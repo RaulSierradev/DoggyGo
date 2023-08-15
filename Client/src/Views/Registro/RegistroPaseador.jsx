@@ -1,4 +1,5 @@
 import { useState } from "react";
+import VerificacionPaseador from "./VerificacionPaseador";
 
 const RegistroPaseador = () => {
   const [paseador, setPaseador] = useState({
@@ -10,26 +11,37 @@ const RegistroPaseador = () => {
     direccion: "",
     telefono: "",
   });
+  const [errores, setErrores] = useState({});
 
   const handleChange = (e) => {
     setPaseador({
       ...paseador,
       [e.target.name]: e.target.value,
     });
+    setErrores(
+      VerificacionPaseador({
+        ...paseador,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPaseador({
-      nombre: "",
-      password: "",
-      descripcion: "",
-      email: "",
-      disponibilidad: false,
-      direccion: "",
-      telefono: "",
-    });
-    alert("Se ha creado su usario correctamente");
+    if (!Object.keys(errores).length) {
+      setPaseador({
+        nombre: "",
+        password: "",
+        descripcion: "",
+        email: "",
+        disponibilidad: false,
+        direccion: "",
+        telefono: "",
+      });
+      alert("Se ha creado su usario correctamente");
+    } else {
+      alert("Hay errores en el formulario");
+    }
   };
 
   return (
@@ -54,7 +66,11 @@ const RegistroPaseador = () => {
             </label>
             <div className="mt-2">
               <input
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+                className={
+                  errores.name
+                    ? "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-red-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+                    : "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+                }
                 placeholder="Ej: Juan Rodríguez"
                 type="text"
                 value={paseador.nombre}
@@ -62,6 +78,9 @@ const RegistroPaseador = () => {
                 onChange={handleChange}
                 id="nombre"
               />
+              {errores.nombre && (
+                <p className="text-sm text-red-600">* {errores.nombre}</p>
+              )}
             </div>
           </div>
           <div>
@@ -78,7 +97,11 @@ const RegistroPaseador = () => {
               name="descripcion"
               onChange={handleChange}
               placeholder="Una descripción de tí, para que la vean los interesados"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+              className={
+                errores.descripcion
+                  ? "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-red-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+                  : "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+              }
             />
           </div>
           <div>
@@ -95,8 +118,15 @@ const RegistroPaseador = () => {
               name="email"
               onChange={handleChange}
               placeholder="correo@correo.com"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+              className={
+                errores.email
+                  ? "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-red-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+                  : "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+              }
             />
+            {errores.email && (
+              <p className="text-sm text-red-600">* {errores.email}</p>
+            )}
           </div>
           <div>
             <label
@@ -112,7 +142,11 @@ const RegistroPaseador = () => {
               name="direccion"
               onChange={handleChange}
               placeholder="Calle, avenida, ciudad"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+              className={
+                errores.direccion
+                  ? "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-red-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+                  : "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+              }
             />
           </div>
           <div>
@@ -129,7 +163,11 @@ const RegistroPaseador = () => {
               name="telefono"
               onChange={handleChange}
               placeholder="Tu teléfono, sin letras ni espacios"
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+              className={
+                errores.telefono
+                  ? "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-red-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+                  : "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+              }
             />
           </div>
           <div>
