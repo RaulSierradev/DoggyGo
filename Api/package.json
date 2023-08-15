@@ -1,13 +1,13 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "DoggyGo.server",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -w ./tests/**/*.spec.js"
   },
-  "author": "DoggyGo Equipo de desarrollo",
+  "author": "Henry",
   "license": "ISC",
   "engines": {
     "node": ">=12.18.3",
