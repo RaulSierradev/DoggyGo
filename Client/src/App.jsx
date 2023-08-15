@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -29,6 +30,22 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
+=======
+import React from 'react'
+import './App.css'
+import {Routes, Route, Navigate} from 'react-router-dom'
+import Nada from './Views/Nada/Nada'
+
+function App() {
+
+  return (
+    <div className='App'>
+      <Routes>
+        <Route path='/' element={<Navigate to={'/inicio'} />} />
+        <Route path='/inicio' element={<Nada />} />
+      </Routes>
+    </div>
+>>>>>>> Roberto
   )
 }
 
