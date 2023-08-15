@@ -1,5 +1,4 @@
 const { Sequelize, DataTypes } = require('sequelize');
-// const { User, Walker } = require('./models')
 
 const sequelize = new Sequelize(
     `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/doggygo`,
@@ -29,7 +28,9 @@ db.users.hasOne(db.walkers, { foreignKey: 'user_id' });
 db.walkers.belongsTo(db.users, { foreignKey: 'user_id' });
 
 // Sync the models with the database
-sequelize.sync();
+db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.");
+})
 
 //exporting the module
 module.exports = db

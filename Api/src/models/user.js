@@ -3,13 +3,6 @@
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
-
-        },
         userName: {
             type: DataTypes.STRING,
             unique: true,
@@ -25,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-        user_type: {
-            type: DataTypes.ENUM('dogOwner', 'dogWalker'),
             allowNull: false
         },
         country: {

@@ -7,15 +7,13 @@ const jwt = require("jsonwebtoken");
 const User = db.users;
 
 const signup = async (req, res) => {
-    const { id, userName, email, password, user_type, country, city } = req.body
+    const { userName, email, password, country, city } = req.body
     try {
 
         const data = {
-            id,
             userName,
             email,
             password: await bcrypt.hash(password, 10),
-            user_type,
             country,
             city: city || null,
         }

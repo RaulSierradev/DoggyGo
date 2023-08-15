@@ -7,7 +7,7 @@ const User = db.users;
 const checkBody = (req, res, next) => {
     const body = req.body;
 
-    if (!body.id || !body.userName || !body.email || !body.password || !body.user_type || !body.country) {
+    if (!body.id || !body.userName || !body.email || !body.password || !body.country) {
         return res.status(400).json({
             status: 'fail',
             message: 'missing data to create a User'
@@ -29,7 +29,7 @@ const checkUser = async (req, res, next) => {
         });
         //if username exist in the database respond with a status of 409
         if (username) {
-            return res.json(409).send("username already taken");
+            return res.json(409).json({ message: "username already taken" });
         }
 
         //checking if email already exist
@@ -41,13 +41,13 @@ const checkUser = async (req, res, next) => {
 
         //if email exist in the database respond with a status of 409
         if (emailCheck) {
-            return res.json(409).send("Authentication failed");
+            return res.json(409).json({ message: "Authentication failed" });
         }
         next();
 
     } catch (error) {
         console.log(error);
-        return res.status(500).send("Internal Server Error");
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
