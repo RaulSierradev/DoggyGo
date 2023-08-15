@@ -1,4 +1,3 @@
-
 const express = require("express");
 // middleware to check if all required fields are present in the request body
 const db = require('../models');
