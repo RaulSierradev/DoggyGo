@@ -2,6 +2,7 @@ import Card from "../Card/Card";
 //import { useSelector } from "react-redux";
 
 const Cards = () => {
+  //*Utilice un array local, actualizar a estado global
   //const paseadores = useSelector((state) => state.paseadores);
   const paseadores = [
     {
