@@ -1,11 +1,13 @@
+import { useState } from "react";
 import Card from "../Card/Card";
 //import { useSelector } from "react-redux";
 
 const Cards = () => {
   //*Utilice un array local, actualizar a estado global
   //const paseadores = useSelector((state) => state.paseadores);
-  const paseadores = [
+  const [paseadores, setPaseadores] = useState([
     {
+      id: 1,
       name: "Pedro",
       direccion: "Calle falsa 123",
       telefono: "1234-9876",
@@ -13,13 +15,14 @@ const Cards = () => {
       disponibilidad: true,
     },
     {
+      id: 2,
       name: "Juan",
       direccion: "Calle falsa 123",
       telefono: "1234-9876",
       descripción: "Esta es mi descripcion",
       disponibilidad: false,
     },
-  ];
+  ])
 
   return (
     <div>
