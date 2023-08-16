@@ -12,6 +12,7 @@ const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
+
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(__dirname, '/models'))
   .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
@@ -30,7 +31,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { User } = sequelize.models;
+const { User, Dogs } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
