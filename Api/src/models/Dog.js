@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('Dogs', {
+    sequelize.define('Dog', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -11,12 +11,16 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        image:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         race: {
             type: DataTypes.ENUM('SMALL', 'MEDIUM', 'LARGE'),
             allowNull: false
         },
         age: {
-            type: DataTypes.INTEGER(),
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         recomendations: {
