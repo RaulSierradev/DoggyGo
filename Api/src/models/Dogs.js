@@ -20,7 +20,8 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         recomendations: {
-            type: DataTypes.STRING(50)
+            type: DataTypes.STRING(50),
+            allowNull: false
         }
     }, {
         timestamps: false
