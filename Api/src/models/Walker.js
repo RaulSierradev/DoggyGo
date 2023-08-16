@@ -12,7 +12,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('Paseador', {
+  sequelize.define('Walker', {
     id:{
       type: DataTypes.UUID,
       allowNull: false,
@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
     },
     name:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    image:{
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -32,20 +36,20 @@ module.exports = (sequelize) => {
         unique: true,
         allowNull: false,
     },
-    direccion:{
+    address:{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    telefono:{
+    phone:{
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
     },
-    descripción:{
+    description:{
         type: DataTypes.TEXT,
         allowNull: false
     },
-    disponibilidad:{
+    status:{
         type: DataTypes.BOOLEAN,
         unique: true,
         allowNull: false,

@@ -1,14 +1,13 @@
 const { DataTypes } = require('sequelize');   
 
 module.exports = (sequelize) => {
-    sequelize.define("walks",{
+    sequelize.define("Walk",{
         id:{
             type: DataTypes.UUID, 
             defaultValue: DataTypes.UUIDV4, 
             allowNull: false, 
             primaryKey: true
-        }, 
-        
+        },
         StartDate:{
             type:DataTypes.DATE,  
             allowNull: false, 
@@ -21,9 +20,12 @@ module.exports = (sequelize) => {
             type:DataTypes.TEXT, 
             allowNull: false,  
         },
-        photo:{ 
+        image:{ 
             type:DataTypes.STRING, 
             allowNull: false,
         }
-    })
-}
+    }, 
+    { 
+      timestamps: false
+    });
+};

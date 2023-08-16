@@ -14,6 +14,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    image:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     password:{
         type: DataTypes.STRING,
         allowNull: false,
@@ -27,11 +31,11 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    direccion:{
+    address:{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    telefono:{
+    phone:{
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
