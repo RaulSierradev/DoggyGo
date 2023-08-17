@@ -17,4 +17,4 @@ router.use("/walk", walkRouter);
 router.use("/review", reviewRouter);
 router.use("/location", locationRouter);
 
-module.exports = router;
+module.exports = router

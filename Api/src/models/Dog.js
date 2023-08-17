@@ -3,9 +3,10 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
     sequelize.define('Dog', {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.UUID,
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4
         },
         name: {
             type: DataTypes.STRING,
@@ -23,8 +24,9 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        recomendation: {
-            type: DataTypes.STRING(50)
+        recomendations: {
+            type: DataTypes.STRING(50),
+            allowNull: false
         }
     }, {
         timestamps: false
