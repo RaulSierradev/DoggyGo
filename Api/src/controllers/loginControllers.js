@@ -17,4 +17,4 @@ const login = async (email, password ) =>{
         return { error: error.message };
     }
 } 
-module.exports = login
+module.exports = login 
