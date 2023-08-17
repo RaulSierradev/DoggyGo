@@ -3,8 +3,8 @@ const { getCountriesHandler, getStatesHandler, getCitiesHandler } = require('../
 
 const locationRouter = Router();
 
-locationRouter.get('/country', getCountriesHandler);                // Traer walkers 
-locationRouter.get('/state', getStatesHandler);              // Traer walkers por su ID
-locationRouter.get('/city', getCitiesHandler);                 // Crear walker
+locationRouter.get('/country', getCountriesHandler);                
+locationRouter.get('/state', getStatesHandler);              
+locationRouter.get('/city', getCitiesHandler);                 
 
 module.exports = locationRouter;

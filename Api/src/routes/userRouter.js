@@ -3,8 +3,9 @@ const { getUsersHandler, getUserByIdHandler, postUserHandler } = require('../han
 
 const userRouter = Router();
 
-userRouter.get('/', getUsersHandler);                // Traer walkers 
-userRouter.get('/:id', getUserByIdHandler);         // Traer walkers por su ID
-userRouter.post('/', postUserHandler);              // Crear walker
+userRouter.get('/', getUsersHandler);                 
+userRouter.get('/:id', getUserByIdHandler);         
+userRouter.post('/', postUserHandler);              
 
 module.exports = userRouter;
+
