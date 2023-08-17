@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import {Routes, Route, Navigate} from 'react-router-dom'
-import Nada from './Views/Nada/Nada'
+import Landing from './Views/Landing/Landing'
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
     <div className='App'>
       <Routes>
         <Route path='/' element={<Navigate to={'/inicio'} />} />
-        <Route path='/inicio' element={<Nada />} />
+        <Route path='/inicio' element={<Landing />} />
       </Routes>
     </div>
   )
