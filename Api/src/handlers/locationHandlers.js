@@ -1,32 +1,31 @@
 const { getCountriesController, getStatesController, getCitiesController} = require('../controllers/locationControllers')
 
-//traer todos los walkers o traerlos por sus nombres
+//traer paises
 const getCountriesHandler = async (req, res) => {
-    const { name } = req.query
     try {
-        const result = await getCountriesController(name);
+        const result = await getCountriesController();
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 }
 
-// traer walkers por id
+// traer estados
 const getStatesHandler = async (req, res) => {
-    const { id } = req.params;
+    const { country } = req.params;
     try {
-        const result = await getStatesController(id);
+        const result = await getStatesController(country);
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 }
 
-// crear walker
+// traer ciudades
 const getCitiesHandler = async (req, res) => {
-    const { id } = req.params;
+    const { state } = req.params;
     try {
-        const result = await getStatesController(id);
+        const result = await getCitiesController(state);
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ error: error.message });
