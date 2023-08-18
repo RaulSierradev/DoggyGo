@@ -32,13 +32,13 @@ const Menu = () => {
 		<div className="">
 			{menu.map((item) => (
 				<div className="flex flex-col gap-3 mb-5" key={item.id}>
-					<span className="text-xl  text-slate-50 capitalize border-b-2 border-slate-400">
+					<span className="text-xl font-bold  text-slate-50 capitalize">
 						{item.title}
 					</span>
 					{item.listItems.map((list) => (
 						<Link
 							key={list.id}
-							className="flex items-center gap-3 p-3 rounded-md cursor-pointer hover:bg-slate-400"
+							className="flex items-center gap-3 p-3 rounded-md cursor-pointer hover:bg-slate-700"
 							to={list.url}
 						>
 							<img src={list.icon} alt="" />

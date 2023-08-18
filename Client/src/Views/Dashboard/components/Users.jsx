@@ -55,7 +55,7 @@ const Users = () => {
 	return (
 		<div className="users">
 			<div className="flex items-center gap-5 mb-5">
-				<h1 className="font-bold text-4xl">Requests</h1>
+				<h1 className="font-bold text-4xl">History</h1>
 			</div>
 			<DataTable slug="users" columns={columns} rows={userRows} />
 		</div>
