@@ -1,50 +1,73 @@
 const axios = require('axios')
-const { API_KEY } = process.env;
+const apiKey = "sPcY6pnk-QkXhQUSJ_YeXbvKkfnLTR7BNz8IUcmEsVY3RpncCmxilSwTe3yUqSrBV0E";
+const name = "Daniel";
+const email = "danielrvt_@hotmail.com";
+
+
+const getApiToken = async () => {
+
+    let response = await axios.get(`https://www.universal-tutorial.com/api/getaccesstoken`, 
+        {headers: {
+            "Accept": "application/json",
+            "api-token": apiKey,
+            "user-email": email
+        }
+    });
+    return response.data.auth_token;
+}
 
 
 const getCountriesController = async () => {
+    const token = await getApiToken();
+    let response = await axios.get(`https://www.universal-tutorial.com/api/countries/`, 
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/json"
+            }
+        }
+    );
 
-    let response = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
-    let genres = await response.data.results.map(genre => genre.name);
+    let countries = await response.data.map(country => country.country_name);
 
-    const count = await Genre.count();
+    return countries;
 
-    if (count === 0) {
-        genres.forEach(element => {
-            Genre.create({ name: element }) 
-        })
-    }
-    return genres;
 }
 
-const getStatesController = async () => {
+const getStatesController = async (country) => {
 
-    let response = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
-    let genres = await response.data.results.map(genre => genre.name);
+    const token = await getApiToken();
+    let response = await axios.get(`https://www.universal-tutorial.com/api/states/${country}`, 
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/json"
+            }
+        }
+    );
 
-    const count = await Genre.count();
+    let states = await response.data.map(state => state.state_name);
 
-    if (count === 0) {
-        genres.forEach(element => {
-            Genre.create({ name: element }) 
-        })
-    }
-    return genres;
+    return states;
+    //return response.data;
 }
 
-const getCitiesController = async () => {
+const getCitiesController = async (state) => {
 
-    let response = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
-    let genres = await response.data.results.map(genre => genre.name);
+    const token = await getApiToken();
+    let response = await axios.get(`https://www.universal-tutorial.com/api/cities/${state}`, 
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Accept": "application/json"
+            }
+        }
+    );
 
-    const count = await Genre.count();
+    let cities = await response.data.map(city => city.city_name);
 
-    if (count === 0) {
-        genres.forEach(element => {
-            Genre.create({ name: element }) 
-        })
-    }
-    return genres;
+    return cities;
+    //return response.data;
 }
 
 module.exports = {

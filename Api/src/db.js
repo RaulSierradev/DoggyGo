@@ -35,7 +35,7 @@ const { User , Walk, Dog, Review } = sequelize.models;
 
 
 // Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+
 User.hasMany(Dog);
 Dog.belongsTo(User);
 
@@ -44,10 +44,6 @@ Walk.belongsTo(User);
 
 User.hasMany(Review);
 Review.belongsTo(User);
-// Videogame.belongsToMany(Genre, { through:{ model: 'VideogameGenre'},  timestamps : false });
-// Genre.belongsToMany(Videogame, { through:{ model: 'VideogameGenre'},  timestamps : false });
-// Product.User = Product.belongsTo(User);
-// User.Addresses = User.hasMany(Address);
 
 
 module.exports = {
