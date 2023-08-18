@@ -5,7 +5,7 @@ function MoneyCard({
 }) {
 	return (
 		<>
-			<div className="w-96 h-40 relative shadow-sm border-zinc-700">
+			<div className="w-96 h-40 relative  border-zinc-700 shadow-lg">
 				<div className="w-96 h-40 left-[-18px] top-0 absolute">
 					<div className="w-96 h-40 left-[18px] top-0 absolute justify-center items-center inline-flex">
 						<div className="w-96 h-40 bg-white rounded-lg" />

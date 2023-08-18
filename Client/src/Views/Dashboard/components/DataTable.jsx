@@ -12,7 +12,7 @@ const DataTable = (props) => {
 		width: 100,
 		renderCell: (params) => (
 			<div className="flex gap-4">
-				<Link to={`/${props.slug}/${params.row.id}`}>
+				<Link to={`/dash/${props.slug}/${params.row.id}`}>
 					<img
 						className='h-5 w-5 cursor-pointer"'
 						src="/view.svg"
@@ -20,7 +20,7 @@ const DataTable = (props) => {
 					/>
 				</Link>
 
-				<div
+				{/* <div
 					className="delete"
 					onClick={() => handleDelete(params.row.id)}
 				>
@@ -29,7 +29,7 @@ const DataTable = (props) => {
 						src="/delete.svg"
 						alt=""
 					/>
-				</div>
+				</div> */}
 			</div>
 		),
 	};
