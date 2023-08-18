@@ -1,7 +1,7 @@
-import { useState } from "React";
 import { Link } from 'react-router-dom'
 import verificacionLogin from './VerificarLogin.js'
 import login from "../../img/Login.jpg";
+import { useState } from 'react';
 
 const Login = () => {
   const [logeo, setLogeo] = useState({
