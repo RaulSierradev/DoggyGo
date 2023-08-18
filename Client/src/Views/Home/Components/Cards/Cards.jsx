@@ -4,7 +4,6 @@ import Card from "../Card/Card";
 const Cards = ({ walkers }) => {
   return (
     <div>
-      <h1>Estas son las cards</h1>
       <div className='m-5 border-2 rounded-lg container mx-auto'>
         {walkers &&
           walkers.map((walker) => (
