@@ -108,9 +108,36 @@ const postUserController = async ({ name, email, password, description, birthdat
 }
 
 
+//editar user
+const putUserController = async ({ name, email, password, description, birthdate, image, country, state, city, address, phone,  status, suscription, rol }) => {
+
+    const user= await User.findOne({ where: { email: email } });
+
+    let updatedUser = await user.update({
+        name,
+        email,
+        password,
+        description,
+        birthdate,
+        image,
+        country,
+        state,
+        city,
+        address,
+        phone, 
+        status,
+        suscription,
+        rol 
+    });
+
+    return updatedUser;
+}
+
+
 module.exports = {
     getUsersController,
     getUserByIdController,
     postUserController,
+    putUserController
 }
 
