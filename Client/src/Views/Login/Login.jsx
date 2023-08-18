@@ -1,4 +1,5 @@
 import { useState } from "React";
+import { Link } from 'react-router-dom'
 import verificacionLogin from './VerificarLogin.js'
 import login from "../../img/Login.jpg";
 
@@ -28,9 +29,15 @@ const Login = () => {
       <div className="bg-white flex rounded-2xl shadow-lg max-w-3xl p-5 text-indigo-600">
         <div className="sm:w-1/2 px-16">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
+            <h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight">
               Inicio De Sesión
             </h2>
+            <p className="text-gray-900 text-sm mt-3 text-center">
+              ¿No tienes una cuenta?{" "}
+              <Link to="/registro">
+                <span className="text-indigo-600 font-bold">Regístrate</span>
+              </Link>
+            </p>
           </div>
 
           <div>
