@@ -6,7 +6,8 @@ import Layout from './Views/Dashboard/LayOut';
 import Users from './Views/Dashboard/components/Users';
 import User from './Views/Dashboard/components/User';
 import HomeDashboard from './Views/Dashboard/Home/HomeDashboard';
-import RegistroPaseador from './Views/Registro/RegistroPaseador.jsx';
+import Registro from './Views/Registro/Registro.jsx';
+import Login from './Views/Login/Login';
 
 function App() {
 	return (
@@ -15,9 +16,10 @@ function App() {
 				<Route path="/" element={<Navigate to="/inicio" />} />
 				<Route path="/inicio" element={<Nada />} />
 				<Route
-					path="/registropaseador"
-					element={<RegistroPaseador />}
+					path="/registro"
+					element={<Registro />}
 				/>
+				<Route path='/login' element={<Login />}/>
 				<Route path="/dash" element={<Layout />}>
 					<Route path="" element={<HomeDashboard />} />
 					<Route path="users" element={<Users />} />

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState } from "React";
+import { Link } from "react-router-dom";
 import VerificacionPaseador from "./VerificacionPaseador";
 import registroPaseador from "../../img/registroPaseador.png";
 
@@ -67,6 +68,12 @@ const RegistroPaseador = () => {
             </h2>
             <p className="mt-3 text-left">
               Llena el siguiente formulario para ser parte de nuestra comunidad
+            </p>
+            <p className="text-gray-900 text-sm mt-3">
+              ¿Ya tienes una cuenta?{" "}
+              <Link to="/login">
+                <span className="text-indigo-600 font-bold">Inicia sesión</span>
+              </Link>
             </p>
           </div>
           <form className="space-y-6 mt-10">
@@ -287,7 +294,6 @@ const RegistroPaseador = () => {
                   onChange={handleChange}
                   placeholder="Vuelve a ingresar tu contraseña"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-                  
                 />
                 {errors.repPassword && (
                   <p className="text-sm text-red-600">* {errors.repPassword}</p>
@@ -304,11 +310,11 @@ const RegistroPaseador = () => {
         </div>
       </div>
 
-      <div className="w-1/2 mt-10 mb-16">
+      <div className="sm:block hidden w-1/2 mt-10 mb-16">
         <img
           src={registroPaseador}
           alt="Imagen registro paseador"
-          className="sm:mx-auto sm:w-full sm:max-w-sm"
+          className="sm:mx-auto sm:w-full sm:max-w-sm sm:block hidden"
         />
       </div>
     </div>
