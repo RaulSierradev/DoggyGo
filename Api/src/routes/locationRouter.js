@@ -4,7 +4,7 @@ const { getCountriesHandler, getStatesHandler, getCitiesHandler } = require('../
 const locationRouter = Router();
 
 locationRouter.get('/country', getCountriesHandler);                
-locationRouter.get('/state', getStatesHandler);              
-locationRouter.get('/city', getCitiesHandler);                 
+locationRouter.get('/state/:country', getStatesHandler);              
+locationRouter.get('/city/:state', getCitiesHandler);                 
 
 module.exports = locationRouter;
