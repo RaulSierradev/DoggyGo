@@ -10,7 +10,7 @@ const Layout = () => {
 			<Navbar />
 			{/* <Nav /> */}
 			<div className="flex">
-				<div className="w-60 py-1 px-5 border-r-2 border-slate-400">
+				<div className="w-60 py-1 px-5 border-r-2 border-slate-50">
 					<Menu />
 				</div>
 				<div className="py-1 px-5 w-full flex-grow">
