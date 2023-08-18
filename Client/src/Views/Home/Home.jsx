@@ -1,4 +1,4 @@
-import Paginado from "../../Components/Paginado/Paginado";
+import Paginado from "./Components/Paginado/Paginado"
 
 const Home = () => {
   return (
