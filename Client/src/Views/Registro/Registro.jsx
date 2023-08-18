@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "React";
 import VerificacionPaseador from "./VerificacionPaseador";
 import registroPaseador from "../../img/registroPaseador.png";
 
@@ -304,11 +304,11 @@ const RegistroPaseador = () => {
         </div>
       </div>
 
-      <div className="w-1/2 mt-10 mb-16">
+      <div className="sm:block hidden w-1/2 mt-10 mb-16">
         <img
           src={registroPaseador}
           alt="Imagen registro paseador"
-          className="sm:mx-auto sm:w-full sm:max-w-sm"
+          className="sm:mx-auto sm:w-full sm:max-w-sm sm:block hidden"
         />
       </div>
     </div>
