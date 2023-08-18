@@ -1,4 +1,4 @@
-const { getUsersController, getUserByIdController, postUserController} = require('../controllers/userControllers')
+const { getUsersController, getUserByIdController, postUserController, putUserController} = require('../controllers/userControllers')
 
 //traer todos los users o traerlos por sus nombres
 const getUsersHandler = async (req, res) => {
@@ -34,10 +34,23 @@ const postUserHandler = async (req, res) => {
 }
 
 
+//editar user
+const putUserHandler = async (req, res) => {
+    const { name, email, password, description, birthdate, image, country, state, city, address, phone,  status, suscription, rol } = req.body;
+    try {
+        const postUser = await putUserController({ name, email, password, description, birthdate, image, country, state, city, address, phone,  status, suscription, rol });
+        res.status(200).json(postUser);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
+
 
 module.exports = {
     getUsersHandler,
     getUserByIdHandler,
     postUserHandler,
+    putUserHandler
 }
 
