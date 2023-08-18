@@ -14,6 +14,7 @@ function App() {
 		<div className="App">
 			<Routes>
 				<Route path="/" element={<Navigate to="/inicio" />} />
+        <Route path='/inicio' element={<Landing />} />
 				<Route path="/inicio" element={<Nada />} />
 				<Route
 					path="/registro"

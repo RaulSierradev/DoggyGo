@@ -1,0 +1,28 @@
+.walker{
+    width: 30% ;
+    aspect-ratio: 1.2;
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    border-radius: 1dvh;
+    overflow: hidden;
+}
+.imgContaienr{
+    background-color: aqua;
+    width: 100%;
+    height: 70%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+.infoC{
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+}
+.txtC{
+    flex-grow: 1;
+    width: 100%;
+}
