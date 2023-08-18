@@ -1,4 +1,4 @@
-import { useState } from "React";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import VerificacionPaseador from "./VerificacionPaseador";
 import registroPaseador from "../../img/registroPaseador.png";
