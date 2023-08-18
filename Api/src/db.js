@@ -12,7 +12,6 @@ const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
-
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
 fs.readdirSync(path.join(__dirname, '/models'))
   .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
@@ -22,6 +21,7 @@ fs.readdirSync(path.join(__dirname, '/models'))
 
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
+
 // Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
@@ -31,17 +31,26 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 
-const { User, Dogs, Paseador } = sequelize.models;
+const { User , Walk, Dog, Review } = sequelize.models;
+
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+User.hasMany(Dog);
+Dog.belongsTo(User);
 
+User.hasMany(Walk);
+Walk.belongsTo(User);
+
+User.hasMany(Review);
+Review.belongsTo(User);
 // Videogame.belongsToMany(Genre, { through:{ model: 'VideogameGenre'},  timestamps : false });
 // Genre.belongsToMany(Videogame, { through:{ model: 'VideogameGenre'},  timestamps : false });
+// Product.User = Product.belongsTo(User);
+// User.Addresses = User.hasMany(Address);
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
-
-

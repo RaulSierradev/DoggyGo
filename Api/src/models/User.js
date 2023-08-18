@@ -14,28 +14,51 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    image:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     password:{
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     email:{
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    birthdate:{
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+  },    
+    address:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phone:{
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    description:{
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     suscription:{
       type: DataTypes.BOOLEAN,
+      unique: true,
+      allowNull: false,
+    },    
+    status:{
+      type: DataTypes.BOOLEAN,
+      unique: true,
       allowNull: false,
     },
-    direccion:{
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    telefono:{
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-    },
+    Rol:{
+      type: DataTypes.ENUM('Walker', 'Client'),
+      unique: true,
+      allowNull: false,
+    }
   }, 
   { 
     timestamps: false

@@ -1,10 +1,10 @@
-import Cards from "../../Components/Cards/Cards";
+import Paginado from "../../Components/Paginado/Paginado";
 
 const Home = () => {
   return (
     <div>
       <h1>Este es el HOME</h1>
-      <Cards />
+      <Paginado />
     </div>
   );
 };
