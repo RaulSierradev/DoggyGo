@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PRUEBA, GET_WALKERS, GET_ALL_USERS, GET_USERS } from "./action-types";
+import { PRUEBA, GET_ALL_USERS } from "./action-types";
 
 const URL = "http://localhost:3001/";
 
@@ -32,15 +32,3 @@ export const getAllUsers = () => {
     }
   };
 };
-
-export const getUsers = ()=>{
-    return {
-        type: GET_USERS,
-    }
-}
-
-export const getWalkers = ()=>{
-    return {
-        type: GET_WALKERS,
-    }
-}
