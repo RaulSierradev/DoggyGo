@@ -4,6 +4,7 @@ let initialstate = {
   allUsers: [],
   users: [],
   walkers: [],
+  walkersBackUp: [],
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -18,8 +19,8 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         allUsers: payload,
-        users: payload && payload.filter((user) => user.rol === "Cliente"),
-        walkers: payload && payload.filter((user) => user.rol === "Paseador")
+        users: payload && payload.filter((user) => user.rol === "Client"),
+        walkers: payload && payload.filter((user) => user.rol === "Walker")
       };
 
     default:

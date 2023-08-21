@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(()=>{
     dispatch(getAllUsers())
-  }, [])
+  }, [dispatch])
 
   return (
     <div>

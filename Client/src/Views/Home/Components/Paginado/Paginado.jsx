@@ -6,6 +6,7 @@ const walkersPerPage = 2;
 
 const Paginado = () => {
   const walkers = useSelector((state) => state.walkers);
+  console.log("Cards:" + walkers);
 
   const [walkersPaginated, setWalkersPaginated] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
