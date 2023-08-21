@@ -1,41 +1,12 @@
 import { useEffect, useState } from "react";
 import Cards from "../Cards/Cards";
+import {useSelector} from "react-redux"
 
 const walkersPerPage = 2;
 
 const Paginado = () => {
-  //*Utilice un array local, actualizar a estado global
-  //const walkers = useSelector((state) => state.walkers);
-  const [walkers, setWalkers] = useState([
-    {
-      id: 1,
-      name: "Pedro",
-      direccion: "Calle falsa 123",
-      telefono: "1234-9876",
-      descripción: "Esta es mi descripcion",
-      disponibilidad: true,
-    },
-    {
-      id: 2,
-      name: "Juan",
-      direccion: "Calle falsa 123",
-      telefono: "1234-9876",
-      descripción: "Esta es mi descripcion",
-      disponibilidad: false,
-    },
-    {
-      id: 3,
-      name: "Pablo",
-    },
-    {
-      id: 4,
-      name: "x1",
-    },
-    {
-      id: 5,
-      name: "x2",
-    },
-  ]);
+  const walkers = useSelector((state) => state.walkers);
+  console.log("Cards:" + walkers);
 
   const [walkersPaginated, setWalkersPaginated] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
