@@ -63,7 +63,6 @@ module.exports = (sequelize) => {
     },
     rol:{
       type: DataTypes.ENUM('Walker', 'Client'),
-      unique: true,
       allowNull: false,
     }
   }, 

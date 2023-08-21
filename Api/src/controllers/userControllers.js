@@ -1,8 +1,14 @@
 const { User } = require('../db')
+const { Op } = require('sequelize');
 
 
-const getUsers = async () => {
+// Trae todos los users
+const getUsersController = async () => {
     const users = await User.findAll();
+
+    if (users.length === 0){
+        throw Error('No registered walkers');
+    }
 
     const arrayUsers = users.map(user => {
         return {
@@ -23,16 +29,28 @@ const getUsers = async () => {
             rol: user.rol
         }
     });
- 
-    return [ ...arrayUsers ];
+    
+    return arrayUsers;
 }
 
 
-const getUsersByName = async (name) => {
-    try {
+//Trae usuarios por nombre
+const getUsersByNameController = async (name) => {
+        if (!name){
+            throw new Error('Enter a name');
+        }
+
         const users = await User.findAll({
-            where: { name: name }
-        })
+            where: { 
+                name: {
+                    [Op.iLike]: `%${name}%`
+                }
+            }
+        });
+
+        if (users.length === 0){
+            throw Error('Walkers not found');
+        }
 
         const arrayUsers = users.map(user => {
             return {
@@ -52,40 +70,39 @@ const getUsersByName = async (name) => {
                 suscription: user.suscription,
                 rol: user.rol
             }
-        })
+        });
 
-        return [ ...arrayUsers ];
-
-    } catch (error) {
-        throw Error('Invalid User.')
-    }
+        return arrayUsers;
 }
-
-
-// Trae todos los users o trae por nombre
-const getUsersController = (name) => {
-    if (!name) return getUsers();
-    else return getUsersByName(name);
-}
-
 
 // trae user por id
 const getUserByIdController = async (id) => {
+    const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
+    
+    if (!id){
+        throw new Error('Enter an ID');
+    }
+
+    if (!regexExp.test(id)){
+        throw Error('Enter a valid ID');
+    }
+
     const user = await User.findByPk(id);
+
     return user;
 }
 
 // postea user en la base de datos
 const postUserController = async ({ name, email, password, description, birthdate, image, country, state, city, address, phone,  status, suscription, rol }) => {
     if (!name || !email || !password || !birthdate || !address || !phone || !description || !country || !state || !city || !rol) {
-        throw Error('All fields are required')
+        throw Error('All fields are required');
     }
 
     const searchName = await User.findAll({
         where: { name: name }
     })
 
-    if (searchName.length !== 0) throw Error('This User already exist!')
+    if (searchName.length !== 0) throw Error('This User already exist!');
 
     let newUser = await User.create({
         name,
@@ -108,9 +125,37 @@ const postUserController = async ({ name, email, password, description, birthdat
 }
 
 
+//editar user
+const putUserController = async ({ name, email, password, description, birthdate, image, country, state, city, address, phone,  status, suscription, rol }) => {
+
+    const user= await User.findOne({ where: { email: email } });
+
+    let updatedUser = await user.update({
+        name,
+        email,
+        password,
+        description,
+        birthdate,
+        image,
+        country,
+        state,
+        city,
+        address,
+        phone, 
+        status,
+        suscription,
+        rol 
+    });
+
+    return updatedUser;
+}
+
+
 module.exports = {
+    getUsersByNameController,
     getUsersController,
     getUserByIdController,
     postUserController,
+    putUserController
 }
 
