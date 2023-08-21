@@ -1,8 +1,9 @@
-import { GET_ALL_USERS, PRUEBA } from "./action-types";
+import { GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS } from "./action-types";
 
 let initialstate = {
   allUsers: [],
-  users: [],
+  clients: [],
+  clientsBackUp: [],
   walkers: [],
   walkersBackUp: [],
 };
@@ -19,9 +20,33 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         allUsers: payload,
-        users: payload && payload.filter((user) => user.rol === "Client"),
-        walkers: payload && payload.filter((user) => user.rol === "Walker")
+        clients: payload && payload.filter((user) => user.rol === "Client"),
+        clientsBackUp: payload && payload.filter((user) => user.rol === "Client"),
+        walkers: payload && payload.filter((user) => user.rol === "Walker"),
+        walkersBackUp: payload && payload.filter((user) => user.rol === "Walker")
       };
+    case GET_CLIENT_BY_NAME:
+      console.log("Reducer - Payload:", payload);
+      return {
+        ...state,
+        clients: payload && payload.filter(user => user.rol === "Client")
+      }
+    case GET_WALKER_BY_NAME:
+      console.log("Reducer - Payload:", payload);
+      return {
+        ...state,
+        walkers: payload && payload.filter(user => user.rol === "Walker")
+      }
+    case RESTORE_CLIENTS:
+      return {
+        ...state,
+        clients: state.clientsBackUp
+      }
+    case RESTORE_WALKERS:
+      return {
+        ...state,
+        walkers: state.walkersBackUp
+      }
 
     default:
       return { ...state };
