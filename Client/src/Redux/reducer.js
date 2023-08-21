@@ -1,4 +1,4 @@
-import { GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS } from "./action-types";
+import { FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS } from "./action-types";
 
 let initialstate = {
   allUsers: [],
@@ -46,6 +46,33 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         walkers: state.walkersBackUp
+      }
+    case ORDER_DEFAULT:
+      console.log("Se aplico ordenDefault:", state.walkers);
+      return {
+        ...state,
+        walkersBackUp: state.walkersBackUp.sort((a, b) => (b.status ? 1 : -1)), 
+        walkers: state.walkers.sort((a, b) => (b.status ? 1 : -1)),
+      }
+    case FILTER_WALKERS:
+      //*Filtro para countries
+      if (payload.includes("Country")){
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(walker => walker.country === payload.slice(10))
+        }
+      }
+      //*Filtro para states
+      if (payload.includes("State")){
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(walker => walker.state === payload.slice(8))
+        }
+      }
+      //*Filtro para cities
+      return {
+        ...state,
+        walkers: state.walkersBackUp.filter(walker => walker.city === payload.slice(7))
       }
 
     default:

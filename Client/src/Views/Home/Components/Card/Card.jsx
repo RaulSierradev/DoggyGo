@@ -2,7 +2,7 @@
 //import { Link } from "react-router-dom";
 
 const Card = ({ walker }) => {
-  const { /*id,*/ name, direccion, telefono, descripción, disponibilidad } =
+  const { /*id,*/ name, image, description, country, state, city, status } =
     walker;
 
     //! Hacer el link cuando lo hayan terminado
@@ -11,15 +11,17 @@ const Card = ({ walker }) => {
       {/*<Link to={`/detail/${id}`}></Link>*/}
       {/*className='border border-gray-400 lg:border lg:border-gray-400 bg-white rounded lg:rounded-b-none lg:rounded-r p-4 flex flex-row justify-between leading-normal*/}
       <div className='border-t-2 flex flex-row justify-between leading-normal space-x-4'>
-        <p className='text-sm text-gray-600 basis-1/5'>
-          {disponibilidad ? "Disponible" : "No disponible"}
+        <img className="basis-1/7" src={image} alt="url" />
+        <p className='text-sm text-gray-600 basis-1/7'>
+          {status ? "Disponible" : "No disponible"}
         </p>
-        <div className='text-gray-900 font-bold text-xl mb-2 basis-1/5'>
+        <div className='text-gray-900 font-bold text-xl mb-2 basis-1/7'>
           {name}
         </div>
-        <p className='text-gray-700 text-base basis-1/5'>{descripción}</p>
-        <p className='text-gray-900 leading-none basis-1/5'>{direccion}</p>
-        <p className='text-gray-900 leading-none basis-1/5'>{telefono}</p>
+        <p className='text-gray-700 text-base basis-1/7'>{description}</p>
+        <p className='text-gray-900 leading-none basis-1/7'>{country}</p>
+        <p className='text-gray-900 leading-none basis-1/7'>{state}</p>
+        <p className='text-gray-900 leading-none basis-1/7'>{city}</p>
       </div>
     </div>
   );
