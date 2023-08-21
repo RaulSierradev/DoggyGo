@@ -48,7 +48,6 @@ let reducer = (state = initialstate, { type, payload }) => {
         walkers: state.walkersBackUp
       }
     case ORDER_DEFAULT:
-      console.log("Se aplico ordenDefault:", state.walkers);
       return {
         ...state,
         walkersBackUp: state.walkersBackUp.sort((a, b) => (b.status ? 1 : -1)), 

@@ -5,7 +5,6 @@ import {useSelector} from "react-redux"
 const walkersPerPage = 2;
 
 const Paginado = () => {
-  console.log("se aplica paginado");
   const walkers = useSelector((state) => state.walkers);
 
   const [walkersPaginated, setWalkersPaginated] = useState([]);
