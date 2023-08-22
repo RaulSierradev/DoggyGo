@@ -4,8 +4,8 @@ let initialstate = {
   allUsers: [],
   clients: [],
   clientsBackUp: [],
-  walkers: [],
-  walkersBackUp: [],
+  walkers: [{"name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1",  "status": false, "suscription": true, "rol": "Walker"},{"name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3",  "status": true, "suscription": true, "rol": "Walker"}],
+  walkersBackUp: [{"name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1",  "status": false, "suscription": true, "rol": "Walker"},{"name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3",  "status": true, "suscription": true, "rol": "Walker"}],
 };
 
 let reducer = (state = initialstate, { type, payload }) => {

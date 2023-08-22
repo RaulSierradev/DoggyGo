@@ -28,7 +28,7 @@ export const getAllUsers = () => {
       return dispatch({ type: GET_ALL_USERS, payload: data });
     } catch (error) {
       error.response && error.response.data
-        ? alert(error.response.data)
+        ? alert(error.response.data.error)
         : alert(error.message);
     }
   };
