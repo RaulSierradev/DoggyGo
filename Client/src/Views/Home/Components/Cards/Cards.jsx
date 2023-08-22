@@ -12,8 +12,8 @@ const Cards = ({ walkers }) => {
             </tr>
           </thead>
           <tbody>
-            {walkers?.map((walker) => (
-              <tr key={walker.id}>
+            {walkers?.map((walker, index) => (
+              <tr key={index}>
                 <td colSpan="1">
                   <Card walker={walker} />
                 </td>
