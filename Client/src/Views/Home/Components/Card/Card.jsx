@@ -7,21 +7,20 @@ const Card = ({ walker }) => {
 
     //! Hacer el link cuando lo hayan terminado
   return (
-    <div className='max-w-sm w-full lg:max-w-full lg:flex'>
+    <div className='w-full'>
       {/*<Link to={`/detail/${id}`}></Link>*/}
-      {/*className='border border-gray-400 lg:border lg:border-gray-400 bg-white rounded lg:rounded-b-none lg:rounded-r p-4 flex flex-row justify-between leading-normal*/}
-      <div className='border-t-2 flex flex-row justify-between leading-normal space-x-4'>
-        <img className="basis-1/7" src={image} alt="url" />
-        <p className='text-sm text-gray-600 basis-1/7'>
+      <div className='flex flex-row justify-around items-center pt-2 mt-4 leading-normal space-x-4 border-y-4'>
+        <div className='basis-11 text-sm text-gray-600 pr-2'>
           {status ? "Disponible" : "No disponible"}
-        </p>
-        <div className='text-gray-900 font-bold text-xl mb-2 basis-1/7'>
-          {name}
         </div>
-        <p className='text-gray-700 text-base basis-1/7'>{description}</p>
-        <p className='text-gray-900 leading-none basis-1/7'>{country}</p>
-        <p className='text-gray-900 leading-none basis-1/7'>{state}</p>
-        <p className='text-gray-900 leading-none basis-1/7'>{city}</p>
+        <img className="basis-11" src={image} alt="url" />
+        <p className='basis-11 pr-2 text-gray-900 font-bold text-xl mb-2'>
+          {name}
+        </p>
+        <p className='basis-40 pr-2 text-gray-700 text-base'>{description}</p>
+        <p className='basis-6 text-gray-900 leading-none'>{country}</p>
+        <p className='basis-6 text-gray-900 leading-none'>{state}</p>
+        <p className='basis-6 pl-2 text-gray-900 leading-none'>{city}</p>
       </div>
     </div>
   );

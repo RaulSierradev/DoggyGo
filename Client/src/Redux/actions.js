@@ -1,5 +1,15 @@
 import axios from "axios";
-import { PRUEBA, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, RESTORE_CLIENTS, RESTORE_WALKERS, FILTER_WALKERS, ORDER_DEFAULT } from "./action-types";
+import {
+  PRUEBA,
+  GET_ALL_USERS,
+  GET_CLIENT_BY_NAME,
+  GET_WALKER_BY_NAME,
+  RESTORE_CLIENTS,
+  RESTORE_WALKERS,
+  FILTER_WALKERS,
+  ORDER_DEFAULT,
+} from "./action-types";
+import { CREATE_USER, EDIT_USER } from "./action-types";
 
 const URL = "http://localhost:3001/";
 
@@ -13,6 +23,39 @@ export const asyncFunction = (params) => {
     }
 } 
 */
+
+export function getAll() {
+  return async function getUsersThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.get("http://localhost:3001/user");
+    console.log(res.data);
+
+    dispatch({ type: GET_ALL_USERS, payload: res.data });
+  };
+}
+
+export function createUser(user) {
+  return async function createUserThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.post("http://localhost:3001/user", user);
+    console.log(res.data);
+
+    dispatch({ type: CREATE_USER, payload: res.data });
+  };
+}
+
+export function editUser(user) {
+  return async function editUserThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.put("http://localhost:3001/user", user);
+    console.log(res.data);
+
+    dispatch({ type: EDIT_USER, payload: res.data });
+  };
+}
 
 export const probarEstado = () => {
   console.log("hola desde actions");
@@ -67,30 +110,30 @@ export const getWalkerByName = (name) => {
 };
 
 //Restablece los clients a su backup
-export const restoreClients = ()=>{
+export const restoreClients = () => {
   return {
     type: RESTORE_CLIENTS,
-  }
-}
+  };
+};
 
 //Restablece los walkers a su backup
-export const restoreWalkers = ()=>{
+export const restoreWalkers = () => {
   return {
     type: RESTORE_WALKERS,
-  }
-}
+  };
+};
 
 //Ordena por default segun disponibilidad, entre otros
-export const orderDefault = ()=>{
+export const orderDefault = () => {
   return {
-    type: ORDER_DEFAULT
-  }
-}
+    type: ORDER_DEFAULT,
+  };
+};
 
 //Filtra los walkers segun el filter
-export const filterWalkers = (filter)=>{
+export const filterWalkers = (filter) => {
   return {
     type: FILTER_WALKERS,
-    payload: filter
-  }
-}
+    payload: filter,
+  };
+};
