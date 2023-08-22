@@ -8,8 +8,9 @@ import {
   RESTORE_WALKERS,
   FILTER_WALKERS,
   ORDER_DEFAULT,
+  CREATE_USER, 
+  EDIT_USER
 } from "./action-types";
-import { CREATE_USER, EDIT_USER } from "./action-types";
 
 const URL = "http://localhost:3001/";
 
@@ -23,6 +24,41 @@ export const asyncFunction = (params) => {
     }
 } 
 */
+export function getAll() {
+  return async function getUsersThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.get('http://localhost:3001/user');
+    console.log(res.data)
+
+    dispatch({ type: GET_ALL_USERS, payload: res.data })
+  }
+}
+
+
+
+export function createUser(user) {
+  return async function createUserThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.post('http://localhost:3001/user', user);
+    console.log(res.data)
+
+    dispatch({ type: CREATE_USER, payload: res.data })
+  }
+}
+
+
+export function editUser(user) {
+  return async function editUserThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.put('http://localhost:3001/user', user);
+    console.log(res.data)
+
+    dispatch({ type: EDIT_USER, payload: res.data })
+  }
+}
 
 export function getAll() {
   return async function getUsersThunk(dispatch) {

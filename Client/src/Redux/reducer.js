@@ -6,6 +6,7 @@ let initialstate = {
   clientsBackUp: [],
   walkers: [{"name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1",  "status": false, "suscription": true, "rol": "Walker"},{"name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Ronaldo", "email": "ejemplo4@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "4",  "status": false, "suscription": true, "rol": "Walker"}, {"name": "Di Stéfano", "email": "ejemplo5@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "5",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Cruyff", "email": "ejemplo6@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "6",  "status": true, "suscription": true, "rol": "Walker"}],
   walkersBackUp: [{"name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1",  "status": false, "suscription": true, "rol": "Walker"},{"name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Ronaldo", "email": "ejemplo4@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "4",  "status": false, "suscription": true, "rol": "Walker"}, {"name": "Di Stéfano", "email": "ejemplo5@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "5",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Cruyff", "email": "ejemplo6@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "6",  "status": true, "suscription": true, "rol": "Walker"}],
+  users: [],
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -23,7 +24,9 @@ let reducer = (state = initialstate, { type, payload }) => {
         clients: payload && payload.filter((user) => user.rol === "Client"),
         clientsBackUp: payload && payload.filter((user) => user.rol === "Client"),
         walkers: payload && payload.filter((user) => user.rol === "Walker"),
-        walkersBackUp: payload && payload.filter((user) => user.rol === "Walker")
+        walkersBackUp: payload && payload.filter((user) => user.rol === "Walker"),
+        users: payload
+
       };
     case GET_CLIENT_BY_NAME:
       console.log("Reducer - Payload:", payload);
@@ -74,21 +77,22 @@ let reducer = (state = initialstate, { type, payload }) => {
         walkers: state.walkersBackUp.filter(walker => walker.city === payload.slice(7))
       }
       case CREATE_USER:
-        return {
-          ...state,
-          users: [...state.users, payload]
-        }
-      case EDIT_USER:
-        return {
-          ...state,
-          users: state.users.map(user => {
-                    if (user.email === payload.email) {
-                        return payload
-                      } else {
-                        return user
-                      }
-                    })
-        }
+      return {
+        ...state,
+        users: [...state.users, payload]
+      }
+    case EDIT_USER:
+      return {
+        ...state,
+        users: state.users.map(user => {
+          if (user.email === payload.email) {
+            return payload
+          } else {
+            return user
+          }
+        })
+
+      }
 
     default:
       return { ...state };
