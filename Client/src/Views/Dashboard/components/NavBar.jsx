@@ -1,3 +1,5 @@
+import ProtectedPage from '../../Login/ProtectedPage';
+
 const Navbar = () => {
 	return (
 		<div className="w-full p-5 flex items-center justify-between shadow-md mb-5">
@@ -5,6 +7,7 @@ const Navbar = () => {
 				<img src="logo.svg" alt="" />
 				<span>Dashboard</span>
 			</div>
+			<ProtectedPage />
 			<div className="flex items-center gap-5">
 				<div className="flex items-center">
 					<img

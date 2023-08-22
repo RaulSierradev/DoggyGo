@@ -1,6 +1,10 @@
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const regexPass =
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+// comment just for now because we are not using this regex in testing phase
+// const regexPass =
+//   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+const regexPass = /^.{8,}$/;
 
 export default function VerificacionPaseador(props) {
   const errors = {};
@@ -12,9 +16,9 @@ export default function VerificacionPaseador(props) {
   if (!props.password.trim()) errors.password = "Este espacio está vacío";
   if (!regexPass.test(props.password))
     errors.password = "Contraseña incorrecta";
-  if (!props.repPassword.trim()) errors.phone = "Este espacio está vacío";
-  if (props.password !== props.repPassword)
-    errors.repPassword = "Las contraseñas no coinciden";
+  // if (!props.repPassword.trim()) errors.phone = "Este espacio está vacío";
+  // if (props.password !== props.repPassword)
+  //   errors.repPassword = "Las contraseñas no coinciden";
 
   return errors;
 }
