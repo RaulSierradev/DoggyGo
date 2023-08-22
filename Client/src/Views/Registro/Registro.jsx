@@ -3,20 +3,31 @@ import { Link, useNavigate } from 'react-router-dom';
 import VerificacionPaseador from './VerificacionPaseador';
 import registroPaseador from '../../img/registroPaseador.png';
 
+import { useDispatch } from 'react-redux';
+import { createUser } from '../../Redux/actions';
+
+const initialState = {
+	rol: '',
+	name: '',
+	password: '',
+	description: '',
+	birthdate: '',
+	email: '',
+	image: 'jkadkkl',
+	country: '',
+	city: '',
+	address: '',
+	state: '',
+	phone: '',
+	status: false,
+	suscription: false,
+};
+
 const RegistroPaseador = () => {
-	const [user, setUser] = useState({
-		role: '',
-		name: '',
-		password: '',
-		repPassword: '',
-		description: '',
-		email: '',
-		country: '',
-		province: '',
-		city: '',
-		address: '',
-		phone: '',
-	});
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const [user, setUser] = useState(initialState);
 	const [errors, setErrors] = useState({});
 
 	const handleChange = (e) => {
@@ -42,24 +53,16 @@ const RegistroPaseador = () => {
 			user.password &&
 			user.phone
 		) {
-			setUser({
-				role: '',
-				name: '',
-				password: '',
-				description: '',
-				email: '',
-				address: '',
-				phone: '',
-			});
-
+			dispatch(createUser(user));
+			setUser(initialState);
 			alert('Se ha creado su usario correctamente');
+			navigate('/login');
 		} else {
 			alert('Hay errores en el formulario');
 		}
 	};
 
-	const navigate = useNavigate();
-
+	console.log(user);
 	return (
 		<div className="bg-white min-h-screen flex items-center justify-center">
 			<div className="w-1/2 mb-16">
@@ -85,22 +88,14 @@ const RegistroPaseador = () => {
 									Inicia sesión
 								</span>
 							</Link>
-							<br />
-							<br />
-							{/* temporary link to dashboard */}
-							<Link to="/dash">
-								<span className="text-indigo-600 font-bold p-2 border rounded-md">
-									Walker Dashboard
-								</span>
-							</Link>
 						</p>
 					</div>
 					<form className="space-y-6 mt-10">
 						<label className="text-sm font-medium leading-6 text-gray-900">
 							<input
 								type="radio"
-								value="Paseador"
-								name="role"
+								value="Walker"
+								name="rol"
 								onChange={handleChange}
 								className="mr-2"
 							/>
@@ -109,15 +104,16 @@ const RegistroPaseador = () => {
 						<label className="block text-sm font-medium leading-6 text-gray-900">
 							<input
 								type="radio"
-								value="Cliente"
+								value="Client"
 								onChange={handleChange}
-								name="role"
+								name="rol"
 								className="mr-2"
 							/>
 							Necesito que alguien pasee a mi perro
 						</label>
 					</form>
-					{user.role && (
+
+					{user.rol && (
 						<form
 							className="space-y-6 mt-10"
 							onSubmit={handleSubmit}
@@ -146,7 +142,7 @@ const RegistroPaseador = () => {
 									)}
 								</div>
 							</div>
-							{user.role === 'Paseador' && (
+							{user.rol === 'Walker' && (
 								<div>
 									<label
 										htmlFor="description"
@@ -186,6 +182,21 @@ const RegistroPaseador = () => {
 										* {errors.email}
 									</p>
 								)}
+								<label
+									htmlFor="birthdate"
+									className="block text-sm font-medium leading-6 text-gray-900 mt-5"
+								>
+									Birth Date:
+								</label>
+								<input
+									type="birthdate"
+									id="birthdate"
+									value={user.birthdate}
+									name="birthdate"
+									onChange={handleChange}
+									placeholder="2021-01-01"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+								/>
 							</div>
 							<div>
 								<label className="block text-sm font-medium leading-6 text-gray-900">
@@ -195,7 +206,7 @@ const RegistroPaseador = () => {
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
 									type="text"
 									name="country"
-									value="country"
+									value={user.country}
 									onChange={handleChange}
 								>
 									<option>Seleccione...</option>
@@ -213,8 +224,8 @@ const RegistroPaseador = () => {
 								<select
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
 									type="text"
-									name="province"
-									value="province"
+									name="state"
+									value={user.state}
 									onChange={handleChange}
 								>
 									<option>Seleccione...</option>
@@ -233,7 +244,7 @@ const RegistroPaseador = () => {
 									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
 									type="text"
 									name="city"
-									value="city"
+									value={user.city}
 									onChange={handleChange}
 								>
 									<option>Seleccione...</option>
@@ -311,7 +322,7 @@ const RegistroPaseador = () => {
 									</p>
 								)}
 							</div>
-							<div>
+							{/* <div>
 								<label
 									htmlFor="repPassword"
 									className="block text-sm font-medium leading-6 text-gray-900"
@@ -332,7 +343,7 @@ const RegistroPaseador = () => {
 										* {errors.repPassword}
 									</p>
 								)}
-							</div>
+							</div> */}
 							<button
 								type="submit"
 								className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
