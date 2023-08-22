@@ -14,13 +14,13 @@ export const menu = [
 			{
 				id: 2,
 				title: 'Profile',
-				url: '/dash/users/1',
+				url: '/dash/profile',
 				icon: '/profile.svg',
 			},
 			{
 				id: 3,
 				title: 'History',
-				url: '/dash/users',
+				url: '/dash/history',
 				icon: '/log.svg',
 			},
 		],

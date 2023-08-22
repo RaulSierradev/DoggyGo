@@ -1,11 +1,12 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
 
-function ImageUpload() {
+function ImageUpload({ imageUrl, setImageUrl }) {
 	const [image, setImage] = useState('');
-	const [imageUrl, setImageUrl] = useState(''); // save the image url
+	// const [imageUrl, setImageUrl] = useState(''); // save the image url
 
 	async function uploadImage() {
+		if (!image) return alert('Please choose a valid image');
 		const formData = new FormData();
 		formData.append('file', image);
 		formData.append('upload_preset', 'zihghzim');
