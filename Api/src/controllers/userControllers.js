@@ -1,211 +1,204 @@
-const { Videogame, Genre } = require('../db')
-const axios = require('axios')
-const { API_KEY } = process.env;
+const { User } = require('../db')
+const { Op } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 
-const getUsers = async () => {
-    //DB
-    const videogameDB = await Videogame.findAll({
-        include: {
-            model: Genre,
-            attributes: ["name"],
-            through: {
-                attributes: []
+
+// Trae todos los users
+const getUsersController = async () => {
+    const users = await User.findAll();
+
+    if (users.length === 0) {
+        throw Error('No registered walkers');
+    }
+
+    const arrayUsers = users.map(user => {
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            description: user.description,
+            birthdate: user.birthdate,
+            image: user.image,
+            country: user.country,
+            state: user.state,
+            city: user.city,
+            address: user.address,
+            phone: user.phone,
+            status: user.status,
+            suscription: user.suscription,
+            rol: user.rol
+        }
+    });
+
+    return arrayUsers;
+}
+
+
+//Trae usuarios por nombre
+const getUsersByNameController = async (name) => {
+    if (!name) {
+        throw new Error('Enter a name');
+    }
+
+    const users = await User.findAll({
+        where: {
+            name: {
+                [Op.iLike]: `%${name}%`
             }
         }
     });
 
-    const arrayVideogamesDB = videogameDB.map(videogame => {
-        return {
-            id: videogame.id,
-            name: videogame.name,
-            description: videogame.description,
-            platform: videogame.platform,
-            background_image: videogame.background_image,
-            released: videogame.released,
-            rating: videogame.rating,
-            genres: videogame.genres.map(genre => genre.name)
-        }
-    })
-
-    // API
-    const arrayVideogamesApi = [];
-    for (let i = 1; i <= 5; i++) {
-        let response = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`);
-        // mapeo y pusheo cada juego
-        response.data.results.map(videogame => {
-            arrayVideogamesApi.push({
-                id: videogame.id,
-                name: videogame.name,
-                platform: videogame.platforms.map(p => p.platform.name),
-                background_image: videogame.background_image,
-                released: videogame.released,
-                rating: videogame.rating,
-                genres: videogame.genres.map(genre => genre.name)
-            });
-        });
-    };
- 
-    return [...arrayVideogamesDB, ...arrayVideogamesApi];
-}
-
-
-const getUsersByName = async (name) => {
-    try {
-        //DB
-        const videogamesDB = await Videogame.findAll({
-            where: { name: name },
-            include: {
-                model: Genre,
-                attributes: ['name'],
-                through: {
-                    attributes: []
-                }
-            }
-        })
-
-        const arrayVideogamesDB = videogamesDB.map(videogame => {
-            return {
-                id: videogame.id,
-                name: videogame.name,
-                description: videogame.description,
-                platform: videogame.platform,
-                background_image: videogame.background_image,
-                released: videogame.released,
-                rating: videogame.rating,
-                genres: videogame.genres.map(genre => genre.name)
-            }
-        })
-
-        //API
-        const arrayVideogamesApi = [];
-            let response = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`);
-            response.data.results.map(videogame => {
-                arrayVideogamesApi.push({
-                    id: videogame.id,
-                    name: videogame.name,
-                    platform: videogame.platforms.map(e => e.platform.name),
-                    background_image: videogame.background_image,
-                    released: videogame.released,
-                    rating: videogame.rating,
-                    genres: videogame.genres.map(genre => genre.name)
-                });
-            });
-        //arrayVideogamesApi = arrayVideogamesApi.filter(game => game.name.toLowerCase() || g.name.toUpperCase())
-        
-        let videogamesByName = [...arrayVideogamesDB, ...arrayVideogamesApi].slice(0, 15)  // -----> API +  DB
-        return videogamesByName;
-    } catch (error) {
-        throw Error('Invalid Videogame.')
+    if (users.length === 0) {
+        throw Error('Walkers not found');
     }
+
+    const arrayUsers = users.map(user => {
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            description: user.description,
+            birthdate: user.birthdate,
+            image: user.image,
+            country: user.country,
+            state: user.state,
+            city: user.city,
+            address: user.address,
+            phone: user.phone,
+            status: user.status,
+            suscription: user.suscription,
+            rol: user.rol
+        }
+    });
+
+    return arrayUsers;
 }
 
+// trae user por id
+const getUserByIdController = async (id) => {
+    const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
 
-// videogames from API by ID
-const getUsersFromApi = async (id) => {
-    const apiVideogames = [];
+    if (!id) {
+        throw new Error('Enter an ID');
+    }
 
-    const getByAPI = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
-    apiVideogames.push({
-        id: getByAPI?.data?.id,
-        name: getByAPI?.data?.name,
-        description: getByAPI?.data?.description,  // Solo tiene description si se busca por ID
-        platform: getByAPI?.data?.platforms?.map(p => p.platform.name),
-        background_image: getByAPI?.data?.background_image,
-        released: getByAPI?.data?.released,
-        rating: getByAPI?.data?.rating,
-        genres: getByAPI?.data?.genres?.map((genre) => genre.name),
-    })
+    if (!regexExp.test(id)) {
+        throw Error('Enter a valid ID');
+    }
 
-    return apiVideogames;
+    const user = await User.findByPk(id);
+
+    return user;
 }
 
+// // postea user en la base de datos
+// const postUserController = async ({ name, email, password, description, birthdate, image, country, state, city, address, phone,  status, suscription, rol }) => {
+//     if (!name || !email || !password || !birthdate || !address || !phone || !description || !country || !state || !city || !rol) {
+//         throw Error('All fields are required');
+//     }
 
-// videogames from DB by ID
-const getUserFromDB = async (id) => {
-    let dbVideogames = []
+//     const searchName = await User.findAll({
+//         where: { name: name }
+//     })
 
-    const getGamesDB = await Videogame.findByPk(
-        id,
-        {
-            include: {
-                model: Genre,
-                attributes: ["name"],
-                through: {
-                    attributes: []
-                }
-            }
-        });
+//     if (searchName.length !== 0) throw Error('This User already exist!');
 
-    dbVideogames.push({
-        id: getGamesDB.id,
-        name: getGamesDB.name,
-        description: getGamesDB.description,
-        platform: getGamesDB.platform,
-        background_image: getGamesDB.background_image,
-        released: getGamesDB.released,
-        rating: getGamesDB.rating,
-        genres: getGamesDB.genres.map(genre => genre.name)
-    })
-    return dbVideogames;
-}
+//     let newUser = await User.create({
+//         name,
+//         email,
+//         password,
+//         description,
+//         birthdate,
+//         image,
+//         country,
+//         state,
+//         city,
+//         address,
+//         phone, 
+//         status,
+//         suscription,
+//         rol 
+//     });
+
+//     return newUser;
+// }
+
+const postUserController = async (userData) => {
+    console.log(userData)
+    const { name, email, password, birthdate, address, phone, description, country, state, city, rol } = userData;
 
 
-const createUser = async ({ name, description, platform, background_image, released, rating, genre }) => {
-
-    if (!name || !description || !platform || !background_image || !released || !rating || !genre) {
+    if (!name || !email || !password || !birthdate || !address || !phone || !description || !country || !state || !city || !rol) {
         throw Error('All fields are required')
     }
 
-    const searchName = await Videogame.findAll({
-        where: { name: name }
+    const existingUser = await User.findOne({
+        where: { email: email }
     })
 
-    if (searchName.length !== 0) throw Error('This videogame already exist!')
+    console.log(existingUser)
+    if (existingUser) throw new Error('This User already exist!')
 
-    let getGenreDB = await Genre.findAll({
-        where: {
-            name: genre
-        }
+    const hashedPassword = await bcrypt.hash(password, 10);  // 10 number of salt rounds
+
+    let newUser = await User.create({
+        ...userData,
+        password: hashedPassword,
     });
 
-    if (getGenreDB.length === 0) throw Error('Los generos no se cargaron correctamente!')
-
-    let newVideogame = await Videogame.create({
-        name,
-        description,
-        platform,
-        background_image,
-        released,
-        rating: Number(rating),
-        genre
-    });
-
-    await newVideogame.addGenres(getGenreDB);
-
-    return newVideogame;
+    return newUser;
 }
 
-// Trae todos los videojuegos o los trae por nombre
-const getUsersController = (name) => {
-    if (!name) return getUsers()
-    else return getUsersByName(name)
-}
 
-// trae video juegos por id
-const getUserByIdController = async (id, source) => {
-    if (source === 'API') return getUserFromApi(id)
-    else return getUserFromDB(id)
-}
 
-// postea videojuego en la base de datos
-const postUserController = (form) => {
-    return createUser(form)
-}
+// //editar user
+// const putUserController = async ({ name, email, password, description, birthdate, image, country, state, city, address, phone, status, suscription, rol }) => {
+
+//     const user = await User.findOne({ where: { email: email } });
+
+//     let updatedUser = await user.update({
+//         name,
+//         email,
+//         password,
+//         description,
+//         birthdate,
+//         image,
+//         country,
+//         state,
+//         city,
+//         address,
+//         phone,
+//         status,
+//         suscription,
+//         rol
+//     });
+
+//     return updatedUser;
+// }
+
+const putUserController = async (updates) => {
+    const user = await User.findOne({ where: { email: updates.email } });
+
+
+    if (!user) {
+        throw new Error('User not found');
+    }
+
+    let updatedUser = await user.update(updates);
+
+    return updatedUser;
+};
+
 
 
 module.exports = {
+    getUsersByNameController,
     getUsersController,
     getUserByIdController,
     postUserController,
+    putUserController
 }
+

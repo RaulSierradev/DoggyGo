@@ -4,14 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-// postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
-
-const sequelize = new Sequelize(`postgres://postgres:postgres@localhost:5432/doggygo`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/doggygo`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
 const basename = path.basename(__filename);
-
 const modelDefiners = [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
@@ -32,7 +29,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { User, Walker, Walk, Dog, Review } = sequelize.models
+
+const { User , Walk, Dog, Review } = sequelize.models;
+
+
+// Aca vendrian las relaciones
 
 User.hasMany(Dog);
 Dog.belongsTo(User);
@@ -40,11 +41,8 @@ Dog.belongsTo(User);
 User.hasMany(Walk);
 Walk.belongsTo(User);
 
-Walker.hasMany(Walk);
-Walk.belongsTo(Walker);
-
-Walker.hasMany(Review);
-Review.belongsTo(Walker);
+User.hasMany(Review);
+Review.belongsTo(User);
 
 
 module.exports = {

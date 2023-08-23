@@ -1,21 +1,24 @@
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const regexPass =
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+// comment just for now because we are not using this regex in testing phase
+// const regexPass =
+//   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+const regexPass = /^.{8,}$/;
 
 export default function VerificacionPaseador(props) {
-  const errores = {};
-  if (!props.nombre.trim()) errores.name = "Este espacio está vacío";
-  if (!props.descripcion.trim())
-    errores.descripcion = "Este espacio está vacío";
-  if (!props.email.trim()) errores.email = "Este espacio está vacío";
-  if (!regexEmail.test(props.email)) errores.email = "Ingresa un email válido";
-  if (!props.direccion.trim()) errores.direccion = "Este espacio está vacío";
-  if (!props.telefono.trim()) errores.telefono = "Este espacio está vacío";
-  if (!props.password.trim()) errores.telefono = "Este espacio está vacío";
+  const errors = {};
+  if (!props.name.trim()) errors.name = "Este espacio está vacío";
+  if (!props.email.trim()) errors.email = "Este espacio está vacío";
+  if (!regexEmail.test(props.email)) errors.email = "Ingresa un email válido";
+  if (!props.address.trim()) errors.address = "Este espacio está vacío";
+  if (!props.phone.trim()) errors.phone = "Este espacio está vacío";
+  if (!props.password.trim()) errors.password = "Este espacio está vacío";
   if (!regexPass.test(props.password))
-    errores.password = "Contraseña incorrecta";
-  if (!props.repPassword.trim()) errores.telefono = "Este espacio está vacío";
-  if (props.password !== props.repPassword ) errores.repPassword = 'Las contraseñas no coinciden'
+    errors.password = "Contraseña incorrecta";
+  // if (!props.repPassword.trim()) errors.phone = "Este espacio está vacío";
+  // if (props.password !== props.repPassword)
+  //   errors.repPassword = "Las contraseñas no coinciden";
 
-  return errores;
+  return errors;
 }

@@ -1,4 +1,4 @@
-const { createDog } = require("../controllers/dogControllers");
+const { createDog, getDogs } = require("../controllers/dogControllers");
 const { Dog } = require("../db")
 
 const addDog = async (req, res) => {
@@ -23,7 +23,7 @@ const getAllDogs = async (req, res) => {
         if (dogs.length) {
             return res.status(200).json(dogs)
         } else {
-            throw Error("you don't have dogs, you must add one")
+            throw Error("No hay perros")
         }
     } catch (error) {
         return res.status(400).json(error.message)

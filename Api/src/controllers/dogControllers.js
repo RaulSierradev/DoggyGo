@@ -12,6 +12,10 @@ const createDog = async (name, race, image, age, recomendations) => {
     return dog
 }
 
+const getDogs = async () => {
+    const dogs = await Dog.findAll()
+    return dogs
+}
 
 module.exports = {
     createDog,
