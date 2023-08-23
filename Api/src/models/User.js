@@ -16,7 +16,6 @@ module.exports = (sequelize) => {
     },
     image:{
       type: DataTypes.STRING,
-      allowNull: false,
     },
     password:{
       type: DataTypes.STRING,
@@ -30,7 +29,19 @@ module.exports = (sequelize) => {
     birthdate:{
       type: DataTypes.DATEONLY,
       allowNull: false,
-  },    
+    },    
+    country:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    state:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    city:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     address:{
       type: DataTypes.STRING,
       allowNull: false,
@@ -46,17 +57,12 @@ module.exports = (sequelize) => {
     },
     suscription:{
       type: DataTypes.BOOLEAN,
-      unique: true,
-      allowNull: false,
     },    
     status:{
       type: DataTypes.BOOLEAN,
-      unique: true,
-      allowNull: false,
     },
-    Rol:{
+    rol:{
       type: DataTypes.ENUM('Walker', 'Client'),
-      unique: true,
       allowNull: false,
     }
   }, 
