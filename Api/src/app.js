@@ -3,12 +3,21 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const router = require('./routes/index.js');  
-const passport = require('passport')
+const passport = require('passport') 
+require('./controllers/authenticate'); 
+const session = require('express-session')
 
 
 require('./db.js');
 
-const server = express();      
+const server = express();       
+
+server.use(session({
+  secret: 'mysecret',
+  resave: false, 
+  saveUninitialized: true, 
+  cookie: {secure:false}
+})) 
 
 
 
@@ -21,12 +30,13 @@ server.use(cookieParser());
 server.use(morgan('dev'));    
 server.use(express.json()) 
 server.use(express.urlencoded({ extended: false}))
-server.use(passport.initialize())   
+server.use(passport.initialize()) 
+server.use(passport.session())
 
-require('./controllers/authenticate.js');
 
 
-server.get('/google', passport.authenticate('google',{ scope: ['profile', 'email'] })); 
+
+server.get('/google',passport.authenticate('google',  {scope: ['profile', 'email']}))
 server.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login'}), (req, res) =>{
   // res.redirect('/') 
   res.end('logget in!')

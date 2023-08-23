@@ -5,13 +5,13 @@ passport.serializeUser((user, done) => {
     done(null, user.id)
 }) 
 passport.deserializeUser((user, done) => {
-    done(null, user.id)
+    done(null, user)
 })
 
 
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-passport.use(new GoogleStrategy({
+passport.use(new GoogleStrategy ({ scope: ['profile', 'email'],
     clientID: '936998695219-dtjenfoa1o1h5roqq0aar531b66gbulh.apps.googleusercontent.com',
     clientSecret: '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',
     callbackURL: "http://localhost:3001/google/callback"
