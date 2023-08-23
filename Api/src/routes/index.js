@@ -4,7 +4,7 @@ const { Router } = require('express');
 const userRouter = require ("./userRouter");
 const dogRouter = require ("./dogRouter");
 const walkRouter = require ("./walkRouter");
-const reviewRouter = require ("./reviewRouter");
+// const reviewRouter = require ("./reviewRouter");
 const locationRouter = require ("./locationRouter");
 
 const router = Router();
@@ -13,8 +13,8 @@ const router = Router();
 
 
 router.use("/user", userRouter);
- router.use("/dog", dogRouter);
-// router.use("/walk", walkRouter);
+router.use("/dog", dogRouter);
+router.use("/walk", walkRouter);
 // router.use("/review", reviewRouter);
 router.use("/location", locationRouter);
 
