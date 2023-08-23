@@ -1,23 +1,23 @@
-const { Dog } = require("../db")
+// const { Dog } = require("../db")
 
-const createDog = async (name, race, image, age, recomendations) => {
-    const dog = await Dog.create({
-        name,
-        race,
-        image,
-        image,
-        age,
-        recomendations
-    })
-    return dog
-}
+// const createDog = async (name, race, image, age, recomendations) => {
+//     const dog = await Dog.create({
+//         name,
+//         race,
+//         image,
+//         image,
+//         age,
+//         recomendations
+//     })
+//     return dog
+// }
 
-const getDogs = async () => {
-    const dogs = await Dog.findAll()
-    return dogs
-}
+// const getDogs = async () => {
+//     const dogs = await Dog.findAll()
+//     return dogs
+// }
 
-module.exports = {
-    createDog,
-    getDogs
-}
+// module.exports = {
+//     createDog,
+//     getDogs
+// }
