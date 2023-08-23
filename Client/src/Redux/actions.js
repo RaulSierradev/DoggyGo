@@ -1,7 +1,16 @@
 import axios from "axios";
-
-import { PRUEBA, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, RESTORE_CLIENTS, RESTORE_WALKERS } from "./action-types";
-import { CREATE_USER, EDIT_USER } from './action-types'
+import {
+  PRUEBA,
+  GET_ALL_USERS,
+  GET_CLIENT_BY_NAME,
+  GET_WALKER_BY_NAME,
+  RESTORE_CLIENTS,
+  RESTORE_WALKERS,
+  FILTER_WALKERS,
+  ORDER_DEFAULT,
+  CREATE_USER, 
+  EDIT_USER
+} from "./action-types";
 
 const URL = "http://localhost:3001/";
 
@@ -15,18 +24,6 @@ export const asyncFunction = (params) => {
     }
 } 
 */
-export function getAll() {
-  return async function getUsersThunk(dispatch) {
-    // dispatch({ type: 'loading' })
-
-    const res = await axios.get('http://localhost:3001/user');
-    console.log(res.data)
-
-    dispatch({ type: GET_ALL_USERS, payload: res.data })
-  }
-}
-
-
 
 export function createUser(user) {
   return async function createUserThunk(dispatch) {
@@ -51,11 +48,23 @@ export function editUser(user) {
   }
 }
 
+export function getAll() {
+  return async function getUsersThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.get("http://localhost:3001/user");
+    console.log(res.data);
+
+    dispatch({ type: GET_ALL_USERS, payload: res.data });
+  };
+}
+
 export const probarEstado = () => {
   console.log("hola desde actions");
   return { type: PRUEBA };
 };
 
+//Trae todos los usuarios, ya sea clients o walkers
 export const getAllUsers = () => {
   return async (dispatch) => {
     try {
@@ -64,12 +73,13 @@ export const getAllUsers = () => {
       return dispatch({ type: GET_ALL_USERS, payload: data });
     } catch (error) {
       error.response && error.response.data
-        ? alert(error.response.data)
+        ? alert(error.response.data.error)
         : alert(error.message);
     }
   };
 };
 
+//Trae todos los clients por nombre (se autocompleta y no es sensible a mayusculas)
 export const getClientByName = (name) => {
   return async (dispatch) => {
     try {
@@ -85,6 +95,7 @@ export const getClientByName = (name) => {
   };
 };
 
+//Trae todos los walkers por nombre (se autocompleta y no es sensible a mayusculas)
 export const getWalkerByName = (name) => {
   return async (dispatch) => {
     try {
@@ -100,14 +111,31 @@ export const getWalkerByName = (name) => {
   };
 };
 
+//Restablece los clients a su backup
 export const restoreClients = () => {
   return {
     type: RESTORE_CLIENTS,
-  }
-}
+  };
+};
 
+//Restablece los walkers a su backup
 export const restoreWalkers = () => {
   return {
     type: RESTORE_WALKERS,
-  }
-}
+  };
+};
+
+//Ordena por default segun disponibilidad, entre otros
+export const orderDefault = () => {
+  return {
+    type: ORDER_DEFAULT,
+  };
+};
+
+//Filtra los walkers segun el filter
+export const filterWalkers = (filter) => {
+  return {
+    type: FILTER_WALKERS,
+    payload: filter,
+  };
+};
