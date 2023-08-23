@@ -1,34 +1,61 @@
 import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import ImageUpload from './ImageUpload';
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
+import { editUser } from '../../../Redux/actions';
 
 const initailState = {
 	name: '',
-	email: '',
 	birthDate: '',
+	email: '',
 	phone: '',
 	description: '',
 	image: '',
 };
 
 function EditForm({ setEdit }) {
+	const dispatch = useDispatch();
+
 	const [forms, setForms] = useState(initailState);
+	const [imageUrl, setImageUrl] = useState(''); // save the image url
+
+	const cookiesString = Cookies.get('auth'); // {"email":"test","password":"test"}
+	const cookies = JSON.parse(cookiesString);
 
 	function onChange(e) {
-		setForms({ ...forms, [e.target.name]: e.target.value });
+		setForms({
+			...forms,
+			image: imageUrl,
+			email: cookies.email,
+			[e.target.name]: e.target.value,
+		});
 	}
 
 	// handle submit confirm button
-	function handleSubmit() {
+	function handleSubmit(e) {
+		e.preventDefault();
 		// send data to server
-		setEdit(false);
-		setForms(initailState);
+		try {
+			dispatch(editUser(forms));
+			setForms(initailState);
+			setEdit(false);
+			alert('Edit success');
+		} catch (error) {
+			console.log(error.message);
+			alert(error.message);
+		}
 	}
+
+	console.log(forms);
 
 	return (
 		<>
 			<div className="flex items-center gap-8 w-9/12">
-				<div className="flex items-center flex-col mt-6 gap-1">
+				<form
+					className="flex items-center flex-col mt-6 gap-1"
+					onSubmit={handleSubmit}
+				>
 					<TextField
 						id="standard-basic"
 						label="Name"
@@ -39,18 +66,11 @@ function EditForm({ setEdit }) {
 					/>
 					<TextField
 						id="standard-basic"
-						label="Email"
-						variant="standard"
-						value={forms.email}
-						name="email"
-						onChange={onChange}
-					/>
-					<TextField
-						id="standard-basic"
 						value={forms.birthDate}
 						name="birthDate"
 						label="Birth Date"
 						variant="standard"
+						placeholder="yyyy-mm-dd"
 						onChange={onChange}
 					/>
 					<TextField
@@ -66,22 +86,25 @@ function EditForm({ setEdit }) {
 							id="standard-basic"
 							label="Description"
 							multiline
-							rows={2}
-							maxRows={4}
+							rows={4}
 							value={forms.description}
 							name="description"
 							onChange={onChange}
 						/>
 					</div>
-				</div>
+					<button type="submit">Confirm</button>
+				</form>
 				<div className="flex-1">
-					<ImageUpload />
+					<ImageUpload
+						imageUrl={imageUrl}
+						setImageUrl={setImageUrl}
+					/>
 				</div>
 			</div>
 			<div className="item-center mt-5">
-				<Button onClick={handleSubmit} variant="contained">
+				{/* <Button type="submit" variant="contained">
 					Confirm
-				</Button>
+				</Button> */}
 			</div>
 		</>
 	);

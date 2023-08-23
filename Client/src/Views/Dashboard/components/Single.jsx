@@ -4,7 +4,7 @@ import { useState } from 'react';
 import EditForm from './EditForm';
 
 const Single = (props) => {
-	props = props[0];
+	console.log(props);
 	const [edit, setEdit] = useState(false);
 
 	function handleEdit() {
