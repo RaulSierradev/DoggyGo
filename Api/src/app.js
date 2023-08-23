@@ -23,7 +23,7 @@ server.use(express.json())
 server.use(express.urlencoded({ extended: false}))
 server.use(passport.initialize())   
 
-require('./authenticate.js');
+require('./controllers/authenticate.js');
 
 
 server.get('/google', passport.authenticate('google',{ scope: ['profile', 'email'] })); 
