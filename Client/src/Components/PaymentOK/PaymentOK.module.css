@@ -1,0 +1,56 @@
+.PaymentOK{
+    background-color: aliceblue;
+    width: 17vw;
+    aspect-ratio: 0.75;
+    border-radius: 1dvb;
+    font-size: 1cqi;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    min-width: 360px;
+}
+.POK_sec1{
+    height: 40%;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.POK_icon{
+    height: 40% ;
+    mix-blend-mode: darken;
+    margin-left: auto;
+    margin-right: auto;
+}
+.POK_ttl{
+    font-size: 1.5dvb;
+    opacity: 0.5;
+    text-transform: capitalize;
+    text-align: center;
+}
+.POK_mnt{
+    text-align: center;
+    font-weight: 500;
+    font-size: 3.5dvb;
+}
+
+.POK_sec2{
+    height: 60%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.POK_sec2_TXcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.8cqb;
+}
+.sc2tx_txsec{
+    font-size: 1.5cqb;
+}
+.sc2tx_total{
+    font-size: 1.6rem;
+}
