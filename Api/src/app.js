@@ -36,8 +36,8 @@ server.use(passport.session())
 
 
 
-server.get('/google',passport.authenticate('google',  {scope: ['profile', 'email']}))
-server.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login'}), (req, res) =>{
+server.get('/auth/google',passport.authenticate('google',  {scope: ['profile', 'email']}))
+server.get('/auth/google/create', passport.authenticate('google', { failureRedirect: '/login'}), (req, res) =>{
   // res.redirect('/') 
   res.end('logget in!')
 })

@@ -1,4 +1,5 @@
-let passport = require('passport')   
+let passport = require('passport')    
+require("dotenv").config();
 
 
 passport.serializeUser((user, done) => {
@@ -12,9 +13,9 @@ passport.deserializeUser((user, done) => {
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 passport.use(new GoogleStrategy ({ scope: ['profile', 'email'],
-    clientID: '936998695219-dtjenfoa1o1h5roqq0aar531b66gbulh.apps.googleusercontent.com',
-    clientSecret: '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',
-    callbackURL: "http://localhost:3001/google/callback"
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3001/auth/google/create"
   },
   function(accessToken, refreshToken, profile, cb) {
    //registro usuario  
