@@ -8,6 +8,7 @@ import Registro from "./Views/Registro/Registro.jsx";
 import Login from "./Views/Login/Login";
 import Landing from "./Views/Landing/Landing";
 import Home from "./Views/Home/Home";
+import T from "./Views/T/T";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='users/:id' element={<User />} />
         </Route>
         <Route path='/home' element={<Home />} />
+        <Route path='/T' element={<T />} />
       </Routes>
     </div>
   );
