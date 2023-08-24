@@ -1,23 +1,14 @@
-import { Button, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import { useState } from 'react';
 import ImageUpload from './ImageUpload';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { editUser } from '../../../Redux/actions';
 
-const initailState = {
-	name: '',
-	birthDate: '',
-	email: '',
-	phone: '',
-	description: '',
-	image: '',
-};
-
-function EditForm({ setEdit }) {
+function EditForm({ setEdit, edit }) {
 	const dispatch = useDispatch();
 
-	const [forms, setForms] = useState(initailState);
+	const [forms, setForms] = useState({});
 	const [imageUrl, setImageUrl] = useState(''); // save the image url
 
 	const cookiesString = Cookies.get('auth'); // {"email":"test","password":"test"}
@@ -28,7 +19,7 @@ function EditForm({ setEdit }) {
 			...forms,
 			image: imageUrl,
 			email: cookies.email,
-			[e.target.name]: e.target.value,
+			[e.target.name]: e.target.value === '' ? null : e.target.value,
 		});
 	}
 
@@ -38,7 +29,7 @@ function EditForm({ setEdit }) {
 		// send data to server
 		try {
 			dispatch(editUser(forms));
-			setForms(initailState);
+			setForms({});
 			setEdit(false);
 			alert('Edit success');
 		} catch (error) {
@@ -51,6 +42,12 @@ function EditForm({ setEdit }) {
 
 	return (
 		<>
+			{' '}
+			{edit ? (
+				<button onClick={() => setEdit(!edit)}>cancel</button>
+			) : (
+				<h1 className="font-bold">Edit</h1>
+			)}
 			<div className="flex items-center gap-8 w-9/12">
 				<form
 					className="flex items-center flex-col mt-6 gap-1"
@@ -92,7 +89,12 @@ function EditForm({ setEdit }) {
 							onChange={onChange}
 						/>
 					</div>
-					<button type="submit">Confirm</button>
+					<button
+						className="rounded-md text-white bg-green-500 p-2 mt-1"
+						type="submit"
+					>
+						Confirm
+					</button>
 				</form>
 				<div className="flex-1">
 					<ImageUpload
@@ -101,11 +103,7 @@ function EditForm({ setEdit }) {
 					/>
 				</div>
 			</div>
-			<div className="item-center mt-5">
-				{/* <Button type="submit" variant="contained">
-					Confirm
-				</Button> */}
-			</div>
+			<div className="item-center mt-5"></div>
 		</>
 	);
 }

@@ -38,7 +38,7 @@ const Single = (props) => {
 						)}
 					</div>
 					{edit ? (
-						<EditForm setEdit={setEdit} />
+						<EditForm setEdit={setEdit} edit={edit} />
 					) : (
 						<UserInfo props={props} />
 					)}

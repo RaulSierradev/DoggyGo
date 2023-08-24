@@ -9,6 +9,7 @@ import Login from './Views/Login/Login';
 import Landing from './Views/Landing/Landing';
 import Home from './Views/Home/Home';
 import PrivateRoutes from './Views/utils/PrivateRoutes';
+import WalkerDetail from './Views/WalkerDetail/WalkerDetail';
 
 function App() {
 	return (
@@ -27,6 +28,7 @@ function App() {
 				</Route>
 
 				<Route path="/home" element={<Home />} />
+				<Route path="/home/detail/:id" element={<WalkerDetail />} />
 			</Routes>
 		</div>
 	);

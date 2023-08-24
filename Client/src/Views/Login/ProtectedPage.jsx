@@ -7,7 +7,7 @@ const ProtectedPage = () => {
 
 	const handleLogout = () => {
 		Cookies.remove('auth');
-		navigate('/login');
+		navigate('/inicio');
 	};
 
 	if (!isAuthenticated) {
@@ -18,7 +18,7 @@ const ProtectedPage = () => {
 	return (
 		<div>
 			<button
-				className="rounded-sm bg-slate-100 text-slate-500"
+				className="rounded-sm text-black bg-gray-200 p-2"
 				onClick={handleLogout}
 			>
 				Sign Out
