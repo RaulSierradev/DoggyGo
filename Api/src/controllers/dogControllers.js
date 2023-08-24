@@ -1,23 +1,48 @@
-// const { Dog } = require("../db")
+const { Dog } = require("../db")
+const axios = require('axios')
 
-// const createDog = async (name, race, image, age, recomendations) => {
-//     const dog = await Dog.create({
-//         name,
-//         race,
-//         image,
-//         image,
-//         age,
-//         recomendations
-//     })
-//     return dog
-// }
+const createDog = async (name, size, image, age, recomendations, breed) => {
+    const dog = await Dog.create({
+        name,
+        size,
+        image,
+        breed,
+        age,
+        recomendations
+    })
+    return dog
+}
 
-// const getDogs = async () => {
-//     const dogs = await Dog.findAll()
-//     return dogs
-// }
+const getDogs = async () => {
+    const dogs = await Dog.findAll()
+    return dogs
+}
 
-// module.exports = {
-//     createDog,
-//     getDogs
-// }
+const getBreeds = async () => {
+
+    const breeds = {
+        method: 'GET',
+        url: 'https://dog-breeds2.p.rapidapi.com/dog_breeds',
+        headers: {
+            'X-RapidAPI-Key': 'a5a12bed46msh41cfdac644ffedcp167b6cjsn348a3c1513a6',
+            'X-RapidAPI-Host': 'dog-breeds2.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await axios.request(breeds);
+
+        const respuesta = response.data.map(raza => ({
+            id: raza.id,
+            name: raza.breed
+        }))
+        return (respuesta);
+    } catch (error) {
+        return (error);
+    }
+}
+module.exports = {
+    createDog,
+    getDogs,
+    getBreeds
+}
