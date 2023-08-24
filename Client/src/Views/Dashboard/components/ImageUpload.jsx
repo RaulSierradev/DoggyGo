@@ -35,6 +35,7 @@ function ImageUpload({ imageUrl, setImageUrl }) {
 			<Button onClick={uploadImage} className="" variant="contained">
 				Upload
 			</Button>
+			<p className="tex-sm ">Image Preview</p>
 			<img
 				src={imageUrl}
 				alt=""

@@ -8,7 +8,7 @@ import {
   RESTORE_WALKERS,
   FILTER_WALKERS,
   ORDER_DEFAULT,
-  CREATE_USER, 
+  CREATE_USER,
   EDIT_USER
 } from "./action-types";
 
@@ -29,7 +29,7 @@ export function createUser(user) {
   return async function createUserThunk(dispatch) {
     // dispatch({ type: 'loading' })
 
-    const res = await axios.post('http://localhost:3001/user', user);
+    const res = await axios.post(`${URL}user`, user);
     console.log(res.data)
 
     dispatch({ type: CREATE_USER, payload: res.data })
@@ -41,7 +41,7 @@ export function editUser(user) {
   return async function editUserThunk(dispatch) {
     // dispatch({ type: 'loading' })
 
-    const res = await axios.put('http://localhost:3001/user', user);
+    const res = await axios.put(`${URL}user`, user);
     console.log(res.data)
 
     dispatch({ type: EDIT_USER, payload: res.data })
@@ -52,7 +52,7 @@ export function getAll() {
   return async function getUsersThunk(dispatch) {
     // dispatch({ type: 'loading' })
 
-    const res = await axios.get("http://localhost:3001/user");
+    const res = await axios.get(`${URL}user`);
     console.log(res.data);
 
     dispatch({ type: GET_ALL_USERS, payload: res.data });
