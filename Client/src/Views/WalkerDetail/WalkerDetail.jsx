@@ -7,6 +7,7 @@ import Nav from '../Nav';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
+import Payment from '../Booking Confirmation/Payment';
 
 function WalkerDetail() {
 	const [details, setDetails] = useState([]);
@@ -76,9 +77,13 @@ function WalkerDetail() {
 								</div>
 							</div>
 
-							<button className="rounded-md mt-2 text-white bg-green-500 p-2">
+							<Link
+								to={'/home/payment'}
+								state={{ details }}
+								className="rounded-md mt-2 text-white bg-green-500 p-2"
+							>
 								Book {details.name}
-							</button>
+							</Link>
 						</div>
 						<div className="gap-8 flex-col ml-5 w-1/2 h-4/6  p-3 rounded-md bg-white shadow">
 							<div className="h-2/5">
@@ -98,11 +103,11 @@ function WalkerDetail() {
 								<h3 className="font-bold text-lg">
 									Recent Reviews
 								</h3>
-								<div className="gap-5 flex mt-1">
-									<div className="rounded-md bg-[#faf9f9] w-full p-3 shadow-md italic">
+								<div className="gap-5 flex mt-2">
+									<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">
 										<p>Good</p>
 									</div>
-									<div className="rounded-md bg-[#faf9f9] w-full p-3 shadow-md italic">
+									<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">
 										<p>
 											Lorem ipsum dolor sit amet,
 											consectetur adipisicing elit.
@@ -110,7 +115,7 @@ function WalkerDetail() {
 											cupiditate aliquid maiores
 										</p>
 									</div>{' '}
-									<div className="rounded-md bg-[#faf9f9] w-full p-3 shadow-md italic">
+									<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md">
 										<p>Ok sjkladjas</p>
 									</div>
 								</div>

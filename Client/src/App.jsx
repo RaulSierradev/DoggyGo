@@ -10,6 +10,7 @@ import Landing from './Views/Landing/Landing';
 import Home from './Views/Home/Home';
 import PrivateRoutes from './Views/utils/PrivateRoutes';
 import WalkerDetail from './Views/WalkerDetail/WalkerDetail';
+import Payment from './Views/Booking Confirmation/Payment';
 
 function App() {
 	return (
@@ -29,6 +30,7 @@ function App() {
 
 				<Route path="/home" element={<Home />} />
 				<Route path="/home/detail/:id" element={<WalkerDetail />} />
+				<Route path="/home/payment" element={<Payment />} />
 			</Routes>
 		</div>
 	);
