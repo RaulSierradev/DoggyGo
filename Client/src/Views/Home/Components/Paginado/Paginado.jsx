@@ -1,41 +1,11 @@
 import { useEffect, useState } from "react";
 import Cards from "../Cards/Cards";
+import {useSelector} from "react-redux"
 
-const walkersPerPage = 2;
+const walkersPerPage = 5;
 
 const Paginado = () => {
-  //*Utilice un array local, actualizar a estado global
-  //const walkers = useSelector((state) => state.walkers);
-  const [walkers, setWalkers] = useState([
-    {
-      id: 1,
-      name: "Pedro",
-      direccion: "Calle falsa 123",
-      telefono: "1234-9876",
-      descripción: "Esta es mi descripcion",
-      disponibilidad: true,
-    },
-    {
-      id: 2,
-      name: "Juan",
-      direccion: "Calle falsa 123",
-      telefono: "1234-9876",
-      descripción: "Esta es mi descripcion",
-      disponibilidad: false,
-    },
-    {
-      id: 3,
-      name: "Pablo",
-    },
-    {
-      id: 4,
-      name: "x1",
-    },
-    {
-      id: 5,
-      name: "x2",
-    },
-  ]);
+  const walkers = useSelector((state) => state.walkers);
 
   const [walkersPaginated, setWalkersPaginated] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -71,9 +41,9 @@ const Paginado = () => {
   };
 
   return (
-    <div>
+    <div className="bg-sky-300 mx-9 mt-2 border-none rounded-lg">
       <Cards walkers={walkersPaginated} />
-      <div className='flex flex-row justify-center'>
+      <div className='pb-4 flex flex-row justify-center'>
         <button
           className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
             currentPage === 0
@@ -85,11 +55,11 @@ const Paginado = () => {
         >
           Prev
         </button>
-        <button className='bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-l' disabled>
+        <button className='bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded mx-4' disabled>
           {currentPage + 1}
         </button>
         <button
-          className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
+          className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ${
             walkersPaginated.length < walkersPerPage ||
             walkers.length === (currentPage + 1) * walkersPerPage
               ? "bg-gray-200 cursor-not-allowed rounded opacity-50"

@@ -22,16 +22,9 @@ const columns = [
 		editable: true,
 	},
 	{
-		field: 'lastName',
-		headerName: 'Last name',
+		field: 'email',
+		headerName: 'Email',
 		width: 150,
-		editable: true,
-	},
-	{
-		field: 'age',
-		headerName: 'Age',
-		type: 'number',
-		width: 110,
 		editable: true,
 	},
 	{
