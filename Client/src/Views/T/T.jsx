@@ -1,11 +1,11 @@
 import React from 'react'
 import style from './T.module.css'
-import PaymentOK from '../../Components/PaymentOK/PaymentOK'
+import Error404 from '../Error404/Error404'
 
 const T = () => {
   return (
     <main className={style.T}>
-        <PaymentOK/>
+        <Error404/>
     </main>
   )
 }

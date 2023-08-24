@@ -1,7 +1,10 @@
 import React from 'react'
 import style from './PaymentOK.module.css'
+import icon from '/SuccessIcon.png'
+
 const PaymentOK = ({pay}) => {
 
+  const iconURL = icon
   const pay2 = {
                monto:100,
                referencia:34322,
@@ -13,7 +16,7 @@ const PaymentOK = ({pay}) => {
   return (
     <div className={style.PaymentOK}>
           <div className={style.POK_sec1}>
-            <img className={style.POK_icon} src="https://static.vecteezy.com/system/resources/previews/006/622/981/large_2x/like-or-correct-symbol-icon-isolated-white-background-checkmark-button-mobile-app-icon-illustration-free-vector.jpg" alt="" />
+            <img className={style.POK_icon} src={iconURL}/>
             <h2 className={style.POK_ttl}>Payment succes</h2>
             <h2 className={style.POK_mnt}>$ {pay2.monto.toLocaleString()}°</h2>
           </div>
