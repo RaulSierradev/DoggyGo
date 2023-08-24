@@ -20,9 +20,9 @@ const Plans = () => {
             </div>
         </div>
         <div className={style.CardsContiner}>
-            <div className={style.card1} style={{animationDelay:'100'}}>{mY ? price.doggy : price.doggy * 11.5 }</div>
-            <div className={style.card2} style={{animationDelay:'200'}}>{mY ? price.doggyPlus : price.doggyPlus * 11.5 }</div>
-            <div className={style.card3} style={{animationDelay:'300'}}>{mY ? price.doggyPro : price.doggyPro * 11.5 }</div>
+            <div className={style.card1} style={{animationDelay:'100ms'}}>{mY ? price.doggy : price.doggy * 11.5 }</div>
+            <div className={style.card2} style={{animationDelay:'200ms'}}>{mY ? price.doggyPlus : price.doggyPlus * 11.5 }</div>
+            <div className={style.card3} style={{animationDelay:'300ms'}}>{mY ? price.doggyPro : price.doggyPro * 11.5 }</div>
         </div>
     </div>
   )
