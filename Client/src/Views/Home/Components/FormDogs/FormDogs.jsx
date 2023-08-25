@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import ImageUpload from '../../../Dashboard/components/ImageUpload';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DogSize from './DogSize';
 
 const FormDogs = () => {
@@ -8,6 +8,14 @@ const FormDogs = () => {
 	console.log(currentUser);
 
 	const [details, setDetails] = useState({});
+	const [imageUrl, setImageUrl] = useState(''); // save the image url
+
+	useEffect(() => {
+		setDetails((prevDetails) => ({
+			...prevDetails,
+			image: imageUrl,
+		}));
+	}, [imageUrl]);
 
 	const handleChange = (e) => {
 		setDetails({
@@ -90,7 +98,7 @@ const FormDogs = () => {
 					handleChange={handleChange}
 				/>
 				<div className="mt-5">
-					<ImageUpload />
+					<ImageUpload setImageUrl={setImageUrl} />
 				</div>
 			</form>
 		</div>
