@@ -1,4 +1,5 @@
-const { Router } = require('express');
+const { Router } = require('express'); 
+
 // Importar todos los routers;
 
 const userRouter = require ("./userRouter");
@@ -11,12 +12,10 @@ const router = Router();
 
 // Configurar los routers
 
-
 router.use("/user", userRouter);
 router.use("/dog", dogRouter);
 router.use("/walk", walkRouter);
 // router.use("/review", reviewRouter);
 router.use("/location", locationRouter);
-
 
 module.exports = router

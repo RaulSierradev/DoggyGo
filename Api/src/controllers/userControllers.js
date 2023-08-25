@@ -246,4 +246,3 @@ module.exports = {
     updateUserController,
     loginController
 }
-
