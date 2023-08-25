@@ -14,7 +14,6 @@ import Error404 from './Views/Error404/Error404';
 import WalkerDetail from './Views/WalkerDetail/WalkerDetail';
 import Payment from './Views/Booking Confirmation/Payment';
 
-
 function App() {
 	return (
 		<div className="App">
@@ -32,11 +31,10 @@ function App() {
 				</Route>
 				<Route path="/T" element={<T />} />
 				<Route path="*" element={<Error404 />} />
-          
-				<Route path="/home" element={<Home />} />
-        <Route path="/home/detail/:id" element={<WalkerDetail />} />
-				<Route path="/home/payment" element={<Payment />} />
 
+				<Route path="/home" element={<Home />} />
+				<Route path="/home/detail/:id" element={<WalkerDetail />} />
+				<Route path="/home/payment" element={<Payment />} />
 			</Routes>
 		</div>
 	);
