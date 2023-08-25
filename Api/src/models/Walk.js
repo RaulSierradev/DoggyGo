@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
       startDate: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       state: {

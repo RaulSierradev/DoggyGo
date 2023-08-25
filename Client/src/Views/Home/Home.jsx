@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { getAllUsers, orderDefault } from "../../Redux/actions";
 import SearchBar from "./Components/SearchBar/SearchBar";
 import FormDogs from "./Components/FormDogs/FormDogs";
+import Schedule from "../Booking Schedule/Schedule";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const Home = () => {
       </div>
       {orderDefaultComplete && <Paginado />}
       <button className='flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' onClick={()=>setEstadoModal(!estadoModal)}>Al modal</button>
+      <Schedule />
     </div>
   );
 };
