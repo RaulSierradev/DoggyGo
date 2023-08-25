@@ -13,6 +13,7 @@ import Summary from '../Booking Confirmation/Summary';
 import Modal from '../../Views/Modal/Modal';
 import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
+import Schedule from '../Booking Schedule/Schedule';
 
 function WalkerDetail() {
 	const dispatch = useDispatch();
@@ -53,13 +54,15 @@ function WalkerDetail() {
 	};
 
 	const renderStepContent = (step) => {
-		if (step > 3) setCurrentStep(1);
+		if (step > 4) setCurrentStep(1);
 		switch (step) {
 			case 1:
 				return <FormDogs />;
 			case 2:
 				return <WalkCosts />;
 			case 3:
+				return <Schedule />;
+			case 4:
 				return <Payment />;
 			default:
 				return <FormDogs />;
@@ -114,13 +117,13 @@ function WalkerDetail() {
 								</div>
 							</div>
 
-							<Link
+							{/* <Link
 								to={'/home/payment'}
 								// state={{ details }}
 								className="rounded-md mt-2 text-white bg-green-500 p-2"
 							>
 								Book {details.name}
-							</Link>
+							</Link> */}
 							<button
 								className="rounded-md mt-2 text-white bg-green-500 p-2"
 								onClick={handleOpen}
