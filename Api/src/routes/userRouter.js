@@ -8,10 +8,10 @@ userRouter.get('/name/', getUsersByNameHandler);
 userRouter.get('/id/:id', getUserByIdHandler);
 userRouter.get('/id/', getUserByIdHandler);
 userRouter.get('/', getUsersHandler);
+userRouter.post('/login', loginHandler);
 userRouter.post('/', createUserHandler);
 userRouter.put('/', updateUserHandler)
 
-userRouter.post('/login', loginHandler);
 
 
 module.exports = userRouter;
