@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ImageUpload from './ImageUpload';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
@@ -14,12 +14,18 @@ function EditForm({ setEdit, edit }) {
 	const cookiesString = Cookies.get('auth'); // {"email":"test","password":"test"}
 	const cookies = JSON.parse(cookiesString);
 
+	useEffect(() => {
+		setForms((prevDetails) => ({
+			...prevDetails,
+			image: imageUrl,
+		}));
+	}, [imageUrl]);
+
 	function onChange(e) {
 		setForms({
 			...forms,
-			image: imageUrl,
 			email: cookies.email,
-			[e.target.name]: e.target.value === '' ? null : e.target.value,
+			[e.target.name]: e.target.value === '' ? '' : e.target.value,
 		});
 	}
 
