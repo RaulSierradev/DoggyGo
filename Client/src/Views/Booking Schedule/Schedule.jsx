@@ -14,12 +14,13 @@ dayjs.locale("es")
 const Schedule = () => {
   const [dateTimeSelected, setDateTimeSelected] = useState(dayjs());
 
-  //const date = new Date('2023-08-15 15:30:00')
-
   const handleDateTimeChange = (newDate, newTime) => {
     const combinedDateTime = newDate.set("hour", newTime.hour()).set("minute", newTime.minute());
     setDateTimeSelected(combinedDateTime);
   };
+
+  const maxDate = dayjs().endOf("year")
+  const minTime = dayjs().isSame(dateTimeSelected, 'day') ? dayjs() : null;
 
   return (
     <div className='flex flex-col items-center'>
@@ -30,14 +31,17 @@ const Schedule = () => {
             label='Selecciona la fecha'
             openTo='day'
             views={["year", "month", "day"]}
-            minDate={new Date()}
-            maxDate={"2023-12-31"}
+            minDate={dayjs()}
+            maxDate={maxDate}
             value={dateTimeSelected}
             onChange={newDate => handleDateTimeChange(newDate, dateTimeSelected)}
             renderInput={(params) => <TextField {...params} />}
           />
           <TimePicker
             label='Selecciona la hora'
+            minTime={minTime}
+            minutesStep={10}
+            orientation="portrait"
             value={dateTimeSelected}
             onChange={newTime => handleDateTimeChange(dateTimeSelected, newTime)}
             renderInput={(params) => <TextField {...params} />}
@@ -52,7 +56,7 @@ const Schedule = () => {
           )}
           variant="contained"
         >
-          Mostrar fecha y hora seleccionada
+          Continue
         </Button>
       </Stack>
     </div>
