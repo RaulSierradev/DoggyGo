@@ -1,20 +1,22 @@
 import Nav from '../Nav';
 import Summary from './Summary';
-import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Payment() {
-	const location = useLocation();
-	const details = location.state.details;
+	const currentUser = useSelector((state) => state.currentUser);
+	console.log(currentUser);
 
 	return (
 		<div>
-			<Nav />
+			{/* <Nav /> */}
 			<div className="flex flex-col items-center w-full h-full gap-4">
 				<div className="w-2/4 h-16 m-2">
 					<div className="pl-6 pr-4 py-4 bg-cyan-50 rounded-lg border border-emerald-700 justify-center items-center gap-1 flex">
 						<div className="text-emerald-700 text-base font-normal text-center">
 							Gracias, tu reserva con{' '}
-							<span className="font-bold">{details.name}</span>{' '}
+							<span className="font-bold">
+								{currentUser.name}
+							</span>{' '}
 							pronto estara confirmada
 						</div>
 					</div>
@@ -26,12 +28,12 @@ function Payment() {
 				<div className="w-96">
 					<span className="text-slate-400 text-lg font-normal">
 						Gracias por confiar en nosotros y agendar a{' '}
-						<span className="font-bold">{details.name}</span> como
-						tu paseador. Abajo encuentras un resumen del paseo. Se
-						enviara una copia a tu correo.{' '}
+						<span className="font-bold">{currentUser.name}</span>{' '}
+						como tu paseador. Abajo encuentras un resumen del paseo.
+						Se enviara una copia a tu correo.{' '}
 					</span>
 				</div>
-				<Summary details={details} />
+				<Summary details={currentUser} />
 				<div className="text-slate-500 text-2xl font-bold">Precio</div>
 				<div className="w-96 h-6 justify-start items-start inline-flex">
 					<div className="grow shrink basis-0 text-slate-500 text-lg font-normal">

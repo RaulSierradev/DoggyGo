@@ -9,7 +9,8 @@ import {
   FILTER_WALKERS,
   ORDER_DEFAULT,
   CREATE_USER,
-  EDIT_USER
+  EDIT_USER,
+  CURRENT_USER
 } from "./action-types";
 
 const URL = "http://localhost:3001/";
@@ -58,6 +59,14 @@ export function getAll() {
     dispatch({ type: GET_ALL_USERS, payload: res.data });
   };
 }
+
+export const setCurrentUser = (user) => {
+  return {
+    type: CURRENT_USER,
+    payload: user,
+  };
+};
+
 
 export const probarEstado = () => {
   console.log("hola desde actions");
