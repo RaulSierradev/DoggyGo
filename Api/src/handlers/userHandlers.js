@@ -44,7 +44,6 @@ const getUserByIdHandler = async (req, res) => {
 //         res.status(400).json({ error: error.message });
 //     }
 // }
-
 const postUserHandler = async (req, res) => {
     // console.log(req.body)
 
@@ -95,4 +94,5 @@ module.exports = {
     postUserHandler,
     putUserHandler
 }
+
 

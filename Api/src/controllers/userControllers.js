@@ -94,7 +94,6 @@ const getUserByIdController = async (id) => {
     return user;
 }
 
-// // postea user en la base de datos
 // const postUserController = async ({ name, email, password, description, birthdate, image, country, state, city, address, phone,  status, suscription, rol }) => {
 //     if (!name || !email || !password || !birthdate || !address || !phone || !description || !country || !state || !city || !rol) {
 //         throw Error('All fields are required');
@@ -152,9 +151,6 @@ const postUserController = async (userData) => {
     return newUser;
 }
 
-
-
-// //editar user
 // const putUserController = async ({ name, email, password, description, birthdate, image, country, state, city, address, phone, status, suscription, rol }) => {
 
 //     const user = await User.findOne({ where: { email: email } });
@@ -201,4 +197,5 @@ module.exports = {
     postUserController,
     putUserController
 }
+
 
