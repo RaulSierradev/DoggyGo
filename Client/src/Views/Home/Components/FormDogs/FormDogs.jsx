@@ -1,19 +1,41 @@
 import ImageUpload from "../../../Dashboard/components/ImageUpload";
 import Modal from "../../../Modal/Modal";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createUser } from "../../../../Redux/actions";
 
-const FormDogs = ({ estadoModal, setEstadoModal }) => {
+const FormDogs = (props) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { registro, estadoModal, setEstadoModal, user, setUser, initialState } =
+    props;
+  console.log(user)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (registro) {
+      dispatch(createUser(user));
+      setUser(initialState);
+      alert("Se ha creado su usario correctamente");
+      navigate("/login");
+      return;
+    }
+    alert("Seguiría lo otro");
+  };
+  console.log(user);
   return (
     <div className="overflow-y-scroll">
       <Modal estadoModal={estadoModal} setEstadoModal={setEstadoModal}>
         <div className="overflow-y-scroll">
           <div className="text-gray-700 text-4xl">
             <h1>
-              Contacta con{" "}
-              <span className="text-indigo-600 font-bold">{`<Nombre paseador>`}</span>
+              {registro ? "Registra a" : `Contacta con`}{" "}
+              <span className="text-indigo-600 font-bold">
+                {registro ? "tu mejor amigo" : `<Nombre paseador>`}
+              </span>
             </h1>
           </div>
 
-          <form className="text-lg p-5">
+          <form className="text-lg p-5" onSubmit={handleSubmit}>
             <div className="pt-3 pb-3">
               <label className="pr-3">Nombre mascota</label>
               <input
@@ -72,21 +94,21 @@ const FormDogs = ({ estadoModal, setEstadoModal }) => {
                   <input type="radio" name="tamaño" /> Mediano{" "}
                   <span>
                     <br />
-                    (3 - 10 Kg)
+                    (10 - 25 Kg)
                   </span>
                 </label>
                 <label className="text-gray-900 px-3">
                   <input type="radio" name="tamaño" /> Grande{" "}
                   <span>
                     <br />
-                    (3 - 10 Kg)
+                    (25 - 50 Kg)
                   </span>
                 </label>
                 <label className="text-gray-900 px-3">
                   <input type="radio" name="tamaño" /> Gigantes{" "}
                   <span>
                     <br />
-                    (3 - 10 Kg)
+                    (50 Kg +)
                   </span>
                 </label>
               </div>
@@ -96,7 +118,12 @@ const FormDogs = ({ estadoModal, setEstadoModal }) => {
             </div>
             <div className="flex justify-between">
               <div></div>
-              <button type="submit" className="justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Continuar</button>
+              <button
+                type="submit"
+                className="justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                {registro ? "Finalizar" : "Continuar"}
+              </button>
             </div>
           </form>
         </div>

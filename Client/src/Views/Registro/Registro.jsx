@@ -2,33 +2,35 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import VerificacionPaseador from "./VerificacionPaseador";
 import registroPaseador from "../../img/registroPaseador.png";
+import FormDogs from "../Home/Components/FormDogs/FormDogs";
 
 import { useDispatch } from "react-redux";
 import { createUser } from "../../Redux/actions";
 
-const initialState = {
-  rol: "",
-  name: "",
-  password: "",
-  description: "",
-  birthdate: "",
-  email: "",
-  image: "jkadkkl",
-  country: "",
-  city: "",
-  address: "",
-  state: "",
-  phone: "",
-  status: false,
-  suscription: false,
-};
-
-const RegistroPaseador = () => {
+const Registro = () => {
+  const initialState = {
+    rol: "",
+    name: "",
+    password: "",
+    description: "",
+    birthdate: "",
+    email: "",
+    image: "jkadkkl",
+    country: "",
+    city: "",
+    address: "",
+    state: "",
+    phone: "",
+    status: false,
+    suscription: false,
+  };
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [user, setUser] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const [estadoModal, setEstadoModal] = useState(false);
+  const [registro, setRegistro] = useState(false);
 
   const handleChange = (e) => {
     setUser({
@@ -43,6 +45,11 @@ const RegistroPaseador = () => {
     );
   };
 
+  const toFormDog = () => {
+    setEstadoModal(true);
+    setRegistro(true);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -53,10 +60,15 @@ const RegistroPaseador = () => {
       user.password &&
       user.phone
     ) {
-      dispatch(createUser(user));
-      setUser(initialState);
-      alert("Se ha creado su usario correctamente");
-      navigate("/login");
+      if (user.rol === "Client") {
+        toFormDog();
+        return;
+      } else {
+        dispatch(createUser(user));
+        setUser(initialState);
+        alert("Se ha creado su usario correctamente");
+        navigate("/login");
+      }
     } else {
       alert("Hay errores en el formulario");
     }
@@ -65,6 +77,14 @@ const RegistroPaseador = () => {
   console.log(user);
   return (
     <div className="bg-white min-h-screen md:flex items-center justify-center">
+      <FormDogs
+        estadoModal={estadoModal}
+        setEstadoModal={setEstadoModal}
+        registro={registro}
+        user={user}
+        setUser={setUser}
+        initialState={initialState}
+      />
       <div className="md:w-1/2 lg:w-1/2 mb-16 overflow-y-scroll">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm mt-20">
           <div className="sm:mx-auto sm:w-full sm:max-w-s">
@@ -350,4 +370,4 @@ const RegistroPaseador = () => {
   );
 };
 
-export default RegistroPaseador;
+export default Registro;
