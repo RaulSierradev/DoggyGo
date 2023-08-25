@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { getAllUsers, orderDefault } from '../../Redux/actions';
 import SearchBar from './Components/SearchBar/SearchBar';
 import FormDogs from './Components/FormDogs/FormDogs';
-import Schedule from '../Booking Schedule/Schedule';
 
 const Home = () => {
 	const navigate = useNavigate();
