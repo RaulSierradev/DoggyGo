@@ -1,0 +1,42 @@
+.Footer{
+    background-color: rgba(163, 189, 255, 1);
+    width: 100vw;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.links{
+    height: 30%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+.links h1{
+    margin-bottom: auto;
+    font-size: 2vw;
+    font-weight: 600;
+}
+.links div{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+.links button{
+    background-color: rgba(15, 27, 76, 1) ;
+    padding: 1.5dvb;
+    border-radius: 0.5dvb;
+    position: relative;
+    font-size: x-large;
+}
+.Declaracion{
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 2rem;
+    color:rgba(117, 117, 117, 1) ;
+}
