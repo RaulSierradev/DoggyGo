@@ -1,4 +1,6 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
+
 function Nav() {
 	const location = useLocation();
 
@@ -10,13 +12,18 @@ function Nav() {
 					src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80"
 				/>
 				<div className="text-white text-xl font-bold leading-tight tracking-widest">
-					DoggyGo.
+					DoggyGo
 				</div>
 			</div>
 			<div className="flex gap-10 text-zinc-200">
-				<a href="/">Home</a>
-				<a href="/services">Services</a>
-				<a href="/help">Help</a>
+				<Link to="/home" className="text-white flex gap-1">
+					<div className="flex items-center">
+						<HomeIcon />
+					</div>
+					<p>Home</p>
+				</Link>
+				<p>Services</p>
+				<p>Help</p>
 			</div>
 			<div className="flex gap-2">
 				{location.pathname === '/dash' ? (
@@ -25,12 +32,18 @@ function Nav() {
 					</button>
 				) : (
 					<>
-						<button className="border border-neutral-50 px-6 py-3 rounded text-neutral-50">
-							LOGIN
-						</button>
-						<button className="bg-neutral-50 px-6 py-3 rounded text-zinc-900">
-							SIGNUP
-						</button>
+						<Link
+							to={'/login'}
+							className="border border-neutral-50 px-6 py-2 rounded text-neutral-50"
+						>
+							Log In
+						</Link>
+						<Link
+							to={'/registro'}
+							className="bg-neutral-50 px-6 py-2 rounded text-zinc-900"
+						>
+							Registro
+						</Link>
 					</>
 				)}
 			</div>

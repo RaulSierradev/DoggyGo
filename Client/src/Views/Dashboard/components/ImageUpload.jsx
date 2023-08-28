@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 function ImageUpload({ imageUrl, setImageUrl }) {
 	const [image, setImage] = useState('');
+	const [loading, setLoading] = useState(false);
+	const [message, setMessage] = useState(''); // save the image url
 	// const [imageUrl, setImageUrl] = useState(''); // save the image url
 
 	async function uploadImage() {
@@ -12,6 +14,7 @@ function ImageUpload({ imageUrl, setImageUrl }) {
 		formData.append('upload_preset', 'zihghzim');
 
 		try {
+			setLoading(true);
 			const res = await fetch(
 				'https://api.cloudinary.com/v1_1/dmohefijy/image/upload',
 				{ method: 'POST', body: formData }
@@ -20,6 +23,8 @@ function ImageUpload({ imageUrl, setImageUrl }) {
 			console.log(data);
 			// console.log(data.secure_url);
 			setImageUrl(data.secure_url);
+			setLoading(false);
+			setMessage('Image uploaded successfully');
 		} catch (error) {
 			console.log(error.message);
 			alert(error.message);
@@ -32,15 +37,10 @@ function ImageUpload({ imageUrl, setImageUrl }) {
 				type="file"
 				onChange={(e) => setImage(e.target.files[0])}
 			/>
+			{loading ? <p>Loading...</p> : <p>{message}</p>}
 			<Button onClick={uploadImage} className="" variant="contained">
 				Upload
 			</Button>
-			<img
-				src={imageUrl}
-				alt=""
-				size="small"
-				className=" mr-5 rounded-full h-14 w-14 object-cover"
-			/>
 		</div>
 	);
 }
