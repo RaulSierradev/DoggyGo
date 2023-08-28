@@ -26,7 +26,6 @@ function WalkerDetail() {
 	const [currentStep, setCurrentStep] = useState(1);
 
 	const { id } = useParams();
-	console.log(id);
 
 	async function getDetails(id) {
 		try {
@@ -85,7 +84,7 @@ function WalkerDetail() {
 							<div className="h-40 w-40">
 								<img
 									className="w-full h-full p-1 rounded-full object-cover border-4 border-black"
-									src={details.image}
+									src={details.image ? details.image : ''}
 									alt={details.name}
 								/>
 							</div>

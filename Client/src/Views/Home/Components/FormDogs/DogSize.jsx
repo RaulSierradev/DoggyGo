@@ -8,8 +8,8 @@ function DogSize({ details, handleChange }) {
 						type="radio"
 						id="small"
 						name="size"
-						value="Pequeño"
-						checked={details.size === 'Pequeño'}
+						value="SMALL"
+						checked={details.size === 'SMALL'}
 						onChange={handleChange}
 					/>{' '}
 					Pequeño{' '}
@@ -23,8 +23,8 @@ function DogSize({ details, handleChange }) {
 						type="radio"
 						id="medium"
 						name="size"
-						value="Mediano"
-						checked={details.size === 'Mediano'}
+						value="MEDIUM"
+						checked={details.size === 'MEDIUM'}
 						onChange={handleChange}
 					/>{' '}
 					Mediano{' '}
@@ -38,8 +38,8 @@ function DogSize({ details, handleChange }) {
 						type="radio"
 						id="large"
 						name="size"
-						value="Grande"
-						checked={details.size === 'Grande'}
+						value="LARGE"
+						checked={details.size === 'LARGE'}
 						onChange={handleChange}
 					/>{' '}
 					Grande{' '}
@@ -53,8 +53,8 @@ function DogSize({ details, handleChange }) {
 						type="radio"
 						id="giant"
 						name="size"
-						value="Gigante"
-						checked={details.size === 'Gigante'}
+						value="GIANT"
+						checked={details.size === 'GIANT'}
 						onChange={handleChange}
 					/>{' '}
 					Gigante{' '}

@@ -1,11 +1,14 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ImageUpload from '../../../Dashboard/components/ImageUpload';
 import { useEffect, useState } from 'react';
 import DogSize from './DogSize';
+import { createDog } from '../../../../Redux/actions';
 
 const FormDogs = () => {
 	const currentUser = useSelector((state) => state.currentUser);
 	console.log(currentUser);
+
+	const dispatch = useDispatch();
 
 	const [details, setDetails] = useState({});
 	const [imageUrl, setImageUrl] = useState(''); // save the image url
@@ -24,6 +27,18 @@ const FormDogs = () => {
 		});
 	};
 
+	const handleSubmit = (e) => {
+		try {
+			e.preventDefault();
+			dispatch(createDog(details));
+			setDetails({});
+			alert('Se ha creado su usario correctamente');
+		} catch (error) {
+			console.log(error.message);
+			alert(error.message);
+		}
+	};
+
 	console.log(details);
 	return (
 		<div className="w-full flex flex-col items-center justify-center">
@@ -39,7 +54,10 @@ const FormDogs = () => {
 				Cuentanos de tu Mascota
 			</div>
 
-			<form className="text-lg p-5 gap-3 flex flex-col  w-5/6 rounded-md shadow-sm">
+			<form
+				className="text-lg p-5 gap-3 flex flex-col  w-5/6 rounded-md shadow-sm"
+				onSubmit={handleSubmit}
+			>
 				<div className="pt-3 pb-3 flex items-center justify-center">
 					<input
 						placeholder="Nombre Mascota"
@@ -57,8 +75,8 @@ const FormDogs = () => {
 					<select
 						className="w-48 text-base text-gray-700 p-3 rounded-md"
 						onChange={handleChange}
-						value={details.raza}
-						name="raza"
+						value={details.breed}
+						name="breed"
 					>
 						<option>Akita Japonés</option>
 						<option>Beagle</option>
@@ -100,6 +118,7 @@ const FormDogs = () => {
 				<div className="mt-5">
 					<ImageUpload setImageUrl={setImageUrl} />
 				</div>
+				<button type="submit">Submit</button>
 			</form>
 		</div>
 	);

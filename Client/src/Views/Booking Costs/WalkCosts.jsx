@@ -1,23 +1,55 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PetsIcon from '@mui/icons-material/Pets';
 import { useState } from 'react';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
+import { setWalk } from '../../Redux/actions';
 
 function WalkCosts() {
 	const currentUser = useSelector((state) => state.currentUser);
 	console.log(currentUser);
 
 	const [details, setDetails] = useState({});
-	const [checked, setChecked] = useState(false);
+	const [selectedService, setSelectedService] = useState(null);
+
+	const dispatch = useDispatch();
+
+	function setWalkDetail() {
+		try {
+			dispatch(setWalk(details));
+			alert('Se ha seleccionado el servicio correctamente');
+		} catch (error) {
+			console.error(error.message);
+			alert(error.message);
+		}
+	}
 
 	const handleChange = (e) => {
-		setDetails({
-			...details,
-			[e.target.name]: e.target.value,
-		});
-		setChecked(!checked);
+		const service = e.target.value;
+		if (service === 'basic') {
+			setDetails({
+				...details,
+				title: 'Fast Walk',
+				duration: '20 min',
+				price: '8',
+			});
+		} else if (service === 'mid') {
+			setDetails({
+				...details,
+				title: 'Basic Walk',
+				duration: '30 min',
+				price: '12',
+			});
+		} else if (service === 'long') {
+			setDetails({
+				...details,
+				title: 'Long Walk',
+				duration: '60 min',
+				price: '20',
+			});
+		}
+		setSelectedService(service);
 	};
 
 	console.log(details);
@@ -33,7 +65,7 @@ function WalkCosts() {
 			</div>
 			<div
 				className={`flex items-center border-4 rounded-md border-black p-4 ${
-					details.service === 'basic'
+					selectedService === 'basic'
 						? 'bg-green-100 border-green-500'
 						: ''
 				}`}
@@ -62,13 +94,13 @@ function WalkCosts() {
 						</p>
 					</div>
 
-					<p>$12</p>
+					<p>$8</p>
 				</label>
 			</div>
 
 			<div
 				className={`flex items-center border-4 rounded-md border-black p-4 ${
-					details.service === 'mid'
+					selectedService === 'mid'
 						? 'bg-green-100 border-green-500'
 						: ''
 				}`}
@@ -97,13 +129,13 @@ function WalkCosts() {
 						</p>
 					</div>
 
-					<p>$16</p>
+					<p>$12</p>
 				</label>
 			</div>
 
 			<div
 				className={`flex items-center border-4 rounded-md border-black p-4 ${
-					details.service === 'long'
+					selectedService === 'long'
 						? 'bg-green-100 border-green-500'
 						: ''
 				}`}
@@ -135,6 +167,12 @@ function WalkCosts() {
 					<p>$20</p>
 				</label>
 			</div>
+			<button
+				className="bg-slate-800 text-white p-2 rounded-md"
+				onClick={setWalkDetail}
+			>
+				confirm
+			</button>
 		</div>
 	);
 }

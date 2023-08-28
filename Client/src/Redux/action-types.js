@@ -10,4 +10,5 @@ export const FILTER_WALKERS = "FILTER_WALKERS"
 export const CREATE_USER = 'CREATE_USER'
 export const EDIT_USER = 'EDIT_USER'
 export const CURRENT_USER = 'CURRENT_USER'
-
+export const CREATE_DOG = 'CREATE_DOG'
+export const SET_WALK = 'SET_WALK'

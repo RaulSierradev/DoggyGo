@@ -1,4 +1,4 @@
-import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER } from "./action-types";
+import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK } from "./action-types";
 
 let initialstate = {
   allUsers: [],
@@ -8,6 +8,8 @@ let initialstate = {
   walkersBackUp: [{ "name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1", "status": false, "suscription": true, "rol": "Walker" }, { "name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Ronaldo", "email": "ejemplo4@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "4", "status": false, "suscription": true, "rol": "Walker" }, { "name": "Di Stéfano", "email": "ejemplo5@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "5", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Cruyff", "email": "ejemplo6@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "6", "status": true, "suscription": true, "rol": "Walker" }],
   users: [],
   currentUser: {},
+  dogs: [],
+  walk: {}
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -98,6 +100,17 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         currentUser: payload
+      }
+    case CREATE_DOG:
+      return {
+        ...state,
+        dogs: [...state.dogs, payload]
+      }
+    case SET_WALK:
+      return {
+        ...state,
+        // walk should be an object with all the walk info that get added on different steps
+        walk: payload
       }
 
     default:

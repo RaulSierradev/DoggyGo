@@ -32,15 +32,15 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       comment: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       emergency: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
