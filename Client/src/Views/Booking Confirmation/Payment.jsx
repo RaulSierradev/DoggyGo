@@ -7,17 +7,21 @@ import { useState } from 'react';
 const PUBLIC_KEY = import.meta.env.VITE_REACT_APP_PUBLIC_KEY;
 
 function Payment() {
+	const bookingFee = 1.5;
 	initMercadoPago(PUBLIC_KEY);
 	const currentUser = useSelector((state) => state.currentUser);
 	console.log(currentUser);
+
+	const walk = useSelector((state) => state.walk);
+	console.log(walk);
 
 	const [id, setId] = useState(null);
 
 	const createPreference = async () => {
 		try {
 			const response = await axios.post('http://localhost:3001/payment', {
-				description: 'Test',
-				price: 100,
+				description: walk.title,
+				price: Number(walk.price),
 				quantity: 1,
 				currency_id: 'USD',
 			});
@@ -63,14 +67,14 @@ function Payment() {
 						Se enviara una copia a tu correo.{' '}
 					</span>
 				</div>
-				<Summary details={currentUser} />
+				<Summary />
 				<div className="text-slate-500 text-2xl font-bold">Precio</div>
 				<div className="w-96 h-6 justify-start items-start inline-flex">
 					<div className="grow shrink basis-0 text-slate-500 text-lg font-normal">
-						Paseo de 1 hora
+						Paseo de {walk.duration}
 					</div>
 					<div className="text-right text-slate-500 text-lg font-normal">
-						$20
+						${walk.price}
 					</div>
 				</div>
 				<div className="w-96 h-6 justify-start items-start inline-flex">
@@ -78,7 +82,7 @@ function Payment() {
 						Booking Fee
 					</div>
 					<div className="text-right text-slate-500 text-lg font-normal">
-						$1.50
+						${bookingFee}
 					</div>
 				</div>
 				<div className="w-96 h-12 flex-col justify-start items-start inline-flex border-y-2 border-slate-100">
@@ -87,7 +91,7 @@ function Payment() {
 							Total a pagar
 						</div>
 						<div className="text-right text-gray-700 text-lg font-semibold">
-							$21.50
+							${Number(walk.price) + bookingFee}
 						</div>
 					</div>
 					<div className="self-stretch h-px bg-slate-300" />
