@@ -1,12 +1,13 @@
-import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS } from "./action-types";
+import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER } from "./action-types";
 
 let initialstate = {
   allUsers: [],
   clients: [],
   clientsBackUp: [],
-  walkers: [{"name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1",  "status": false, "suscription": true, "rol": "Walker"},{"name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Ronaldo", "email": "ejemplo4@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "4",  "status": false, "suscription": true, "rol": "Walker"}, {"name": "Di Stéfano", "email": "ejemplo5@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "5",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Cruyff", "email": "ejemplo6@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "6",  "status": true, "suscription": true, "rol": "Walker"}],
-  walkersBackUp: [{"name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1",  "status": false, "suscription": true, "rol": "Walker"},{"name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Ronaldo", "email": "ejemplo4@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "4",  "status": false, "suscription": true, "rol": "Walker"}, {"name": "Di Stéfano", "email": "ejemplo5@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "5",  "status": true, "suscription": true, "rol": "Walker"}, {"name": "Cruyff", "email": "ejemplo6@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "6",  "status": true, "suscription": true, "rol": "Walker"}],
+  walkers: [{ "name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1", "status": false, "suscription": true, "rol": "Walker" }, { "name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Ronaldo", "email": "ejemplo4@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "4", "status": false, "suscription": true, "rol": "Walker" }, { "name": "Di Stéfano", "email": "ejemplo5@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "5", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Cruyff", "email": "ejemplo6@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "6", "status": true, "suscription": true, "rol": "Walker" }],
+  walkersBackUp: [{ "name": "Pele", "email": "ejemplo1@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "1", "status": false, "suscription": true, "rol": "Walker" }, { "name": "Messi", "email": "ejemplo2@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Colombia", "state": "Bogota D.C.", "city": "Bogota", "address": "Av Alcorta y Udaondo", "phone": "2", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Maradona", "email": "ejemplo3@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Mexico", "state": "CDMX", "city": "Ciudad De Mexico", "address": "Av Alcorta y Udaondo", "phone": "3", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Ronaldo", "email": "ejemplo4@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "4", "status": false, "suscription": true, "rol": "Walker" }, { "name": "Di Stéfano", "email": "ejemplo5@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "5", "status": true, "suscription": true, "rol": "Walker" }, { "name": "Cruyff", "email": "ejemplo6@gmail.com", "password": ".", "description": "Esta es la descripcion", "birthdate": "1901-05-25", "image": "url", "country": "Argentina", "state": "Buenos Aires", "city": "Buenos Aires", "address": "Av Alcorta y Udaondo", "phone": "6", "status": true, "suscription": true, "rol": "Walker" }],
   users: [],
+  currentUser: {},
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -53,19 +54,19 @@ let reducer = (state = initialstate, { type, payload }) => {
     case ORDER_DEFAULT:
       return {
         ...state,
-        walkersBackUp: state.walkersBackUp.sort((a, b) => (b.status ? 1 : -1)), 
+        walkersBackUp: state.walkersBackUp.sort((a, b) => (b.status ? 1 : -1)),
         walkers: state.walkers.sort((a, b) => (b.status ? 1 : -1)),
       }
     case FILTER_WALKERS:
       //*Filtro para countries
-      if (payload.includes("Country")){
+      if (payload.includes("Country")) {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(walker => walker.country === payload.slice(10))
         }
       }
       //*Filtro para states
-      if (payload.includes("State")){
+      if (payload.includes("State")) {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(walker => walker.state === payload.slice(8))
@@ -76,7 +77,7 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         walkers: state.walkersBackUp.filter(walker => walker.city === payload.slice(7))
       }
-      case CREATE_USER:
+    case CREATE_USER:
       return {
         ...state,
         users: [...state.users, payload]
@@ -92,6 +93,11 @@ let reducer = (state = initialstate, { type, payload }) => {
           }
         })
 
+      }
+    case CURRENT_USER:
+      return {
+        ...state,
+        currentUser: payload
       }
 
     default:

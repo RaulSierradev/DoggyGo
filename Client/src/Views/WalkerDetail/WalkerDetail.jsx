@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import StarRating from '../Reviews/StartRating';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -8,10 +8,23 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import Payment from '../Booking Confirmation/Payment';
+import { setCurrentUser } from '../../Redux/actions/';
+import Summary from '../Booking Confirmation/Summary';
+import Modal from '../../Views/Modal/Modal';
+import FormDogs from '../Home/Components/FormDogs/FormDogs';
+import WalkCosts from '../Booking Costs/WalkCosts';
+import Schedule from '../Booking Schedule/Schedule';
 
 function WalkerDetail() {
+	const dispatch = useDispatch();
+
 	const [details, setDetails] = useState([]);
 	const [loading, setLoading] = useState(false);
+
+	// modal states
+	const [estadoModal, setEstadoModal] = useState(false);
+	const [currentStep, setCurrentStep] = useState(1);
+
 	const { id } = useParams();
 	console.log(id);
 
@@ -22,12 +35,39 @@ function WalkerDetail() {
 			const res = await axios.get(`http://localhost:3001/user/id/${id}`);
 			console.log(res.data);
 			setDetails(res.data);
+			dispatch(setCurrentUser(res.data));
 			setLoading(false);
 		} catch (error) {
 			console.error(error.message);
 			alert(error.message);
 		}
 	}
+
+	const handleOpen = () => setEstadoModal(!estadoModal);
+
+	const nextStep = () => {
+		setCurrentStep(currentStep + 1);
+	};
+
+	const prevStep = () => {
+		if (currentStep > 1) setCurrentStep(currentStep - 1);
+	};
+
+	const renderStepContent = (step) => {
+		if (step > 4) setCurrentStep(1);
+		switch (step) {
+			case 1:
+				return <FormDogs />;
+			case 2:
+				return <WalkCosts />;
+			case 3:
+				return <Schedule />;
+			case 4:
+				return <Payment />;
+			default:
+				return <FormDogs />;
+		}
+	};
 
 	useEffect(() => {
 		getDetails(id);
@@ -77,13 +117,28 @@ function WalkerDetail() {
 								</div>
 							</div>
 
-							<Link
+							{/* <Link
 								to={'/home/payment'}
-								state={{ details }}
+								// state={{ details }}
 								className="rounded-md mt-2 text-white bg-green-500 p-2"
 							>
 								Book {details.name}
-							</Link>
+							</Link> */}
+							<button
+								className="rounded-md mt-2 text-white bg-green-500 p-2"
+								onClick={handleOpen}
+							>
+								Test Modal
+							</button>
+							<Modal
+								estadoModal={estadoModal}
+								setEstadoModal={setEstadoModal}
+								nextStep={nextStep}
+								prevStep={prevStep}
+								currentStep={currentStep}
+							>
+								{renderStepContent(currentStep)}
+							</Modal>
 						</div>
 						<div className="gap-8 flex-col ml-5 w-1/2 h-4/6  p-3 rounded-md bg-white shadow">
 							<div className="h-2/5">

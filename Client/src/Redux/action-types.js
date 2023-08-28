@@ -9,4 +9,5 @@ export const ORDER_DEFAULT = "ORDER_DEFAULT"
 export const FILTER_WALKERS = "FILTER_WALKERS"
 export const CREATE_USER = 'CREATE_USER'
 export const EDIT_USER = 'EDIT_USER'
+export const CURRENT_USER = 'CURRENT_USER'
 
