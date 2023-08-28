@@ -1,14 +1,44 @@
-import Nav from '../Nav';
 import Summary from './Summary';
 import { useSelector } from 'react-redux';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import axios from 'axios';
+import { useState } from 'react';
+
+const PUBLIC_KEY = import.meta.env.VITE_REACT_APP_PUBLIC_KEY;
 
 function Payment() {
+	initMercadoPago(PUBLIC_KEY);
 	const currentUser = useSelector((state) => state.currentUser);
 	console.log(currentUser);
 
+	const [id, setId] = useState(null);
+
+	const createPreference = async () => {
+		try {
+			const response = await axios.post('http://localhost:3001/payment', {
+				description: 'Test',
+				price: 100,
+				quantity: 1,
+				currency_id: 'USD',
+			});
+			console.log(response.data);
+			const { id } = await response.data;
+			console.log(id);
+			return id;
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
+	const handlePayment = async () => {
+		const id = await createPreference();
+		setId(id);
+	};
+
+	console.log(id);
+
 	return (
 		<div>
-			{/* <Nav /> */}
 			<div className="flex flex-col items-center w-full h-full gap-4">
 				<div className="w-2/4 h-16 m-2">
 					<div className="pl-6 pr-4 py-4 bg-cyan-50 rounded-lg border border-emerald-700 justify-center items-center gap-1 flex">
@@ -81,10 +111,16 @@ function Payment() {
 						</button>
 					</div>
 					<div className="w-44 h-12 px-5 py-3 bg-indigo-500 rounded justify-start items-center gap-2 inline-flex">
-						<button className="text-neutral-50 text-lg font-normal">
+						<button
+							onClick={handlePayment}
+							className="text-neutral-50 text-lg font-normal"
+						>
 							Confirm and pay
 						</button>
 					</div>
+				</div>
+				<div className="flex">
+					{id && <Wallet initialization={{ preferenceId: id }} />}
 				</div>
 			</div>
 		</div>
