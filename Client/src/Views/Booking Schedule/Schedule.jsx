@@ -15,7 +15,7 @@ import {
   Select,
 } from "@mui/material";
 
-dayjs.locale('es');
+dayjs.locale("es");
 
 const Schedule = () => {
   const minDate = dayjs().add(1, "day")
