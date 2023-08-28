@@ -1,5 +1,7 @@
 let passport = require('passport')    
-require("dotenv").config();
+require("dotenv").config(); 
+const User = require('../models/User') 
+const {postUserController}= require('../controllers/userControllers')
 
 
 passport.serializeUser((user, done) => {
@@ -19,7 +21,21 @@ passport.use(new GoogleStrategy ({ scope: ['profile', 'email'],
   },
   function(accessToken, refreshToken, profile, cb) {
    //registro usuario  
-   console.log(profile)
-   cb(null, profile)
+//    console.log(profile)
+//    cb(null, profile)  
+const user = {
+  googleId: profile.id, 
+  email: profile.emails[0].value,
+  birthdate: 'null',
+  address:'null',
+  phone:'null',
+  description:'null',
+  country:'null',
+  state:'null',
+  city:'null',
+  rol:'null', 
+  name:'null'
+} 
+//  postUserController(user) 
   }
 ));
