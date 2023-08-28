@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 function Summary() {
 	const currentUser = useSelector((state) => state.currentUser);
 	console.log(currentUser);
+
+	const walk = useSelector((state) => state.walk);
+
 	return (
 		<div className="w-4/6 h-16 px-4 py-1 bg-white rounded border border-slate-300 justify-start items-center  inline-flex">
 			<div className="w-10 h-10 relative">
@@ -16,16 +19,13 @@ function Summary() {
 				<div className="self-stretch justify-around items-center flex">
 					<div className=" text-slate-800 text-base font-normal">
 						<CalendarTodayIcon />
-						Thu, 24 Aug
+						{walk.dateTimeSelected}
 					</div>
 					<div className="text-center text-slate-800 text-base font-normal">
-						3:15PM - 4:15PM
-					</div>
-					<div className="text-center text-slate-800 text-base font-normal">
-						1 hour
+						{walk.duration}
 					</div>
 					<div className=" text-center text-slate-800 text-base font-normal">
-						$20
+						${walk.price}
 					</div>
 				</div>
 			</div>

@@ -8,10 +8,16 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from 'react';
 import { TimePicker } from '@mui/x-date-pickers';
 import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setWalk } from '../../Redux/actions';
 
 dayjs.locale('es');
 
 const Schedule = () => {
+	const dispatch = useDispatch();
+	const walk = useSelector((state) => state.walk);
+	console.log(walk);
+
 	const [dateTimeSelected, setDateTimeSelected] = useState(dayjs());
 	// const [book, setBook] = useState(false);
 
@@ -20,6 +26,16 @@ const Schedule = () => {
 			.set('hour', newTime.hour())
 			.set('minute', newTime.minute());
 		setDateTimeSelected(combinedDateTime);
+	};
+
+	const handleChanges = () => {
+		dispatch(
+			setWalk({
+				...walk,
+				dateTimeSelected: dateTimeSelected.format('LLL'),
+			})
+		);
+		alert(`Fecha y hora seleccionada: ${dateTimeSelected.format('LLL')}`);
 	};
 
 	const maxDate = dayjs().endOf('year');
@@ -60,15 +76,7 @@ const Schedule = () => {
 			<Stack spacing={1} direction={'row'}>
 				{/* <Button variant="outlined">Atras</Button> */}
 				<div className="mt-5">
-					<Button
-						onClick={() =>
-							alert(
-								'Fecha y hora seleccionada: ' +
-									dateTimeSelected.format('LLL')
-							)
-						}
-						variant="contained"
-					>
+					<Button onClick={handleChanges} variant="contained">
 						Confirm
 					</Button>
 				</div>
