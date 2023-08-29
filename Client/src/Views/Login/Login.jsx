@@ -1,9 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import verificacionLogin from './VerificarLogin.js';
 import login from '../../img/Login.jpg';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { getAll } from '../../Redux/actions.js';
 
 const Login = () => {
 	const [logeo, setLogeo] = useState({
@@ -12,6 +14,16 @@ const Login = () => {
 	});
 
 	const [errors, setErrors] = useState({});
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		try {
+			dispatch(getAll());
+		} catch (error) {
+			console.log(error.message);
+		}
+	}, []);
 
 	const authenticateUser = async (email, password) => {
 		try {

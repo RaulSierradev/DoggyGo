@@ -8,10 +8,17 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from 'react';
 import { TimePicker } from '@mui/x-date-pickers';
 import { Button } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setWalk } from '../../Redux/actions';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 
 dayjs.locale('es');
 
 const Schedule = () => {
+	const dispatch = useDispatch();
+	const walk = useSelector((state) => state.walk);
+	console.log(walk);
+
 	const [dateTimeSelected, setDateTimeSelected] = useState(dayjs());
 	// const [book, setBook] = useState(false);
 
@@ -22,6 +29,16 @@ const Schedule = () => {
 		setDateTimeSelected(combinedDateTime);
 	};
 
+	const handleChanges = () => {
+		dispatch(
+			setWalk({
+				...walk,
+				dateTimeSelected: dateTimeSelected.format('LLL'),
+			})
+		);
+		alert(`Fecha y hora seleccionada: ${dateTimeSelected.format('LLL')}`);
+	};
+
 	const maxDate = dayjs().endOf('year');
 	const minTime = dayjs().isSame(dateTimeSelected, 'day') ? dayjs() : null;
 
@@ -29,7 +46,13 @@ const Schedule = () => {
 
 	return (
 		<div className="flex flex-col items-center">
-			<label className="my-2 font-bold">CREAR AGENDAMIENTO</label>
+      <div className="text-indigo-500 text-2xl font-bold">
+				En que momento le gustaria?
+			</div>
+			<label className="my-3 text-slate-500 text-2xl font-bold">
+        Selecciona la Fecha y Hora 
+        <EditCalendarIcon />
+      </label>
 			<LocalizationProvider dateAdapter={AdapterDayjs}>
 				<Stack spacing={3} direction={'row'}>
 					<DatePicker
@@ -57,18 +80,10 @@ const Schedule = () => {
 					/>
 				</Stack>
 			</LocalizationProvider>
-			<Stack spacing={1} direction={'row'}>
+			<Stack spacing={1} direction={'row'} sx={{marginTop: 1}}>
 				{/* <Button variant="outlined">Atras</Button> */}
 				<div className="mt-5">
-					<Button
-						onClick={() =>
-							alert(
-								'Fecha y hora seleccionada: ' +
-									dateTimeSelected.format('LLL')
-							)
-						}
-						variant="contained"
-					>
+					<Button onClick={handleChanges} variant="contained">
 						Confirm
 					</Button>
 				</div>

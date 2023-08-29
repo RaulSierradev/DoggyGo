@@ -1,13 +1,10 @@
 import style from './Landing.module.css';
 import Paseadores from '../../Components/Paseadores/Paseadores';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getAll } from '../../Redux/actions';
 
 const Landing = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 
 	const PaseadoresEstrella = [
 		{
@@ -33,13 +30,13 @@ const Landing = () => {
 		},
 	];
 
-	useEffect(() => {
-		try {
-			dispatch(getAll());
-		} catch (error) {
-			console.log(error.message);
-		}
-	}, []);
+	// useEffect(() => {
+	// 	try {
+	// 		dispatch(getAll());
+	// 	} catch (error) {
+	// 		console.log(error.message);
+	// 	}
+	// }, []);
 
 	return (
 		<div className={style.Landing}>
