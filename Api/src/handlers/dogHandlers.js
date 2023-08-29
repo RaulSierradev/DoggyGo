@@ -2,11 +2,11 @@ const { createDog, getDogs, getBreeds } = require("../controllers/dogControllers
 const { Dog } = require("../db")
 
 const addDog = async (req, res) => {
-    const { name, image, size, age, recomendations, breed } = req.body
+    const { name, image, size, age, recomendations, breed, sex, castrated } = req.body
 
     try {
-        if (name && size && age && breed) {
-            const newDog = await createDog(name, size, image, age, recomendations, breed)
+        if (name && size && age && breed && sex && castrated) {
+            const newDog = await createDog(name, size, image, age, recomendations, breed, sex, castrated)
             return res.status(200).json(newDog)
         } else {
             throw Error("Necesitamos mas información para añadir tu perro")
