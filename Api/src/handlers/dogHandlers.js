@@ -5,9 +5,10 @@ const addDog = async (req, res) => {
     const { name, image, size, age, recomendations, breed, sex, castrated } = req.body
 
     try {
-        if (name && size && age && breed && sex && castrated) {
+        if (name && size && age && breed && sex) {
             const newDog = await createDog(name, size, image, age, recomendations, breed, sex, castrated)
             return res.status(200).json(newDog)
+            
         } else {
             throw Error("Necesitamos mas información para añadir tu perro")
         }

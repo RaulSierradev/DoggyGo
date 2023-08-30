@@ -15,10 +15,6 @@ const createDog = async (name, size, image, age, recomendations, breed, sex, cas
     return dog
 }
 
-const getDogs = async () => {
-    const dogs = await Dog.findAll()
-    return dogs
-}
 
 const getBreeds = async () => {
 
@@ -45,6 +41,5 @@ const getBreeds = async () => {
 }
 module.exports = {
     createDog,
-    getDogs,
     getBreeds
 }

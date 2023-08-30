@@ -37,7 +37,8 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         castrated: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     }, {
         timestamps: false
