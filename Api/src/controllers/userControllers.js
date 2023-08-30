@@ -31,8 +31,10 @@ const getUsersController = async () => {
             address: user.address,
             phone: user.phone,
             status: user.status,
-            suscription: user.suscription,
-            rol: user.rol
+            rol: user.rol,
+            schedule: user.schedule,
+            cpr: user.schedule,
+            size: user.rol
         }
     });
 
@@ -73,8 +75,10 @@ const getUsersByNameController = async (name) => {
             address: user.address,
             phone: user.phone,
             status: user.status,
-            suscription: user.suscription,
-            rol: user.rol
+            rol: user.rol,
+            schedule: user.schedule,
+            cpr: user.schedule,
+            size: user.rol
         }
     });
 
@@ -133,7 +137,7 @@ const getUserByIdController = async (id) => {
 
 const createUserController = async (userData) => {
     console.log(userData)
-    const { name, email, password, birthdate, address, phone, description, country, state, city, rol } = userData;
+    const { name, email, password, birthdate, address, phone, country, state, city, rol } = userData;
 
 
     if (!name || !email || !password || !birthdate || !address || !phone || !country || !state || !city || !rol) {
