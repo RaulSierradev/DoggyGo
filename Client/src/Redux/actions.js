@@ -10,7 +10,9 @@ import {
   ORDER_DEFAULT,
   CREATE_USER,
   EDIT_USER,
-  CURRENT_USER
+  CURRENT_USER,
+  CREATE_DOG,
+  SET_WALK
 } from "./action-types";
 
 const URL = "http://localhost:3001/";
@@ -37,6 +39,25 @@ export function createUser(user) {
   }
 }
 
+export function createDog(dog) {
+  return async function createDogThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.post(`${URL}dog/add`, dog);
+    console.log(res.data)
+
+    dispatch({ type: CREATE_DOG, payload: res.data })
+  }
+}
+
+
+export function setWalk(walk) {
+  return {
+    type: SET_WALK,
+    payload: walk,
+  };
+
+}
 
 export function editUser(user) {
   return async function editUserThunk(dispatch) {
