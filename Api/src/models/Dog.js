@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         size: {
-            type: DataTypes.ENUM('PEQUEÑO', 'MEDIANO', 'GRANDE', 'GIGANTE'),
+            type: DataTypes.ENUM('SMALL', 'MEDIUM', 'LARGE', 'GIANT'),
             allowNull: false
         },
         age: {
