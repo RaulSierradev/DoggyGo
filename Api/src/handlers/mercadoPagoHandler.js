@@ -28,7 +28,7 @@ const walkPayment = (req, res) => {
     .create(preference)
     .then((response) => {
       // init_point -> es una url donde voy a poder realizar mi pago
-      res.json({ init_point: response.body.init_point });
+      res.json({ id: response.body.id, init_point: response.body.init_point });
     })
     .catch((error) => {
       console.log(error);

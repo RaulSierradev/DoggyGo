@@ -13,6 +13,9 @@ import T from './Views/T/T';
 import Error404 from './Views/Error404/Error404';
 import WalkerDetail from './Views/WalkerDetail/WalkerDetail';
 import Payment from './Views/Booking Confirmation/Payment';
+import Admin from './Views/Admin/Admin';
+import Clientes from './Views/Admin/Clients/Clientes';
+import Walkers from './Views/Admin/Walkers/Walkers';
 
 function App() {
 	return (
@@ -35,6 +38,9 @@ function App() {
 				<Route path="/home" element={<Home />} />
 				<Route path="/home/detail/:id" element={<WalkerDetail />} />
 				<Route path="/home/payment" element={<Payment />} />
+				<Route path='/admin' element={<Admin />}/>
+				<Route path='/admin/clientes' element={<Clientes/>}/>
+				<Route path='/admin/paseadores' element={<Walkers/>}/>
 			</Routes>
 		</div>
 	);

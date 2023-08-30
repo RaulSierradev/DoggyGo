@@ -3,7 +3,8 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = process.env;
-require("dotenv").config(); 
+require("dotenv").config();
+
 
 
 
@@ -134,26 +135,28 @@ const createUserController = async (userData) => {
     console.log(userData)
     const { name, email, password, birthdate, address, phone, description, country, state, city, rol } = userData;
 
-    if (!name || !email || !password || !birthdate || !address || !phone || !description || !country || !state || !city || !rol) {
+
+    if (!name || !email || !password || !birthdate || !address || !phone || !country || !state || !city || !rol) {
         throw Error('All fields are required')
     }
 
     const emailCheck = await User.findOne({
         where: {
             email: email
-         }
+        }
     });
     if (emailCheck) throw new Error('This email is already registered!');
 
     const phoneCheck = await User.findOne({
         where: {
             phone: phone
-         }
+        }
     });
     if (phoneCheck) throw new Error('This phone number is already registered!'); 
 
     if( password !== 'null'){ 
         const hashedPassword = await bcrypt.hash(password, 10);  // 10 number of salt rounds
+
 
         let newUser = await User.create({
             ...userData,
@@ -219,23 +222,23 @@ const updateUserController = async (updates) => {
 const loginController = async (email, password) => {
 
     //find a user by their email
-    const user = await User.findOne({ where: { email: email }});
-        
+    const user = await User.findOne({ where: { email: email } });
+
     //if user email is found, compare password with bcrypt
-    if (user) {   
+    if (user) {
         const isSame = await bcrypt.compare(password, user.password);
         //if password is the same
         //generate token with the user's id and the secretKey in the env file
-        if (isSame) {    
+        if (isSame) {
             const token = jwt.sign({ id: user.id }, JWT_SECRET_KEY, {
                 expiresIn: 1 * 24 * 60 * 60 * 1000,
-            }); 
+            });
             //send user and token data
             return { user, token };
-        } else { 
+        } else {
             throw new Error('Authentication failed');
         }
-    } else {  
+    } else {
         throw new Error('Authentication failed');
     }
 };
