@@ -21,11 +21,23 @@ function EditForm({ setEdit, edit }) {
 		}));
 	}, [imageUrl]);
 
+	// function onChange(e) {
+	// 	setForms({
+	// 		...forms,
+	// 		email: cookies.email,
+	// 		[e.target.name]: e.target.value === '' ? '' : e.target.value,
+	// 	});
+	// }
+
 	function onChange(e) {
+		const { name, value, type } = e.target;
+
+		const newValue = type === 'checkbox' ? e.target.checked : value;
+
 		setForms({
 			...forms,
 			email: cookies.email,
-			[e.target.name]: e.target.value === '' ? '' : e.target.value,
+			[name]: newValue,
 		});
 	}
 
@@ -48,15 +60,9 @@ function EditForm({ setEdit, edit }) {
 
 	return (
 		<>
-			{' '}
-			{edit ? (
-				<button onClick={() => setEdit(!edit)}>cancel</button>
-			) : (
-				<h1 className="font-bold">Edit</h1>
-			)}
-			<div className="flex items-center gap-8 w-9/12">
+			<div className="flex  items-center gap-2 w-5/6">
 				<form
-					className="flex items-center flex-col mt-6 gap-1"
+					className="flex flex-1 items-center flex-col mt-6 gap-1"
 					onSubmit={handleSubmit}
 				>
 					<TextField
@@ -95,6 +101,7 @@ function EditForm({ setEdit, edit }) {
 							onChange={onChange}
 						/>
 					</div>
+
 					<button
 						className="rounded-md text-white bg-green-500 p-2 mt-1"
 						type="submit"
@@ -102,14 +109,170 @@ function EditForm({ setEdit, edit }) {
 						Confirm
 					</button>
 				</form>
-				<div className="flex-1">
+				<div className="flex-1 items-center justify-center flex flex-col gap-5">
+					<h3 className="font-bold">Edita tus preferencias</h3>
+					<div className="pt-3 pb-3 flex items-center justify-center">
+						<label className="pr-3">Horario de paseos</label>
+						<select
+							className="w-48 text-base text-gray-700 p-3 rounded-md"
+							onChange={onChange}
+							value={forms.schedule}
+							name="schedule"
+						>
+							<option>6am-11am</option>
+							<option>11am-3pm</option>
+							<option>3pm-10pm</option>
+						</select>
+					</div>
+					<div className="flex border-2 p-2 items-center justify-center w-4/6">
+						<h3 className="flex mr-auto">Status</h3>
+						<label className="text-gray-900 px-3">
+							No Disponible{' '}
+							<input
+								type="radio"
+								name="status"
+								checked={forms.status === false}
+								onChange={() =>
+									onChange({
+										target: {
+											name: 'status',
+											value: false,
+										},
+									})
+								}
+							/>{' '}
+						</label>
+
+						<label className="text-gray-900 px-3">
+							Disponible{' '}
+							<input
+								type="radio"
+								name="status"
+								checked={forms.status === true}
+								onChange={() =>
+									onChange({
+										target: { name: 'status', value: true },
+									})
+								}
+							/>{' '}
+						</label>
+					</div>
+					<div className="flex border-2 p-2 items-center justify-around w-4/6">
+						<h3 className="">CPR</h3>
+						<label className="text-gray-900 px-3">
+							No{' '}
+							<input
+								type="radio"
+								name="cpr"
+								checked={forms.cpr === false}
+								onChange={() =>
+									onChange({
+										target: {
+											name: 'cpr',
+											value: false,
+										},
+									})
+								}
+							/>{' '}
+						</label>
+
+						<label className="text-gray-900 px-3">
+							Si{' '}
+							<input
+								type="radio"
+								name="cpr"
+								checked={forms.cpr === true}
+								onChange={() =>
+									onChange({
+										target: { name: 'cpr', value: true },
+									})
+								}
+							/>{' '}
+						</label>
+					</div>
+					<div className="flex border-2 p-2 items-center justify-around w-5/6">
+						<h3 className="">Tamaño perro</h3>
+						<label className="text-gray-900 px-3">
+							Pequeño{' '}
+							<input
+								type="radio"
+								name="size"
+								checked={forms.size === 'SMALL'}
+								onChange={() =>
+									onChange({
+										target: {
+											name: 'size',
+											value: 'SMALL',
+										},
+									})
+								}
+							/>{' '}
+						</label>
+						<label className="text-gray-900 px-3">
+							Mediano{' '}
+							<input
+								type="radio"
+								name="size"
+								checked={forms.size === 'MEDIUM'}
+								onChange={() =>
+									onChange({
+										target: {
+											name: 'size',
+											value: 'MEDIUM',
+										},
+									})
+								}
+							/>{' '}
+						</label>
+						<label className="text-gray-900 px-3">
+							Grande{' '}
+							<input
+								type="radio"
+								name="size"
+								checked={forms.size === 'LARGE'}
+								onChange={() =>
+									onChange({
+										target: {
+											name: 'size',
+											value: 'LARGE',
+										},
+									})
+								}
+							/>{' '}
+						</label>
+						<label className="text-gray-900 px-3">
+							Gigante{' '}
+							<input
+								type="radio"
+								name="size"
+								checked={forms.size === 'GIANT'}
+								onChange={() =>
+									onChange({
+										target: {
+											name: 'size',
+											value: 'GIANT',
+										},
+									})
+								}
+							/>{' '}
+						</label>
+					</div>
 					<ImageUpload
 						imageUrl={imageUrl}
 						setImageUrl={setImageUrl}
 					/>
 				</div>
 			</div>
-			<div className="item-center mt-5"></div>
+			{edit ? (
+				<button
+					className="rounded-md bg-red-500 p-2 text-white mb-2"
+					onClick={() => setEdit(!edit)}
+				>
+					cancel
+				</button>
+			) : (
+				<h1 className="font-bold">Edit</h1>
+			)}
 		</>
 	);
 }
