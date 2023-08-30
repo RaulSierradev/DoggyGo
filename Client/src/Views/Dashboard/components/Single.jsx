@@ -12,14 +12,14 @@ const Single = (props) => {
 	}
 
 	return (
-		<div className="h-[80vh] bg-slate-50  text-black rounded-3xl flex ">
-			<div>
+		<div className="h-full bg-slate-50  text-black rounded-3xl flex ">
+			{/* <div>
 				<img
 					src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80"
 					alt=""
 					className="h-full object-cover rounded-3xl"
 				/>
-			</div>
+			</div> */}
 			<div className="mr-5 flex-1">
 				<div className="flex items-center justify-center flex-col gap-2 mt-5">
 					<div className="flex items-center gap-5 space-x-5">
