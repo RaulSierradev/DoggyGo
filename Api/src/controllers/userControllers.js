@@ -2,7 +2,8 @@ const { User } = require('../db')
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET_KEY } = process.env;
+const { JWT_SECRET_KEY } = process.env; 
+const  sendEmail  = require('../utils/mailer')
 require("dotenv").config(); 
 
 
@@ -158,20 +159,24 @@ const createUserController = async (userData) => {
         let newUser = await User.create({
             ...userData,
             password: hashedPassword,
-        });
-    
+        });    
+        sendEmail(newUser.email);
+        console.log("final:", newUser);
+
         if (newUser) {
             let token = jwt.sign({ id: newUser.id }, JWT_SECRET_KEY, {
               expiresIn: 1 * 24 * 60 * 60 * 1000,
-            });
-       
+            });  
+           
+           
             //send users details
             return { newUser, token };
           } else {
             throw new Error('Details are not correct');
-          }
-
-    }
+          } 
+    }  
+    
+   
 }
 
 
@@ -219,7 +224,7 @@ const updateUserController = async (updates) => {
 const loginController = async (email, password) => {
 
     //find a user by their email
-    const user = await User.findOne({ where: { email: email }});
+    const user = await User.findOne({ where: { email: email }}); 
         
     //if user email is found, compare password with bcrypt
     if (user) {   
