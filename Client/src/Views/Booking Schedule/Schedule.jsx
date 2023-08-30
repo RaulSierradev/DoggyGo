@@ -6,7 +6,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useState } from "react";
-import { TimePicker } from "@mui/x-date-pickers";
 import {
   Button,
   FormControl,
@@ -27,43 +26,27 @@ const Schedule = () => {
 
   const minDate = dayjs().add(1, "day");
   const maxDate = dayjs().endOf("year");
-  const minTime = dayjs().set("hour", 6).set("minute", 0).set("second",0);
-  const maxTime = dayjs().set("hour", 11);
 
-  const [dateTimeSelected, setDateTimeSelected] = useState(minDate);
   const [dateSelected, setDateSelected] = useState(minDate);
-  const [timePickerSelected, setTimePickerSelected] = useState(minTime);
   const [timeSelected, setTimeSelected] = useState("");
   // const [book, setBook] = useState(false);
 
-  const handleDateTimeChange = (newDate, newTime) => {
-    const combinedDateTime = newDate
-      .set("hour", newTime.hour())
-      .set("minute", newTime.minute());
-    setDateTimeSelected(combinedDateTime);
-  };
-
   const handleChanges = () => {
+    if (timeSelected === "") return alert("Seleccione un horario");
+
     dispatch(
       setWalk({
         ...walk,
-        dateTimeSelected: dateTimeSelected.format("LLL"),
+        dateSelected: dayjs(dateSelected).format("LL"),
+		timeSelected
       })
     );
-    alert(`Fecha y hora seleccionada: ${dateTimeSelected.format("LLL")}`);
+    alert(`Fecha y hora seleccionada: ${dateSelected.format("LL")}, ${timeSelected}`);
   };
 
   const selectHandleChange = (event) => {
     setTimeSelected(event.target.value);
   };
-
-  //const minTime = dayjs().isSame(dateTimeSelected, "day") ? dayjs() : null;
-  console.log(
-    "Time picker selected: ",
-    dayjs(timePickerSelected).format("hh:mm")
-  );
-  
-  console.log(dateTimeSelected.format("LLL"));
 
   return (
     <div className='flex flex-col items-center'>
@@ -83,20 +66,7 @@ const Schedule = () => {
             minDate={minDate}
             maxDate={maxDate}
             value={dateSelected}
-            onChange={(newDate) =>
-              setDateSelected(newDate)
-            }
-            renderInput={(params) => <TextField {...params} />}
-          />
-          <TimePicker
-            label='Selecciona la hora'
-            minTime={minTime}
-            maxTime={maxTime}
-            minutesStep={60}
-            orientation='portrait'
-            ampm={false}
-            value={timePickerSelected}
-            onChange={(newTime) => setTimePickerSelected(newTime)}
+            onChange={(newDate) => setDateSelected(newDate)}
             renderInput={(params) => <TextField {...params} />}
           />
           <FormControl variant='outlined' sx={{ width: 250 }}>
@@ -110,13 +80,11 @@ const Schedule = () => {
               onChange={selectHandleChange}
               label='Selecciona el horario'
             >
-              <MenuItem value='6-7am'>
-                6 - 7 AM
-              </MenuItem>
-              <MenuItem value='7-8am'>7 - 8 AM</MenuItem>
-              <MenuItem value='8-9am'>8 - 9 AM</MenuItem>
-              <MenuItem value='9-10am'>9 - 10 AM</MenuItem>
-              <MenuItem value='10-11am'>10 - 11 AM</MenuItem>
+              <MenuItem value='6 - 7 AM'>6 - 7 AM</MenuItem>
+              <MenuItem value='7 - 8 AM'>7 - 8 AM</MenuItem>
+              <MenuItem value='8 - 9 AM'>8 - 9 AM</MenuItem>
+              <MenuItem value='9 - 10 AM'>9 - 10 AM</MenuItem>
+              <MenuItem value='10 - 11 AM'>10 - 11 AM</MenuItem>
             </Select>
           </FormControl>
         </Stack>
@@ -127,19 +95,6 @@ const Schedule = () => {
           <Button onClick={handleChanges} variant='contained'>
             Confirm
           </Button>
-		<Button
-            onClick={() =>
-              alert(
-                timeSelected === ""
-                ? "Seleccione un horario" 
-                : `Fecha y horario seleccionado: ${dateTimeSelected.format("LL")}, ${timeSelected}`
-              )
-            }
-            variant='contained'
-          >
-            Confirm
-          </Button>
-
         </div>
       </Stack>
     </div>
