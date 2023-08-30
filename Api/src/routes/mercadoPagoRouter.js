@@ -1,8 +1,8 @@
-const { Router } = require("express");
-const { walkPayment } = require("../handlers/mercadoPagoHandler");
+// const { Router } = require("express");
+// const { walkPayment } = require("../handlers/mercadoPagoHandler");
 
-const mercadoPagoRouter = Router();
+// const mercadoPagoRouter = Router();
 
-mercadoPagoRouter.post("/", walkPayment);
+// mercadoPagoRouter.post("/", walkPayment);
 
-module.exports = mercadoPagoRouter;
+// module.exports = mercadoPagoRouter;
