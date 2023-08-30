@@ -152,25 +152,29 @@ const createUserController = async (userData) => {
             phone: phone
         }
     });
-    if (phoneCheck) throw new Error('This phone number is already registered!');
+    if (phoneCheck) throw new Error('This phone number is already registered!'); 
 
-    const hashedPassword = await bcrypt.hash(password, 10);  // 10 number of salt rounds
+    if( password !== 'null'){ 
+        const hashedPassword = await bcrypt.hash(password, 10);  // 10 number of salt rounds
 
-    let newUser = await User.create({
-        ...userData,
-        password: hashedPassword,
-    });
 
-    if (newUser) {
-        let token = jwt.sign({ id: newUser.id }, JWT_SECRET_KEY, {
-            expiresIn: 1 * 24 * 60 * 60 * 1000,
+        let newUser = await User.create({
+            ...userData,
+            password: hashedPassword,
         });
-        //send users details
-        return { newUser, token };
-    } else {
-        throw new Error('Details are not correct');
-    }
+    
+        if (newUser) {
+            let token = jwt.sign({ id: newUser.id }, JWT_SECRET_KEY, {
+              expiresIn: 1 * 24 * 60 * 60 * 1000,
+            });
+       
+            //send users details
+            return { newUser, token };
+          } else {
+            throw new Error('Details are not correct');
+          }
 
+    }
 }
 
 
