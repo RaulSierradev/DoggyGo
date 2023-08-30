@@ -137,7 +137,7 @@ const getUserByIdController = async (id) => {
 
 const createUserController = async (userData) => {
     console.log(userData)
-    const { name, email, password, birthdate, address, phone, country, state, city, rol } = userData;
+    const { name, email, password, birthdate, address, description, phone, country, state, city, rol } = userData;
 
 
     if (!name || !email || !password || !birthdate || !address || !phone || !country || !state || !city || !rol) {
