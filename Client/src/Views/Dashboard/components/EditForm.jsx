@@ -119,6 +119,9 @@ function EditForm({ setEdit, edit }) {
 							value={forms.schedule}
 							name="schedule"
 						>
+							<option hidden value>
+								Selecciona Horario
+							</option>
 							<option>6am-11am</option>
 							<option>11am-3pm</option>
 							<option>3pm-10pm</option>
