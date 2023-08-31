@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getAllUsers, orderDefault } from '../../Redux/actions';
 import SearchBar from './Components/SearchBar/SearchBar';
-import FormDogs from './Components/FormDogs/FormDogs';
+//import FormDogs from './Components/FormDogs/FormDogs';
 
 const Home = () => {
 	const navigate = useNavigate();
