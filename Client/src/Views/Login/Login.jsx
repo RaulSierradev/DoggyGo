@@ -15,6 +15,11 @@ const Login = () => {
 
 	const [errors, setErrors] = useState({});
 
+	const googleLogin = (e) => {
+		e.preventDefault();
+		window.open('http://localhost:3001/auth/google/login', '_self');
+	};
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -88,6 +93,7 @@ const Login = () => {
 						>
 							Volver
 						</button>
+						<button onClick={googleLogin}>Google</button>
 						<h2 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight">
 							Inicio De Sesión
 						</h2>

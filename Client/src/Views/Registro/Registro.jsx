@@ -4,7 +4,7 @@ import VerificacionPaseador from './VerificacionPaseador';
 import registroPaseador from '../../img/registroPaseador.png';
 
 import { useDispatch } from 'react-redux';
-import { createUser } from '../../Redux/actions';
+import { createUser, editUser } from '../../Redux/actions';
 
 const initialState = {
 	rol: '',
@@ -21,39 +21,65 @@ const initialState = {
 	phone: '',
 	status: false,
 	suscription: false,
+	isComplete: true,
 };
 
 const RegistroPaseador = () => {
+	const urlParams = new URLSearchParams(window.location.search)
+		? new URLSearchParams(window.location.search)
+		: null;
+	const googleEmail = urlParams ? urlParams.get('email') : null;
+	const googleName = urlParams ? urlParams.get('name') : null;
+
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const [user, setUser] = useState(initialState);
+	const [user, setUser] = useState({
+		...initialState,
+		password: googleEmail ? 'null' : '',
+	});
 	const [errors, setErrors] = useState({});
+
+	const googleLogin = (e) => {
+		e.preventDefault();
+		window.open('http://localhost:3001/auth/google/signup', '_self');
+	};
 
 	const handleChange = (e) => {
 		setUser({
 			...user,
+			// is google email is not null, then set the email to google email
+			email: googleEmail ? googleEmail : user.email,
+			name: googleName ? googleName : user.name,
 			[e.target.name]: e.target.value,
 		});
 		setErrors(
-			VerificacionPaseador({
-				...user,
-				[e.target.name]: e.target.value,
-			})
+			VerificacionPaseador(
+				{
+					...user,
+					[e.target.name]: e.target.value,
+				},
+				!!googleEmail
+			)
 		);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(errors);
 		if (
 			!Object.keys(errors).length &&
 			user.name &&
 			user.address &&
 			user.email &&
-			user.password &&
-			user.phone
+			user.phone &&
+			(googleEmail || user.password) // only check for password if googleEmail is null
 		) {
-			dispatch(createUser(user));
+			if (googleEmail) {
+				dispatch(editUser(user));
+			} else {
+				dispatch(createUser(user));
+			}
 			setUser(initialState);
 			alert('Se ha creado su usario correctamente');
 			navigate('/login');
@@ -89,6 +115,7 @@ const RegistroPaseador = () => {
 								</span>
 							</Link>
 						</p>
+						<button onClick={googleLogin}>Google</button>
 					</div>
 					<form className="space-y-6 mt-10">
 						<label className="text-sm font-medium leading-6 text-gray-900">
@@ -301,25 +328,31 @@ const RegistroPaseador = () => {
 								)}
 							</div>
 							<div>
-								<label
-									htmlFor="password"
-									className="block text-sm font-medium leading-6 text-gray-900"
-								>
-									Contraseña
-								</label>
-								<input
-									type="password"
-									id="password"
-									value={user.password}
-									name="password"
-									onChange={handleChange}
-									placeholder="Minima de 8 caracteres"
-									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-								/>
-								{errors.password && (
-									<p className="text-sm text-red-600">
-										* {errors.password}
-									</p>
+								{googleEmail ? (
+									''
+								) : (
+									<>
+										<label
+											htmlFor="password"
+											className="block text-sm font-medium leading-6 text-gray-900"
+										>
+											Contraseña
+										</label>
+										<input
+											type="password"
+											id="password"
+											value={user.password}
+											name="password"
+											onChange={handleChange}
+											placeholder="Minima de 8 caracteres"
+											className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+										/>
+										{errors.password && (
+											<p className="text-sm text-red-600">
+												* {errors.password}
+											</p>
+										)}
+									</>
 								)}
 							</div>
 
@@ -327,7 +360,9 @@ const RegistroPaseador = () => {
 								type="submit"
 								className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 							>
-								Crear Cuenta
+								{googleEmail
+									? 'Actualiza tus datos'
+									: 'Crear Cuenta'}
 							</button>
 						</form>
 					)}
