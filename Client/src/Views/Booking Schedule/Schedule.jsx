@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   FormControl,
@@ -21,8 +21,11 @@ dayjs.locale("es");
 
 const Schedule = () => {
   const dispatch = useDispatch();
-  const walk = useSelector((state) => state.walk);
-  console.log(walk);
+  const { walk, currentUser } = useSelector((state) => ({
+    walk: state.walk,
+    currentUser: state.currentUser,
+  }));
+  const [hoursArray, setHoursArray] = useState([]);
 
   const minDate = dayjs().add(1, "day");
   const maxDate = dayjs().endOf("year");
@@ -38,15 +41,41 @@ const Schedule = () => {
       setWalk({
         ...walk,
         dateSelected: dayjs(dateSelected).format("LL"),
-		timeSelected
+        timeSelected,
       })
     );
-    alert(`Fecha y hora seleccionada: ${dateSelected.format("LL")}, ${timeSelected}`);
+    alert(
+      `Fecha y hora seleccionada: ${dateSelected.format("LL")}, ${timeSelected}`
+    );
   };
 
   const selectHandleChange = (event) => {
     setTimeSelected(event.target.value);
   };
+
+  console.log(currentUser.schedule);
+
+  useEffect(() => {
+    let array = [];
+
+    switch (currentUser.schedule) {
+      case "6am-11am":
+        array = [6, 7, 8, 9, 10];
+        break;
+      case "11am-3pm":
+        array = [11, 12, 13, 14];
+        break;
+      case "3pm-10pm":
+        array = [15, 16, 17, 18, 19, 20, 21];
+        break;
+      default:
+        array = [
+          6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+        ];
+    }
+
+	setHoursArray(array)
+  }, [currentUser.schedule]);
 
   return (
     <div className='flex flex-col items-center'>
@@ -80,11 +109,16 @@ const Schedule = () => {
               onChange={selectHandleChange}
               label='Selecciona el horario'
             >
-              <MenuItem value='6 - 7 AM'>6 - 7 AM</MenuItem>
-              <MenuItem value='7 - 8 AM'>7 - 8 AM</MenuItem>
-              <MenuItem value='8 - 9 AM'>8 - 9 AM</MenuItem>
-              <MenuItem value='9 - 10 AM'>9 - 10 AM</MenuItem>
-              <MenuItem value='10 - 11 AM'>10 - 11 AM</MenuItem>
+              {hoursArray.map((hour) => (
+                <MenuItem
+                  key={hour}
+                  value={`${hour <= 12 ? hour : hour - 12} ${hour <= 12 ? "AM" : "PM"} - ${
+                    hour < 12 ? hour + 1 : hour - 11
+                  } ${hour < 12 ? "AM" : "PM"}`}
+                >
+                  {hour <= 12 ? hour : hour - 12} {hour <= 12 ? "AM" : "PM"} - {hour < 12 ? hour + 1 : hour - 11} {hour < 12 ? "AM" : "PM"}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Stack>
