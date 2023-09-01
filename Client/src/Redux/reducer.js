@@ -1,4 +1,4 @@
-import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK } from "./action-types";
+import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK, GET_BY_ID, GET_ALL_WALKS } from "./action-types";
 
 let initialstate = {
   allUsers: [],
@@ -9,7 +9,9 @@ let initialstate = {
   users: [],
   currentUser: {},
   dogs: [],
-  walk: {}
+  walk: {},
+  user: [],
+  walks: []
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -112,6 +114,17 @@ let reducer = (state = initialstate, { type, payload }) => {
         // walk should be an object with all the walk info that get added on different steps
         walk: payload
       }
+    case GET_BY_ID :
+      return{
+        ...state,
+        user: payload
+      }
+    case GET_ALL_WALKS:
+      return{
+        ...state,
+        walks: payload,
+      }
+
 
     default:
       return { ...state };

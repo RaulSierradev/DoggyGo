@@ -16,6 +16,8 @@ import Payment from './Views/Booking Confirmation/Payment';
 import Admin from './Views/Admin/Admin';
 import Clientes from './Views/Admin/Clients/Clientes';
 import Walkers from './Views/Admin/Walkers/Walkers';
+import UserProfile from './Views/Admin/UserProfile/UserProfile';
+import Walks from './Views/Admin/Walks/Walks';
 
 function App() {
 	return (
@@ -41,6 +43,8 @@ function App() {
 				<Route path='/admin' element={<Admin />}/>
 				<Route path='/admin/clientes' element={<Clientes/>}/>
 				<Route path='/admin/paseadores' element={<Walkers/>}/>
+				<Route path='/admin/detail/:id' element={<UserProfile />}/>
+				<Route path='/admin/paseos' element={<Walks />}/>
 			</Routes>
 		</div>
 	);
