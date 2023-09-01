@@ -58,14 +58,23 @@ function App() {
 				<Route path="/T" element={<T />} />
 				<Route path="*" element={<Error404 />} />
 
-				<Route path="/admin" element={<Admin />} />
+				{/* Admin routes */}
+				<Route
+					path="/admin"
+					element={<PrivateRoutes rol={['Admin']} />}
+				>
+					<Route index element={<Admin />} />
+					<Route path="clientes" element={<Clientes />} />
+					<Route path="paseadores" element={<Walkers />} />
+					<Route path="/admin/detail/:id" element={<UserProfile />} />
+					<Route path="/admin/paseos" element={<Walks />} />
+				</Route>
+
+				{/* <Route path="/admin" element={<Admin />} />
 				<Route path="/admin/clientes" element={<Clientes />} />
 				<Route path="/admin/paseadores" element={<Walkers />} />
 				<Route path="/admin/detail/:id" element={<UserProfile />} />
-				<Route path="/admin/paseos" element={<Walks />} />
-				<Route path="/admin" element={<Admin />} />
-				<Route path="/admin/clientes" element={<Clientes />} />
-				<Route path="/admin/paseadores" element={<Walkers />} />
+				<Route path="/admin/paseos" element={<Walks />} /> */}
 			</Routes>
 		</div>
 	);

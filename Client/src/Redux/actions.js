@@ -15,6 +15,7 @@ import {
   SET_WALK,
   GET_BY_ID,
   GET_ALL_WALKS,
+  CREATE_WALK
 } from "./action-types";
 
 const URL = "http://localhost:3001/";
@@ -49,6 +50,17 @@ export function createDog(dog) {
     console.log(res.data);
 
     dispatch({ type: CREATE_DOG, payload: res.data });
+  };
+}
+
+export function createWalk(walk) {
+  return async function createWalkThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.post(`${URL}walk`, walk);
+    console.log(res.data);
+
+    dispatch({ type: CREATE_WALK, payload: res.data });
   };
 }
 
