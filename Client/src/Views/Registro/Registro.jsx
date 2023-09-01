@@ -5,6 +5,7 @@ import registroPaseador from '../../img/registroPaseador.png';
 
 import { useDispatch } from 'react-redux';
 import { createUser, editUser } from '../../Redux/actions';
+import google from '../../assets/google1.svg';
 
 const initialState = {
 	rol: '',
@@ -107,7 +108,7 @@ const RegistroPaseador = () => {
 							Llena el siguiente formulario para ser parte de
 							nuestra comunidad
 						</p>
-						<p className="text-gray-900 text-sm mt-3">
+						<p className="text-gray-900 text-sm mt-3 mb-3">
 							¿Ya tienes una cuenta?{' '}
 							<Link to="/login">
 								<span className="text-indigo-600 font-bold">
@@ -115,7 +116,20 @@ const RegistroPaseador = () => {
 								</span>
 							</Link>
 						</p>
-						<button onClick={googleLogin}>Google</button>
+						<div className="flex gap-1 items-center">
+							<p className="mt-3 text-center">Registrate con: </p>
+
+							<button
+								className="cursor-pointer"
+								onClick={googleLogin}
+							>
+								<img
+									className="rounded-md"
+									src={google}
+									alt=""
+								/>
+							</button>
+						</div>
 					</div>
 					<form className="space-y-6 mt-10">
 						<label className="text-sm font-medium leading-6 text-gray-900">

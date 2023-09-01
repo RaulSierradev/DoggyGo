@@ -6,7 +6,8 @@ const router = require('./routes/index.js');
 const passport = require('passport')
 require('./handlers/authenticate.js');
 const session = require('express-session')
-// const User = require('./models/User')
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET_KEY } = process.env;
 
 
 
@@ -45,10 +46,14 @@ server.get('/auth/google/login', passport.authenticate('google', { scope: ['prof
 
 // For Google Callback
 server.get('/auth/google/create', passport.authenticate('google', { failureRedirect: '/login' }), async (req, res) => {
-  console.log('req.user', req.user)
   // user isComplete only when user is created manually or when user is created by google and then completed the form
   if (req.user.isComplete) {
-    res.redirect('http://127.0.0.1:5173/home');
+    console.log('req user complete', req.user)
+    let token = jwt.sign({ id: req.user.dataValues.id, rol: req.user.dataValues.rol }, JWT_SECRET_KEY, {
+      expiresIn: 1 * 24 * 60 * 60 * 1000,
+    });
+    console.log('token', token)
+    res.redirect(`http://127.0.0.1:5173/home?token=${token}`);
   } else {
 
     res.redirect(`http://127.0.0.1:5173/registro?googleId=${req.user.id}&email=${req.user.emails[0].value}&name=${req.user.displayName}`);

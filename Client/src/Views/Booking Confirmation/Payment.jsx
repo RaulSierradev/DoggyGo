@@ -26,7 +26,7 @@ function Payment() {
 		try {
 			const response = await axios.post('http://localhost:3001/payment', {
 				description: walk.title,
-				price: Number(walk.price) + bookingFee,
+				price: Number(walk.cost) + bookingFee,
 				quantity: 1,
 				currency_id: 'USD',
 			});
@@ -39,21 +39,35 @@ function Payment() {
 		}
 	};
 
+	const postWalk = async () => {
+		try {
+			// title is broken also UserId is not connected
+			console.log(walk);
+			const response = await axios.post(
+				'http://localhost:3001/walk',
+				walk
+			);
+			console.log(response.data);
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
 	const handlePayment = async () => {
 		setLoading(true);
 		dispatch(
 			setWalk({
 				...walk,
-				total: Number(walk.price) + bookingFee,
-				walker: currentUser.name,
+				total: Number(walk.cost) + bookingFee,
+				state: true, // this needs back fix
+				// walker: currentUser.name,
 			})
 		);
 		const id = await createPreference();
 		setId(id);
+		await postWalk();
 		setLoading(false);
 	};
-
-	console.log(id);
 
 	return (
 		<div>
@@ -88,7 +102,7 @@ function Payment() {
 						Paseo de {walk.duration}
 					</div>
 					<div className="text-right text-slate-500 text-lg font-normal">
-						${walk.price}
+						${walk.cost}
 					</div>
 				</div>
 				<div className="w-96 h-6 justify-start items-start inline-flex">
@@ -105,7 +119,7 @@ function Payment() {
 							Total a pagar
 						</div>
 						<div className="text-right text-gray-700 text-lg font-semibold">
-							${Number(walk.price) + bookingFee}
+							${Number(walk.cost) + bookingFee}
 						</div>
 					</div>
 					<div className="self-stretch h-px bg-slate-300" />

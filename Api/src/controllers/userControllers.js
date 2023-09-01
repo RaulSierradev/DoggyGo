@@ -195,7 +195,8 @@ const createUserController = async (userData) => {
         console.log("final:", newUser);
 
         if (newUser) {
-            let token = jwt.sign({ id: newUser.id }, JWT_SECRET_KEY, {
+            // add rol so the token contains it and we can use it in the front end
+            let token = jwt.sign({ id: newUser.id, rol: newUser.rol }, JWT_SECRET_KEY, {
                 expiresIn: 1 * 24 * 60 * 60 * 1000,
             });
 
@@ -270,7 +271,7 @@ const loginController = async (email, password) => {
         //if password is the same or user is signing up with google
         //generate token with the user's id and the secretKey in the env file
         if (isSame) {
-            const token = jwt.sign({ id: user.id }, JWT_SECRET_KEY, {
+            const token = jwt.sign({ id: user.id, rol: user.rol }, JWT_SECRET_KEY, {
                 expiresIn: 1 * 24 * 60 * 60 * 1000,
             });
             //send user and token data
