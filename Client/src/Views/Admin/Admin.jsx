@@ -1,4 +1,7 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import * as actions from "../../Redux/actions.js";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
@@ -6,6 +9,21 @@ import Sidebar from "./Sidebar";
 import { RiLineChartLine } from "react-icons/ri";
 
 const Admin = () => {
+  const clients = useSelector((state) => state.clients);
+  const walkers = useSelector((state) => state.walkers);
+  const walks = useSelector((state) => state.walks);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    try {
+      dispatch(actions.getAllUsers());
+      dispatch(actions.getAllWalks());
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [dispatch]);
+
+  console.log("Estos son los clientes", clients);
   return (
     <div className="grid lg:grid-cols-4 xl:grid-cols-6 min-h-screen">
       <Sidebar />
@@ -14,19 +32,18 @@ const Admin = () => {
         {/* Section 1 */}
         <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 mt-10 gap-8">
           {/* Card 1 */}
-          <div className="bg-indigo-600 p-8 rounded-xl text-gray-300 flex flex-col gap-6">
+          <div className="bg-indigo-600 p-8 rounded-xl text-gray-300 flex flex-col gap-3">
             <RiLineChartLine className="text-5xl" />
             <h4 className="text-2xl">Ingresos</h4>
-            <span className="text-5xl text-white">&euro; 8,350</span>
-            <span className="py-1 px-3 bg-indigo-800/80 rounded-full">
-              + 10% desde el último mes
+            <span className="text-5xl text-white">
+              &#36; {1.5 * walks.length}
             </span>
           </div>
           {/* Card 2 */}
           <div className="p-4 bg-white rounded-xl flex flex-col justify-between gap-4 drop-shadow-2xl">
             <div className="flex items-center gap-4 bg-indigo-600/10 rounded-xl p-4">
               <span className="bg-indigo-600 text-gray-300 text-2xl font-bold p-4 rounded-xl">
-                98
+                {walks.length}
               </span>
               <div>
                 <h3 className="font-bold">Paseos realizados</h3>
@@ -35,7 +52,7 @@ const Admin = () => {
             <div className="bg-indigo-600/10 rounded-xl p-4">
               <div className="flex items-center gap-4 mb-4">
                 <span className="bg-indigo-600 text-gray-300 text-2xl font-bold p-4 rounded-xl">
-                  32
+                  {clients.length}
                 </span>
                 <div>
                   <h3 className="font-bold">Nuevos Clientes</h3>
@@ -49,26 +66,26 @@ const Admin = () => {
               Últimos clientes inscritos
             </h1>
             <div className="bg-white p-8 rounded-xl shadow-2xl">
-              <div className="flex items-center gap-4 mb-8">
-                <img
-                  src="https://img.freepik.com/foto-gratis/retrato-mujer-mayor-cerca_23-2149207185.jpg"
-                  className="w-14 h-14 object-cover rounded-full"
-                />
-                <div>
-                  <h3 className="font-bold">Juana Morales</h3>
-                  <p className="text-gray-500">Hace 12 h</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4 mb-4">
-                <img
-                  src="https://img.freepik.com/foto-gratis/retrato-mujer-mayor-cerca_23-2149207185.jpg"
-                  className="w-14 h-14 object-cover rounded-full"
-                />
-                <div>
-                  <h3 className="font-bold">Margarita Acosta</h3>
-                  <p className="text-gray-500">Hace 1 d</p>
-                </div>
-              </div>
+              {clients?.map((e, index) => {
+                console.log(index);
+                return (
+                  <div
+                    key={index}
+                    className={`flex items-center gap-4 mb-8 ${
+                      index >= 2 && "hidden"
+                    }`}
+                  >
+                    <img
+                      src={e.image}
+                      className="w-14 h-14 object-cover rounded-full"
+                    />
+                    <div>
+                      <h3 className="font-bold">{e.name}</h3>
+                      <p className="text-gray-500">Hace {index} h</p>
+                    </div>
+                  </div>
+                );
+              })}
               <div className="flex justify-end">
                 <Link
                   to="/admin/clientes"
@@ -86,47 +103,42 @@ const Admin = () => {
             <h1 className="text-2xl font-bold mb-8">Ultimos paseos</h1>
             <div className="bg-white p-8 rounded-xl shadow-2xl mb-8 flex flex-col gap-8">
               {/* Card 1 */}
-              <div className="grid grid-cols-1 xl:grid-cols-4 items-center gap-4 mb-4">
-                <div className="col-span-2 flex items-center gap-4">
-                  <img
-                    src="https://img.freepik.com/foto-gratis/hombre-joven-hermoso-contento-camiseta-azul-que-senala-lado_1262-17845.jpg"
-                    className="w-14 h-14 object-cover rounded-xl"
-                  />
-                  <div>
-                    <h3 className="font-bold">Alexander Williams</h3>
-                    <p className="text-gray-500">Paseo corto</p>
+              {walks?.map((e, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`grid grid-cols-1 xl:grid-cols-4 items-center gap-4 mb-4 ${
+                      index >= 2 && "hidden"
+                    }`}
+                  >
+                    <div className="col-span-2 flex items-center gap-4">
+                      <img
+                        src={e.image}
+                        className="w-14 h-14 object-cover rounded-xl"
+                      />
+                      <div>
+                        <h3 className="font-bold">Jhon Philips</h3>
+                        <p className="text-gray-500">{e.duration}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <span
+                        className={
+                          e.state === true
+                            ? `bg-red-100 text-red-800 py-1 px-3 rounded-full font-medium`
+                            : "bg-green-100 text-green-800 py-1 px-3 rounded-full font-medium"
+                        }
+                      >
+                        {e.state === true ? "En proceso" : "Finalizado"}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-bold">&#36; {e.cost}</span>
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <span className="bg-green-100 text-green-800 py-1 px-3 rounded-full font-medium">
-                    Finalizado
-                  </span>
-                </div>
-                <div>
-                  <span className="font-bold">&#36; 8</span>
-                </div>
-              </div>
+                );
+              })}
               {/* Card 2 */}
-              <div className="grid grid-cols-1 xl:grid-cols-4 items-center gap-4 mb-4">
-                <div className="col-span-2 flex items-center gap-4">
-                  <img
-                    src="https://img.freepik.com/foto-gratis/alegre-joven-deportista-posando-mostrando-pulgares-arriba-gesto_171337-8194.jpg"
-                    className="w-14 h-14 object-cover rounded-xl"
-                  />
-                  <div>
-                    <h3 className="font-bold">Jhon Philips</h3>
-                    <p className="text-gray-500">Paseo Largo</p>
-                  </div>
-                </div>
-                <div>
-                  <span className="bg-red-100 text-red-800 py-1 px-3 rounded-full font-medium">
-                    En proceso
-                  </span>
-                </div>
-                <div>
-                  <span className="font-bold">&#36; 20</span>
-                </div>
-              </div>
               <div className="flex justify-end">
                 <a
                   href="#"
@@ -142,26 +154,26 @@ const Admin = () => {
               Últimos paseadores inscritos
             </h1>
             <div className="bg-white p-8 rounded-xl shadow-2xl">
-              <div className="flex items-center gap-4 mb-8">
-                <img
-                  src="https://img.freepik.com/foto-gratis/retrato-mujer-mayor-cerca_23-2149207185.jpg"
-                  className="w-14 h-14 object-cover rounded-full"
-                />
-                <div>
-                  <h3 className="font-bold">Juana Morales</h3>
-                  <p className="text-gray-500">Hace 12 h</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4 mb-4">
-                <img
-                  src="https://img.freepik.com/foto-gratis/retrato-mujer-mayor-cerca_23-2149207185.jpg"
-                  className="w-14 h-14 object-cover rounded-full"
-                />
-                <div>
-                  <h3 className="font-bold">Margarita Acosta</h3>
-                  <p className="text-gray-500">Hace 1 d</p>
-                </div>
-              </div>
+              {walkers?.map((e, index) => {
+                return (
+                  <div
+                    key={index}
+                    className={`flex items-center gap-4 mb-8 ${
+                      index >= 2 && "hidden"
+                    }`}
+                  >
+                    <img
+                      src={e.image}
+                      className="w-14 h-14 object-cover rounded-full"
+                    />
+                    <div>
+                      <h3 className="font-bold">{e.name}</h3>
+                      <p className="text-gray-500">Hace {index} h</p>
+                    </div>
+                  </div>
+                );
+              })}
+
               <div className="flex justify-end">
                 <Link
                   to="/admin/paseadores"
