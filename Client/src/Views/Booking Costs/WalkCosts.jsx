@@ -32,21 +32,21 @@ function WalkCosts() {
 				...details,
 				title: 'Fast Walk',
 				duration: '20 min',
-				price: '8',
+				cost: '8',
 			});
 		} else if (service === 'mid') {
 			setDetails({
 				...details,
 				title: 'Basic Walk',
 				duration: '30 min',
-				price: '12',
+				cost: '12',
 			});
 		} else if (service === 'long') {
 			setDetails({
 				...details,
 				title: 'Long Walk',
 				duration: '60 min',
-				price: '20',
+				cost: '20',
 			});
 		}
 		setSelectedService(service);

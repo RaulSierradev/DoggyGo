@@ -53,6 +53,7 @@ export function createDog(dog) {
 }
 
 export function setWalk(walk) {
+  window.localStorage.setItem("user", JSON.stringify(walk));
   return {
     type: SET_WALK,
     payload: walk,

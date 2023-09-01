@@ -55,15 +55,33 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    suscription: {
+    schedule: {
+      type: DataTypes.ENUM('6am-11am', '11am-3pm', "3pm-10pm"),
+    },
+    cpr: {
       type: DataTypes.BOOLEAN,
     },
     status: {
       type: DataTypes.BOOLEAN,
     },
+    size: {
+      type: DataTypes.ENUM('SMALL', 'MEDIUM', "LARGE", "GIANT"),
+    },
     rol: {
       type: DataTypes.ENUM('Walker', 'Client'),
       allowNull: false,
+    },
+    // add new googleId field
+    googleId: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: true
+    },
+    // add isComplete field to check if user has completed registration
+    // useful for google signups
+    isComplete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     }
   },
     {

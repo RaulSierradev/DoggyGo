@@ -69,17 +69,8 @@ let reducer = (state = initialstate, { type, payload }) => {
           walkers: state.walkersBackUp.filter(walker => walker.country === payload.slice(10))
         }
       }
-      //*Filtro para states
-      if (payload.includes("State")) {
-        return {
-          ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.state === payload.slice(8))
-        }
-      }
-      //*Filtro para cities
       return {
         ...state,
-        walkers: state.walkersBackUp.filter(walker => walker.city === payload.slice(7))
       }
     case CREATE_USER:
       return {
