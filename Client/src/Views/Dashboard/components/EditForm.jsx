@@ -2,17 +2,23 @@ import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ImageUpload from './ImageUpload';
 import Cookies from 'js-cookie';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../../Redux/actions';
+import idFromToken from '../../utils/getToken';
 
 function EditForm({ setEdit, edit }) {
+	const id = idFromToken();
+	console.log(id);
+
+	// fetch data from store and pass it to single component
+	const users = useSelector((state) => state.users);
+	const userProfile = users.filter((user) => user.id === id)[0];
+	console.log(userProfile);
+
 	const dispatch = useDispatch();
 
 	const [forms, setForms] = useState({});
 	const [imageUrl, setImageUrl] = useState(''); // save the image url
-
-	const cookiesString = Cookies.get('auth'); // {"email":"test","password":"test"}
-	const cookies = JSON.parse(cookiesString);
 
 	useEffect(() => {
 		setForms((prevDetails) => ({
@@ -36,7 +42,7 @@ function EditForm({ setEdit, edit }) {
 
 		setForms({
 			...forms,
-			email: cookies.email,
+			email: userProfile.email,
 			[name]: newValue,
 		});
 	}
