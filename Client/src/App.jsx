@@ -16,7 +16,7 @@ import Payment from './Views/Booking Confirmation/Payment';
 import Admin from './Views/Admin/Admin';
 import Clientes from './Views/Admin/Clients/Clientes';
 import Walkers from './Views/Admin/Walkers/Walkers';
-import Form from './Views/Google Form/Form';
+import Success from './Views/Mercado Pago/Success';
 
 function App() {
 	return (
@@ -26,7 +26,8 @@ function App() {
 				<Route path="/inicio" element={<Landing />} />
 				<Route path="/registro" element={<Registro />} />
 				<Route path="/login" element={<Login />} />
-				<Route path="/complete-registration" element={<Form />} />
+				<Route path="/home/success" element={<Success />} />
+
 				<Route element={<PrivateRoutes />}>
 					<Route path="/dash" element={<Layout />} exact>
 						<Route path="" element={<HomeDashboard />} exact />

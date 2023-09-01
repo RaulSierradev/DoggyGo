@@ -1,12 +1,17 @@
 import Summary from './Summary';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios';
 import { useState } from 'react';
+import { setWalk } from '../../Redux/actions';
 
 const PUBLIC_KEY = import.meta.env.VITE_REACT_APP_PUBLIC_KEY;
 
 function Payment() {
+	const dispatch = useDispatch();
+
+	const [loading, setLoading] = useState(false);
+
 	const bookingFee = 1.5;
 	initMercadoPago(PUBLIC_KEY);
 	const currentUser = useSelector((state) => state.currentUser);
@@ -21,7 +26,7 @@ function Payment() {
 		try {
 			const response = await axios.post('http://localhost:3001/payment', {
 				description: walk.title,
-				price: Number(walk.price),
+				price: Number(walk.price) + bookingFee,
 				quantity: 1,
 				currency_id: 'USD',
 			});
@@ -35,8 +40,17 @@ function Payment() {
 	};
 
 	const handlePayment = async () => {
+		setLoading(true);
+		dispatch(
+			setWalk({
+				...walk,
+				total: Number(walk.price) + bookingFee,
+				walker: currentUser.name,
+			})
+		);
 		const id = await createPreference();
 		setId(id);
+		setLoading(false);
 	};
 
 	console.log(id);
@@ -124,7 +138,14 @@ function Payment() {
 					</div>
 				</div>
 				<div className="flex">
-					{id && <Wallet initialization={{ preferenceId: id }} />}
+					{loading ? (
+						<div className="font-bold text-blue-600">
+							Loading...
+						</div>
+					) : (
+						id && <Wallet initialization={{ preferenceId: id }} />
+					)}
+					{/* {id && <Wallet initialization={{ preferenceId: id }} />} */}
 				</div>
 			</div>
 		</div>
