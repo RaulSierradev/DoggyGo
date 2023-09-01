@@ -1,8 +1,26 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
+import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 
 function Nav() {
-	const location = useLocation();
+	const navigate = useNavigate();
+	const users = useSelector((state) => state.users);
+	let isAuthenticated = false;
+	let currentUser = null;
+
+	const token = Cookies.get('auth') ? Cookies.get('auth') : null;
+	if (token) {
+		isAuthenticated = true;
+		const { id } = jwt_decode(token);
+		currentUser = users.filter((user) => user.id === id)[0];
+	}
+
+	const handleLogout = () => {
+		Cookies.remove('auth');
+		navigate('/');
+	};
 
 	return (
 		<nav className="flex justify-between items-center bg-zinc-900 h-20 p-4">
@@ -25,9 +43,18 @@ function Nav() {
 				<p>Services</p>
 				<p>Help</p>
 			</div>
+			<div className="text-white font-bold flex gap-4">
+				<div className="ml-2 rounded-full">
+					{currentUser ? currentUser.image : ''}
+				</div>
+				{currentUser ? currentUser.name : ''}
+			</div>
 			<div className="flex gap-2">
-				{location.pathname === '/dash' ? (
-					<button className="border border-neutral-50 px-6 py-3 rounded text-neutral-50">
+				{isAuthenticated ? (
+					<button
+						onClick={handleLogout}
+						className="border border-neutral-50 px-6 py-3 rounded text-neutral-50"
+					>
 						LOGOUT
 					</button>
 				) : (
