@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { SideBtn } from '../../Components/SideBtn/SideBtn'
 import { SideBar } from '../../Components/SideBar/SideBar'
+import DogsUser from '../DogsUser/DogsUser'
 import style from './PerfilDeUsuario.module.css'
 import userimg from '/user.png'
 import imgdog from '/userDogs.png'
-import DogsUser from '../DogsUser/DogsUser'
 
 const PerfilDeUsuario = (props) => {
 
