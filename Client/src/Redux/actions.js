@@ -53,14 +53,16 @@ export function createDog(dog) {
   };
 }
 
-export function createWalk(walk) {
-  return async function createWalkThunk(dispatch) {
+export function createWalk() {
+  return async function createWalkThunk(dispatch, getState) {
     // dispatch({ type: 'loading' })
+    const { walk } = getState();  // Get the updated walk from the state
 
     const res = await axios.post(`${URL}walk`, walk);
     console.log(res.data);
 
     dispatch({ type: CREATE_WALK, payload: res.data });
+
   };
 }
 
