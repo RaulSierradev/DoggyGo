@@ -1,39 +1,41 @@
 import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ImageUpload from './ImageUpload';
-import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../../Redux/actions';
 import idFromToken from '../../utils/getToken';
 
 function EditForm({ setEdit, edit }) {
+	const dispatch = useDispatch();
+
+	const [forms, setForms] = useState({});
+	const [imageUrl, setImageUrl] = useState(''); // save the image url
+
+	// get the current user id from the token
 	const id = idFromToken();
-	console.log(id);
 
 	// fetch data from store and pass it to single component
 	const users = useSelector((state) => state.users);
 	const userProfile = users.filter((user) => user.id === id)[0];
 	console.log(userProfile);
 
-	const dispatch = useDispatch();
-
-	const [forms, setForms] = useState({});
-	const [imageUrl, setImageUrl] = useState(''); // save the image url
-
 	useEffect(() => {
 		setForms((prevDetails) => ({
 			...prevDetails,
-			image: imageUrl,
+			image: userProfile.image ? userProfile.image : imageUrl,
+			cpr: userProfile.cpr ? userProfile.cpr : false,
+			schedule: userProfile.schedule ? userProfile.schedule : '',
+			status: userProfile.status ? userProfile.status : false,
+			size: userProfile.size ? userProfile.size : null,
 		}));
-	}, [imageUrl]);
-
-	// function onChange(e) {
-	// 	setForms({
-	// 		...forms,
-	// 		email: cookies.email,
-	// 		[e.target.name]: e.target.value === '' ? '' : e.target.value,
-	// 	});
-	// }
+	}, [
+		imageUrl,
+		userProfile.cpr,
+		userProfile.schedule,
+		userProfile.status,
+		userProfile.size,
+		userProfile.image,
+	]);
 
 	function onChange(e) {
 		const { name, value, type } = e.target;

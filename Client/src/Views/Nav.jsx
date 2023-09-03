@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
+import Person2Icon from '@mui/icons-material/Person2';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -23,7 +24,7 @@ function Nav() {
 	};
 
 	return (
-		<nav className="flex justify-between items-center bg-zinc-900 h-20 p-4">
+		<nav className="flex justify-between items-center bg-[#16425b] h-20 p-4">
 			<div className="flex items-center gap-2">
 				<img
 					className="w-10 h-10 rounded-full"
@@ -40,12 +41,25 @@ function Nav() {
 					</div>
 					<p>Home</p>
 				</Link>
-				<p>Services</p>
+				<Link to="/dash" className="text-white flex gap-1">
+					<div className="flex items-center">
+						<Person2Icon />
+					</div>
+					<p>Profile</p>
+				</Link>
 				<p>Help</p>
 			</div>
-			<div className="text-white font-bold flex gap-4">
+			<div className="text-white font-bold flex gap-4 items-center">
 				<div className="ml-2 rounded-full">
-					{currentUser ? currentUser.image : ''}
+					{currentUser ? (
+						<img
+							className="w-10 h-10 rounded-full"
+							src={currentUser.image}
+							alt=""
+						/>
+					) : (
+						''
+					)}
 				</div>
 				{currentUser ? currentUser.name : ''}
 			</div>
@@ -63,7 +77,7 @@ function Nav() {
 							to={'/login'}
 							className="border border-neutral-50 px-6 py-2 rounded text-neutral-50"
 						>
-							Log In
+							Inicia sesión
 						</Link>
 						<Link
 							to={'/registro'}
