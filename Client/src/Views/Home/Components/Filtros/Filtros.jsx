@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { filterWalkers, restoreWalkers } from "../../../../Redux/actions";
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { filterWalkers, restoreWalkers } from '../../../../Redux/actions';
 import {
   Checkbox,
   FormControl,
@@ -10,8 +10,8 @@ import {
   MenuItem,
   Select,
   Stack,
-} from "@mui/material";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+} from '@mui/material';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const Filtros = () => {
   const dispatch = useDispatch();
@@ -21,8 +21,8 @@ const Filtros = () => {
   }, [dispatch]);
 
   const [selectsFilter, setSelectsFilter] = useState({
-    country: "",
-    time: "",
+    country: '',
+    time: '',
   });
   //const [sizeFilter, setSizeFilter] = useState("");
   const [cprFilter, setCprFilter] = useState(false);
@@ -36,11 +36,13 @@ const Filtros = () => {
     const name = event.target.name;
     const value = event.target.value;
 
-    dispatch(filterWalkers({
-      ...selectsFilter,
-      cpr: cprFilter,
-      [name]: value
-    }));
+    dispatch(
+      filterWalkers({
+        ...selectsFilter,
+        cpr: cprFilter,
+        [name]: value,
+      })
+    );
     setSelectsFilter({
       ...selectsFilter,
       [name]: value,
@@ -49,12 +51,14 @@ const Filtros = () => {
 
   const handleCprFilter = (event) => {
     event.preventDefault();
-    const checked = event.target.checked
+    const checked = event.target.checked;
 
-    dispatch(filterWalkers({
-      ...selectsFilter,
-      cpr: checked,
-    }));
+    dispatch(
+      filterWalkers({
+        ...selectsFilter,
+        cpr: checked,
+      })
+    );
     setCprFilter(checked);
   };
 
@@ -65,18 +69,19 @@ const Filtros = () => {
 
   const handleResetFilter = () => {
     dispatch(restoreWalkers());
-    setSelectsFilter({ country: "", time: "" });
+    dispatch(filterWalkers(true));
+    setSelectsFilter({ country: '', time: '' });
     //setSizeFilter("");
     setCprFilter(false);
   };
 
   return (
     <div>
-      <Stack spacing={2} direction={"row"}>
+      <Stack spacing={2} direction={'row'}>
         <FormControl variant='outlined' sx={{ width: 180, top: 12 }}>
           <InputLabel id='country-select-label'>Selecciona el pais</InputLabel>
           <Select
-            sx={{ backgroundColor: "white" }}
+            sx={{ backgroundColor: 'white' }}
             labelId='country-select-label'
             id='country-select'
             name='country'
@@ -94,7 +99,7 @@ const Filtros = () => {
         <FormControl variant='outlined' sx={{ width: 200, top: 12 }}>
           <InputLabel id='time-select-label'>Selecciona el horario</InputLabel>
           <Select
-            sx={{ backgroundColor: "white" }}
+            sx={{ backgroundColor: 'white' }}
             labelId='time-select-label'
             id='time-select'
             name='time'
@@ -126,8 +131,8 @@ const Filtros = () => {
             <ToggleButton value='Size - GIANT'>Gigante (45+)</ToggleButton>
           </ToggleButtonGroup>
         </Stack>*/}
-        <Stack spacing={1} direction={"column"}>
-          <InputLabel sx={{ fontWeight: "bold" }} id='cpr-checkbox-label'>
+        <Stack spacing={1} direction={'column'}>
+          <InputLabel sx={{ fontWeight: 'bold' }} id='cpr-checkbox-label'>
             Servicios adicionales
           </InputLabel>
           <FormControlLabel

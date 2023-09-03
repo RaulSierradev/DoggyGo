@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getWalkerByName, restoreWalkers } from "../../../../Redux/actions";
+import { filterWalkers, getWalkerByName, restoreWalkers } from "../../../../Redux/actions";
 
 const SearchBar = () => {
   const [name, setName] = useState("");
@@ -21,6 +21,7 @@ const SearchBar = () => {
 
   const handleReset = () => {
     dispatch(restoreWalkers());
+    dispatch(filterWalkers(true))
   };
 
   return (

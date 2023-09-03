@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import {
   PRUEBA,
   GET_ALL_USERS,
@@ -15,9 +15,9 @@ import {
   SET_WALK,
   GET_BY_ID,
   GET_ALL_WALKS,
-} from "./action-types";
+} from './action-types';
 
-const URL = "http://localhost:3001/";
+const URL = 'http://localhost:3001/';
 
 /*
 /////////////////////ejemplo funcion asincrona para las store/////////////////////// 
@@ -53,7 +53,7 @@ export function createDog(dog) {
 }
 
 export function setWalk(walk) {
-  window.localStorage.setItem("user", JSON.stringify(walk));
+  window.localStorage.setItem('user', JSON.stringify(walk));
   return {
     type: SET_WALK,
     payload: walk,
@@ -90,7 +90,7 @@ export const setCurrentUser = (user) => {
 };
 
 export const probarEstado = () => {
-  console.log("hola desde actions");
+  console.log('hola desde actions');
   return { type: PRUEBA };
 };
 
@@ -98,8 +98,8 @@ export const probarEstado = () => {
 export const getAllUsers = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(URL + "user");
-      console.log("Action - Data:", data);
+      const { data } = await axios(URL + 'user');
+      console.log('Action - Data:', data);
       return dispatch({ type: GET_ALL_USERS, payload: data });
     } catch (error) {
       error.response && error.response.data
@@ -115,7 +115,7 @@ export const getClientByName = (name) => {
     try {
       const nameURL = URL + `user/name/${name}`;
       const { data } = await axios(nameURL);
-      console.log("Action - Data:", data);
+      console.log('Action - Data:', data);
       return dispatch({ type: GET_CLIENT_BY_NAME, payload: data });
     } catch (error) {
       error.response && error.response.data
@@ -131,7 +131,7 @@ export const getWalkerByName = (name) => {
     try {
       const nameURL = URL + `user/name/${name}`;
       const { data } = await axios(nameURL);
-      console.log("Action - Data:", data);
+      console.log('Action - Data:', data);
       return dispatch({ type: GET_WALKER_BY_NAME, payload: data });
     } catch (error) {
       error.response && error.response.data
@@ -186,7 +186,7 @@ export const getById = (id) => {
 };
 
 export const getAllWalks = () => {
-  const endpoint = "http://localhost:3001/walk";
+  const endpoint = 'http://localhost:3001/walk';
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
