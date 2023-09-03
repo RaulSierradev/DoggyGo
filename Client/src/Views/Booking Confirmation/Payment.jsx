@@ -52,7 +52,7 @@ function Payment() {
 				total: Number(walk.cost) + bookingFee,
 				state: true, // this needs back fix
 				// walker: currentUser.name,
-				UserId: currentUser.id,
+				UserId: currentUser.id, // ! fix this
 			})
 		);
 		// get the new walk state
