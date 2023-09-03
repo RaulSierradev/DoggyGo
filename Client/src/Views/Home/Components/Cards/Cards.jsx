@@ -8,7 +8,7 @@ const Cards = ({ walkers }) => {
         <table className="border-separate border-spacing-3 w-full">
           <thead>
             <tr>
-              <th>Walkers</th>
+              <th>Paseadores</th>
             </tr>
           </thead>
           <tbody>
