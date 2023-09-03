@@ -26,7 +26,7 @@ const Layout = () => {
 	}, []);
 
 	return (
-		<div className="bg-[#386fa4] text-white h-full min-h-screen">
+		<div className="bg-[#0c2239] text-white h-full min-h-screen">
 			{/* <Navbar /> */}
 			<Nav />
 			<div className="flex mt-5">

@@ -20,7 +20,7 @@ function HomeDashboard() {
 			<div className="px-10 py-10 h-screen gap-4 ">
 				<div className=" rounded-lg h-full">
 					<div className="flex justify-start py-4 px-4">
-						<h2 className="text-black text-3xl font-medium mb-2">
+						<h2 className="text-white text-3xl font-medium mb-2">
 							Bienvenido
 						</h2>
 					</div>
