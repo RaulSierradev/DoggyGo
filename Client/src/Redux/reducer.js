@@ -26,198 +26,222 @@ let initialstate = {
   clientsBackUp: [],
   walkers: [
     {
-      name: "Pele",
-      email: "ejemplo1@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Argentina",
-      state: "Buenos Aires",
-      city: "Buenos Aires",
-      address: "Av Alcorta y Udaondo",
-      phone: "1",
+      name: 'Pele',
+      email: 'ejemplo1@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "6am-11am",
+      cpr: true,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Argentina',
+      state: 'Buenos Aires',
+      city: 'Buenos Aires',
+      address: 'Av Alcorta y Udaondo',
+      phone: '1',
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Messi",
-      email: "ejemplo2@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Colombia",
-      state: "Bogota D.C.",
-      city: "Bogota",
-      address: "Av Alcorta y Udaondo",
-      phone: "2",
+      name: 'Messi',
+      email: 'ejemplo2@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "6am-11am",
+      cpr: true,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Colombia',
+      state: 'Bogota D.C.',
+      city: 'Bogota',
+      address: 'Av Alcorta y Udaondo',
+      phone: '2',
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Maradona",
-      email: "ejemplo3@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Mexico",
-      state: "CDMX",
-      city: "Ciudad De Mexico",
-      address: "Av Alcorta y Udaondo",
-      phone: "3",
+      name: 'Maradona',
+      email: 'ejemplo3@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "11am-3pm",
+      cpr: true,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Mexico',
+      state: 'CDMX',
+      city: 'Ciudad De Mexico',
+      address: 'Av Alcorta y Udaondo',
+      phone: '3',
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Ronaldo",
-      email: "ejemplo4@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Argentina",
-      state: "Buenos Aires",
-      city: "Buenos Aires",
-      address: "Av Alcorta y Udaondo",
-      phone: "4",
+      name: 'Ronaldo',
+      email: 'ejemplo4@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "3pm-10pm",
+      cpr: true,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Argentina',
+      state: 'Buenos Aires',
+      city: 'Buenos Aires',
+      address: 'Av Alcorta y Udaondo',
+      phone: '4',
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Di Stéfano",
-      email: "ejemplo5@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Argentina",
-      state: "Buenos Aires",
-      city: "Buenos Aires",
-      address: "Av Alcorta y Udaondo",
-      phone: "5",
+      name: 'Di Stéfano',
+      email: 'ejemplo5@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "11am-3pm",
+      cpr: false,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Argentina',
+      state: 'Buenos Aires',
+      city: 'Buenos Aires',
+      address: 'Av Alcorta y Udaondo',
+      phone: '5',
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Cruyff",
-      email: "ejemplo6@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Argentina",
-      state: "Buenos Aires",
-      city: "Buenos Aires",
-      address: "Av Alcorta y Udaondo",
-      phone: "6",
+      name: 'Cruyff',
+      email: 'ejemplo6@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "3pm-10pm",
+      cpr: false,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Argentina',
+      state: 'Buenos Aires',
+      city: 'Buenos Aires',
+      address: 'Av Alcorta y Udaondo',
+      phone: '6',
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
   ],
   walkersBackUp: [
     {
-      name: "Pele",
-      email: "ejemplo1@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Argentina",
-      state: "Buenos Aires",
-      city: "Buenos Aires",
-      address: "Av Alcorta y Udaondo",
-      phone: "1",
+      name: 'Pele',
+      email: 'ejemplo1@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "6am-11am",
+      cpr: true,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Argentina',
+      state: 'Buenos Aires',
+      city: 'Buenos Aires',
+      address: 'Av Alcorta y Udaondo',
+      phone: '1',
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Messi",
-      email: "ejemplo2@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Colombia",
-      state: "Bogota D.C.",
-      city: "Bogota",
-      address: "Av Alcorta y Udaondo",
-      phone: "2",
+      name: 'Messi',
+      email: 'ejemplo2@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "6am-11am",
+      cpr: true,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Colombia',
+      state: 'Bogota D.C.',
+      city: 'Bogota',
+      address: 'Av Alcorta y Udaondo',
+      phone: '2',
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Maradona",
-      email: "ejemplo3@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Mexico",
-      state: "CDMX",
-      city: "Ciudad De Mexico",
-      address: "Av Alcorta y Udaondo",
-      phone: "3",
+      name: 'Maradona',
+      email: 'ejemplo3@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "11am-3pm",
+      cpr: true,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Mexico',
+      state: 'CDMX',
+      city: 'Ciudad De Mexico',
+      address: 'Av Alcorta y Udaondo',
+      phone: '3',
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Ronaldo",
-      email: "ejemplo4@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Argentina",
-      state: "Buenos Aires",
-      city: "Buenos Aires",
-      address: "Av Alcorta y Udaondo",
-      phone: "4",
+      name: 'Ronaldo',
+      email: 'ejemplo4@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "3pm-10pm",
+      cpr: true,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Argentina',
+      state: 'Buenos Aires',
+      city: 'Buenos Aires',
+      address: 'Av Alcorta y Udaondo',
+      phone: '4',
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Di Stéfano",
-      email: "ejemplo5@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Argentina",
-      state: "Buenos Aires",
-      city: "Buenos Aires",
-      address: "Av Alcorta y Udaondo",
-      phone: "5",
+      name: 'Di Stéfano',
+      email: 'ejemplo5@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "11am-3pm",
+      cpr: false,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Argentina',
+      state: 'Buenos Aires',
+      city: 'Buenos Aires',
+      address: 'Av Alcorta y Udaondo',
+      phone: '5',
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
     {
-      name: "Cruyff",
-      email: "ejemplo6@gmail.com",
-      password: ".",
-      description: "Esta es la descripcion",
-      birthdate: "1901-05-25",
-      image: "url",
-      country: "Argentina",
-      state: "Buenos Aires",
-      city: "Buenos Aires",
-      address: "Av Alcorta y Udaondo",
-      phone: "6",
+      name: 'Cruyff',
+      email: 'ejemplo6@gmail.com',
+      password: '.',
+      description: 'Esta es la descripcion',
+      schedule: "3pm-10pm",
+      cpr: false,
+      birthdate: '1901-05-25',
+      image: 'url',
+      country: 'Argentina',
+      state: 'Buenos Aires',
+      city: 'Buenos Aires',
+      address: 'Av Alcorta y Udaondo',
+      phone: '6',
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
     },
   ],
   users: [],
@@ -229,6 +253,28 @@ let initialstate = {
   countries: [],
   states: [],
   cities: [],
+};
+
+const compareStringsSecondary = (a, b, i = 0) => {
+  //* Para ORDER_CARDS
+  if (a === b) {
+    return 0;
+  }
+
+  if (i >= a.length) {
+    return -1; // a es más corto que b
+  }
+
+  if (i >= b.length) {
+    return 1; // b es más corto que a
+  }
+
+  const comparison = a[i].localeCompare(b[i]);
+  if (comparison !== 0) {
+    return comparison;
+  }
+
+  return compareStringsSecondary(a, b, i + 1);
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -274,28 +320,58 @@ let reducer = (state = initialstate, { type, payload }) => {
         walkers: state.walkersBackUp,
       };
     case ORDER_DEFAULT:
-      //*Establecer el orden por default de los paseadores (Disponibilidad)
-      //*Que mas?
+      //*Establecer el orden por defecto de los paseadores (Alfabetico)
       return {
         ...state,
-        walkersBackUp: state.walkersBackUp.sort((a, b) => (b.status ? 1 : -1)),
-        walkers: state.walkers.sort((a, b) => (b.status ? 1 : -1)),
+        walkersBackUp: state.walkersBackUp.sort((a, b) =>
+          compareStringsSecondary(a.name, b.name)
+        ),
+        walkers: state.walkers.sort((a, b) =>
+          compareStringsSecondary(a.name, b.name)
+        ),
       };
     case FILTER_WALKERS:
       //*Filtros combinados
-      /*if (payload.country && payload.time && payload.cpr) {
+      if (payload.country && payload.time && payload.cpr) {
+        console.log("Se aplico filtro pais, horario y RCP");
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time && walker.cpr === payload.cpr)
+          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time && walker.cpr === payload.cpr && walker.status === true)
         }
-      }*/
+      }
       if (payload.country && payload.time) {
+        console.log("Se aplico filtro pais y horario");
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
             (walker) =>
               walker.country === payload.country &&
-              walker.schedule === payload.time
+              walker.schedule === payload.time &&
+              walker.status === true
+          ),
+        };
+      }
+      if (payload.country && payload.cpr){
+        console.log("Se aplico filtro pais y RCP");
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(
+            (walker) =>
+              walker.country === payload.country &&
+              walker.cpr === payload.cpr &&
+              walker.status === true
+          ),
+        };
+      }
+      if (payload.time && payload.cpr){
+        console.log("Se aplico filtro horario y RCP");
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(
+            (walker) =>
+              walker.schedule === payload.time &&
+              walker.cpr === payload.cpr &&
+              walker.status === true
           ),
         };
       }
@@ -304,7 +380,8 @@ let reducer = (state = initialstate, { type, payload }) => {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
-            (walker) => walker.country === payload.country
+            (walker) =>
+              walker.country === payload.country && walker.status === true
           ),
         };
       }
@@ -313,7 +390,8 @@ let reducer = (state = initialstate, { type, payload }) => {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
-            (walker) => walker.schedule === payload.time
+            (walker) =>
+              walker.schedule === payload.time && walker.status === true
           ),
         };
       }
@@ -321,15 +399,17 @@ let reducer = (state = initialstate, { type, payload }) => {
       if (payload.cpr) {
         return {
           ...state,
-
           walkers: state.walkersBackUp.filter(
-            (walker) => walker.cpr === payload.cpr
+            (walker) => walker.cpr === payload.cpr && walker.status === true
           ),
         };
       }
+      //*Filtro por disponibilidad
       return {
         ...state,
-        walkers: state.walkersBackUp,
+        walkers: state.walkersBackUp.filter(
+          (walker) => walker.status === payload.status
+        ),
       };
     case CREATE_USER:
       return {
