@@ -3,12 +3,13 @@ import style from './PaymentOK.module.css';
 import icon from '/SuccessIcon.png';
 
 const PaymentOK = () => {
-	const [items, setItems] = useState([]);
+	const [items, setItems] = useState({});
 
 	useEffect(() => {
-		const items = JSON.parse(localStorage.getItem('user'));
-		if (items) {
-			setItems(items);
+		const localItems = JSON.parse(localStorage.getItem('user'));
+		console.log(localItems);
+		if (localItems) {
+			setItems(localItems);
 		}
 	}, []);
 
@@ -24,11 +25,11 @@ const PaymentOK = () => {
 			<div className={style.POK_sec1}>
 				<img className={style.POK_icon} src={iconURL} />
 				<h2 className={style.POK_ttl}>Pago exitoso</h2>
-				<h2 className={style.POK_mnt}>$ {items.price}</h2>
+				<h2 className={style.POK_mnt}>$ {items.cost}</h2>
 				<div className="flex items-center flex-col font-extralight mt-2">
 					<p>Tu paseo de {items.duration} esta confirmado</p>
-					<p>Fecha: {items.dateSelected}</p>
-					<p>Hora: {items.timeSelected}</p>
+					<p>Fecha: {items.startDate}</p>
+					<p>Hora: {items.time}</p>
 				</div>
 			</div>
 			<hr />
@@ -58,7 +59,7 @@ const PaymentOK = () => {
 				<div className={style.POK_sec2_TXcontainer}>
 					{' '}
 					<p className={style.sc2tx_total}>Total</p>{' '}
-					<p className={style.sc2tx_total}>{items.total}</p>{' '}
+					<p className={style.sc2tx_total}>${items.total}</p>{' '}
 				</div>
 			</div>
 		</div>

@@ -32,7 +32,7 @@ function UserInfo({ props }) {
 				</div>
 			</div>
 			<div className="text-sm text-gray-500 font-light">Description</div>
-			<div className="w-1/2">{props.description}</div>
+			<div className="w-1/2 p-3">{props.description}</div>
 		</>
 	);
 }

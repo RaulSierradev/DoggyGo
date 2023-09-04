@@ -68,7 +68,7 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('SMALL', 'MEDIUM', "LARGE", "GIANT"),
     },
     rol: {
-      type: DataTypes.ENUM('Walker', 'Client'),
+      type: DataTypes.ENUM('Walker', 'Client', "Admin"),
       allowNull: false,
     },
     // add new googleId field

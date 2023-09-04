@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios';
 import { useState } from 'react';
-import { setWalk } from '../../Redux/actions';
+import { createWalk, setWalk } from '../../Redux/actions';
 
 const PUBLIC_KEY = import.meta.env.VITE_REACT_APP_PUBLIC_KEY;
 
@@ -14,11 +14,16 @@ function Payment() {
 
 	const bookingFee = 1.5;
 	initMercadoPago(PUBLIC_KEY);
+	// get the current user (Walker user)
 	const currentUser = useSelector((state) => state.currentUser);
 	console.log(currentUser);
 
+	// an state to keep track of the walk
 	const walk = useSelector((state) => state.walk);
 	console.log(walk);
+
+	// get the current user (Client user)
+	// !todo
 
 	const [id, setId] = useState(null);
 
@@ -39,33 +44,24 @@ function Payment() {
 		}
 	};
 
-	const postWalk = async () => {
-		try {
-			// title is broken also UserId is not connected
-			console.log(walk);
-			const response = await axios.post(
-				'http://localhost:3001/walk',
-				walk
-			);
-			console.log(response.data);
-		} catch (error) {
-			console.log(error.message);
-		}
-	};
-
 	const handlePayment = async () => {
 		setLoading(true);
-		dispatch(
+		await dispatch(
 			setWalk({
 				...walk,
 				total: Number(walk.cost) + bookingFee,
 				state: true, // this needs back fix
 				// walker: currentUser.name,
+				// UserId: currentUser.id, // ! fix this
 			})
 		);
+		// get the new walk state
+		console.log(walk);
+
+		await dispatch(createWalk());
+
 		const id = await createPreference();
 		setId(id);
-		await postWalk();
 		setLoading(false);
 	};
 

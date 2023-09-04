@@ -1,3 +1,4 @@
+
 import {
   CREATE_USER,
   EDIT_USER,
@@ -14,7 +15,13 @@ import {
   SET_WALK,
   GET_BY_ID,
   GET_ALL_WALKS,
-} from './action-types';
+  GET_COUNTRIES,
+  GET_STATES,
+  GET_CITIES,
+  CREATE_WALK 
+} from "./action-types";
+E_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK, GET_BY_ID, GET_ALL_WALKS, CREATE_WALK } from "./action-types";
+
 
 let initialstate = {
   allUsers: [],
@@ -246,61 +253,42 @@ let initialstate = {
   walk: {},
   user: [],
   walks: [],
-};
-
-const compareStringsSecondary = (a, b, i = 0) => {
-  //* Para ORDER_DEFAULT
-  if (a === b) {
-    return 0;
-  }
-
-  if (i >= a.length) {
-    return -1; // a es más corto que b
-  }
-
-  if (i >= b.length) {
-    return 1; // b es más corto que a
-  }
-
-  const comparison = a[i].localeCompare(b[i]);
-  if (comparison !== 0) {
-    return comparison;
-  }
-
-  return compareStringsSecondary(a, b, i + 1);
+  countries: [],
+  states: [],
+  cities: [],
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
   switch (type) {
     case PRUEBA:
-      console.log('hola desde el state global');
+      console.log("hola desde el state global");
       return {
         ...state,
       };
     case GET_ALL_USERS:
-      console.log('Reducer - Payload:', payload);
+      console.log("Reducer - Payload:", payload);
       return {
         ...state,
         allUsers: payload,
-        clients: payload && payload.filter((user) => user.rol === 'Client'),
+        clients: payload && payload.filter((user) => user.rol === "Client"),
         clientsBackUp:
-          payload && payload.filter((user) => user.rol === 'Client'),
-        walkers: payload && payload.filter((user) => user.rol === 'Walker'),
+          payload && payload.filter((user) => user.rol === "Client"),
+        walkers: payload && payload.filter((user) => user.rol === "Walker"),
         walkersBackUp:
-          payload && payload.filter((user) => user.rol === 'Walker'),
+          payload && payload.filter((user) => user.rol === "Walker"),
         users: payload,
       };
     case GET_CLIENT_BY_NAME:
-      console.log('Reducer - Payload:', payload);
+      console.log("Reducer - Payload:", payload);
       return {
         ...state,
-        clients: payload && payload.filter((user) => user.rol === 'Client'),
+        clients: payload && payload.filter((user) => user.rol === "Client"),
       };
     case GET_WALKER_BY_NAME:
-      console.log('Reducer - Payload:', payload);
+      console.log("Reducer - Payload:", payload);
       return {
         ...state,
-        walkers: payload && payload.filter((user) => user.rol === 'Walker'),
+        walkers: payload && payload.filter((user) => user.rol === "Walker"),
       };
     case RESTORE_CLIENTS:
       return {
@@ -434,6 +422,7 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         // walk should be an object with all the walk info that get added on different steps
+
         walk: payload,
       };
     case GET_BY_ID:
@@ -441,11 +430,40 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         user: payload,
       };
+
+        walk: payload
+      }
+    case GET_BY_ID:
+      return {
+        ...state,
+        user: payload
+      }
+    case CREATE_WALK:
+      return {
+        ...state,
+        walks: [...state.walks, payload]
+      }
+
     case GET_ALL_WALKS:
       return {
         ...state,
         walks: payload,
       };
+    case GET_COUNTRIES:
+      return {
+        ...state,
+        countries: payload,
+      };
+      case GET_STATES:
+        return {
+          ...state,
+          states: payload,
+        };
+      case GET_CITIES:
+        return{
+          ...state,
+          cities: payload
+        }
 
     default:
       return { ...state };
