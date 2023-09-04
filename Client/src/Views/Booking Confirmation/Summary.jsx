@@ -19,13 +19,14 @@ function Summary() {
 				<div className="self-stretch justify-around items-center flex">
 					<div className=" text-slate-800 text-base font-normal">
 						<CalendarTodayIcon />
-						{walk.dateTimeSelected}
+						{walk.startDate}
+						{walk.time}
 					</div>
 					<div className="text-center text-slate-800 text-base font-normal">
 						{walk.duration}
 					</div>
 					<div className=" text-center text-slate-800 text-base font-normal">
-						${walk.price}
+						${walk.cost}
 					</div>
 				</div>
 			</div>

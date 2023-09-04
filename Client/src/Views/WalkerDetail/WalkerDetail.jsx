@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import StarRating from '../Reviews/StartRating';
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -9,7 +8,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import Payment from '../Booking Confirmation/Payment';
 import { setCurrentUser } from '../../Redux/actions/';
-import Summary from '../Booking Confirmation/Summary';
 import Modal from '../../Views/Modal/Modal';
 import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
@@ -127,7 +125,7 @@ function WalkerDetail() {
 								className="rounded-md mt-2 text-white bg-green-500 p-2"
 								onClick={handleOpen}
 							>
-								Test Modal
+								Agenda a {details.name}
 							</button>
 							<Modal
 								estadoModal={estadoModal}

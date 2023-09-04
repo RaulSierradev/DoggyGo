@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getAllUsers, orderDefault } from '../../Redux/actions';
 import SearchBar from './Components/SearchBar/SearchBar';
-import FormDogs from './Components/FormDogs/FormDogs';
+import Cookies from 'js-cookie';
+//import FormDogs from './Components/FormDogs/FormDogs';
 
 const Home = () => {
 	const navigate = useNavigate();
@@ -23,6 +24,17 @@ const Home = () => {
 		};
 		getAllUsersFirst();
 	}, [dispatch]);
+
+	useEffect(() => {
+		const urlParams = new URLSearchParams(window.location.search);
+		const token = urlParams.get('token');
+
+		if (token) {
+			Cookies.set('auth', token);
+			// Remove token from URL
+			window.history.replaceState({}, document.title, '/');
+		}
+	}, []);
 
 	return (
 		<div className="flex flex-col bg-sky-100 h-screen">

@@ -6,8 +6,12 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getAll } from '../../Redux/actions.js';
+import google from '../../assets/google1.svg';
 
 const Login = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const [logeo, setLogeo] = useState({
 		email: '',
 		password: '',
@@ -15,7 +19,10 @@ const Login = () => {
 
 	const [errors, setErrors] = useState({});
 
-	const dispatch = useDispatch();
+	const googleLogin = (e) => {
+		e.preventDefault();
+		window.open('http://localhost:3001/auth/google/login', '_self');
+	};
 
 	useEffect(() => {
 		try {
@@ -31,7 +38,9 @@ const Login = () => {
 				email,
 				password,
 			});
-			return res.data;
+			console.log(res.data);
+			Cookies.set('auth', res.data.token);
+			return res.data.user;
 		} catch (error) {
 			console.log(error);
 			return null;
@@ -58,22 +67,13 @@ const Login = () => {
 		const user = await authenticateUser(logeo.email, logeo.password);
 
 		if (user) {
-			// Set cookie time to 15 minutes
-			const expirationTime = new Date(
-				new Date().getTime() + 15 * 60 * 1000
-			);
-			Cookies.set('auth', JSON.stringify(user), {
-				expires: expirationTime,
-			});
 			// Redirect to protected route after successful login
-			navigate('/dash');
+			if (user.rol === 'Walker') navigate('/dash');
 		} else {
 			// Show error message or perform other actions for failed authentication
 			alert('Usuario o contraseña incorrectos');
 		}
 	};
-
-	const navigate = useNavigate();
 
 	console.log(logeo);
 
@@ -101,7 +101,14 @@ const Login = () => {
 						</p>
 					</div>
 
-					<div>
+					<div className="flex flex-col items-center p-2">
+						<button
+							className="cursor-pointer"
+							onClick={googleLogin}
+						>
+							<img className="rounded-md" src={google} alt="" />
+						</button>
+
 						<form
 							className="flex flex-col gap-4"
 							onSubmit={handleLogin}
