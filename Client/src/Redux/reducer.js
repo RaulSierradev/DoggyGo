@@ -273,24 +273,53 @@ let reducer = (state = initialstate, { type, payload }) => {
         walkers: state.walkersBackUp,
       };
     case ORDER_DEFAULT:
+      //*Establecer el orden por default de los paseadores (Disponibilidad)
+      //*Que mas?
       return {
         ...state,
         walkersBackUp: state.walkersBackUp.sort((a, b) => (b.status ? 1 : -1)),
         walkers: state.walkers.sort((a, b) => (b.status ? 1 : -1)),
       };
     case FILTER_WALKERS:
-      //*Filtro para countries
-      if (payload.includes("Country")) {
+      //*Filtros combinados
+      /*if (payload.country && payload.time && payload.cpr) {
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(
-            (walker) => walker.country === payload.slice(10)
-          ),
-        };
+          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time && walker.cpr === payload.cpr)
+        }
+      }*/
+      if (payload.country && payload.time) {
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time)
+        }
+      }
+      //*Filtro para countries
+      if (payload.country) {  
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country)
+        }
+      }
+      //*Filtro por horario
+      if (payload.time){
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(walker => walker.schedule === payload.time)
+        }
+      }
+      //*Filtro por RCP
+      if (payload.cpr){
+        return {
+          ...state,
+
+          walkers: state.walkersBackUp.filter(walker => walker.cpr === payload.cpr)
+        }
       }
       return {
         ...state,
-      };
+        walkers: state.walkersBackUp
+      }
     case CREATE_USER:
       return {
         ...state,
