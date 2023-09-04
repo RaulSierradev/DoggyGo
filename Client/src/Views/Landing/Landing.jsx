@@ -3,6 +3,7 @@ import Paseadores from '../../Components/Paseadores/Paseadores';
 import { useNavigate } from 'react-router-dom';
 import Nav from '../Nav';
 import Footer from '../Dashboard/components/Footer';
+import Accordion from '../Accordion/Accordion';
 
 const Landing = () => {
 	const navigate = useNavigate();
@@ -98,43 +99,8 @@ const Landing = () => {
 				<span className={style.sec2txS}>
 					lo que necesitas saber para contratar a un paseador
 				</span>
-				<div className={style.sec2indicatiosnContainer}>
-					<div className={style.sec2_idication1}>
-						<img
-							src="https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
-							alt=""
-						/>
-						<div>
-							<p>guia de paseadores</p>
-							<button>
-								how to buy <img src="" alt="" />
-							</button>
-						</div>
-					</div>
-					<div className={style.sec2_idication2}>
-						<img
-							src="https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
-							alt=""
-						/>
-						<div>
-							<p>agenda / contacta</p>
-							<button>
-								how to rent <img src="" alt="" />
-							</button>
-						</div>
-					</div>
-					<div className={style.sec2_idication3}>
-						<img
-							src="https://img.freepik.com/vector-premium/imagen-dibujos-animados-hongo-palabra-hongo_587001-200.jpg?w=2000"
-							alt=""
-						/>
-						<div>
-							<p>paga</p>
-							<button>
-								how to pay <img src="" alt="" />
-							</button>
-						</div>
-					</div>
+				<div className="w-4/6 flex items-center justify-center m-auto p-2">
+					<Accordion />
 				</div>
 			</section>
 			<section className={style.sec3}>

@@ -13,8 +13,12 @@ import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
 import Schedule from '../Booking Schedule/Schedule';
 import Swal from 'sweetalert2';
+import idFromToken from '../utils/getToken';
 
 function WalkerDetail() {
+	const idLogUse = idFromToken();
+	console.log(idLogUse);
+
 	const dispatch = useDispatch();
 
 	const [details, setDetails] = useState([]);
