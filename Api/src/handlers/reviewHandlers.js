@@ -13,7 +13,7 @@ const getReviewsHandler = async (req, res) => {
 const createReviewHandler = async (req, res) => {
     try {
         const walkerId = req.params.id;
-        const clientId = req.body.id;
+        const clientId = req.body.clientId;
         const { rating, comment } = req.body;
 
         const createReview = await createReviewController(walkerId, clientId, rating, comment);

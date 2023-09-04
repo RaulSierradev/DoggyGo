@@ -6,6 +6,8 @@ import Nav from '../Nav';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
+import StarIcon from '@mui/icons-material/Star';
+//import { yellow } from '@mui/material/colors';
 import Payment from '../Booking Confirmation/Payment';
 import { setCurrentUser } from '../../Redux/actions/';
 import Modal from '../../Views/Modal/Modal';
@@ -14,11 +16,14 @@ import WalkCosts from '../Booking Costs/WalkCosts';
 import Schedule from '../Booking Schedule/Schedule';
 import Swal from 'sweetalert2';
 import ReviewForm from '../Reviews/reviewForm';
+import idFromToken from '../utils/getToken';
 
 
 function WalkerDetail() {
 	const dispatch = useDispatch();
 
+	const clientId = idFromToken();
+console.log(clientId);
 	const [details, setDetails] = useState([]);
 	const [loading, setLoading] = useState(false);
 
@@ -120,6 +125,12 @@ function WalkerDetail() {
 										{details.country}, {details.city}
 									</p>
 								</div>
+								<div className="text-sm text-black flex gap-2">
+									<div>
+										<StarIcon color="inherit" />
+									</div>
+									<p>{details.ratingAvg}</p>
+								</div>
 							</div>
 
 							{/* <Link
@@ -186,7 +197,7 @@ function WalkerDetail() {
 							</div>
 
 							<div className="gap-8 flex flex-col ml-5 w-1/3 h-4/6  p-3 rounded-md bg-white shadow">
-								<ReviewForm walkerId={id}/>
+								<ReviewForm walkerId={id} clientId={clientId}/>
 							</div>
 						</div>
 					</>

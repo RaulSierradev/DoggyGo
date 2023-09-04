@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import StarRating from './StartRating';
 import axios from 'axios';
 
-export default function ReviewForm({walkerId}) {
+export default function ReviewForm({walkerId, clientId}) {
 
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
@@ -19,13 +19,15 @@ export default function ReviewForm({walkerId}) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(walkerId);
+        console.log("clientId: ", clientId);
+        console.log("walkerId: ", walkerId);
         try {
             const response = await axios.post(`http://localhost:3001/review/${walkerId}`, {
                 rating: rating,
                 comment: comment,
-                id: "8935edbe-ce96-47ee-9d37-416398769232"
+                clientId: clientId
             });
+            console.log(response);
       
             console.log('Reseña guardada:', response.data);
             
@@ -33,10 +35,12 @@ export default function ReviewForm({walkerId}) {
             setRating(0);
             setComment('');
 
-            console.log('Calificación:', rating);
-            console.log('Comentario:', comment);
+            // console.log('Calificación:', rating);
+            // console.log('Comentario:', comment);
           } catch (error) {
-            console.error('Error al guardar la reseña:', error);
+            console.error('Error al guardar la reseña:', error.response.data.error);
+            alert(error.response.data.error);
+           
           }
     };
 
