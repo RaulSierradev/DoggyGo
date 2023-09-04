@@ -15,6 +15,9 @@ import {
   SET_WALK,
   GET_BY_ID,
   GET_ALL_WALKS,
+  GET_COUNTRIES,
+  GET_STATES,
+  GET_CITIES
 } from "./action-types";
 
 const URL = "http://localhost:3001/";
@@ -192,6 +195,50 @@ export const getAllWalks = () => {
       const { data } = await axios(endpoint);
       return dispatch({
         type: GET_ALL_WALKS,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+};
+
+export const getCountries = ()=>{
+  const endpoint = 'http://localhost:3001/location/countries/'
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(endpoint);
+      return dispatch({
+        type: GET_COUNTRIES,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+}
+
+export const getStates = (sta) => {
+  const endpoint = `http://localhost:3001/location/state/${sta}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(endpoint);
+      return dispatch({
+        type: GET_STATES,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
+};
+export const getCities = (sta, co) => {
+  const endpoint = `http://localhost:3001/location/countries/${co}/states/${sta}/cities`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(endpoint);
+      return dispatch({
+        type: GET_CITIES,
         payload: data,
       });
     } catch (error) {
