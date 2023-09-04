@@ -2,6 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editUser } from "../../../Redux/actions";
 import { useNavigate } from "react-router-dom";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import TextField from "@mui/material/TextField";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 const EditProfile = (props) => {
   const { userDetail, setEdit, edit } = props;
@@ -23,6 +28,7 @@ const EditProfile = (props) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(initialState);
+  const [value, setValue] = useState(dayjs(user.birthdate));
   const handleChange = (e) => {
     setUser({
       ...user,
@@ -102,72 +108,61 @@ const EditProfile = (props) => {
           >
             Birth Date:
           </label>
-          <input
-            type="birthdate"
-            id="birthdate"
-            value={user.birthdate}
-            name="birthdate"
-            onChange={handleChange}
-            placeholder="2021-01-01"
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-          />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              disableFuture
+              openTo="year"
+              views={["year", "month", "day"]}
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+                setUser({
+                  ...user,
+                  birthdate: newValue.format("YYYY-MM-DD"),
+                });
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
         </div>
         <div>
           <label className="block text-sm font-medium leading-6 text-gray-900">
             Pais
           </label>
-          <select
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+          <input
             type="text"
+            id="country"
             name="country"
             value={user.country}
             onChange={handleChange}
-          >
-            <option>Seleccione...</option>
-            <option>Colombia</option>
-            <option>Argentina</option>
-            <option>Mexico</option>
-            <option>Chile</option>
-            <option>Uruguay</option>
-          </select>
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+          />
         </div>
         <div>
           <label className="block text-sm font-medium leading-6 text-gray-900">
             Estado
           </label>
-          <select
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+          <input
             type="text"
+            id="state"
             name="state"
             value={user.state}
             onChange={handleChange}
-          >
-            <option>Seleccione...</option>
-            <option>Bogota D.C.</option>
-            <option>Buenos Aires</option>
-            <option>CDMX</option>
-            <option>Metropolitana de Santiago</option>
-            <option>Montevideo</option>
-          </select>
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+          />
         </div>
         <div>
           <label className="block text-sm font-medium leading-6 text-gray-900">
             Ciudad
           </label>
-          <select
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+          <input
             type="text"
+            id="city"
             name="city"
             value={user.city}
             onChange={handleChange}
-          >
-            <option>Seleccione...</option>
-            <option>Bogota</option>
-            <option>Buenos Aires</option>
-            <option>Ciudad De Mexico</option>
-            <option>Santiago</option>
-            <option>Montevideo</option>
-          </select>
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+          />
         </div>
 
         <div>
