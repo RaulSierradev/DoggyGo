@@ -42,13 +42,12 @@ const Sidebar = () => {
             >
               <FcManager /> Paseadores
             </Link>
-            
-            <a
-              href="#"
-              className="flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors"
+            <Link
+              to="/admin/paseos"
+              className="flex items-center gap-4 text-white py-2 px-4 rounded-xl hover:bg-primary-900/50 transition-colors hover:text-gray-400"
             >
               <FcGlobe /> Paseos
-            </a>
+            </Link>
           </nav>
           <div className="bg-primary-900/50 text-white p-4 rounded-xl">
             <p className="text-gray-400">Having troubles?</p>

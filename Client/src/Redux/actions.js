@@ -12,7 +12,9 @@ import {
   EDIT_USER,
   CURRENT_USER,
   CREATE_DOG,
-  SET_WALK
+  SET_WALK,
+  GET_BY_ID,
+  GET_ALL_WALKS,
 } from "./action-types";
 
 const URL = "http://localhost:3001/";
@@ -33,10 +35,10 @@ export function createUser(user) {
     // dispatch({ type: 'loading' })
 
     const res = await axios.post(`${URL}user`, user);
-    console.log(res.data)
+    console.log(res.data);
 
-    dispatch({ type: CREATE_USER, payload: res.data })
-  }
+    dispatch({ type: CREATE_USER, payload: res.data });
+  };
 }
 
 export function createDog(dog) {
@@ -44,19 +46,18 @@ export function createDog(dog) {
     // dispatch({ type: 'loading' })
 
     const res = await axios.post(`${URL}dog/add`, dog);
-    console.log(res.data)
+    console.log(res.data);
 
-    dispatch({ type: CREATE_DOG, payload: res.data })
-  }
+    dispatch({ type: CREATE_DOG, payload: res.data });
+  };
 }
 
-
 export function setWalk(walk) {
+  window.localStorage.setItem("user", JSON.stringify(walk));
   return {
     type: SET_WALK,
     payload: walk,
   };
-
 }
 
 export function editUser(user) {
@@ -64,10 +65,10 @@ export function editUser(user) {
     // dispatch({ type: 'loading' })
 
     const res = await axios.put(`${URL}user`, user);
-    console.log(res.data)
+    console.log(res.data);
 
-    dispatch({ type: EDIT_USER, payload: res.data })
-  }
+    dispatch({ type: EDIT_USER, payload: res.data });
+  };
 }
 
 export function getAll() {
@@ -87,7 +88,6 @@ export const setCurrentUser = (user) => {
     payload: user,
   };
 };
-
 
 export const probarEstado = () => {
   console.log("hola desde actions");
@@ -167,5 +167,35 @@ export const filterWalkers = (filter) => {
   return {
     type: FILTER_WALKERS,
     payload: filter,
+  };
+};
+
+export const getById = (id) => {
+  const endpoint = `http://localhost:3001/user/id/${id}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(endpoint);
+      return dispatch({
+        type: GET_BY_ID,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: `No hay un usuario con el siguiente ID: "${id}"` };
+    }
+  };
+};
+
+export const getAllWalks = () => {
+  const endpoint = "http://localhost:3001/walk";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(endpoint);
+      return dispatch({
+        type: GET_ALL_WALKS,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: error.message };
+    }
   };
 };

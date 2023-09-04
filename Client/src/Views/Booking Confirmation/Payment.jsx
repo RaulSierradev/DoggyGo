@@ -1,12 +1,17 @@
 import Summary from './Summary';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios';
 import { useState } from 'react';
+import { setWalk } from '../../Redux/actions';
 
 const PUBLIC_KEY = import.meta.env.VITE_REACT_APP_PUBLIC_KEY;
 
 function Payment() {
+	const dispatch = useDispatch();
+
+	const [loading, setLoading] = useState(false);
+
 	const bookingFee = 1.5;
 	initMercadoPago(PUBLIC_KEY);
 	const currentUser = useSelector((state) => state.currentUser);
@@ -21,7 +26,7 @@ function Payment() {
 		try {
 			const response = await axios.post('http://localhost:3001/payment', {
 				description: walk.title,
-				price: Number(walk.price),
+				price: Number(walk.cost) + bookingFee,
 				quantity: 1,
 				currency_id: 'USD',
 			});
@@ -34,12 +39,35 @@ function Payment() {
 		}
 	};
 
-	const handlePayment = async () => {
-		const id = await createPreference();
-		setId(id);
+	const postWalk = async () => {
+		try {
+			// title is broken also UserId is not connected
+			console.log(walk);
+			const response = await axios.post(
+				'http://localhost:3001/walk',
+				walk
+			);
+			console.log(response.data);
+		} catch (error) {
+			console.log(error.message);
+		}
 	};
 
-	console.log(id);
+	const handlePayment = async () => {
+		setLoading(true);
+		dispatch(
+			setWalk({
+				...walk,
+				total: Number(walk.cost) + bookingFee,
+				state: true, // this needs back fix
+				// walker: currentUser.name,
+			})
+		);
+		const id = await createPreference();
+		setId(id);
+		await postWalk();
+		setLoading(false);
+	};
 
 	return (
 		<div>
@@ -74,7 +102,7 @@ function Payment() {
 						Paseo de {walk.duration}
 					</div>
 					<div className="text-right text-slate-500 text-lg font-normal">
-						${walk.price}
+						${walk.cost}
 					</div>
 				</div>
 				<div className="w-96 h-6 justify-start items-start inline-flex">
@@ -91,7 +119,7 @@ function Payment() {
 							Total a pagar
 						</div>
 						<div className="text-right text-gray-700 text-lg font-semibold">
-							${Number(walk.price) + bookingFee}
+							${Number(walk.cost) + bookingFee}
 						</div>
 					</div>
 					<div className="self-stretch h-px bg-slate-300" />
@@ -124,7 +152,14 @@ function Payment() {
 					</div>
 				</div>
 				<div className="flex">
-					{id && <Wallet initialization={{ preferenceId: id }} />}
+					{loading ? (
+						<div className="font-bold text-blue-600">
+							Loading...
+						</div>
+					) : (
+						id && <Wallet initialization={{ preferenceId: id }} />
+					)}
+					{/* {id && <Wallet initialization={{ preferenceId: id }} />} */}
 				</div>
 			</div>
 		</div>
