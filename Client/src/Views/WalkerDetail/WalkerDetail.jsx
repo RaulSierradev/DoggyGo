@@ -12,6 +12,8 @@ import Modal from '../../Views/Modal/Modal';
 import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
 import Schedule from '../Booking Schedule/Schedule';
+import ReviewForm from '../Reviews/reviewForm';
+
 
 function WalkerDetail() {
 	const dispatch = useDispatch();
@@ -137,40 +139,48 @@ function WalkerDetail() {
 								{renderStepContent(currentStep)}
 							</Modal>
 						</div>
-						<div className="gap-8 flex-col ml-5 w-1/2 h-4/6  p-3 rounded-md bg-white shadow">
-							<div className="h-2/5">
-								<h3 className="font-bold text-lg mb-2">
-									About Me
-								</h3>
-								<div className="flex p-2 m-1 justify-center items-center">
-									<p className="items-center font-semibold justify-center flex w-5/6">
-										{details.description}
-									</p>
+
+
+						<div className="gap-10 flex flex-col h-5/6 w-2/3">
+							<div className="gap-8 flex-col ml-5 h-4/6  p-3 rounded-md bg-white shadow">
+								<div className="h-2/5">
+									<h3 className="font-bold text-lg mb-2">
+										About Me
+									</h3>
+									<div className="flex p-2 m-1 justify-center items-center">
+										<p className="items-center font-semibold justify-center flex w-5/6">
+											{details.description}
+										</p>
+									</div>
+								</div>
+
+
+
+								<div className="">
+									<h3 className="font-bold text-lg">
+										Recent Reviews
+									</h3>
+									<div className="gap-5 flex mt-2">
+										<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">
+											<p>Good</p>
+										</div>
+										<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">
+											<p>
+												Lorem ipsum dolor sit amet,
+												consectetur adipisicing elit.
+												Exercitationem, autem veniam amet
+												cupiditate aliquid maiores
+											</p>
+										</div>{' '}
+										<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md">
+											<p>Ok sjkladjas</p>
+										</div>
+									</div>
 								</div>
 							</div>
 
-							{/* <StarRating size={20} /> */}
-
-							<div className="">
-								<h3 className="font-bold text-lg">
-									Recent Reviews
-								</h3>
-								<div className="gap-5 flex mt-2">
-									<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">
-										<p>Good</p>
-									</div>
-									<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">
-										<p>
-											Lorem ipsum dolor sit amet,
-											consectetur adipisicing elit.
-											Exercitationem, autem veniam amet
-											cupiditate aliquid maiores
-										</p>
-									</div>{' '}
-									<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md">
-										<p>Ok sjkladjas</p>
-									</div>
-								</div>
+							<div className="gap-8 flex flex-col ml-5 w-1/3 h-4/6  p-3 rounded-md bg-white shadow">
+								<ReviewForm walkerId={id}/>
 							</div>
 						</div>
 					</>

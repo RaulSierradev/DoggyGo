@@ -7,20 +7,21 @@ const getReviewsController = async () => {
     const reviews = await Review.findAll();
 
     if (reviews.length === 0) {
-        throw Error('This walker has no reviews');
+        throw Error('no reviews yet');
     }
 
-    const arrayReviews = reviews.map(review => {
-        return {
-            id: review.id,
-            rating: review.rating,
-            comment: review.comment,
-            clientId: review.clientId,
-            walkerId: review.walkerId
-        }
-    });
+    return reviews;
+    // const arrayReviews = reviews.map(review => {
+    //     return {
+    //         id: review.id,
+    //         rating: review.rating,
+    //         comment: review.comment,
+    //         clientId: review.clientId,
+    //         walkerId: review.walkerId
+    //     }
+    // });
 
-    return arrayReviews;
+    // return arrayReviews;
 }
 
 // trae reviews por id de paseador

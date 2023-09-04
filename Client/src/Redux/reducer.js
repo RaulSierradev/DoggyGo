@@ -1,4 +1,4 @@
-import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK, GET_BY_ID, GET_ALL_WALKS } from "./action-types";
+import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK } from "./action-types";
 
 let initialstate = {
   allUsers: [],
@@ -9,9 +9,7 @@ let initialstate = {
   users: [],
   currentUser: {},
   dogs: [],
-  walk: {},
-  user: [],
-  walks: []
+  walk: {}
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -56,51 +54,30 @@ let reducer = (state = initialstate, { type, payload }) => {
         walkers: state.walkersBackUp
       }
     case ORDER_DEFAULT:
-      //*Establecer el orden por default de los paseadores (Disponibilidad)
-      //*Que mas?
       return {
         ...state,
         walkersBackUp: state.walkersBackUp.sort((a, b) => (b.status ? 1 : -1)),
         walkers: state.walkers.sort((a, b) => (b.status ? 1 : -1)),
       }
     case FILTER_WALKERS:
-      //*Filtros combinados
-      /*if (payload.country && payload.time && payload.cpr) {
-        return {
-          ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time && walker.cpr === payload.cpr)
-        }
-      }*/
-      if (payload.country && payload.time) {
-        return {
-          ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time)
-        }
-      }
       //*Filtro para countries
-      if (payload.country) {  
+      if (payload.includes("Country")) {
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country)
+          walkers: state.walkersBackUp.filter(walker => walker.country === payload.slice(10))
         }
       }
-      //*Filtro por horario
-      if (payload.time){
+      //*Filtro para states
+      if (payload.includes("State")) {
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.schedule === payload.time)
+          walkers: state.walkersBackUp.filter(walker => walker.state === payload.slice(8))
         }
       }
-      //*Filtro por RCP
-      if (payload.cpr){
-        return {
-          ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.cpr === payload.cpr)
-        }
-      }
+      //*Filtro para cities
       return {
         ...state,
-        walkers: state.walkersBackUp
+        walkers: state.walkersBackUp.filter(walker => walker.city === payload.slice(7))
       }
     case CREATE_USER:
       return {
@@ -120,7 +97,6 @@ let reducer = (state = initialstate, { type, payload }) => {
 
       }
     case CURRENT_USER:
-      console.log("usuario actual",payload);
       return {
         ...state,
         currentUser: payload
@@ -136,17 +112,6 @@ let reducer = (state = initialstate, { type, payload }) => {
         // walk should be an object with all the walk info that get added on different steps
         walk: payload
       }
-    case GET_BY_ID :
-      return{
-        ...state,
-        user: payload
-      }
-    case GET_ALL_WALKS:
-      return{
-        ...state,
-        walks: payload,
-      }
-
 
     default:
       return { ...state };

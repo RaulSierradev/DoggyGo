@@ -65,10 +65,11 @@ const Login = () => {
 
 		// Authenticate user
 		const user = await authenticateUser(logeo.email, logeo.password);
-
+		console.log(user);
 		if (user) {
 			// Redirect to protected route after successful login
 			if (user.rol === 'Walker') navigate('/dash');
+			if (user.rol === 'Client') navigate('/home');
 		} else {
 			// Show error message or perform other actions for failed authentication
 			alert('Usuario o contraseña incorrectos');
