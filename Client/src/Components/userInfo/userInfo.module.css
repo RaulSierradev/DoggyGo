@@ -1,0 +1,61 @@
+.UserInfoDynamictrue,
+.UserInfoDynamicfalse{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+}
+.UserInfoDynamictrue{
+    animation: appear 400ms ease-out 0ms 1 normal forwards;
+}
+.UserInfoDynamicfalse{
+    animation: disappear 400ms ease-out 0ms 1 normal forwards;
+}
+@keyframes appear {
+    from{ height: 0%;}
+    to{    height: 16vmax;}
+}
+@keyframes disappear {
+    from{ height: 16vmax;}
+    to{    height: 0%; display: none;}
+}
+/* <------------------------------------------------> */
+.UserInfoContainer{
+    background-color: color-mix(in srgb, rgba(163, 189, 255, 1) 77%, rgb(67, 107, 209) 23%);
+    width: 95%;
+    height: 18vh;
+    border-radius:1rem ;
+    animation: slide-in-bottom 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 50ms both;
+    margin: auto;
+    margin-bottom: 0%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 42.5% 15% 42.5% ;
+    grid-template-rows: 100%;
+}
+@keyframes slide-in-bottom {
+    0% {
+      transform: translateY(1000px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+.imageContainer{
+    background-color:color-mix(in srgb, rgba(163, 189, 255, 1) 77%, rgb(67, 107, 209) 23%);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    display: inline-block;
+    position: absolute;
+    top: -25%;
+    left: 50%;
+    padding: 1rem;
+    transform: translateX(-50%);
+    width: 100%;
+    display: grid;
+    position: relative;
+}
+.imageUser{
+    width: 100%;
+}
