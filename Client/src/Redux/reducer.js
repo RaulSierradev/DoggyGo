@@ -255,6 +255,28 @@ let initialstate = {
   cities: [],
 };
 
+const compareStringsSecondary = (a, b, i = 0) => {
+  //* Para ORDER_CARDS
+  if (a === b) {
+    return 0;
+  }
+
+  if (i >= a.length) {
+    return -1; // a es más corto que b
+  }
+
+  if (i >= b.length) {
+    return 1; // b es más corto que a
+  }
+
+  const comparison = a[i].localeCompare(b[i]);
+  if (comparison !== 0) {
+    return comparison;
+  }
+
+  return compareStringsSecondary(a, b, i + 1);
+};
+
 let reducer = (state = initialstate, { type, payload }) => {
   switch (type) {
     case PRUEBA:
