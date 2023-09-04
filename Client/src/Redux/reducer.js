@@ -97,6 +97,7 @@ let reducer = (state = initialstate, { type, payload }) => {
 
       }
     case CURRENT_USER:
+      console.log("usuario actual",payload);
       return {
         ...state,
         currentUser: payload
