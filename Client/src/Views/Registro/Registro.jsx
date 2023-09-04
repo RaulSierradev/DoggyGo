@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import VerificacionPaseador from "./VerificacionPaseador";
-import registroPaseador from "../../img/registroPaseador.png";
-
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import VerificacionPaseador from './VerificacionPaseador';
+import registroPaseador from '../../img/registroPaseador.png';
+import Swal from 'sweetalert2';
 
 import { useDispatch } from 'react-redux';
 import { createUser, editUser } from '../../Redux/actions';
@@ -83,10 +83,18 @@ const RegistroPaseador = () => {
 				dispatch(createUser(user));
 			}
 			setUser(initialState);
-			alert('Se ha creado su usario correctamente');
+			Swal.fire({
+				icon: 'success',
+				title: '¡Registro exitoso!',
+				text: 'Ya puedes iniciar sesión',
+			});
 			navigate('/login');
 		} else {
-			alert('Hay errores en el formulario');
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Hay campos vacios o incorrectos en el formulario',
+			});
 		}
 	};
 
@@ -155,141 +163,148 @@ const RegistroPaseador = () => {
 						</label>
 					</form>
 
-          {user.rol && (
-            <form className="space-y-6 mt-10" onSubmit={handleSubmit}>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Nombre:
-                </label>
-                <div className="mt-2">
-                  <input
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-                    placeholder="Ej: Juan Rodríguez"
-                    type="text"
-                    value={user.name}
-                    name="name"
-                    onChange={handleChange}
-                    id="name"
-                  />
-                  {errors.name && (
-                    <p className="text-sm text-red-600">* {errors.name}</p>
-                  )}
-                </div>
-              </div>
-              {user.rol === "Walker" && (
-                <div>
-                  <label
-                    htmlFor="description"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Descripción:
-                  </label>
-                  <textarea
-                    type="text"
-                    id="description"
-                    value={user.description}
-                    name="description"
-                    onChange={handleChange}
-                    placeholder="Una descripción de tí, para que la vean los interesados"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-                  />
-                </div>
-              )}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Email:
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={user.email}
-                  name="email"
-                  onChange={handleChange}
-                  placeholder="correo@correo.com"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-                />
-                {errors.email && (
-                  <p className="text-sm text-red-600">* {errors.email}</p>
-                )}
-                <label
-                  htmlFor="birthdate"
-                  className="block text-sm font-medium leading-6 text-gray-900 mt-5"
-                >
-                  Birth Date:
-                </label>
-                <input
-                  type="birthdate"
-                  id="birthdate"
-                  value={user.birthdate}
-                  name="birthdate"
-                  onChange={handleChange}
-                  placeholder="2021-01-01"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">
-                  Pais
-                </label>
-                <select
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-                  type="text"
-                  name="country"
-                  value={user.country}
-                  onChange={handleChange}
-                >
-                  <option>Seleccione...</option>
-                  <option>Colombia</option>
-                  <option>Argentina</option>
-                  <option>Mexico</option>
-                  <option>Chile</option>
-                  <option>Uruguay</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">
-                  Estado
-                </label>
-                <select
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-                  type="text"
-                  name="state"
-                  value={user.state}
-                  onChange={handleChange}
-                >
-                  <option>Seleccione...</option>
-                  <option>Bogota D.C.</option>
-                  <option>Buenos Aires</option>
-                  <option>CDMX</option>
-                  <option>Metropolitana de Santiago</option>
-                  <option>Montevideo</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">
-                  Ciudad
-                </label>
-                <select
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
-                  type="text"
-                  name="city"
-                  value={user.city}
-                  onChange={handleChange}
-                >
-                  <option>Seleccione...</option>
-                  <option>Bogota</option>
-                  <option>Buenos Aires</option>
-                  <option>Ciudad De Mexico</option>
-                  <option>Santiago</option>
-                  <option>Montevideo</option>
-                </select>
-              </div>
+					{user.rol && (
+						<form
+							className="space-y-6 mt-10"
+							onSubmit={handleSubmit}
+						>
+							<div>
+								<label
+									htmlFor="name"
+									className="block text-sm font-medium leading-6 text-gray-900"
+								>
+									Nombre:
+								</label>
+								<div className="mt-2">
+									<input
+										className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+										placeholder="Ej: Juan Rodríguez"
+										type="text"
+										value={user.name}
+										name="name"
+										onChange={handleChange}
+										id="name"
+									/>
+									{errors.name && (
+										<p className="text-sm text-red-600">
+											* {errors.name}
+										</p>
+									)}
+								</div>
+							</div>
+							{user.rol === 'Walker' && (
+								<div>
+									<label
+										htmlFor="description"
+										className="block text-sm font-medium leading-6 text-gray-900"
+									>
+										Descripción:
+									</label>
+									<textarea
+										type="text"
+										id="description"
+										value={user.description}
+										name="description"
+										onChange={handleChange}
+										placeholder="Una descripción de tí, para que la vean los interesados"
+										className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+									/>
+								</div>
+							)}
+							<div>
+								<label
+									htmlFor="email"
+									className="block text-sm font-medium leading-6 text-gray-900"
+								>
+									Email:
+								</label>
+								<input
+									type="email"
+									id="email"
+									value={user.email}
+									name="email"
+									onChange={handleChange}
+									placeholder="correo@correo.com"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+								/>
+								{errors.email && (
+									<p className="text-sm text-red-600">
+										* {errors.email}
+									</p>
+								)}
+								<label
+									htmlFor="birthdate"
+									className="block text-sm font-medium leading-6 text-gray-900 mt-5"
+								>
+									Birth Date:
+								</label>
+								<input
+									type="birthdate"
+									id="birthdate"
+									value={user.birthdate}
+									name="birthdate"
+									onChange={handleChange}
+									placeholder="2021-01-01"
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+								/>
+							</div>
+							<div>
+								<label className="block text-sm font-medium leading-6 text-gray-900">
+									Pais
+								</label>
+								<select
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+									type="text"
+									name="country"
+									value={user.country}
+									onChange={handleChange}
+								>
+									<option>Seleccione...</option>
+									<option>Colombia</option>
+									<option>Argentina</option>
+									<option>Mexico</option>
+									<option>Chile</option>
+									<option>Uruguay</option>
+								</select>
+							</div>
+							<div>
+								<label className="block text-sm font-medium leading-6 text-gray-900">
+									Estado
+								</label>
+								<select
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+									type="text"
+									name="state"
+									value={user.state}
+									onChange={handleChange}
+								>
+									<option>Seleccione...</option>
+									<option>Bogota D.C.</option>
+									<option>Buenos Aires</option>
+									<option>CDMX</option>
+									<option>Metropolitana de Santiago</option>
+									<option>Montevideo</option>
+								</select>
+							</div>
+							<div>
+								<label className="block text-sm font-medium leading-6 text-gray-900">
+									Ciudad
+								</label>
+								<select
+									className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6 pl-3"
+									type="text"
+									name="city"
+									value={user.city}
+									onChange={handleChange}
+								>
+									<option>Seleccione...</option>
+									<option>Bogota</option>
+									<option>Buenos Aires</option>
+									<option>Ciudad De Mexico</option>
+									<option>Santiago</option>
+									<option>Montevideo</option>
+								</select>
+							</div>
 							<div>
 								<label
 									htmlFor="address"
@@ -376,15 +391,15 @@ const RegistroPaseador = () => {
 				</div>
 			</div>
 
-      <div className="sm:block hidden w-1/2 mt-10 mb-16">
-        <img
-          src={registroPaseador}
-          alt="Imagen registro paseador"
-          className="sm:mx-auto sm:w-full sm:max-w-sm sm:block hidden"
-        />
-      </div>
-    </div>
-  );
+			<div className="sm:block hidden w-1/2 mt-10 mb-16">
+				<img
+					src={registroPaseador}
+					alt="Imagen registro paseador"
+					className="sm:mx-auto sm:w-full sm:max-w-sm sm:block hidden"
+				/>
+			</div>
+		</div>
+	);
 };
 
 export default RegistroPaseador;

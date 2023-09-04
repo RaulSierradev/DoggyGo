@@ -3,6 +3,7 @@ import ImageUpload from '../../../Dashboard/components/ImageUpload';
 import { useEffect, useState } from 'react';
 import DogSize from './DogSize';
 import { createDog } from '../../../../Redux/actions';
+import Swal from 'sweetalert2';
 
 const FormDogs = () => {
 	const currentUser = useSelector((state) => state.currentUser);
@@ -40,10 +41,18 @@ const FormDogs = () => {
 			e.preventDefault();
 			dispatch(createDog(details));
 			setDetails({});
-			alert('Se ha creado su usario correctamente');
+			Swal.fire({
+				icon: 'success',
+				title: 'Felicitaciones!',
+				text: 'Has registrado a tu mascota!',
+			});
 		} catch (error) {
 			console.log(error.message);
-			alert(error.message);
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Algo salio mal!',
+			});
 		}
 	};
 

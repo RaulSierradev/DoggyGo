@@ -5,6 +5,7 @@ import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 import { setWalk } from '../../Redux/actions';
+import Swal from 'sweetalert2';
 
 function WalkCosts() {
 	const currentUser = useSelector((state) => state.currentUser);
@@ -18,10 +19,19 @@ function WalkCosts() {
 	function setWalkDetail() {
 		try {
 			dispatch(setWalk(details));
-			alert('Se ha seleccionado el servicio correctamente');
+			Swal.fire({
+				icon: 'success',
+				text: 'Has seleccionado el servicio!',
+			});
+			// alert('Se ha seleccionado el servicio correctamente');
 		} catch (error) {
 			console.error(error.message);
-			alert(error.message);
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Algo salio mal!',
+			});
+			// alert(error.message);
 		}
 	}
 
