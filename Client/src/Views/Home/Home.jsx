@@ -20,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     const getAllUsersFirst = async () => {
       await dispatch(getAllUsers()); //!Esto va aca por ahora
-      await dispatch(filterWalkers(true));
+      await dispatch(filterWalkers({status: true}));
       await dispatch(orderDefault());
       setOrderDefaultComplete(true);
     };

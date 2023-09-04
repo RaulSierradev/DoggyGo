@@ -52,7 +52,7 @@ const SearchBar = () => {
             onChange={handleChange}
             value={name}
             type='search'
-            className='block w-full p-4 pl-14 mr-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-white'
+            className='block w-full p-4 pl-14 mr-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500'
             placeholder='Buscar paseador...'
           />
           <button

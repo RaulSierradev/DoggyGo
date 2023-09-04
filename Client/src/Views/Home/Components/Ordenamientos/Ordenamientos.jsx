@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 const Ordenamientos = () => {
   const dispatch = useDispatch();
 
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState("Alphabetic");
 
   const handleOrder = (event) => {
     event.preventDefault();

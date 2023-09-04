@@ -26,6 +26,8 @@ let initialstate = {
       email: 'ejemplo1@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "6am-11am",
+      cpr: true,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Argentina',
@@ -42,6 +44,8 @@ let initialstate = {
       email: 'ejemplo2@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "6am-11am",
+      cpr: true,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Colombia',
@@ -58,6 +62,8 @@ let initialstate = {
       email: 'ejemplo3@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "11am-3pm",
+      cpr: true,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Mexico',
@@ -74,6 +80,8 @@ let initialstate = {
       email: 'ejemplo4@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "3pm-10pm",
+      cpr: true,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Argentina',
@@ -90,6 +98,8 @@ let initialstate = {
       email: 'ejemplo5@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "11am-3pm",
+      cpr: false,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Argentina',
@@ -106,6 +116,8 @@ let initialstate = {
       email: 'ejemplo6@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "3pm-10pm",
+      cpr: false,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Argentina',
@@ -124,6 +136,8 @@ let initialstate = {
       email: 'ejemplo1@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "6am-11am",
+      cpr: true,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Argentina',
@@ -140,6 +154,8 @@ let initialstate = {
       email: 'ejemplo2@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "6am-11am",
+      cpr: true,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Colombia',
@@ -156,6 +172,8 @@ let initialstate = {
       email: 'ejemplo3@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "11am-3pm",
+      cpr: true,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Mexico',
@@ -172,6 +190,8 @@ let initialstate = {
       email: 'ejemplo4@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "3pm-10pm",
+      cpr: true,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Argentina',
@@ -188,6 +208,8 @@ let initialstate = {
       email: 'ejemplo5@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "11am-3pm",
+      cpr: false,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Argentina',
@@ -204,6 +226,8 @@ let initialstate = {
       email: 'ejemplo6@gmail.com',
       password: '.',
       description: 'Esta es la descripcion',
+      schedule: "3pm-10pm",
+      cpr: false,
       birthdate: '1901-05-25',
       image: 'url',
       country: 'Argentina',
@@ -301,19 +325,45 @@ let reducer = (state = initialstate, { type, payload }) => {
       };
     case FILTER_WALKERS:
       //*Filtros combinados
-      /*if (payload.country && payload.time && payload.cpr) {
+      if (payload.country && payload.time && payload.cpr) {
+        console.log("Se aplico filtro pais, horario y RCP");
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time && walker.cpr === payload.cpr)
+          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time && walker.cpr === payload.cpr && walker.status === true)
         }
-      }*/
+      }
       if (payload.country && payload.time) {
+        console.log("Se aplico filtro pais y horario");
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
             (walker) =>
               walker.country === payload.country &&
               walker.schedule === payload.time &&
+              walker.status === true
+          ),
+        };
+      }
+      if (payload.country && payload.cpr){
+        console.log("Se aplico filtro pais y RCP");
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(
+            (walker) =>
+              walker.country === payload.country &&
+              walker.cpr === payload.cpr &&
+              walker.status === true
+          ),
+        };
+      }
+      if (payload.time && payload.cpr){
+        console.log("Se aplico filtro horario y RCP");
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(
+            (walker) =>
+              walker.schedule === payload.time &&
+              walker.cpr === payload.cpr &&
               walker.status === true
           ),
         };
@@ -351,7 +401,7 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         walkers: state.walkersBackUp.filter(
-          (walker) => walker.status === payload
+          (walker) => walker.status === payload.status
         ),
       };
     case CREATE_USER:
