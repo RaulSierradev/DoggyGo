@@ -70,6 +70,9 @@ module.exports = (sequelize) => {
     rol: {
       type: DataTypes.ENUM('Walker', 'Client'),
       allowNull: false,
+    },
+    ratingAvg: {
+      type: DataTypes.FLOAT,
     }
   },
     {

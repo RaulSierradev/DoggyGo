@@ -10,12 +10,11 @@ module.exports = (sequelize) => {
         },
         rating: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
         },
         comment:{
             type: DataTypes.TEXT,
-            allowNull: false,
-        }
+        },
     }, {
         timestamps: false
     });
