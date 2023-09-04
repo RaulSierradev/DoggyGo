@@ -67,7 +67,7 @@ const Login = () => {
 
 		// Authenticate user
 		const user = await authenticateUser(logeo.email, logeo.password);
-
+		console.log(user);
 		if (user) {
 			// Redirect to protected route after successful login
 			if (user.rol === 'Walker') navigate('/dash');

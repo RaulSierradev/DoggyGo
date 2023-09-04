@@ -1,4 +1,4 @@
-const { User } = require('../db')
+const { User, Review } = require('../db')
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -56,7 +56,8 @@ const getUsersByNameController = async (name) => {
             rol: user.rol,
             schedule: user.schedule,
             cpr: user.schedule,
-            size: user.rol
+            size: user.size,
+            ratingAvg: user.ratingAvg
         }
     });
 
@@ -75,7 +76,14 @@ const getUserByIdController = async (id) => {
         throw Error('Enter a valid ID');
     }
 
-    const user = await User.findByPk(id);
+    const user = await User.findOne({
+        where:{id}, 
+        include: { model: Review, as: "Reviews" }
+    });
+
+    if (!user) {
+        throw Error('User does not exist');
+    }
 
     return user;
 }
