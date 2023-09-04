@@ -290,7 +290,34 @@ const loginController = async (email, password) => {
     } else {
         throw new Error('Authentication failed');
     }
-};
+}; 
+
+// Actualizar contraseña 
+const updateUserPassword = async (email,newPassword) => { 
+    try { 
+
+    const user = await User.findOne({ where: { email: email } });
+      
+    const hashednewPassword = await bcrypt.hash(newPassword, 10) 
+
+    await user.update({password: hashednewPassword}) 
+    return 'Contraseña actualizada exitosamente';
+        
+    } catch (error) { 
+        console.error(error);
+    return error;
+        
+    }
+
+} 
+// consultar por email 
+const userEmail = async (email) => {
+    const user = await User.findOne({where: {email}})  
+    sendEmail(user.email)  
+    console.log("final:", user.email);
+    return user
+   
+}
 
 module.exports = {
     getUsersByNameController,
@@ -298,5 +325,7 @@ module.exports = {
     getUserByIdController,
     createUserController,
     updateUserController,
-    loginController
+    loginController, 
+    updateUserPassword, 
+    userEmail
 }

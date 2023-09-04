@@ -1,6 +1,8 @@
 import style from './Landing.module.css';
 import Paseadores from '../../Components/Paseadores/Paseadores';
 import { useNavigate } from 'react-router-dom';
+import Nav from '../Nav';
+import Footer from '../Dashboard/components/Footer';
 
 const Landing = () => {
 	const navigate = useNavigate();
@@ -40,7 +42,8 @@ const Landing = () => {
 
 	return (
 		<div className={style.Landing}>
-			<nav className={style.nav}>
+			<Nav />
+			{/* <nav className={style.nav}>
 				<h1>DoggyGo</h1>
 				<div className={style.secbtns1}>
 					<button
@@ -78,7 +81,7 @@ const Landing = () => {
 						))}
 					</button>
 				</div>
-			</nav>
+			</nav> */}
 			<section className={style.sec1}>
 				<span>Bienvenido a Doggy</span>
 				<h2>Pasea a tu perro</h2>

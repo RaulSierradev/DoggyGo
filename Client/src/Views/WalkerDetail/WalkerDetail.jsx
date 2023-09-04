@@ -12,6 +12,7 @@ import Modal from '../../Views/Modal/Modal';
 import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
 import Schedule from '../Booking Schedule/Schedule';
+import Swal from 'sweetalert2';
 import ReviewForm from '../Reviews/reviewForm';
 
 
@@ -38,7 +39,12 @@ function WalkerDetail() {
 			setLoading(false);
 		} catch (error) {
 			console.error(error.message);
-			alert(error.message);
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Something went wrong!',
+			});
+			// alert(error.message);
 		}
 	}
 

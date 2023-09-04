@@ -8,7 +8,7 @@ function Summary() {
 	const walk = useSelector((state) => state.walk);
 
 	return (
-		<div className="w-4/6 h-16 px-4 py-1 bg-white rounded border border-slate-300 justify-start items-center  inline-flex">
+		<div className="w-5/6 h-16 px-4 py-1 bg-white rounded border border-slate-300 justify-start items-center  inline-flex">
 			<div className="w-10 h-10 relative">
 				<img
 					className="w-10 h-10 left-0 top-0 absolute rounded-full"
@@ -19,7 +19,8 @@ function Summary() {
 				<div className="self-stretch justify-around items-center flex">
 					<div className=" text-slate-800 text-base font-normal">
 						<CalendarTodayIcon />
-						{walk.startDate}
+						<span className="font-bold">{walk.startDate}</span>
+						{' / '}
 						{walk.time}
 					</div>
 					<div className="text-center text-slate-800 text-base font-normal">

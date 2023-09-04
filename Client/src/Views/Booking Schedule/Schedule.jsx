@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { setWalk } from '../../Redux/actions';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import Swal from 'sweetalert2';
 
 dayjs.locale('es');
 
@@ -35,7 +36,7 @@ const Schedule = () => {
 	// const [book, setBook] = useState(false);
 
 	const handleChanges = () => {
-		if (timeSelected === '') return alert('Seleccione un horario');
+		if (timeSelected === '') return Swal.fire('Seleccione un horario');
 
 		dispatch(
 			setWalk({
@@ -44,11 +45,17 @@ const Schedule = () => {
 				time: timeSelected,
 			})
 		);
-		alert(
-			`Fecha y hora seleccionada: ${dateSelected.format(
-				'LL'
-			)}, ${timeSelected}`
-		);
+		Swal.fire({
+			title: 'Cita Selecionada',
+			text: `${dateSelected.format('LL')}, 
+			${timeSelected}`,
+			icon: 'success',
+		});
+		// alert(
+		// 	`Fecha y hora seleccionada: ${dateSelected.format(
+		// 		'LL'
+		// 	)}, ${timeSelected}`
+		// );
 	};
 
 	const selectHandleChange = (event) => {
