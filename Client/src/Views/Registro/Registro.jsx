@@ -15,7 +15,7 @@ const initialState = {
 	description: '',
 	birthdate: '',
 	email: '',
-	image: 'jkadkkl',
+	image: '',
 	country: '',
 	city: '',
 	address: '',

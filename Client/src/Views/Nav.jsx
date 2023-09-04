@@ -4,6 +4,7 @@ import Person2Icon from '@mui/icons-material/Person2';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
 import jwt_decode from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 function Nav() {
 	const navigate = useNavigate();
@@ -21,6 +22,7 @@ function Nav() {
 	const handleLogout = () => {
 		Cookies.remove('auth');
 		navigate('/');
+		Swal.fire('Sesión Cerrada Exitosamente!');
 	};
 
 	return (

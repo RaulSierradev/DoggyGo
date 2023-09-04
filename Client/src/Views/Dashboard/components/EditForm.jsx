@@ -4,6 +4,7 @@ import ImageUpload from './ImageUpload';
 import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../../Redux/actions';
 import idFromToken from '../../utils/getToken';
+import Swal from 'sweetalert2';
 
 function EditForm({ setEdit, edit }) {
 	const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function EditForm({ setEdit, edit }) {
 	useEffect(() => {
 		setForms((prevDetails) => ({
 			...prevDetails,
-			image: userProfile.image ? userProfile.image : imageUrl,
+			image: imageUrl ? imageUrl : userProfile.image,
 			cpr: userProfile.cpr ? userProfile.cpr : false,
 			schedule: userProfile.schedule ? userProfile.schedule : '',
 			status: userProfile.status ? userProfile.status : false,
@@ -57,10 +58,21 @@ function EditForm({ setEdit, edit }) {
 			dispatch(editUser(forms));
 			setForms({});
 			setEdit(false);
-			alert('Edit success');
+			Swal.fire({
+				position: 'top-end',
+				icon: 'success',
+				title: 'Edicion Exitosa',
+				showConfirmButton: false,
+				timer: 1500,
+			});
 		} catch (error) {
 			console.log(error.message);
-			alert(error.message);
+
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Algo salio mal!',
+			});
 		}
 	}
 
