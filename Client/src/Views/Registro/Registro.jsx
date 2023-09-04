@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import Swal from 'sweetalert2';
 
 import {
   createUser,
@@ -21,7 +23,7 @@ import VerificacionPaseador from "./VerificacionPaseador";
 import registroPaseador from "../../img/registroPaseador.png";
 import google from "../../assets/google1.svg";
 
-const RegistroPaseador = () => {
+const Registro = () => {
   const initialState = {
     rol: "",
     name: "",
@@ -117,29 +119,38 @@ const RegistroPaseador = () => {
     );
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(errors);
-    if (
-      !Object.keys(errors).length &&
-      user.name &&
-      user.address &&
-      user.email &&
-      user.phone &&
-      (googleEmail || user.password) // only check for password if googleEmail is null
-    ) {
-      if (googleEmail) {
-        dispatch(editUser(user));
-      } else {
-        dispatch(createUser(user));
-      }
-      setUser(initialState);
-      alert("Se ha creado su usario correctamente");
-      navigate("/login");
-    } else {
-      alert("Hay errores en el formulario");
-    }
-  };
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(errors);
+		if (
+			!Object.keys(errors).length &&
+			user.name &&
+			user.address &&
+			user.email &&
+			user.phone &&
+			(googleEmail || user.password) // only check for password if googleEmail is null
+		) {
+			if (googleEmail) {
+				dispatch(editUser(user));
+			} else {
+				dispatch(createUser(user));
+			}
+			setUser(initialState);
+			Swal.fire({
+				icon: 'success',
+				title: '¡Registro exitoso!',
+				text: 'Ya puedes iniciar sesión',
+			});
+			navigate('/login');
+		} else {
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Hay campos vacios o incorrectos en el formulario',
+			});
+		}
+	};
 
   console.log(user);
   return (
@@ -195,6 +206,7 @@ const RegistroPaseador = () => {
               Necesito que alguien pasee a mi perro
             </label>
           </form>
+
 
           {user.rol && (
             <form className="space-y-6 mt-10 pr-10" onSubmit={handleSubmit}>
@@ -576,7 +588,7 @@ const RegistroPaseador = () => {
           )}
         </div>
       </div>
-
+      
       <div className="sm:block hidden w-1/3 mt-20 mb-16">
         <img
           src={registroPaseador}
@@ -586,6 +598,7 @@ const RegistroPaseador = () => {
       </div>
     </div>
   );
+
 };
 
-export default RegistroPaseador;
+export default Registro;

@@ -1,3 +1,4 @@
+
 import {
   CREATE_USER,
   EDIT_USER,
@@ -17,7 +18,10 @@ import {
   GET_COUNTRIES,
   GET_STATES,
   GET_CITIES,
+  CREATE_WALK 
 } from "./action-types";
+E_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK, GET_BY_ID, GET_ALL_WALKS, CREATE_WALK } from "./action-types";
+
 
 let initialstate = {
   allUsers: [],
@@ -350,6 +354,7 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         // walk should be an object with all the walk info that get added on different steps
+
         walk: payload,
       };
     case GET_BY_ID:
@@ -357,6 +362,20 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         user: payload,
       };
+
+        walk: payload
+      }
+    case GET_BY_ID:
+      return {
+        ...state,
+        user: payload
+      }
+    case CREATE_WALK:
+      return {
+        ...state,
+        walks: [...state.walks, payload]
+      }
+
     case GET_ALL_WALKS:
       return {
         ...state,
