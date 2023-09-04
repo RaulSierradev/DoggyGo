@@ -3,6 +3,7 @@ import ImageUpload from '../../../Dashboard/components/ImageUpload';
 import { useEffect, useState } from 'react';
 import DogSize from './DogSize';
 import { createDog } from '../../../../Redux/actions';
+import Swal from 'sweetalert2';
 
 const FormDogs = () => {
 	const currentUser = useSelector((state) => state.currentUser);
@@ -21,9 +22,17 @@ const FormDogs = () => {
 	}, [imageUrl]);
 
 	const handleChange = (e) => {
+		const { name, value } = e.target;
+		let convertedValue = value;
+
+		if (value === 'true') {
+			convertedValue = true;
+		} else if (value === 'false') {
+			convertedValue = false;
+		}
 		setDetails({
 			...details,
-			[e.target.name]: e.target.value,
+			[name]: convertedValue,
 		});
 	};
 
@@ -32,10 +41,18 @@ const FormDogs = () => {
 			e.preventDefault();
 			dispatch(createDog(details));
 			setDetails({});
-			alert('Se ha creado su usario correctamente');
+			Swal.fire({
+				icon: 'success',
+				title: 'Felicitaciones!',
+				text: 'Has registrado a tu mascota!',
+			});
 		} catch (error) {
 			console.log(error.message);
-			alert(error.message);
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Algo salio mal!',
+			});
 		}
 	};
 
@@ -104,10 +121,47 @@ const FormDogs = () => {
 				<div className="flex items-center justify-center">
 					<label>Castrado/esterilizada: </label>
 					<label className="text-gray-900 px-3">
-						<input type="radio" name="castrado" /> Sí
+						<input
+							type="radio"
+							name="castrated"
+							value="true"
+							checked={details.castrated === true}
+							onChange={handleChange}
+						/>{' '}
+						Sí
 					</label>
 					<label className="text-gray-900 px-3">
-						<input type="radio" name="castrado" /> No
+						<input
+							type="radio"
+							name="castrated"
+							value="false"
+							checked={details.castrated === false}
+							onChange={handleChange}
+						/>{' '}
+						No
+					</label>
+				</div>
+				<div className="flex items-center justify-center">
+					<label>Sexo: </label>
+					<label className="text-gray-900 px-3">
+						<input
+							type="radio"
+							name="sex"
+							value={'MACHO'}
+							checked={details.sex === 'MACHO'}
+							onChange={handleChange}
+						/>{' '}
+						Macho
+					</label>
+					<label className="text-gray-900 px-3">
+						<input
+							type="radio"
+							name="sex"
+							value={'HEMBRA'}
+							checked={details.sex === 'HEMBRA'}
+							onChange={handleChange}
+						/>{' '}
+						Hembra
 					</label>
 				</div>
 				<DogSize
