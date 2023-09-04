@@ -1,4 +1,3 @@
-
 import {
   CREATE_USER,
   EDIT_USER,
@@ -18,10 +17,8 @@ import {
   GET_COUNTRIES,
   GET_STATES,
   GET_CITIES,
-  CREATE_WALK 
+  CREATE_WALK,
 } from "./action-types";
-E_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK, GET_BY_ID, GET_ALL_WALKS, CREATE_WALK } from "./action-types";
-
 
 let initialstate = {
   allUsers: [],
@@ -295,35 +292,45 @@ let reducer = (state = initialstate, { type, payload }) => {
       if (payload.country && payload.time) {
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time)
-        }
+          walkers: state.walkersBackUp.filter(
+            (walker) =>
+              walker.country === payload.country &&
+              walker.schedule === payload.time
+          ),
+        };
       }
       //*Filtro para countries
-      if (payload.country) {  
+      if (payload.country) {
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country)
-        }
+          walkers: state.walkersBackUp.filter(
+            (walker) => walker.country === payload.country
+          ),
+        };
       }
       //*Filtro por horario
-      if (payload.time){
+      if (payload.time) {
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.schedule === payload.time)
-        }
+          walkers: state.walkersBackUp.filter(
+            (walker) => walker.schedule === payload.time
+          ),
+        };
       }
       //*Filtro por RCP
-      if (payload.cpr){
+      if (payload.cpr) {
         return {
           ...state,
 
-          walkers: state.walkersBackUp.filter(walker => walker.cpr === payload.cpr)
-        }
+          walkers: state.walkersBackUp.filter(
+            (walker) => walker.cpr === payload.cpr
+          ),
+        };
       }
       return {
         ...state,
-        walkers: state.walkersBackUp
-      }
+        walkers: state.walkersBackUp,
+      };
     case CREATE_USER:
       return {
         ...state,
@@ -363,18 +370,11 @@ let reducer = (state = initialstate, { type, payload }) => {
         user: payload,
       };
 
-        walk: payload
-      }
-    case GET_BY_ID:
-      return {
-        ...state,
-        user: payload
-      }
     case CREATE_WALK:
       return {
         ...state,
-        walks: [...state.walks, payload]
-      }
+        walks: [...state.walks, payload],
+      };
 
     case GET_ALL_WALKS:
       return {
@@ -386,16 +386,16 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         countries: payload,
       };
-      case GET_STATES:
-        return {
-          ...state,
-          states: payload,
-        };
-      case GET_CITIES:
-        return{
-          ...state,
-          cities: payload
-        }
+    case GET_STATES:
+      return {
+        ...state,
+        states: payload,
+      };
+    case GET_CITIES:
+      return {
+        ...state,
+        cities: payload,
+      };
 
     default:
       return { ...state };
