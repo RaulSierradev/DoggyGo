@@ -1,14 +1,18 @@
-import style from './Recuperar.module.css';
-const Recuperar = () => {  
-    return(
-        <div>
-        <div className={style.modal}>
-       
-        <button >Cerrar Modal</button>
-      </div>
-    </div>
-    )
-   
+const Recuperar = () => {
+  return (
+    <div>
+      <form> 
+      <h2>Contraseña nueva</h2>
+        <input
+          type="search"
+          value=""
+          onChange=""
+          placeholder="Escriba su Nueva contraseña..."
+        />
 
-} 
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  );
+};
 export default Recuperar;

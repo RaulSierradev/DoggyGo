@@ -18,6 +18,7 @@ export const GET_ALL_WALKS = 'GET_ALL_WALKS'
 export const GET_COUNTRIES = 'GET_COUNTRIES'
 export const GET_STATES = 'GET_STATES'
 export const GET_CITIES = 'GET_CITIES'
-export const CREATE_WALK = 'CREATE_WALK'
+export const CREATE_WALK = 'CREATE_WALK' 
+export const EDIT_PASSWORD = 'EDIT_PASSWORD'
 
 

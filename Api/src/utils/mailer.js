@@ -26,7 +26,9 @@ const emailContraseña = async (email) => {
         from: 'doggygo.noreply@gmail.com', 
         to: email, 
         subject: '¡Recuperar Contraseña.',  
-        text: '¡Ingrese al siguiente enlace para recuperar su contraseña.',
+        html:  href="http://127.0.0.1:5173/recuperarcontrase%C3%B1a", 
+        text: '¡Ingrese al siguiente enlace para recuperar su contraseña.', 
+       
 
     }) 
     console.log('Correo enviado:', info.messageId);

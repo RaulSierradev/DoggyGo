@@ -17,9 +17,9 @@ const ResetPassword = () => {
         dispatch(getEmail(emails))  
         // console.log("getEmail",emails)
        
-    } 
+    }  
+  
    
-
   return (
     <div>
      <h2>Olvidé mi contraseña</h2> 
@@ -29,10 +29,11 @@ const ResetPassword = () => {
          value={emails} 
          onChange={handleChange} 
          placeholder="Escriba su correo..."
+        /> 
+
+        <button type="submit" onClick={handleSubmit}  >Enviar</button>   
         
-        />
-        <button type="submit" onClick={handleSubmit}>Enviar</button>
-      </form>
+      </form> 
     </div>
   );
 };
