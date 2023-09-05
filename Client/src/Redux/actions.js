@@ -14,7 +14,8 @@ import {
   CREATE_DOG,
   SET_WALK,
   GET_BY_ID,
-  GET_ALL_WALKS,
+  GET_ALL_WALKS, 
+  GET_ALL_MAIL,
 } from "./action-types";
 
 const URL = "http://localhost:3001/";
@@ -199,3 +200,13 @@ export const getAllWalks = () => {
     }
   };
 };
+export const getEmail = (email) => {   
+  return async (dispatch) => {
+    const response = await axios(`http://localhost:3001/user/`,{ params: { email} })   
+    console.log('response',response.data[0].email)
+    return dispatch({
+      type : GET_ALL_MAIL, 
+      payload: response.data[0].email
+    })
+  }
+}

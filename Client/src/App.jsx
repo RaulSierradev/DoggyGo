@@ -19,7 +19,9 @@ import Walkers from './Views/Admin/Walkers/Walkers';
 import UserProfile from './Views/Admin/UserProfile/UserProfile';
 import Walks from './Views/Admin/Walks/Walks';
 
-import Success from './Views/Mercado Pago/Success';
+import Success from './Views/Mercado Pago/Success'; 
+import ResetPassword from './Views/Login/ResetPassword'; 
+import Recuperar from './Views/recuprarContraseña/Recuperar';
 
 
 function App() {
@@ -52,7 +54,9 @@ function App() {
 				<Route path='/admin/paseos' element={<Walks />}/>
 				<Route path="/admin" element={<Admin />} />
 				<Route path="/admin/clientes" element={<Clientes />} />
-				<Route path="/admin/paseadores" element={<Walkers />} />
+				<Route path="/admin/paseadores" element={<Walkers />} /> 
+				<Route path="/reset-password" element={<ResetPassword/>} /> 
+				<Route path="/recuperarcontraseña" element={<Recuperar/>}/>
 
 			</Routes>
 		</div>
