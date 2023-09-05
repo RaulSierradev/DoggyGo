@@ -18,8 +18,8 @@ import Clientes from './Views/Admin/Clients/Clientes';
 import Walkers from './Views/Admin/Walkers/Walkers';
 import UserProfile from './Views/Admin/UserProfile/UserProfile';
 import Walks from './Views/Admin/Walks/Walks';
-// import ResetPassword from './Views/Login/ResetPassword'; 
-// import Recuperar from './Views/recuprarContraseña/Recuperar';
+import ResetPassword from './Views/Login/ResetPassword'; 
+import Recuperar from './Views/recuprarContraseña/Recuperar';
 import Success from './Views/Mercado Pago/Success';
 import AlertDialog from './Views/Home/Components/Card/AlertDialog';
 
@@ -72,13 +72,13 @@ function App() {
 					<Route path="/admin/paseos" element={<Walks />} />
 				</Route>
 
-				{/* <Route path="/admin" element={<Admin />} />
+				<Route path="/admin" element={<Admin />} />
 				<Route path="/admin/clientes" element={<Clientes />} />
 				<Route path="/reset-password" element={<ResetPassword/>} /> 
 				<Route path="/recuperarcontraseña" element={<Recuperar/>}/>
 				<Route path="/admin/paseadores" element={<Walkers />} />
 				<Route path="/admin/detail/:id" element={<UserProfile />} />
-				<Route path="/admin/paseos" element={<Walks />} /> */}
+				<Route path="/admin/paseos" element={<Walks />} />
 			</Routes>
 		</div>
 	);

@@ -18,7 +18,8 @@ import {
   GET_COUNTRIES,
   GET_STATES,
   GET_CITIES,
-  CREATE_WALK
+  CREATE_WALK, 
+  GET_ALL_MAIL,
 
 } from "./action-types";
 
@@ -260,4 +261,21 @@ export const getCities = (sta, co) => {
       return { error: error.message };
     }
   };
-};
+}; 
+export const getEmail = (email) =>{ 
+  const endpoint = ` http://localhost:3001/user/email/${email}` 
+  return async (dispatch) => { 
+    try { 
+      const { data } = await axios(endpoint) 
+      return dispatch({
+        type: GET_ALL_MAIL, 
+        payload: data
+      })
+      
+    } catch (error) {
+      return { error: error.message };
+    }
+
+  }
+
+}
