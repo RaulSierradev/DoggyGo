@@ -21,7 +21,7 @@ const SearchBar = () => {
 
   const handleReset = () => {
     dispatch(restoreWalkers());
-    dispatch(filterWalkers(true))
+    dispatch(filterWalkers({status: true}))
   };
 
   return (
