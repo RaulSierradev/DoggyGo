@@ -17,7 +17,8 @@ import {
   GET_COUNTRIES,
   GET_STATES,
   GET_CITIES,
-  CREATE_WALK,
+  CREATE_WALK, 
+  GET_ALL_MAIL,
 } from "./action-types";
 
 let initialstate = {
@@ -264,7 +265,8 @@ let initialstate = {
   walks: [],
   countries: [],
   states: [],
-  cities: [],
+  cities: [], 
+  email:[],
 };
 
 const compareStringsSecondary = (a, b, i = 0) => {
@@ -491,7 +493,12 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         cities: payload,
-      };
+      }; 
+      case GET_ALL_MAIL: 
+      return{
+        ...state, 
+        email: payload
+      }
 
     default:
       return { ...state };

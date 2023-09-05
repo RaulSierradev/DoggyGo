@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = process.env;
-const sendEmail = require('../utils/mailer')
+const {email1 , emailContraseña } = require('../utils/mailer')  
 require("dotenv").config();
 
 
@@ -199,7 +199,7 @@ const createUserController = async (userData) => {
     }
     if (newUser) {
 
-        sendEmail(newUser.email);
+        email1(newUser.email);
         console.log("final:", newUser);
 
         if (newUser) {
@@ -313,7 +313,7 @@ const updateUserPassword = async (email,newPassword) => {
 // consultar por email 
 const userEmail = async (email) => {
     const user = await User.findOne({where: {email}})  
-    sendEmail(user.email)  
+    emailContraseña(user.email)  
     console.log("final:", user.email);
     return user
    

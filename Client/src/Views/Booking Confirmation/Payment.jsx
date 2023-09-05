@@ -44,6 +44,7 @@ function Payment() {
 		}
 	};
 
+	console.log(currentUser.id);
 	const handlePayment = async () => {
 		setLoading(true);
 		await dispatch(
@@ -52,13 +53,13 @@ function Payment() {
 				total: Number(walk.cost) + bookingFee,
 				state: true, // this needs back fix
 				// walker: currentUser.name,
-				// UserId: currentUser.id, // ! fix this
+				WalkerId: currentUser.id, // ! fix this
 			})
 		);
 		// get the new walk state
 		console.log(walk);
 
-		await dispatch(createWalk());
+		// await dispatch(createWalk());
 
 		const id = await createPreference();
 		setId(id);

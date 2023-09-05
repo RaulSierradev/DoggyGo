@@ -20,15 +20,42 @@ function EditForm({ setEdit, edit }) {
 	const userProfile = users.filter((user) => user.id === id)[0];
 	console.log(userProfile);
 
+	// useEffect(() => {
+	// 	setForms((prevDetails) => ({
+	// 		...prevDetails,
+	// 		email: userProfile.email,
+	// 		image: imageUrl ? imageUrl : userProfile.image,
+	// 		cpr: userProfile.cpr ? userProfile.cpr : false,
+	// 		schedule: userProfile.schedule ? userProfile.schedule : '',
+	// 		status: userProfile.status ? userProfile.status : false,
+	// 		size: userProfile.size ? userProfile.size : null,
+	// 	}));
+	// }, [
+	// 	imageUrl,
+	// 	userProfile.cpr,
+	// 	userProfile.schedule,
+	// 	userProfile.status,
+	// 	userProfile.size,
+	// 	userProfile.image,
+	// ]);
+
 	useEffect(() => {
-		setForms((prevDetails) => ({
-			...prevDetails,
-			image: imageUrl ? imageUrl : userProfile.image,
-			cpr: userProfile.cpr ? userProfile.cpr : false,
-			schedule: userProfile.schedule ? userProfile.schedule : '',
-			status: userProfile.status ? userProfile.status : false,
-			size: userProfile.size ? userProfile.size : null,
-		}));
+		setForms((prevDetails) => {
+			const newDetails = {
+				...prevDetails,
+				email: userProfile.email,
+				image: imageUrl ? imageUrl : userProfile.image,
+				cpr: userProfile.cpr ? userProfile.cpr : false,
+				status: userProfile.status ? userProfile.status : false,
+				size: userProfile.size ? userProfile.size : null,
+			};
+
+			if (userProfile.schedule) {
+				newDetails.schedule = userProfile.schedule;
+			}
+
+			return newDetails;
+		});
 	}, [
 		imageUrl,
 		userProfile.cpr,

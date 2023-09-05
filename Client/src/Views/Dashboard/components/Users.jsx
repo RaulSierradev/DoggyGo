@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { userRows } from '../data';
 import DataTable from './DataTable';
+import idFromToken from '../../utils/getToken';
 
 const columns = [
 	{ field: 'id', headerName: 'ID', width: 90 },
@@ -58,7 +59,9 @@ const columns = [
 ];
 
 const Users = () => {
-	const walks = useSelector((state) => state.walks);
+	const id = idFromToken();
+	const allWalks = useSelector((state) => state.walks);
+	const walks = allWalks.filter((walk) => walk.WalkerId === id);
 
 	return (
 		<div className="users">

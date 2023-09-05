@@ -3,13 +3,14 @@
     height: 100vh;
     overflow-y: scroll;
     box-sizing: border-box;
-    padding-bottom: 5vh;
+    overflow-x: hidden;
 }
 .nav{
     height: 7vh;
     position: sticky;
     top: 0%;
-    background-color: rgba(230, 240, 255, 1);
+    background-color: rgba(230, 240, 255, 0.881);
+    backdrop-filter: blur( 4px );
     display: grid;
     grid-template-columns: 20% 60% 20%;
     grid-template-rows: 100%;
@@ -32,10 +33,10 @@
     align-items: center;
     list-style: none;
     padding: 0;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   .btnsnav{
-    width: calc(35% / 5);
+    width: calc(45% / 4);
     transform: scale(1);
     padding-top: 0.3rem ;
     padding-bottom: 0.3rem ;
@@ -95,12 +96,13 @@
     padding-left: 20%;
     padding-top: 10vh;
     margin-bottom: 5vh;
-    background-image: url(https://cdn.dribbble.com/userupload/2844366/file/original-ec53ecb9b3d82ad8673f430e9218c15e.png);
+    background-image: url(/bgLanding.png);
     background-blend-mode: darken;
-    background-position: top;
-    background-position-x: 200%;
+    background-position: bottom;
+    background-position-x: right;
     background-repeat: no-repeat;
-}
+    background-size: 50%;
+  }
 
 .sec1 span:nth-child(1){
   color: rgba(104, 118, 144, 1);
@@ -123,7 +125,13 @@
   padding: 1rem;
   border-radius: 0.7dvh;
   background-color: rgba(0, 3, 54, 1);
-
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0) ;
+  transition: text-decoration-color 1s;
+}
+.sec1 button:nth-child(4):hover{
+  text-decoration-color: rgba(255, 255, 255, 1) ;
+  transition: text-decoration-color 300ms;
 }
 
 /* <---------------------------------SEC2--------------------------------------------> */
