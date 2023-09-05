@@ -2,17 +2,22 @@ import style from './Landing.module.css';
 import Paseadores from '../../Components/Paseadores/Paseadores';
 import { useNavigate } from 'react-router-dom';
 import Nav from '../Nav';
-import Footer from '../Dashboard/components/Footer';
+import Footer from '../../Components/Footer/Footer';
+//import Footer from '../Dashboard/components/Footer';
+
+
+/* borrar al sustituir por urls de cloudinary */
 import agenda from '/guia.png'
 import contacta from '/contacta.png'
 import renta from '/renta.png'
 import flecha from '/flecha.png'
-import Footer from '../../Components/Footer/Footer';
+
 
 
 const Landing = () => {
 	const navigate = useNavigate();
 
+	//requerido de redux
 	const PaseadoresEstrella = [
 		{
 			img: 'https://picsum.photos/203',
