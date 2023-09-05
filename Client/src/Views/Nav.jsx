@@ -47,9 +47,9 @@ function Nav() {
 					<div className="flex items-center">
 						<Person2Icon />
 					</div>
-					<p>Profile</p>
+					<p>Perfil</p>
 				</Link>
-				<p>Help</p>
+				<p>Ayuda</p>
 			</div>
 			<div className="text-white font-bold flex gap-4 items-center">
 				<div className="ml-2 rounded-full">
