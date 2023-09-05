@@ -23,21 +23,34 @@ export default function AlertDialog({ onClose }) {
 				aria-describedby="alert-dialog-description"
 			>
 				<DialogTitle id="alert-dialog-title">
-					{'No estas logueado como cliente'}
+					{'Tu perfil no esta autorizado'}
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-description">
-						Tienes que estar logueado no como paseador para poder
-						ver el perfil del paseador. Inicia sesion o Registrate.
+						Tu sesion no es valida para ver el perfil del paseador.
+						Inicia sesion con otra cuenta o Registrate.
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
 					<div className="mr-3">
-						<NavLink to={'/registro'} onClick={handleClose}>
+						<NavLink
+							className={
+								'bg-green-500 rounded-md px-3 py-1 text-white font-bold'
+							}
+							to={'/registro'}
+							onClick={handleClose}
+						>
 							Registrate
 						</NavLink>
 					</div>
-					<NavLink to={'/login'} onClick={handleClose} autoFocus>
+					<NavLink
+						className={
+							'bg-blue-500 rounded-md px-3 py-1 text-white font-bold'
+						}
+						to={'/login'}
+						onClick={handleClose}
+						autoFocus
+					>
 						Inicia Sesion
 					</NavLink>
 				</DialogActions>

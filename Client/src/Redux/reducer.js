@@ -1,4 +1,3 @@
-
 import {
   CREATE_USER,
   EDIT_USER,
@@ -6,7 +5,7 @@ import {
   GET_ALL_USERS,
   GET_CLIENT_BY_NAME,
   GET_WALKER_BY_NAME,
-  ORDER_DEFAULT,
+  ORDER_WALKERS,
   PRUEBA,
   RESTORE_CLIENTS,
   RESTORE_WALKERS,
@@ -44,6 +43,7 @@ let initialstate = {
       status: false,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.21,
     },
     {
       name: 'Messi',
@@ -62,6 +62,7 @@ let initialstate = {
       status: true,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.45,
     },
     {
       name: 'Maradona',
@@ -80,6 +81,7 @@ let initialstate = {
       status: true,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.42,
     },
     {
       name: 'Ronaldo',
@@ -98,6 +100,7 @@ let initialstate = {
       status: false,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.76,
     },
     {
       name: 'Di Stéfano',
@@ -116,6 +119,7 @@ let initialstate = {
       status: true,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.99,
     },
     {
       name: 'Cruyff',
@@ -134,6 +138,7 @@ let initialstate = {
       status: true,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.34,
     },
   ],
   walkersBackUp: [
@@ -154,6 +159,7 @@ let initialstate = {
       status: false,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.21,
     },
     {
       name: 'Messi',
@@ -172,6 +178,7 @@ let initialstate = {
       status: true,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.45,
     },
     {
       name: 'Maradona',
@@ -190,6 +197,7 @@ let initialstate = {
       status: true,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.42,
     },
     {
       name: 'Ronaldo',
@@ -208,6 +216,7 @@ let initialstate = {
       status: false,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.76,
     },
     {
       name: 'Di Stéfano',
@@ -226,6 +235,7 @@ let initialstate = {
       status: true,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.99,
     },
     {
       name: 'Cruyff',
@@ -244,6 +254,7 @@ let initialstate = {
       status: true,
       suscription: true,
       rol: 'Walker',
+      ratingAvg: 1.34,
     },
   ],
   users: [],
@@ -322,28 +333,34 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         walkers: state.walkersBackUp,
       };
-    case ORDER_DEFAULT:
-      //*Establecer el orden por defecto de los paseadores (Alfabetico)
-      return {
+    case ORDER_WALKERS:
+      //*Ordenamiento alfabetico (por defecto)
+      if (payload === "Alphabetic"){
+        return {
         ...state,
         walkersBackUp: state.walkersBackUp.sort((a, b) =>
           compareStringsSecondary(a.name, b.name)
         ),
-        walkers: state.walkers.sort((a, b) =>
+        walkers: [...state.walkers].sort((a, b) =>
           compareStringsSecondary(a.name, b.name)
         ),
-      };
+        }
+      }
+      //*Ordenamiento por calificación
+      return {
+        ...state,
+        walkersBackUp: state.walkersBackUp.sort((a , b) => b.ratingAvg - a.ratingAvg),
+        walkers: [...state.walkers].sort((a , b) => b.ratingAvg - a.ratingAvg)
+      }
     case FILTER_WALKERS:
       //*Filtros combinados
       if (payload.country && payload.time && payload.cpr) {
-        console.log("Se aplico filtro pais, horario y RCP");
         return {
           ...state,
           walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time && walker.cpr === payload.cpr && walker.status === true)
         }
       }
       if (payload.country && payload.time) {
-        console.log("Se aplico filtro pais y horario");
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
@@ -355,7 +372,6 @@ let reducer = (state = initialstate, { type, payload }) => {
         };
       }
       if (payload.country && payload.cpr){
-        console.log("Se aplico filtro pais y RCP");
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
@@ -367,7 +383,6 @@ let reducer = (state = initialstate, { type, payload }) => {
         };
       }
       if (payload.time && payload.cpr){
-        console.log("Se aplico filtro horario y RCP");
         return {
           ...state,
           walkers: state.walkersBackUp.filter(

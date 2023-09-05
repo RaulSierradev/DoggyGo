@@ -7,7 +7,7 @@ import {
   RESTORE_CLIENTS,
   RESTORE_WALKERS,
   FILTER_WALKERS,
-  ORDER_DEFAULT,
+  ORDER_WALKERS,
   CREATE_USER,
   EDIT_USER,
   CURRENT_USER,
@@ -20,7 +20,7 @@ import {
   GET_CITIES,
   CREATE_WALK, 
   GET_ALL_MAIL, 
- 
+
 
 } from "./action-types";
 
@@ -59,10 +59,10 @@ export function createDog(dog) {
   };
 }
 
-export function createWalk() {
-  return async function createWalkThunk(dispatch, getState) {
+export function createWalk(walk) {
+  return async function createWalkThunk(dispatch) {
     // dispatch({ type: 'loading' })
-    const { walk } = getState();  // Get the updated walk from the state
+    // const { walk } = getState();  // Get the updated walk from the state
 
     const res = await axios.post(`${URL}walk`, walk);
     console.log(res.data);
@@ -175,10 +175,11 @@ export const restoreWalkers = () => {
   };
 };
 
-//Ordena por default segun disponibilidad, entre otros
-export const orderDefault = () => {
+//Ordena los walkers segun el order
+export const orderWalkers = (order) => {
   return {
-    type: ORDER_DEFAULT,
+    type: ORDER_WALKERS,
+    payload: order,
   };
 };
 
@@ -220,7 +221,7 @@ export const getAllWalks = () => {
   };
 };
 
-export const getCountries = ()=>{
+export const getCountries = () => {
   const endpoint = 'http://localhost:3001/location/countries/'
   return async (dispatch) => {
     try {
@@ -262,6 +263,7 @@ export const getCities = (sta, co) => {
       return { error: error.message };
     }
   };
+
 }; 
 export const getEmail = (email) =>{ 
   const endpoint = ` http://localhost:3001/user/email/${email}` 

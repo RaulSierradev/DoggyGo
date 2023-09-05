@@ -41,8 +41,3 @@ const emailContraseña = async (email) => {
 
 
 module.exports = {email1 , emailContraseña }
- 
-
-
-
-
