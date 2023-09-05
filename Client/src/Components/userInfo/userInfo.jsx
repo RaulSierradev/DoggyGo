@@ -28,13 +28,14 @@ const UserInfo = ({bool}) => {
     <div className={style[`UserInfoDynamic${bool}`]}>
       <div className={style.UserInfoContainer}>
         <div>
-          <p>hola</p>
+          <p style={{textAlign: 'center', fontSize:'2.5cqmax'}}>{user.name}</p>
         </div>
         <div className={style.imageContainer}>
           <img className={style.imageUser} src={user.image} />
         </div>
         <div>
-          <p>hola2</p>
+          <p>{user.country}</p>
+          <p>{user.description}</p>
         </div>
       </div>
     </div>
