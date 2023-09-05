@@ -53,7 +53,7 @@ const Paginado = () => {
           onClick={prevHandler}
           disabled={currentPage === 0}
         >
-          Prev
+          Anterior
         </button>
         <button className='bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded mx-4' disabled>
           {currentPage + 1}
@@ -71,7 +71,7 @@ const Paginado = () => {
             walkers.length === (currentPage + 1) * walkersPerPage
           }
         >
-          Next
+          Siguiente
         </button>
       </div>
     </div>

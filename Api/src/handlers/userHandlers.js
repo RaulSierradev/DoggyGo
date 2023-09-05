@@ -1,4 +1,4 @@
-const { getUsersByNameController, getUsersController, getUserByIdController, createUserController, updateUserController, loginController } = require('../controllers/userControllers')
+const { getUsersByNameController, getUsersController, getUserByIdController, createUserController, updateUserController, loginController, updateUserPassword,  userEmail } = require('../controllers/userControllers')
 
 //traer todos los users o traerlos por sus nombres
 const getUsersHandler = async (req, res) => {
@@ -101,12 +101,37 @@ const loginHandler = async (req, res) => {
         console.log("User", JSON.stringify(login.user, null, 2));
         console.log("Token:", login.token);
 
-        return res.status(201).json(login.user);
+        return res.status(201).json({ user: login.user, token: login.token });
     } catch (error) {
         res.status(401).json({ error: error.message });
     }
-};
+}; 
 
+// actualizar contraseña 
+const passwordUserHandler = async (req, res) => { 
+    const { email, newPassword} = req.body
+    try {
+       const updatePassword = await updateUserPassword(email, newPassword) 
+       res.status(200).json(updatePassword)
+    } catch (error) { 
+        res.status(400).json({ error: error.message });
+        
+    }
+} 
+// consultar email 
+const handleUserByEmail = async(req, res) => {
+    try { 
+        const { email} = req.params 
+        const emailsend = await  userEmail(email)  
+        console.log("emailcomprobar",email)
+        res.status(200).json(emailsend)
+        
+    } catch (error) { 
+        res.status(400).json({ error: error.message });
+        
+    }  
+   
+}
 
 
 module.exports = {
@@ -115,5 +140,7 @@ module.exports = {
     getUserByIdHandler,
     createUserHandler,
     updateUserHandler,
-    loginHandler
+    loginHandler,
+    passwordUserHandler, 
+    handleUserByEmail
 }

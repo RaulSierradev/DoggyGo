@@ -6,16 +6,25 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getAll } from '../../Redux/actions.js';
+import google from '../../assets/google1.svg';
+import Alert from '@mui/material/Alert';
 
 const Login = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const [logeo, setLogeo] = useState({
 		email: '',
 		password: '',
 	});
 
 	const [errors, setErrors] = useState({});
+	const [error, setError] = useState('');
 
-	const dispatch = useDispatch();
+	const googleLogin = (e) => {
+		e.preventDefault();
+		window.open('http://localhost:3001/auth/google/login', '_self');
+	};
 
 	useEffect(() => {
 		try {
@@ -31,7 +40,9 @@ const Login = () => {
 				email,
 				password,
 			});
-			return res.data;
+			console.log(res.data);
+			Cookies.set('auth', res.data.token);
+			return res.data.user;
 		} catch (error) {
 			console.log(error);
 			return null;
@@ -56,24 +67,18 @@ const Login = () => {
 
 		// Authenticate user
 		const user = await authenticateUser(logeo.email, logeo.password);
-
+		console.log(user);
 		if (user) {
-			// Set cookie time to 15 minutes
-			const expirationTime = new Date(
-				new Date().getTime() + 15 * 60 * 1000
-			);
-			Cookies.set('auth', JSON.stringify(user), {
-				expires: expirationTime,
-			});
 			// Redirect to protected route after successful login
-			navigate('/dash');
+			if (user.rol === 'Walker') navigate('/dash');
+			if (user.rol === 'Admin') navigate('/admin');
+			if (user.rol === 'Client') navigate('/home');
 		} else {
 			// Show error message or perform other actions for failed authentication
-			alert('Usuario o contraseña incorrectos');
+			// alert('Usuario o contraseña incorrectos');
+			setError('Usuario o contraseña incorrectos');
 		}
 	};
-
-	const navigate = useNavigate();
 
 	console.log(logeo);
 
@@ -101,11 +106,19 @@ const Login = () => {
 						</p>
 					</div>
 
-					<div>
+					<div className="flex flex-col items-center p-2">
+						<button
+							className="cursor-pointer"
+							onClick={googleLogin}
+						>
+							<img className="rounded-md" src={google} alt="" />
+						</button>
+
 						<form
 							className="flex flex-col gap-4"
 							onSubmit={handleLogin}
 						>
+							{error && <Alert severity="error">{error}</Alert>}
 							<input
 								className="p-2 rounded-xl border mt-8 text-gray-600"
 								type="text"
@@ -126,13 +139,14 @@ const Login = () => {
 								<p className="text-sm text-red-600">
 									* {errors.email}
 								</p>
-							)}
+							)}  
 							<button
 								className="flex w-full justify-center rounded-md bg-indigo-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 								type="submit"
 							>
 								Iniciar Sesión
-							</button>
+							</button> 
+							<Link to="/reset-password">Olvidé mi contraseña</Link>
 						</form>
 					</div>
 				</div>

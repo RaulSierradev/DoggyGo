@@ -1,10 +1,13 @@
-const { User } = require('../db')
+const { User, Review } = require('../db')
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET_KEY } = process.env;
-require("dotenv").config();
+const { JWT_SECRET_KEY } = process.env; 
+const {email1 , emailContraseña } = require('../utils/mailer')   
 
+
+
+require("dotenv").config(); 
 
 
 
@@ -78,7 +81,8 @@ const getUsersByNameController = async (name) => {
             rol: user.rol,
             schedule: user.schedule,
             cpr: user.schedule,
-            size: user.rol
+            size: user.size,
+            ratingAvg: user.ratingAvg
         }
     });
 
@@ -97,7 +101,14 @@ const getUserByIdController = async (id) => {
         throw Error('Enter a valid ID');
     }
 
-    const user = await User.findByPk(id);
+    const user = await User.findOne({
+        where:{id}, 
+        include: { model: Review, as: "Reviews" }
+    });
+
+    if (!user) {
+        throw Error('User does not exist');
+    }
 
     return user;
 }
@@ -165,20 +176,24 @@ const createUserController = async (userData) => {
         let newUser = await User.create({
             ...userData,
             password: hashedPassword,
-        });
-    
+        });    
+        email1(newUser.email);
+        console.log("final:", newUser);
+
         if (newUser) {
             let token = jwt.sign({ id: newUser.id }, JWT_SECRET_KEY, {
               expiresIn: 1 * 24 * 60 * 60 * 1000,
-            });
-       
+            });  
+           
+           
             //send users details
             return { newUser, token };
           } else {
             throw new Error('Details are not correct');
-          }
-
-    }
+          } 
+    }  
+    
+   
 }
 
 
@@ -226,8 +241,8 @@ const updateUserController = async (updates) => {
 const loginController = async (email, password) => {
 
     //find a user by their email
-    const user = await User.findOne({ where: { email: email } });
-
+    const user = await User.findOne({ where: { email: email }});
+        
     //if user email is found, compare password with bcrypt
     if (user) {
         const isSame = await bcrypt.compare(password, user.password);
@@ -245,7 +260,36 @@ const loginController = async (email, password) => {
     } else {
         throw new Error('Authentication failed');
     }
-};
+}; 
+
+// Actualizar contraseña 
+const updateUserPassword = async (email,newPassword) => { 
+    try { 
+
+    const user = await User.findOne({ where: { email: email } });
+      
+    const hashednewPassword = await bcrypt.hash(newPassword, 10) 
+
+    await user.update({password: hashednewPassword}) 
+    return 'Contraseña actualizada exitosamente';
+        
+    } catch (error) { 
+        console.error(error);
+    return error;
+        
+    }
+
+} 
+// consultar por email 
+const userEmail = async (email) => { 
+    console.log("email",email)
+    const user = await User.findOne({ where: { email: email } }); 
+    console.log("user",user)
+   const prueba = emailContraseña(email)  
+    console.log("prueba :", prueba );
+    return user
+   
+}
 
 module.exports = {
     getUsersByNameController,
@@ -253,5 +297,7 @@ module.exports = {
     getUserByIdController,
     createUserController,
     updateUserController,
-    loginController
+    loginController, 
+    updateUserPassword, 
+    userEmail
 }

@@ -4,11 +4,13 @@ const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
-
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/doggygo`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+const sequelize = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/doggygo`,
+  {
+    logging: false, // set to console.log to see the raw SQL queries
+    native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  }
+);
 
 const basename = path.basename(__filename);
 
@@ -43,16 +45,41 @@ const { User, Walk, Dog, Review } = sequelize.models;
 // Aca vendrian las relaciones
 
 User.hasMany(Dog);
-Dog.belongsTo(User);
+Dog.belongsToMany(User, { through: "UserDogs", timestamps: false });
+
+Dog.hasOne(User);
+User.belongsToMany(Dog, { through: "UserDogs", timestamps: false });
 
 User.hasMany(Walk);
-Walk.belongsTo(User);
+Walk.belongsToMany(User, { through: "UserWalks", timestamps: false });
 
 Walk.hasMany(User);
-User.belongsTo(Walk);
+User.belongsToMany(Walk, { through: "UserWalks", timestamps: false });
 
-User.hasMany(Review);
-Review.belongsTo(User);
+// User.hasMany(Review);
+// Review.belongsTo(User);
+
+
+User.hasMany(Review, {
+  foreignKey: 'clientId',
+  as: 'clientReviews',
+});
+Review.belongsTo(User, {
+  foreignKey: 'clientId',
+  as: 'client',
+});
+
+
+User.hasMany(Review, {
+  foreignKey: 'walkerId',
+  as: 'Reviews',
+});
+Review.belongsTo(User, {
+  foreignKey: 'walkerId',
+  as: 'walker',
+});
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

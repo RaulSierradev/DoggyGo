@@ -1,25 +1,26 @@
-const express = require('express'); 
+const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const router = require('./routes/index.js');  
-const passport = require('passport') 
-require('./handlers/authenticate.js'); 
-const session = require('express-session') 
-// const User = require('./models/User')
+const router = require('./routes/index.js');
+const passport = require('passport')
+require('./handlers/authenticate.js');
+const session = require('express-session')
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET_KEY } = process.env;
 
 
 
 require('./db.js');
 
-const server = express();       
+const server = express();
 
 server.use(session({
   secret: 'mysecret',
-  resave: false, 
-  saveUninitialized: true, 
-  cookie: {secure:false}
-})) 
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
 
 
 
@@ -30,39 +31,43 @@ server.name = 'API';
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
-server.use(morgan('dev'));    
-server.use(express.json()) 
-server.use(express.urlencoded({ extended: false}))
-server.use(passport.initialize()) 
+server.use(morgan('dev'));
+server.use(express.json())
+server.use(express.urlencoded({ extended: false }))
+server.use(passport.initialize())
 server.use(passport.session())
 
 
+// For Google Signup
+server.get('/auth/google/signup', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
+// For Google Login
+server.get('/auth/google/login', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-server.get('/auth/google',passport.authenticate('google',  {scope: ['profile', 'email']}))
+// For Google Callback
+server.get('/auth/google/create', passport.authenticate('google', { failureRedirect: '/login' }), async (req, res) => {
+  // user isComplete only when user is created manually or when user is created by google and then completed the form
+  if (req.user.isComplete) {
+    console.log('req user complete', req.user)
+    let token = jwt.sign({ id: req.user.dataValues.id, rol: req.user.dataValues.rol }, JWT_SECRET_KEY, {
+      expiresIn: 1 * 24 * 60 * 60 * 1000,
+    });
+    console.log('token', token)
+    if (req.user.dataValues.rol === 'Client') {
+      res.redirect(`http://127.0.0.1:5173/home?token=${token}`);
+    } else if (req.user.dataValues.rol === 'Admin') {
+      res.redirect(`http://127.0.0.1:5173/admin?token=${token}`);
+    } else if (req.user.dataValues.rol === 'Walker') {
+      res.redirect(`http://127.0.0.1:5173/dash?token=${token}`);
+    }
 
-server.get('/auth/google/create', passport.authenticate('google', { failureRedirect: '/login'}), async (req, res) =>{
-  // res.redirect('/') 
-  res.end('logget in!') 
-  //  Datos del usuario desde Google 
-  // const googleId = req.user.id;
-  // const email = req.user.emails[0].value;
-  // const name = req.user.displayName;
+  } else {
 
-  //  try {
-  //   // Guardar en la base de datos utilizando el modelo User
-  //   const user = await User.create({
-  //     googleId,
-  //     email, 
-  //     name
-  //   });
-  //   console.log('Usuario guardado en la base de datos:',  user);
-  //   res.redirect('/');
-  // } catch (error) {
-  //   console.error('Error al guardar en la base de datos:', error);
-  //   res.redirect('/');
-  // }
+    res.redirect(`http://127.0.0.1:5173/registro?googleId=${req.user.id}&email=${req.user.emails[0].value}&name=${req.user.displayName}`);
+  }
+
 });
+
 
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
@@ -72,7 +77,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/', router);   
+server.use('/', router);
 
 
 

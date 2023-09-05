@@ -1,9 +1,10 @@
 import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ImageUpload from './ImageUpload';
-import Cookies from 'js-cookie';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../../Redux/actions';
+import idFromToken from '../../utils/getToken';
+import Swal from 'sweetalert2';
 
 function EditForm({ setEdit, edit }) {
 	const dispatch = useDispatch();
@@ -11,23 +12,31 @@ function EditForm({ setEdit, edit }) {
 	const [forms, setForms] = useState({});
 	const [imageUrl, setImageUrl] = useState(''); // save the image url
 
-	const cookiesString = Cookies.get('auth'); // {"email":"test","password":"test"}
-	const cookies = JSON.parse(cookiesString);
+	// get the current user id from the token
+	const id = idFromToken();
+
+	// fetch data from store and pass it to single component
+	const users = useSelector((state) => state.users);
+	const userProfile = users.filter((user) => user.id === id)[0];
+	console.log(userProfile);
 
 	useEffect(() => {
 		setForms((prevDetails) => ({
 			...prevDetails,
-			image: imageUrl,
+			image: imageUrl ? imageUrl : userProfile.image,
+			cpr: userProfile.cpr ? userProfile.cpr : false,
+			schedule: userProfile.schedule ? userProfile.schedule : '',
+			status: userProfile.status ? userProfile.status : false,
+			size: userProfile.size ? userProfile.size : null,
 		}));
-	}, [imageUrl]);
-
-	// function onChange(e) {
-	// 	setForms({
-	// 		...forms,
-	// 		email: cookies.email,
-	// 		[e.target.name]: e.target.value === '' ? '' : e.target.value,
-	// 	});
-	// }
+	}, [
+		imageUrl,
+		userProfile.cpr,
+		userProfile.schedule,
+		userProfile.status,
+		userProfile.size,
+		userProfile.image,
+	]);
 
 	function onChange(e) {
 		const { name, value, type } = e.target;
@@ -36,7 +45,7 @@ function EditForm({ setEdit, edit }) {
 
 		setForms({
 			...forms,
-			email: cookies.email,
+			email: userProfile.email,
 			[name]: newValue,
 		});
 	}
@@ -49,10 +58,21 @@ function EditForm({ setEdit, edit }) {
 			dispatch(editUser(forms));
 			setForms({});
 			setEdit(false);
-			alert('Edit success');
+			Swal.fire({
+				position: 'top-end',
+				icon: 'success',
+				title: 'Edicion Exitosa',
+				showConfirmButton: false,
+				timer: 1500,
+			});
 		} catch (error) {
 			console.log(error.message);
-			alert(error.message);
+
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Algo salio mal!',
+			});
 		}
 	}
 
@@ -119,6 +139,9 @@ function EditForm({ setEdit, edit }) {
 							value={forms.schedule}
 							name="schedule"
 						>
+							<option hidden value>
+								Selecciona Horario
+							</option>
 							<option>6am-11am</option>
 							<option>11am-3pm</option>
 							<option>3pm-10pm</option>

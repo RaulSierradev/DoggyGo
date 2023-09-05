@@ -68,8 +68,23 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('SMALL', 'MEDIUM', "LARGE", "GIANT"),
     },
     rol: {
-      type: DataTypes.ENUM('Walker', 'Client'),
+      type: DataTypes.ENUM('Walker', 'Client', "Admin"),
       allowNull: false,
+    },
+    // add new googleId field
+    googleId: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: true
+    },
+    // add isComplete field to check if user has completed registration
+    // useful for google signups
+    isComplete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    ratingAvg: {
+      type: DataTypes.FLOAT,
     }
   },
     {

@@ -17,6 +17,13 @@ import Admin from './Views/Admin/Admin';
 import Clientes from './Views/Admin/Clients/Clientes';
 import Walkers from './Views/Admin/Walkers/Walkers';
 import PerfilDeUsuario from './Views/PerfilDeUsuario/PerfilDeUsuario';
+import UserProfile from './Views/Admin/UserProfile/UserProfile';
+import Walks from './Views/Admin/Walks/Walks';
+// import ResetPassword from './Views/Login/ResetPassword'; 
+// import Recuperar from './Views/recuprarContraseña/Recuperar';
+import Success from './Views/Mercado Pago/Success';
+import AlertDialog from './Views/Home/Components/Card/AlertDialog';
+
 
 function App() {
 	return (
@@ -26,23 +33,53 @@ function App() {
 				<Route path="/inicio" element={<Landing />} />
 				<Route path="/registro" element={<Registro />} />
 				<Route path="/login" element={<Login />} />
-				<Route element={<PrivateRoutes />}>
-					<Route path="/dash" element={<Layout />} exact>
+				<Route path="/home/success" element={<Success />} />
+				<Route path="/home" element={<Home />} />
+				<Route path="/alert" element={<AlertDialog />} />
+
+				{/* Walker routes */}
+				<Route
+					path="/dash"
+					element={<PrivateRoutes rol={['Walker']} />}
+				>
+					<Route path="/dash" element={<Layout />}>
 						<Route path="" element={<HomeDashboard />} exact />
-						<Route path="history" element={<Users />} exact />
-						<Route path="profile" element={<User />} exact />
+						<Route path="/dash/history" element={<Users />} exact />
+						<Route path="/dash/profile" element={<User />} exact />
 					</Route>
 				</Route>
-				<Route path="/home" element={<Home />} />
-				<Route path="/home/detail/:id" element={<WalkerDetail />} />
-				<Route path="/home/payment" element={<Payment />} />
-				<Route path='/admin' element={<Admin />}/>
-				<Route path='/admin/clientes' element={<Clientes/>}/>
-				<Route path='/admin/paseadores' element={<Walkers/>}/>
-				<Route path='/Profile' element={<PerfilDeUsuario/>}/>
-				{/* ------------------------dev------------------------ */}
+
+				{/* Client routes */}
+				<Route
+					path="/home/detail/:id"
+					element={<PrivateRoutes rol={['Client']} />}
+				>
+					<Route index element={<WalkerDetail />} />
+					<Route path="payment" element={<Payment />} />
+				</Route>
+
 				<Route path="/T" element={<T />} />
 				<Route path="*" element={<Error404 />} />
+
+				{/* Admin routes */}
+				<Route
+					path="/admin"
+					element={<PrivateRoutes rol={['Admin']} />}
+				>
+					<Route index element={<Admin />} />
+					<Route path="clientes" element={<Clientes />} />
+					<Route path="paseadores" element={<Walkers />} />
+					<Route path="/admin/detail/:id" element={<UserProfile />} />
+					<Route path="/admin/paseos" element={<Walks />} />
+				</Route>
+
+				{/* <Route path="/admin" element={<Admin />} />
+				<Route path="/admin/clientes" element={<Clientes />} />
+				<Route path="/reset-password" element={<ResetPassword/>} /> 
+				<Route path="/recuperarcontraseña" element={<Recuperar/>}/>
+				<Route path="/admin/paseadores" element={<Walkers />} />
+				<Route path="/admin/detail/:id" element={<UserProfile />} />
+				<Route path="/admin/paseos" element={<Walks />} /> */}
 			</Routes>
 		</div>
 	);
