@@ -16,6 +16,7 @@ import Payment from './Views/Booking Confirmation/Payment';
 import Admin from './Views/Admin/Admin';
 import Clientes from './Views/Admin/Clients/Clientes';
 import Walkers from './Views/Admin/Walkers/Walkers';
+import PerfilDeUsuario from './Views/PerfilDeUsuario/PerfilDeUsuario';
 import UserProfile from './Views/Admin/UserProfile/UserProfile';
 import Walks from './Views/Admin/Walks/Walks';
 

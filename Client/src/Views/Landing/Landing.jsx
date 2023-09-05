@@ -2,13 +2,21 @@ import style from './Landing.module.css';
 import Paseadores from '../../Components/Paseadores/Paseadores';
 import { useNavigate } from 'react-router-dom';
 import Nav from '../Nav';
-import Footer from '../Dashboard/components/Footer';
+import Footer from '../../Components/Footer/Footer';
+//import Footer from '../Dashboard/components/Footer';
+
+/* borrar al sustituir por urls de cloudinary */
+import agenda from '/guia.png';
+import contacta from '/contacta.png';
+import renta from '/renta.png';
+import flecha from '/flecha.png';
+
 import Accordion from '../Accordion/Accordion';
 
 const Landing = () => {
 	const navigate = useNavigate();
-	// const dispatch = useDispatch();
 
+	//requerido de redux
 	const PaseadoresEstrella = [
 		{
 			img: 'https://picsum.photos/203',
@@ -33,13 +41,10 @@ const Landing = () => {
 		},
 	];
 
-	// useEffect(() => {
-	// 	try {
-	// 		dispatch(getAll());
-	// 	} catch (error) {
-	// 		console.log(error.message);
-	// 	}
-	// }, []);
+	const urlguia = agenda;
+	const urlcontacta = contacta;
+	const urlarenta = renta;
+	const urlflecha = flecha;
 
 	return (
 		<div className={style.Landing}>
@@ -51,25 +56,21 @@ const Landing = () => {
 						className={style.btnsnav}
 						onClick={() => navigate('/home')}
 					>
-						home
+						Inicio
 					</button>
-					<button className={style.btnsnav}>features</button>
-					<button className={style.btnsnav}>service</button>
-					<button className={style.btnsnav}>listed</button>
-					<button className={style.btnsnav}>contact</button>
+					<button className={style.btnsnav}>Caracteristicas</button>
+					<button className={style.btnsnav}>Servicios</button>
+					<button className={style.btnsnav}>Contactanos</button>
 				</div>
 				<div className={style.sesionbtns}>
-					<button
-						className={style.Sing}
-						onClick={() => navigate('/login')}
-					>
-						Sign in
+					<button className={style.Sing} onClick={() => navigate('/login')}>
+						Iniciar sesion
 					</button>
 					<button
 						className={style.Register}
 						onClick={() => navigate('/registro')}
 					>
-						{'Register'.split('').map((letter, index) => (
+						{'Registrate..!'.split('').map((letter, index) => (
 							<span
 								className={style.letter}
 								style={{
@@ -92,7 +93,7 @@ const Landing = () => {
 					numquam magni veritatis aliquam, sed ut accusantium illo
 					unde cupiditate itaque harum adipisci quidem?
 				</p>
-				<button>More about us</button>
+				<button>Mas sobre nosostros</button>
 			</section>
 			<section className={style.sec2}>
 				<p className={style.sec2txP}>¿como funciona?</p>
@@ -108,10 +109,18 @@ const Landing = () => {
 					<h2 className={style.sec3tll}>paseadores estrella</h2>
 					<div>
 						<p className={style.sec3stx}>
-							everything you need to when you're looking
+							de entre nuestros mejores paseadores...
 						</p>
 						<button className={style.sec3vwall}>
-							ver todos los paseadores
+							ver todos los paseadores{' '}
+							<img
+								style={{
+									display: 'inline-block',
+									height: '1rem',
+								}}
+								src={flecha}
+								alt=""
+							/>
 						</button>
 					</div>
 				</div>
@@ -126,6 +135,7 @@ const Landing = () => {
 					})}
 				</div>
 			</section>
+			<Footer />
 		</div>
 	);
 };
