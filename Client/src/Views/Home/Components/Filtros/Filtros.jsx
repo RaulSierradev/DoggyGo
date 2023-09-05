@@ -86,6 +86,9 @@ const Filtros = () => {
   return (
     <div>
       <Stack spacing={2} direction={"row"}>
+      <InputLabel sx={{ fontWeight: "bold", top: 20 }} id='filter-label'>
+          FILTRAR POR:
+        </InputLabel>
         <FormControl variant='outlined' sx={{ width: 180, top: 12 }}>
           <InputLabel id='country-select-label'>Selecciona el pais</InputLabel>
           <Select

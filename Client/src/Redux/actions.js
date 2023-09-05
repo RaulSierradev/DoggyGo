@@ -7,7 +7,7 @@ import {
   RESTORE_CLIENTS,
   RESTORE_WALKERS,
   FILTER_WALKERS,
-  ORDER_DEFAULT,
+  ORDER_WALKERS,
   CREATE_USER,
   EDIT_USER,
   CURRENT_USER,
@@ -19,7 +19,6 @@ import {
   GET_STATES,
   GET_CITIES,
   CREATE_WALK
-
 } from "./action-types";
 
 const URL = "http://localhost:3001/";
@@ -173,10 +172,11 @@ export const restoreWalkers = () => {
   };
 };
 
-//Ordena por default segun disponibilidad, entre otros
-export const orderDefault = () => {
+//Ordena los walkers segun el order
+export const orderWalkers = (order) => {
   return {
-    type: ORDER_DEFAULT,
+    type: ORDER_WALKERS,
+    payload: order,
   };
 };
 
