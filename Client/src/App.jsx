@@ -18,8 +18,8 @@ import Clientes from './Views/Admin/Clients/Clientes';
 import Walkers from './Views/Admin/Walkers/Walkers';
 import UserProfile from './Views/Admin/UserProfile/UserProfile';
 import Walks from './Views/Admin/Walks/Walks';
-import ResetPassword from './Views/Login/ResetPassword'; 
-import Recuperar from './Views/recuprarContraseña/Recuperar';
+// import ResetPassword from './Views/Login/ResetPassword'; 
+// import Recuperar from './Views/recuprarContraseña/Recuperar';
 import Success from './Views/Mercado Pago/Success';
 import AlertDialog from './Views/Home/Components/Card/AlertDialog';
 

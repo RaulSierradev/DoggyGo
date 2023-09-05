@@ -1,4 +1,25 @@
-import { CREATE_USER, EDIT_USER, FILTER_WALKERS, GET_ALL_USERS, GET_CLIENT_BY_NAME, GET_WALKER_BY_NAME, ORDER_DEFAULT, PRUEBA, RESTORE_CLIENTS, RESTORE_WALKERS, CURRENT_USER, CREATE_DOG, SET_WALK, GET_BY_ID, GET_ALL_WALKS } from "./action-types";
+
+import {
+  CREATE_USER,
+  EDIT_USER,
+  FILTER_WALKERS,
+  GET_ALL_USERS,
+  GET_CLIENT_BY_NAME,
+  GET_WALKER_BY_NAME,
+  ORDER_DEFAULT,
+  PRUEBA,
+  RESTORE_CLIENTS,
+  RESTORE_WALKERS,
+  CURRENT_USER,
+  CREATE_DOG,
+  SET_WALK,
+  GET_BY_ID,
+  GET_ALL_WALKS,
+  GET_COUNTRIES,
+  GET_STATES,
+  GET_CITIES,
+  CREATE_WALK,
+} from "./action-types";
 
 let initialstate = {
   allUsers: [],
@@ -229,7 +250,32 @@ let initialstate = {
   dogs: [],
   walk: {},
   user: [],
-  walks: []
+  walks: [],
+  countries: [],
+  states: [],
+  cities: [],
+};
+
+const compareStringsSecondary = (a, b, i = 0) => {
+  //* Para ORDER_CARDS
+  if (a === b) {
+    return 0;
+  }
+
+  if (i >= a.length) {
+    return -1; // a es más corto que b
+  }
+
+  if (i >= b.length) {
+    return 1; // b es más corto que a
+  }
+
+  const comparison = a[i].localeCompare(b[i]);
+  if (comparison !== 0) {
+    return comparison;
+  }
+
+  return compareStringsSecondary(a, b, i + 1);
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -415,8 +461,22 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         walks: payload,
-      }
-
+      };
+    case GET_COUNTRIES:
+      return {
+        ...state,
+        countries: payload,
+      };
+    case GET_STATES:
+      return {
+        ...state,
+        states: payload,
+      };
+    case GET_CITIES:
+      return {
+        ...state,
+        cities: payload,
+      };
 
     default:
       return { ...state };
