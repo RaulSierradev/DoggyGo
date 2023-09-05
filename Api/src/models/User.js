@@ -82,6 +82,9 @@ module.exports = (sequelize) => {
     isComplete: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },
+    ratingAvg: {
+      type: DataTypes.FLOAT,
     }
   },
     {
