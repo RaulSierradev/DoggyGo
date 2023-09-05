@@ -1,6 +1,6 @@
 .ovr{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
     overflow: hidden;
  }
@@ -17,7 +17,7 @@
     height: 90%;
     position: absolute;
     padding-bottom: 5%;
-    bottom: -7%;
+    bottom: -2%;
     right: 2%;
     transform: rotateZ(-5deg);
     display: flex;

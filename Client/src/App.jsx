@@ -22,6 +22,7 @@ import Walks from './Views/Admin/Walks/Walks';
 
 import Success from './Views/Mercado Pago/Success';
 import AlertDialog from './Views/Home/Components/Card/AlertDialog';
+import Contact from './Views/Contact/Contact';
 
 function App() {
 	return (
@@ -55,7 +56,9 @@ function App() {
 					<Route index element={<WalkerDetail />} />
 					<Route path="payment" element={<Payment />} />
 				</Route>
-
+				
+				<Route path="/Help" element={<Contact />} />
+				<Route path="/Profile" element={<PerfilDeUsuario />} />
 				<Route path="/T" element={<T />} />
 				<Route path="*" element={<Error404 />} />
 
