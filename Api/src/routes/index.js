@@ -2,12 +2,16 @@ const { Router } = require('express');
 
 // Importar todos los routers;
 
+
+
 const userRouter = require ("./userRouter");
 const dogRouter = require ("./dogRouter");
 const walkRouter = require ("./walkRouter");
 const reviewRouter = require ("./reviewRouter");
 const locationRouter = require ("./locationRouter");
 const mercadopagoRouter = require ("./mercadoPagoRouter");
+const contactRouter = require ("./contactRouter");
+
 
 const router = Router();
 
@@ -19,6 +23,7 @@ router.use("/walk", walkRouter);
 router.use("/review", reviewRouter);
 router.use("/location", locationRouter);
 router.use("/payment", mercadopagoRouter);
+router.use("/contact", contactRouter);
 
 
 module.exports = router
