@@ -1,12 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import Navbar from './components/NavBar';
 import Menu from './components/Menu';
-import Footer from './components/Footer';
 import Nav from '../Nav';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { getAllWalks } from '../../Redux/actions';
 import { useDispatch } from 'react-redux';
+import FooterDashboard from './components/FooterDashboard';
 
 const Layout = () => {
 	const dispatch = useDispatch();
@@ -37,7 +36,7 @@ const Layout = () => {
 					<Outlet />
 				</div>
 			</div>
-			<Footer />
+			<FooterDashboard />
 		</div>
 	);
 };

@@ -41,6 +41,7 @@ const createWalkHandler = async (req, res) => {
     image,
     comment,
     emergency,
+    WalkerId,
   } = req.body;
   try {
     // if (startDate || state || duration || cost || image || comment) {
@@ -57,6 +58,7 @@ const createWalkHandler = async (req, res) => {
       image,
       comment,
       emergency,
+      WalkerId,
     });
     res.status(200).json(newWalk);
   } catch (error) {
