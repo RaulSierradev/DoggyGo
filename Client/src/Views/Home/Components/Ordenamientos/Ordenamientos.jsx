@@ -37,7 +37,7 @@ const Ordenamientos = () => {
             onChange={handleOrder}
           >
             <MenuItem value='Alphabetic'>Alfabético</MenuItem>
-            <MenuItem value='rating'>Puntuación</MenuItem>
+            <MenuItem value='rating'>Calificación</MenuItem>
           </Select>
         </FormControl>
       </Stack>
