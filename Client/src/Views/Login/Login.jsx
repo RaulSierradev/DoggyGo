@@ -139,13 +139,14 @@ const Login = () => {
 								<p className="text-sm text-red-600">
 									* {errors.email}
 								</p>
-							)}
+							)}  
 							<button
 								className="flex w-full justify-center rounded-md bg-indigo-600 px-5 py-3 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 								type="submit"
 							>
 								Iniciar Sesión
-							</button>
+							</button> 
+							<Link to="/reset-password">Olvidé mi contraseña</Link>
 						</form>
 					</div>
 				</div>
