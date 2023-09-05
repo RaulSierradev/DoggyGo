@@ -1,9 +1,11 @@
 import { useState } from 'react'; 
 import { useDispatch, useSelector } from "react-redux"; 
 import { getEmail} from '../../Redux/actions.js'
+import { useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {  
-    const dispatch = useDispatch(); 
+    const dispatch = useDispatch();  
+    const navigate = useNavigate()
     const email = useSelector((state) => state.email)   
     console.log("email1", email )
     const [emails, setEmails] =  useState('');  
@@ -14,7 +16,9 @@ const ResetPassword = () => {
     } 
     function handleSubmit(event){
         event.preventDefault(); 
-        dispatch(getEmail(emails))  
+        dispatch(getEmail(emails)) 
+        alert("Se envio su correo")  
+        navigate("/login") 
         // console.log("getEmail",emails)
        
     }  
