@@ -12,7 +12,7 @@ userRouter.post('/login', loginHandler);
 userRouter.post('/', createUserHandler);
 userRouter.put('/', updateUserHandler) 
 userRouter.post('/auth/update', passwordUserHandler) 
-userRouter.get('/email/:email', handleUserByEmail)
+userRouter.get('/email', handleUserByEmail)
 
 
 
