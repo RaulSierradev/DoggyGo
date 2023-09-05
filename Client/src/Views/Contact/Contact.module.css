@@ -1,0 +1,93 @@
+.ovr{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+ }
+.vwContainer{
+    background-color: rgba(163, 189, 255, 1);
+    background-image: url(/polygon-scatter-.svg);
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.contact{
+    background-color: white;
+    width: 80%;
+    height: 90%;
+    position: absolute;
+    padding-bottom: 5%;
+    bottom: -7%;
+    right: 2%;
+    transform: rotateZ(-5deg);
+    display: flex;
+    flex-direction: column;
+    box-shadow:-4px 65px 0px 20px #edeff2;
+}
+.contacthdr{
+    box-sizing: border-box;
+    padding-left: 5% ;
+    padding-right: 5% ;
+}
+.contact_p{
+    padding: 1rem;
+    padding-top: 1.3rem;
+    font-size: 1.3vw;
+    font-weight: 500;
+}
+.frmttl{
+    height: 20%;
+    box-sizing: border-box;
+    padding-top: 5%;
+    padding-left: 15%;
+    font-size: 2vw;
+    color: rgb(20, 19, 19);
+    font-weight: 500;
+}
+.form{
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding-top: 2.5%;
+    display: flex;
+    flex-direction: column;
+}
+.inpsSection{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 25%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+}
+.secInput{
+    position: relative;
+}
+.lblinp{
+    height: 40%;
+    display: block;
+    box-sizing: border-box;
+    padding-left: 10%;
+    font-weight: 500;
+    opacity: 45%;
+}
+.inp{
+    display: block;
+    height:60% ;
+    width: 70%;
+    margin-left: 15%;
+    background-color: #fafafa;
+    box-shadow: inset 0px 0px 15px -13px gray;
+}
+.txtar{
+    background-color: #fafafa;
+    box-shadow:0px 0px 11px -5px gray;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
+    max-height: 40%;
+    min-height: 10%;
+    box-sizing: border-box;
+    padding: 1.5rem;
+}
