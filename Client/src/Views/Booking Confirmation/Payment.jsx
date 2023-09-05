@@ -59,7 +59,7 @@ function Payment() {
 		// get the new walk state
 		console.log(walk);
 
-		await dispatch(createWalk());
+		// await dispatch(createWalk());
 
 		const id = await createPreference();
 		setId(id);

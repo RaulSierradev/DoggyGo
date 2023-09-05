@@ -56,10 +56,10 @@ export function createDog(dog) {
   };
 }
 
-export function createWalk() {
-  return async function createWalkThunk(dispatch, getState) {
+export function createWalk(walk) {
+  return async function createWalkThunk(dispatch) {
     // dispatch({ type: 'loading' })
-    const { walk } = getState();  // Get the updated walk from the state
+    // const { walk } = getState();  // Get the updated walk from the state
 
     const res = await axios.post(`${URL}walk`, walk);
     console.log(res.data);
@@ -218,7 +218,7 @@ export const getAllWalks = () => {
   };
 };
 
-export const getCountries = ()=>{
+export const getCountries = () => {
   const endpoint = 'http://localhost:3001/location/countries/'
   return async (dispatch) => {
     try {
