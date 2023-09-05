@@ -49,41 +49,6 @@ const Landing = () => {
 	return (
 		<div className={style.Landing}>
 			<Nav />
-			{/* <nav className={style.nav}>
-				<h1>DoggyGo</h1>
-				<div className={style.secbtns1}>
-					<button
-						className={style.btnsnav}
-						onClick={() => navigate('/home')}
-					>
-						Inicio
-					</button>
-					<button className={style.btnsnav}>Caracteristicas</button>
-					<button className={style.btnsnav}>Servicios</button>
-					<button className={style.btnsnav}>Contactanos</button>
-				</div>
-				<div className={style.sesionbtns}>
-					<button className={style.Sing} onClick={() => navigate('/login')}>
-						Iniciar sesion
-					</button>
-					<button
-						className={style.Register}
-						onClick={() => navigate('/registro')}
-					>
-						{'Registrate..!'.split('').map((letter, index) => (
-							<span
-								className={style.letter}
-								style={{
-									animationDelay: `${(index + 1) * 60}ms`,
-								}}
-								key={index}
-							>
-								{letter}
-							</span>
-						))}
-					</button>
-				</div>
-			</nav> */}
 			<section className={style.sec1}>
 				<span>Bienvenido a Doggy</span>
 				<h2>Pasea a tu perro</h2>
