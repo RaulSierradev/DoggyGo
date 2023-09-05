@@ -81,7 +81,6 @@ const Admin = () => {
                     />
                     <div>
                       <h3 className="font-bold">{e.name}</h3>
-                      <p className="text-gray-500">Hace {index} h</p>
                     </div>
                   </div>
                 );
@@ -168,7 +167,6 @@ const Admin = () => {
                     />
                     <div>
                       <h3 className="font-bold">{e.name}</h3>
-                      <p className="text-gray-500">Hace {index} h</p>
                     </div>
                   </div>
                 );

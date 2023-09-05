@@ -14,8 +14,7 @@ import {
   CREATE_DOG,
   SET_WALK,
   GET_BY_ID,
-  GET_ALL_WALKS, 
-  GET_ALL_MAIL,
+  GET_ALL_WALKS,
 } from "./action-types";
 
 const URL = "http://localhost:3001/";
@@ -50,6 +49,19 @@ export function createDog(dog) {
     console.log(res.data);
 
     dispatch({ type: CREATE_DOG, payload: res.data });
+  };
+}
+
+export function createWalk() {
+  return async function createWalkThunk(dispatch, getState) {
+    // dispatch({ type: 'loading' })
+    const { walk } = getState();  // Get the updated walk from the state
+
+    const res = await axios.post(`${URL}walk`, walk);
+    console.log(res.data);
+
+    dispatch({ type: CREATE_WALK, payload: res.data });
+
   };
 }
 
@@ -200,13 +212,3 @@ export const getAllWalks = () => {
     }
   };
 };
-export const getEmail = (email) => {   
-  return async (dispatch) => {
-    const response = await axios(`http://localhost:3001/user/`,{ params: { email} })   
-    console.log('response',response.data[0].email)
-    return dispatch({
-      type : GET_ALL_MAIL, 
-      payload: response.data[0].email
-    })
-  }
-}

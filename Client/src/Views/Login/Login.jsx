@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getAll } from '../../Redux/actions.js';
 import google from '../../assets/google1.svg';
+import Alert from '@mui/material/Alert';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Login = () => {
 	});
 
 	const [errors, setErrors] = useState({});
+	const [error, setError] = useState('');
 
 	const googleLogin = (e) => {
 		e.preventDefault();
@@ -65,13 +67,16 @@ const Login = () => {
 
 		// Authenticate user
 		const user = await authenticateUser(logeo.email, logeo.password);
-
+		console.log(user);
 		if (user) {
 			// Redirect to protected route after successful login
 			if (user.rol === 'Walker') navigate('/dash');
+			if (user.rol === 'Admin') navigate('/admin');
+			if (user.rol === 'Client') navigate('/home');
 		} else {
 			// Show error message or perform other actions for failed authentication
-			alert('Usuario o contraseña incorrectos');
+			// alert('Usuario o contraseña incorrectos');
+			setError('Usuario o contraseña incorrectos');
 		}
 	};
 
@@ -113,6 +118,7 @@ const Login = () => {
 							className="flex flex-col gap-4"
 							onSubmit={handleLogin}
 						>
+							{error && <Alert severity="error">{error}</Alert>}
 							<input
 								className="p-2 rounded-xl border mt-8 text-gray-600"
 								type="text"

@@ -36,11 +36,13 @@ const Filtros = () => {
     const name = event.target.name;
     const value = event.target.value;
 
-    dispatch(filterWalkers({
-      ...selectsFilter,
-      cpr: cprFilter,
-      [name]: value
-    }));
+    dispatch(
+      filterWalkers({
+        ...selectsFilter,
+        cpr: cprFilter,
+        [name]: value,
+      })
+    );
     setSelectsFilter({
       ...selectsFilter,
       [name]: value,
@@ -48,14 +50,24 @@ const Filtros = () => {
   };
 
   const handleCprFilter = (event) => {
-    event.preventDefault();
-    const checked = event.target.checked
+    const checked = event.target.checked;
 
-    dispatch(filterWalkers({
-      ...selectsFilter,
-      cpr: checked,
-    }));
     setCprFilter(checked);
+
+    if (!checked)
+      return dispatch(
+        filterWalkers({
+          ...selectsFilter,
+          status: true,
+        })
+      );
+
+    dispatch(
+      filterWalkers({
+        ...selectsFilter,
+        cpr: checked,
+      })
+    );
   };
 
   /*const handleSizeFilter = (event, newSize) => {
@@ -65,6 +77,7 @@ const Filtros = () => {
 
   const handleResetFilter = () => {
     dispatch(restoreWalkers());
+    dispatch(filterWalkers({ status: true }));
     setSelectsFilter({ country: "", time: "" });
     //setSizeFilter("");
     setCprFilter(false);
