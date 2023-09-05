@@ -104,6 +104,7 @@ function EditForm({ setEdit, edit }) {
 	}
 
 	console.log(forms);
+	console.log(userProfile.rol);
 
 	return (
 		<>
@@ -158,155 +159,167 @@ function EditForm({ setEdit, edit }) {
 				</form>
 				<div className="flex-1 items-center justify-center flex flex-col gap-5">
 					<h3 className="font-bold">Edita tus preferencias</h3>
-					<div className="pt-3 pb-3 flex items-center justify-center">
-						<label className="pr-3">Horario de paseos</label>
-						<select
-							className="w-48 text-base text-gray-700 p-3 rounded-md"
-							onChange={onChange}
-							value={forms.schedule}
-							name="schedule"
-						>
-							<option hidden value>
-								Selecciona Horario
-							</option>
-							<option>6am-11am</option>
-							<option>11am-3pm</option>
-							<option>3pm-10pm</option>
-						</select>
-					</div>
-					<div className="flex border-2 p-2 items-center justify-center w-4/6">
-						<h3 className="flex mr-auto">Status</h3>
-						<label className="text-gray-900 px-3">
-							No Disponible{' '}
-							<input
-								type="radio"
-								name="status"
-								checked={forms.status === false}
-								onChange={() =>
-									onChange({
-										target: {
-											name: 'status',
-											value: false,
-										},
-									})
-								}
-							/>{' '}
-						</label>
+					{userProfile.rol === 'Walker' ? (
+						<>
+							<div className="pt-3 pb-3 flex items-center justify-center">
+								<label className="pr-3">
+									Horario de paseos
+								</label>
+								<select
+									className="w-48 text-base text-gray-700 p-3 rounded-md"
+									onChange={onChange}
+									value={forms.schedule}
+									name="schedule"
+								>
+									<option hidden value>
+										Selecciona Horario
+									</option>
+									<option>6am-11am</option>
+									<option>11am-3pm</option>
+									<option>3pm-10pm</option>
+								</select>
+							</div>
+							<div className="flex border-2 p-2 items-center justify-center w-4/6">
+								<h3 className="flex mr-auto">Status</h3>
+								<label className="text-gray-900 px-3">
+									No Disponible{' '}
+									<input
+										type="radio"
+										name="status"
+										checked={forms.status === false}
+										onChange={() =>
+											onChange({
+												target: {
+													name: 'status',
+													value: false,
+												},
+											})
+										}
+									/>{' '}
+								</label>
 
-						<label className="text-gray-900 px-3">
-							Disponible{' '}
-							<input
-								type="radio"
-								name="status"
-								checked={forms.status === true}
-								onChange={() =>
-									onChange({
-										target: { name: 'status', value: true },
-									})
-								}
-							/>{' '}
-						</label>
-					</div>
-					<div className="flex border-2 p-2 items-center justify-around w-4/6">
-						<h3 className="">CPR</h3>
-						<label className="text-gray-900 px-3">
-							No{' '}
-							<input
-								type="radio"
-								name="cpr"
-								checked={forms.cpr === false}
-								onChange={() =>
-									onChange({
-										target: {
-											name: 'cpr',
-											value: false,
-										},
-									})
-								}
-							/>{' '}
-						</label>
+								<label className="text-gray-900 px-3">
+									Disponible{' '}
+									<input
+										type="radio"
+										name="status"
+										checked={forms.status === true}
+										onChange={() =>
+											onChange({
+												target: {
+													name: 'status',
+													value: true,
+												},
+											})
+										}
+									/>{' '}
+								</label>
+							</div>
+							<div className="flex border-2 p-2 items-center justify-around w-4/6">
+								<h3 className="">CPR</h3>
+								<label className="text-gray-900 px-3">
+									No{' '}
+									<input
+										type="radio"
+										name="cpr"
+										checked={forms.cpr === false}
+										onChange={() =>
+											onChange({
+												target: {
+													name: 'cpr',
+													value: false,
+												},
+											})
+										}
+									/>{' '}
+								</label>
 
-						<label className="text-gray-900 px-3">
-							Si{' '}
-							<input
-								type="radio"
-								name="cpr"
-								checked={forms.cpr === true}
-								onChange={() =>
-									onChange({
-										target: { name: 'cpr', value: true },
-									})
-								}
-							/>{' '}
-						</label>
-					</div>
-					<div className="flex border-2 p-2 items-center justify-around w-5/6">
-						<h3 className="">Tamaño perro</h3>
-						<label className="text-gray-900 px-3">
-							Pequeño{' '}
-							<input
-								type="radio"
-								name="size"
-								checked={forms.size === 'SMALL'}
-								onChange={() =>
-									onChange({
-										target: {
-											name: 'size',
-											value: 'SMALL',
-										},
-									})
-								}
-							/>{' '}
-						</label>
-						<label className="text-gray-900 px-3">
-							Mediano{' '}
-							<input
-								type="radio"
-								name="size"
-								checked={forms.size === 'MEDIUM'}
-								onChange={() =>
-									onChange({
-										target: {
-											name: 'size',
-											value: 'MEDIUM',
-										},
-									})
-								}
-							/>{' '}
-						</label>
-						<label className="text-gray-900 px-3">
-							Grande{' '}
-							<input
-								type="radio"
-								name="size"
-								checked={forms.size === 'LARGE'}
-								onChange={() =>
-									onChange({
-										target: {
-											name: 'size',
-											value: 'LARGE',
-										},
-									})
-								}
-							/>{' '}
-						</label>
-						<label className="text-gray-900 px-3">
-							Gigante{' '}
-							<input
-								type="radio"
-								name="size"
-								checked={forms.size === 'GIANT'}
-								onChange={() =>
-									onChange({
-										target: {
-											name: 'size',
-											value: 'GIANT',
-										},
-									})
-								}
-							/>{' '}
-						</label>
-					</div>
+								<label className="text-gray-900 px-3">
+									Si{' '}
+									<input
+										type="radio"
+										name="cpr"
+										checked={forms.cpr === true}
+										onChange={() =>
+											onChange({
+												target: {
+													name: 'cpr',
+													value: true,
+												},
+											})
+										}
+									/>{' '}
+								</label>
+							</div>
+							<div className="flex border-2 p-2 items-center justify-around w-5/6">
+								<h3 className="">Tamaño perro</h3>
+								<label className="text-gray-900 px-3">
+									Pequeño{' '}
+									<input
+										type="radio"
+										name="size"
+										checked={forms.size === 'SMALL'}
+										onChange={() =>
+											onChange({
+												target: {
+													name: 'size',
+													value: 'SMALL',
+												},
+											})
+										}
+									/>{' '}
+								</label>
+								<label className="text-gray-900 px-3">
+									Mediano{' '}
+									<input
+										type="radio"
+										name="size"
+										checked={forms.size === 'MEDIUM'}
+										onChange={() =>
+											onChange({
+												target: {
+													name: 'size',
+													value: 'MEDIUM',
+												},
+											})
+										}
+									/>{' '}
+								</label>
+								<label className="text-gray-900 px-3">
+									Grande{' '}
+									<input
+										type="radio"
+										name="size"
+										checked={forms.size === 'LARGE'}
+										onChange={() =>
+											onChange({
+												target: {
+													name: 'size',
+													value: 'LARGE',
+												},
+											})
+										}
+									/>{' '}
+								</label>
+								<label className="text-gray-900 px-3">
+									Gigante{' '}
+									<input
+										type="radio"
+										name="size"
+										checked={forms.size === 'GIANT'}
+										onChange={() =>
+											onChange({
+												target: {
+													name: 'size',
+													value: 'GIANT',
+												},
+											})
+										}
+									/>{' '}
+								</label>
+							</div>
+						</>
+					) : null}
 					<ImageUpload
 						imageUrl={imageUrl}
 						setImageUrl={setImageUrl}
