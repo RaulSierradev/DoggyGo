@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { orderWalkers } from "../../../../Redux/actions";
 
 const Ordenamientos = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Ordenamientos = () => {
             onChange={handleOrder}
           >
             <MenuItem value='Alphabetic'>Alfabético</MenuItem>
-            <MenuItem value='Calification'>Calificación</MenuItem>
+            <MenuItem value='rating'>Calificación</MenuItem>
           </Select>
         </FormControl>
       </Stack>

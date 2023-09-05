@@ -1,11 +1,12 @@
 import React from 'react'
 import style from './T.module.css'
-import Plans from '../../Components/Plans/Plans'
+import Testimonios from '../../Components/Testimonios/Testimonios'
+
 
 const T = () => {
   return (
     <main className={style.T}>
-        <Plans/>
+      
     </main>
   )
 }

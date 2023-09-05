@@ -16,6 +16,7 @@ import Payment from './Views/Booking Confirmation/Payment';
 import Admin from './Views/Admin/Admin';
 import Clientes from './Views/Admin/Clients/Clientes';
 import Walkers from './Views/Admin/Walkers/Walkers';
+import PerfilDeUsuario from './Views/PerfilDeUsuario/PerfilDeUsuario';
 import UserProfile from './Views/Admin/UserProfile/UserProfile';
 import Walks from './Views/Admin/Walks/Walks';
 
@@ -37,7 +38,7 @@ function App() {
 				{/* Walker routes */}
 				<Route
 					path="/dash"
-					element={<PrivateRoutes rol={['Walker']} />}
+					element={<PrivateRoutes rol={['Walker', 'Client']} />}
 				>
 					<Route path="/dash" element={<Layout />}>
 						<Route path="" element={<HomeDashboard />} exact />
@@ -55,6 +56,13 @@ function App() {
 					<Route path="payment" element={<Payment />} />
 				</Route>
 
+				<Route
+					path="/perfil"
+					element={<PrivateRoutes rol={['Client']} />}
+				>
+					<Route index element={<PerfilDeUsuario />} />
+				</Route>
+
 				<Route path="/T" element={<T />} />
 				<Route path="*" element={<Error404 />} />
 
@@ -66,8 +74,8 @@ function App() {
 					<Route index element={<Admin />} />
 					<Route path="clientes" element={<Clientes />} />
 					<Route path="paseadores" element={<Walkers />} />
-					<Route path="/admin/detail/:id" element={<UserProfile />} />
-					<Route path="/admin/paseos" element={<Walks />} />
+					<Route path="detail/:id" element={<UserProfile />} />
+					<Route path="paseos" element={<Walks />} />
 				</Route>
 
 				{/* <Route path="/admin" element={<Admin />} />

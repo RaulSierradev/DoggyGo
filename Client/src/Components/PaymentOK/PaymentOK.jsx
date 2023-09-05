@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import style from './PaymentOK.module.css';
 import icon from '/SuccessIcon.png';
+import Swal from 'sweetalert2';
+import { createWalk } from '../../Redux/actions';
+import { useDispatch } from 'react-redux';
 
 const PaymentOK = () => {
+	const dispatch = useDispatch();
 	const [items, setItems] = useState({});
 
 	useEffect(() => {
@@ -13,9 +17,26 @@ const PaymentOK = () => {
 		}
 	}, []);
 
-	// const clearLocalStorage = () => {
-	// 	localStorage.clear();
-	// }
+	const handleConfirm = () => {
+		try {
+			dispatch(createWalk(items));
+			localStorage.clear();
+			Swal.fire({
+				title: 'Paseo confirmado',
+				text: 'Tu paseo ha sido confirmado',
+				icon: 'success',
+				confirmButtonText: 'Ok',
+			});
+		} catch (error) {
+			console.log(error.message);
+			Swal.fire({
+				title: 'Error',
+				text: 'Ha ocurrido un error',
+				icon: 'error',
+				confirmButtonText: 'Ok',
+			});
+		}
+	};
 
 	const iconURL = icon;
 	console.log(items);
@@ -61,6 +82,7 @@ const PaymentOK = () => {
 					<p className={style.sc2tx_total}>Total</p>{' '}
 					<p className={style.sc2tx_total}>${items.total}</p>{' '}
 				</div>
+				<button onClick={handleConfirm}>Confirma</button>
 			</div>
 		</div>
 	);

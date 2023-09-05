@@ -56,8 +56,30 @@ Walk.belongsToMany(User, { through: "UserWalks", timestamps: false });
 Walk.hasMany(User);
 User.belongsToMany(Walk, { through: "UserWalks", timestamps: false });
 
-User.hasMany(Review);
-Review.belongsTo(User);
+// User.hasMany(Review);
+// Review.belongsTo(User);
+
+
+User.hasMany(Review, {
+  foreignKey: 'clientId',
+  as: 'clientReviews',
+});
+Review.belongsTo(User, {
+  foreignKey: 'clientId',
+  as: 'client',
+});
+
+
+User.hasMany(Review, {
+  foreignKey: 'walkerId',
+  as: 'Reviews',
+});
+Review.belongsTo(User, {
+  foreignKey: 'walkerId',
+  as: 'walker',
+});
+
+
 
 Contact.hasMany(User);
 User.belongsTo(Contact);
