@@ -11,7 +11,7 @@ const Card = ({ walker }) => {
 	const token = Cookies.get('auth') ? Cookies.get('auth') : null;
 	const decoded = token ? jwt_decode(token) : null;
 	const userRole = decoded ? decoded.rol : '';
-	const { id, name, image, description, country, state, city, status } =
+	const { id, name, image, description, country, state, city, status, ratingAvg } =
 		walker;
 	const showAlert = () => {
 		// e.preventDefault();
@@ -47,6 +47,9 @@ const Card = ({ walker }) => {
 				<p className="basis-6 text-gray-900 leading-none">{state}</p>
 				<p className="basis-6 pl-2 text-gray-900 leading-none">
 					{city}
+				</p>
+				<p className="basis-6 pl-2 text-gray-900 leading-none">
+					{ratingAvg}
 				</p>
 				<NavLink
 					className={'rounded-md text-white bg-green-500 p-2'}
