@@ -18,7 +18,8 @@ import {
   GET_COUNTRIES,
   GET_STATES,
   GET_CITIES,
-  CREATE_WALK
+  CREATE_WALK,
+  DELETE_USER,
 
 } from "./action-types";
 
@@ -258,6 +259,21 @@ export const getCities = (sta, co) => {
       });
     } catch (error) {
       return { error: error.message };
+    }
+  };
+};
+
+export const deleteUser = (id) => {
+  const endpoint = `http://localhost:3001/user/id/${id}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      return dispatch({
+        type: DELETE_USER,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: `No hay un usuario con el siguiente ID: "${id}"` };
     }
   };
 };

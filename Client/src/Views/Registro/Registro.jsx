@@ -37,6 +37,7 @@ const Registro = () => {
     address: "",
     state: "",
     phone: "",
+    enabled: true,
     status: false,
     suscription: false,
     isComplete: true,

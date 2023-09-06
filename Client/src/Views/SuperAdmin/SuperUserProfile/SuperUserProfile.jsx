@@ -1,30 +1,29 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getById } from "../../../Redux/actions.js";
-import jwt_decode from "jwt-decode";
-import Cookies from "js-cookie";
-import Sidebar from "../Sidebar.jsx";
-import ViewProfile from "./ViewProfile.jsx";
-import EditProfile from "./EditProfile.jsx";
+import { deleteUser, getById } from "../../../Redux/actions.js";
+import SuperSidebar from "../SuperSidebar.jsx";
+import SuperViewProfile from "./SuperViewProfile.jsx";
+import SuperEditProfile from "./SuperEditProfile.jsx";
 
-const UserProfile = () => {
-  const token = Cookies.get("auth"); // {"email":"test","password":"test"}
-  const decoded = jwt_decode(token);
-  const ids = decoded.id;
-  const users = useSelector((state) => state.users);
-  const userProfile = users.filter((user) => user.id === ids)[0];
+const SuperUserProfile = () => {
+  const navigate = useNavigate()
   const { id } = useParams();
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   useEffect(() => {
     dispatch(getById(id));
-  }, [id]);
+  }, [dispatch]);
   let userDetail = useSelector((state) => state.user);
+  const handleDelete = ()=>{
+    alert('Eliminar usuario')
+    dispatch(deleteUser(id))
+    navigate('/sadmin')
+  }
   return (
     <div>
       <div className="grid lg:grid-cols-4 xl:grid-cols-6 min-h-screen">
-        <Sidebar userProfile={userProfile} />
+        <SuperSidebar />
         <div className="p-10 text-center lg:col-span-3 xl:col-span-5 bg-gray-100 h-screen overflow-y-scroll">
           <div className="flex">
             <div className="mr-10">
@@ -39,7 +38,7 @@ const UserProfile = () => {
                 id: #{userDetail.id}
               </p>
               <div className="font-bold">
-                <h1 className="text-4xl text-indigo-600">{userDetail.name}</h1>
+                <h1 className="text-4xl text-amber-600">{userDetail.name}</h1>
                 <p>{userDetail.rol}</p>
               </div>
               <div className="flex justify-evenly p-8 gap-5">
@@ -47,17 +46,23 @@ const UserProfile = () => {
                   onClick={() => setEdit(!edit)}
                   className="bg-emerald-700 p-5 text-white font-bold rounded-lg hover:bg-emerald-600"
                 >
-                  {!edit ? "Editar Rol" : "Ver perfil"}
+                  {!edit ? "Editar Perfil" : "Ver perfil"}
                 </button>
-                <button className="bg-blue-700 p-5 text-white font-bold rounded-lg hover:bg-blue-600">
-                  {userDetail.rol === "Client"
-                    ? "Paseos solicitados"
-                    : "Paseos realizados"}
+                {userDetail.rol !== "Admin" && (
+                  <button className="bg-blue-700 p-5 text-white font-bold rounded-lg hover:bg-blue-600">
+                    {userDetail.rol === "Client"
+                      ? "Paseos solicitados"
+                      : "Paseos realizados"}
+                  </button>
+                )}
+
+                <button className="bg-rose-600 p-5 text-white font-bold rounded-lg hover:bg-rose-500" onClick={handleDelete}>
+                  Eliminar
                 </button>
               </div>
-              {!edit && <ViewProfile userDetail={userDetail} />}
+              {!edit && <SuperViewProfile userDetail={userDetail} />}
               {edit && (
-                <EditProfile
+                <SuperEditProfile
                   userDetail={userDetail}
                   setEdit={setEdit}
                   edit={edit}
@@ -71,4 +76,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default SuperUserProfile;
