@@ -37,7 +37,7 @@ function WalkerDetail() {
 		try {
 			setLoading(true);
 
-			const res = await axios.get(`http://localhost:3001/user/id/${id}`);
+			const res = await axios.get(`/user/id/${id}`);
 			console.log(res.data);
 			setDetails(res.data);
 			dispatch(setCurrentUser(res.data));

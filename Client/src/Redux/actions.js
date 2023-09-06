@@ -26,7 +26,7 @@ import {
 } from "./action-types";
 import Swal from "sweetalert2";
 
-const URL = "http://localhost:3001/";
+const URL = import.meta.env.VITE_REACT_APP_API_URL || "https://doggygo-production.up.railway.app/";
 
 /*
 /////////////////////ejemplo funcion asincrona para las store/////////////////////// 
@@ -150,7 +150,7 @@ export const getAllUsers = () => {
           icon: 'error',
           title: 'Oops...',
           text: error.message
-        }) 
+        })
     }
   };
 };
@@ -190,7 +190,7 @@ export const getWalkerByName = (name) => {
           icon: 'error',
           title: 'Oops...',
           text: error.message
-        }) 
+        })
     }
   };
 };
@@ -226,7 +226,7 @@ export const filterWalkers = (filter) => {
 };
 
 export const getById = (id) => {
-  const endpoint = `http://localhost:3001/user/id/${id}`;
+  const endpoint = `${URL}user/id/${id}`;
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -241,7 +241,7 @@ export const getById = (id) => {
 };
 
 export const getAllWalks = () => {
-  const endpoint = "http://localhost:3001/walk";
+  const endpoint = `${URL}walk`;
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -256,7 +256,7 @@ export const getAllWalks = () => {
 };
 
 export const getCountries = () => {
-  const endpoint = 'http://localhost:3001/location/countries/'
+  const endpoint = `${URL}location/countries/`;
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -271,7 +271,7 @@ export const getCountries = () => {
 }
 
 export const getStates = (sta) => {
-  const endpoint = `http://localhost:3001/location/state/${sta}`;
+  const endpoint = `${URL}location/state/${sta}`;
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -285,7 +285,7 @@ export const getStates = (sta) => {
   };
 };
 export const getCities = (sta, co) => {
-  const endpoint = `http://localhost:3001/location/countries/${co}/states/${sta}/cities`;
+  const endpoint = `${URL}location/countries/${co}/states/${sta}/cities`;
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -300,7 +300,7 @@ export const getCities = (sta, co) => {
 
 };
 export const getEmail = (email) => {
-  const endpoint = ` http://localhost:3001/user/email/${email}`
+  const endpoint = ` ${URL}user/email/${email}`
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint)

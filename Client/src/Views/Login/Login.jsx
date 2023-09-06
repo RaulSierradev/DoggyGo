@@ -23,6 +23,10 @@ const Login = () => {
 
 	const googleLogin = (e) => {
 		e.preventDefault();
+		// window.open(
+		// 	'https://doggygo-production.up.railway.app/auth/google/login',
+		// 	'_self'
+		// );
 		window.open('http://localhost:3001/auth/google/login', '_self');
 	};
 
@@ -36,7 +40,7 @@ const Login = () => {
 
 	const authenticateUser = async (email, password) => {
 		try {
-			const res = await axios.post('http://localhost:3001/user/login', {
+			const res = await axios.post('/user/login', {
 				email,
 				password,
 			});
@@ -145,9 +149,10 @@ const Login = () => {
 								type="submit"
 							>
 								Iniciar Sesión
-							</button> 
-							<Link to="/reset-password">Olvidé mi contraseña</Link>
-
+							</button>
+							<Link to="/reset-password">
+								Olvidé mi contraseña
+							</Link>
 						</form>
 					</div>
 				</div>

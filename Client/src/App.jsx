@@ -59,12 +59,12 @@ function App() {
 					<Route path="payment" element={<Payment />} />
 				</Route>
 
-				<Route
+				{/* <Route
 					path="/perfil"
 					element={<PrivateRoutes rol={['Client']} />}
 				>
 					<Route index element={<PerfilDeUsuario />} />
-				</Route>
+				</Route> */}
 
 				<Route path="/T" element={<T />} />
 				<Route path="*" element={<Error404 />} />
@@ -81,11 +81,11 @@ function App() {
 					<Route path="paseos" element={<Walks />} />
 				</Route>
 
-				<Route path="/admin" element={<Admin />} />
+				{/* <Route path="/admin" element={<Admin />} />
 				<Route path="/admin/clientes" element={<Clientes />} />
 				<Route path="/admin/paseadores" element={<Walkers />} />
 				<Route path="/admin/detail/:id" element={<UserProfile />} />
-				<Route path="/admin/paseos" element={<Walks />} />
+				<Route path="/admin/paseos" element={<Walks />} /> */}
 			</Routes>
 		</div>
 	);

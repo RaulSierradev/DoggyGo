@@ -96,6 +96,11 @@ const Registro = () => {
 
 	const googleLogin = (e) => {
 		e.preventDefault();
+		// window.open(
+		// 	'https://doggygo-production.up.railway.app/auth/google/signup',
+		// 	'_self'
+		// );
+
 		window.open('http://localhost:3001/auth/google/signup', '_self');
 	};
 

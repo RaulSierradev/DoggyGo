@@ -34,7 +34,7 @@ function Payment() {
 
 	const createPreference = async () => {
 		try {
-			const response = await axios.post('http://localhost:3001/payment', {
+			const response = await axios.post('/payment', {
 				description: walk.title,
 				price: Number(walk.cost) + bookingFee,
 				quantity: 1,

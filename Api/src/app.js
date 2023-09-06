@@ -56,16 +56,16 @@ server.get('/auth/google/create', passport.authenticate('google', { failureRedir
     });
     console.log('token', token)
     if (req.user.dataValues.rol === 'Client') {
-      res.redirect(`http://127.0.0.1:5173/home?token=${token}`);
+      res.redirect(`${process.env.BASE_URL}/home?token=${token}`);
     } else if (req.user.dataValues.rol === 'Admin') {
-      res.redirect(`http://127.0.0.1:5173/admin?token=${token}`);
+      res.redirect(`${process.env.BASE_URL}/admin?token=${token}`);
     } else if (req.user.dataValues.rol === 'Walker') {
-      res.redirect(`http://127.0.0.1:5173/dash?token=${token}`);
+      res.redirect(`${process.env.BASE_URL}/dash?token=${token}`);
     }
 
   } else {
 
-    res.redirect(`http://127.0.0.1:5173/registro?googleId=${req.user.id}&email=${req.user.emails[0].value}&name=${req.user.displayName}`);
+    res.redirect(`${process.env.BASE_URL}/registro?googleId=${req.user.id}&email=${req.user.emails[0].value}&name=${req.user.displayName}`);
   }
 
 });
