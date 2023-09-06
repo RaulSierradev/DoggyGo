@@ -4,10 +4,17 @@ import { useEffect, useState } from 'react';
 import DogSize from './DogSize';
 import { createDog } from '../../../../Redux/actions';
 import Swal from 'sweetalert2';
+import idFromToken from '../../../utils/getToken';
 
 const FormDogs = () => {
+	const id = idFromToken();
 	const currentUser = useSelector((state) => state.currentUser);
 	console.log(currentUser);
+
+	const client = useSelector(
+		(state) => state.users.filter((user) => user.id === id)[0]
+	);
+	console.log(client);
 
 	const dispatch = useDispatch();
 
@@ -18,8 +25,9 @@ const FormDogs = () => {
 		setDetails((prevDetails) => ({
 			...prevDetails,
 			image: imageUrl,
+			ownerID: client.id,
 		}));
-	}, [imageUrl]);
+	}, [imageUrl, client]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;

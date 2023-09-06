@@ -3,19 +3,25 @@ import MoneyCard from './MoneyCard';
 import Orders from './Orders';
 import idFromToken from '../../utils/getToken';
 import { useEffect, useState } from 'react';
-import { getById } from '../../../Redux/actions';
-
-// import Nav from '../../Nav';
+import { getAllDogs, getById } from '../../../Redux/actions';
+import Dogs from '../components/Dogs';
 
 function HomeDashboard() {
 	const [user, setUser] = useState({});
+
 	const dispatch = useDispatch();
 	const id = idFromToken();
 	console.log(id);
 
 	useEffect(() => {
 		dispatch(getById(id)).then((res) => setUser(res.payload));
+		dispatch(getAllDogs());
 	}, []);
+
+	const dogs = useSelector((state) =>
+		state.dogs.filter((dog) => dog.ownerID === id)
+	);
+	console.log(dogs);
 
 	// const user = useSelector((state) => state.users);
 	// console.log(user);
@@ -72,7 +78,7 @@ function HomeDashboard() {
 							</div>
 						</>
 					) : (
-						<h1>Cliente</h1>
+						<Dogs dogs={dogs} />
 					)}
 				</div>
 			</div>

@@ -17,8 +17,9 @@ import {
   GET_COUNTRIES,
   GET_STATES,
   GET_CITIES,
-  CREATE_WALK, 
+  CREATE_WALK,
   GET_ALL_MAIL,
+  GET_ALL_DOGS
 } from "./action-types";
 
 let initialstate = {
@@ -265,8 +266,8 @@ let initialstate = {
   walks: [],
   countries: [],
   states: [],
-  cities: [], 
-  email:[],
+  cities: [],
+  email: [],
 };
 
 const compareStringsSecondary = (a, b, i = 0) => {
@@ -335,22 +336,22 @@ let reducer = (state = initialstate, { type, payload }) => {
       };
     case ORDER_WALKERS:
       //*Ordenamiento alfabetico (por defecto)
-      if (payload === "Alphabetic"){
+      if (payload === "Alphabetic") {
         return {
-        ...state,
-        walkersBackUp: state.walkersBackUp.sort((a, b) =>
-          compareStringsSecondary(a.name, b.name)
-        ),
-        walkers: [...state.walkers].sort((a, b) =>
-          compareStringsSecondary(a.name, b.name)
-        ),
+          ...state,
+          walkersBackUp: state.walkersBackUp.sort((a, b) =>
+            compareStringsSecondary(a.name, b.name)
+          ),
+          walkers: [...state.walkers].sort((a, b) =>
+            compareStringsSecondary(a.name, b.name)
+          ),
         }
       }
       //*Ordenamiento por calificación
       return {
         ...state,
-        walkersBackUp: state.walkersBackUp.sort((a , b) => b.ratingAvg - a.ratingAvg),
-        walkers: [...state.walkers].sort((a , b) => b.ratingAvg - a.ratingAvg)
+        walkersBackUp: state.walkersBackUp.sort((a, b) => b.ratingAvg - a.ratingAvg),
+        walkers: [...state.walkers].sort((a, b) => b.ratingAvg - a.ratingAvg)
       }
     case FILTER_WALKERS:
       //*Filtros combinados
@@ -371,7 +372,7 @@ let reducer = (state = initialstate, { type, payload }) => {
           ),
         };
       }
-      if (payload.country && payload.cpr){
+      if (payload.country && payload.cpr) {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
@@ -382,7 +383,7 @@ let reducer = (state = initialstate, { type, payload }) => {
           ),
         };
       }
-      if (payload.time && payload.cpr){
+      if (payload.time && payload.cpr) {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
@@ -493,11 +494,17 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         cities: payload,
-      }; 
-      case GET_ALL_MAIL: 
-      return{
-        ...state, 
+      };
+    case GET_ALL_MAIL:
+      return {
+        ...state,
         email: payload
+      }
+
+    case GET_ALL_DOGS:
+      return {
+        ...state,
+        dogs: payload
       }
 
     default:

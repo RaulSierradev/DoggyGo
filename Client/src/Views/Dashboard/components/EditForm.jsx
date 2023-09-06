@@ -46,7 +46,7 @@ function EditForm({ setEdit, edit }) {
 				email: userProfile.email,
 				image: imageUrl ? imageUrl : userProfile.image,
 				cpr: userProfile.cpr ? userProfile.cpr : false,
-				status: userProfile.status ? userProfile.status : false,
+				status: userProfile.status ? userProfile.status : true,
 				size: userProfile.size ? userProfile.size : null,
 			};
 

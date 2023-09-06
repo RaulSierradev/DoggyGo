@@ -13,7 +13,7 @@ export const menu = [
 			},
 			{
 				id: 2,
-				title: 'Profile',
+				title: 'Perfil',
 				url: '/dash/profile',
 				icon: '/profile.svg',
 			},
