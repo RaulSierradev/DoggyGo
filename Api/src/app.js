@@ -10,6 +10,8 @@ require('./handlers/authenticate.js');
 const session = require('cookie-session')
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = process.env;
+const path = require('path');
+
 
 
 
@@ -25,6 +27,7 @@ server.use(session({
   // cookie: { secure: false }
 }))
 
+server.use(express.static(path.join(__dirname, 'dist')));
 
 
 
@@ -82,6 +85,9 @@ server.use((req, res, next) => {
 
 server.use('/', router);
 
+server.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 
 // Error catching endware.
