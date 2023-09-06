@@ -293,12 +293,13 @@ const loginController = async (email, password) => {
 }; 
 
 // Actualizar contraseña 
-const updateUserPassword = async (email,newPassword) => { 
+const updateUserPassword = async (email, password) => { 
     try { 
 
     const user = await User.findOne({ where: { email: email } });
+    console.log('Es esto correcto controller', email, password )
       
-    const hashednewPassword = await bcrypt.hash(newPassword, 10) 
+    const hashednewPassword = await bcrypt.hash(password, 10) 
 
     await user.update({password: hashednewPassword}) 
     return 'Contraseña actualizada exitosamente';
@@ -313,10 +314,18 @@ const updateUserPassword = async (email,newPassword) => {
 // consultar por email 
 const userEmail = async (email) => {
     const user = await User.findOne({where: {email}})  
-    emailContraseña(user.email)  
+    emailContraseña(user.email, user.id)  
     console.log("final:", user.email);
     return user
    
+}
+
+const userDelete = async(id)=>{
+    console.log('id desde el controller',id)
+    const userDelete = await User.findByPk(id)
+    await userDelete.update({enabled: false})
+    
+    return userDelete
 }
 
 module.exports = {
@@ -327,5 +336,6 @@ module.exports = {
     updateUserController,
     loginController, 
     updateUserPassword, 
-    userEmail
+    userEmail,
+    userDelete
 }

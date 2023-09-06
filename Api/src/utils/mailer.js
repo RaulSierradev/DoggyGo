@@ -21,12 +21,12 @@ const email1 = async (email) => {
     console.log('Correo enviado:', info.messageId);
 }
 
-const emailContraseña = async (email) => { 
+const emailContraseña = async (email,id) => { 
     const info = await transporter.sendMail({ 
         from: 'doggygo.noreply@gmail.com', 
         to: email, 
         subject: '¡Recuperar Contraseña.',  
-        html:  href="http://127.0.0.1:5173/recuperarcontrase%C3%B1a", 
+        html:  href=`http://127.0.0.1:5173/recuperarcontrase%C3%B1a/${id}`, 
         text: '¡Ingrese al siguiente enlace para recuperar su contraseña.', 
        
 

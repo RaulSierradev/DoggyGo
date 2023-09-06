@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { RiMore2Fill, RiCloseFill } from "react-icons/ri";
 import { FcHome, FcManager, FcBusinessman, FcGlobe } from "react-icons/fc";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+  const { userProfile } = props;
   const [showMenu, setShowMenu] = useState(false);
   return (
     <>
@@ -14,12 +15,19 @@ const Sidebar = () => {
         }`}
       >
         {/* Profile */}
-        <div className="flex flex-col items-center justify-center p-8 gap-2 h-[30vh]">
+        <div className="flex flex-col items-center justify-center p-8 gap-2 h-[40vh]">
           <img
-            src="https://cdn.pixabay.com/photo/2013/07/13/13/38/man-161282_960_720.png"
+            src={!userProfile.image ? "https://cdn.pixabay.com/photo/2013/07/13/13/38/man-161282_960_720.png": userProfile.image}
+            alt={userProfile.name}
             className="w-20 h-20 object-cover rounded-full ring-2 ring-gray-300"
           />
-          <h1 className="text-xl text-white font-bold">Admin</h1>
+          <h1 className="text-xl text-white font-bold">{userProfile.name}</h1>
+          <h2 className="text-base text-white font-bold">{userProfile.rol}</h2>
+          <Link to='http://localhost:5173/admin/editar'>
+            <button className="bg-gray-300 hover:bg-gray-200 p-3 text-indigo-600 font-bold hover:text-indigo-500">
+              Editar Perfil
+            </button>
+          </Link>
         </div>
         {/* Nav */}
         <div className="bg-indigo-800 p-8 rounded-tr-[100px] h-[70vh] overflow-y-scroll flex flex-col justify-between gap-8">
@@ -49,10 +57,6 @@ const Sidebar = () => {
               <FcGlobe /> Paseos
             </Link>
           </nav>
-          <div className="bg-primary-900/50 text-white p-4 rounded-xl">
-            <p className="text-gray-400">Having troubles?</p>
-            <a href="#">Contact us</a>
-          </div>
         </div>
       </div>
       {/* Button mobile */}

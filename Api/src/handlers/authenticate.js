@@ -1,5 +1,5 @@
-let passport = require('passport')
 require("dotenv").config();
+const passport = require('passport')
 const { createUserController } = require('../controllers/userControllers')
 const { User } = require('../db.js')
 // const bcrypt = require('bcrypt');

@@ -18,10 +18,11 @@ import {
   GET_COUNTRIES,
   GET_STATES,
   GET_CITIES,
-  CREATE_WALK, 
-  GET_ALL_MAIL, 
-
-
+  CREATE_WALK,
+  DELETE_USER,
+  GET_ALL_MAIL,  
+  EDIT_PASSWORD,
+  GET_ALL_DOGS
 } from "./action-types";
 import Swal from "sweetalert2";
 
@@ -52,11 +53,16 @@ export function createUser(user) {
 export function createDog(dog) {
   return async function createDogThunk(dispatch) {
     // dispatch({ type: 'loading' })
+    try {
+      const res = await axios.post(`${URL}dog/add`, dog);
+      console.log(res.data);
 
-    const res = await axios.post(`${URL}dog/add`, dog);
-    console.log(res.data);
+      dispatch({ type: CREATE_DOG, payload: res.data });
 
-    dispatch({ type: CREATE_DOG, payload: res.data });
+    } catch (error) {
+      console.log(error.message)
+    }
+
   };
 }
 
@@ -100,6 +106,17 @@ export function getAll() {
     console.log(res.data);
 
     dispatch({ type: GET_ALL_USERS, payload: res.data });
+  };
+}
+
+export function getAllDogs() {
+  return async function getDogsThunk(dispatch) {
+    // dispatch({ type: 'loading' })
+
+    const res = await axios.get(`${URL}dog/get`);
+    console.log(res.data);
+
+    dispatch({ type: GET_ALL_DOGS, payload: res.data });
   };
 }
 
@@ -280,23 +297,55 @@ export const getCities = (sta, co) => {
       return { error: error.message };
     }
   };
+};
 
-}; 
 export const getEmail = (email) =>{ 
-  const endpoint = ` http://localhost:3001/user/email/${email}` 
+  const endpoint = `http://localhost:3001/user/email/${email}` 
   return async (dispatch) => { 
     try { 
-      const { data } = await axios(endpoint) 
+      const { data } = await axios(endpoint)
       return dispatch({
-        type: GET_ALL_MAIL, 
+        type: GET_ALL_MAIL,
         payload: data
       })
-      
+
     } catch (error) {
       return { error: error.message };
     }
 
   }
+}  
 
-} 
+export const editPassword = (email, password)=>{
+  const endpoint = 'http://localhost:3001/user/auth/update'
+  return async (dispatch)=>{
+    try {
+      const { data } = await axios.put(endpoint, email, password)
+      return dispatch({
+        type: EDIT_PASSWORD,
+        payload: data
+      })
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
+
+}
+
+export const deleteUser = (id) => {
+  const endpoint = `http://localhost:3001/user/id/${id}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      return dispatch({
+        type: DELETE_USER,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: `No hay un usuario con el siguiente ID: "${id}"` };
+    }
+  };
+};
+
+
 
