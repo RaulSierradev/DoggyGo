@@ -32,7 +32,7 @@ function App() {
 				<Route path="/inicio" element={<Landing />} />
 				<Route path="/registro" element={<Registro />} />
 				<Route path="/login" element={<Login />} />
-				<Route path="/home/success" element={<Success />} />
+				<Route path="/success" element={<Success />} />
 				<Route path="/home" element={<Home />} />
 				<Route path="/alert" element={<AlertDialog />} />
 				<Route path="/reset-password" element={<ResetPassword />} />
