@@ -89,14 +89,14 @@ const createReviewController = async ( walkerId, clientId, rating, comment ) => 
     const client = await User.findOne({ where: { id: clientId } });
     
     if (!rating) {
-        throw Error('Star rating is required!')
+        throw Error('No has calificado!')
     }
 
     const searchReview = await Review.findAll({
         where: { clientId: clientId, walkerId: walkerId }
     });
 
-    if (searchReview.length !== 0) throw Error('You have already reviewed this user!');
+    if (searchReview.length !== 0) throw Error('Ya has reseñado a este usuario!');
 
     let newReview = await Review.create({
         clientName: client.name,

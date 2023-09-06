@@ -17,6 +17,8 @@ import Schedule from '../Booking Schedule/Schedule';
 import Swal from 'sweetalert2';
 import ReviewForm from '../Reviews/reviewForm';
 import idFromToken from '../utils/getToken';
+import CardsReview from '../Reviews/CardsReview';
+
 
 
 function WalkerDetail() {
@@ -25,7 +27,9 @@ function WalkerDetail() {
 	const clientId = idFromToken();
 console.log(clientId);
 	const [details, setDetails] = useState([]);
+	const [reviews, setReviews] = useState([]);
 	const [loading, setLoading] = useState(false);
+	console.log("reviews en walkerdetail",reviews);
 
 	// modal states
 	const [estadoModal, setEstadoModal] = useState(false);
@@ -42,6 +46,26 @@ console.log(clientId);
 			setDetails(res.data);
 			dispatch(setCurrentUser(res.data));
 			setLoading(false);
+		} catch (error) {
+			console.error(error.message);
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops...',
+				text: 'Something went wrong!',
+			});
+			// alert(error.message);
+		}
+	}
+
+	async function getReviews() {
+		try {
+			// setLoading(true);
+
+			const res = await axios.get(`http://localhost:3001/review/`);
+			console.log(res.data);
+			setReviews(res.data);
+
+			// setLoading(false);
 		} catch (error) {
 			console.error(error.message);
 			Swal.fire({
@@ -80,18 +104,19 @@ console.log(clientId);
 	};
 
 	useEffect(() => {
+		getReviews();
 		getDetails(id);
 	}, [id]);
 
 	return (
 		<>
 			<Nav />
-			<div className="flex items-center gap-10 justify-center bg-[#e9ecef] p-6 w-full h-screen">
+			<div className="flex gap-10 bg-[#e9ecef] p-6 w-full h-screen">
 				{loading ? (
-					<h1>Loading...</h1>
+					<h1>Cargando...</h1>
 				) : (
 					<>
-						<div className="border-md h-5/6 w-1/3 flex items-center flex-col justify-center gap-4 bg-white p-3 rounded-md shadow">
+						<div className="border-md h-full w-1/3 flex items-center flex-col justify-center gap-4 bg-white p-3 rounded-md shadow">
 							<div className="h-40 w-40">
 								<img
 									className="w-full h-full p-1 rounded-full object-cover border-4 border-black"
@@ -158,11 +183,11 @@ console.log(clientId);
 						</div>
 
 
-						<div className="gap-10 flex flex-col h-5/6 w-2/3">
-							<div className="gap-8 flex-col ml-5 h-4/6  p-3 rounded-md bg-white shadow">
-								<div className="h-2/5">
+						<div className="gap-10 flex flex-col h-full w-2/3 bg-[#e9ecef]">
+							<div className="gap-10 flex h-[35%] bg-[#e9ecef]">
+								<div className="gap-8 flex-col w-1/3 p-3 rounded-md bg-white shadow">
 									<h3 className="font-bold text-lg mb-2">
-										About Me
+										Sobre mi
 									</h3>
 									<div className="flex p-2 m-1 justify-center items-center">
 										<p className="items-center font-semibold justify-center flex w-5/6">
@@ -170,34 +195,20 @@ console.log(clientId);
 										</p>
 									</div>
 								</div>
-
-
-
-								<div className="">
-									<h3 className="font-bold text-lg">
-										Recent Reviews
-									</h3>
-									<div className="gap-5 flex mt-2">
-										<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">
-											<p>Good</p>
-										</div>
-										<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">
-											<p>
-												Lorem ipsum dolor sit amet,
-												consectetur adipisicing elit.
-												Exercitationem, autem veniam amet
-												cupiditate aliquid maiores
-											</p>
-										</div>{' '}
-										<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md">
-											<p>Ok sjkladjas</p>
-										</div>
-									</div>
+								<div className="gap-8 flex-col w-2/3 p-3 rounded-md bg-white shadow">
+									<ReviewForm walkerId={id} clientId={clientId}/>
 								</div>
 							</div>
-
-							<div className="gap-8 flex flex-col ml-5 w-1/3 h-4/6  p-3 rounded-md bg-white shadow">
-								<ReviewForm walkerId={id} clientId={clientId}/>
+							<div className="gap-10 flex w-full h-[61%] rounded-md bg-[#e9ecef]">
+								{/* <ReviewForm walkerId={id} clientId={clientId}/> */}
+								<div className="flex flex-col w-full h-auto p-3 rounded-md bg-white shadow">
+									<h3 className="font-bold text-lg mb-2">
+										Reseñas
+									</h3>
+									<div className="flex flex-col w-full h-auto p-3 rounded-md bg-white shadow overflow-scroll">
+										<CardsReview reviews={reviews}></CardsReview>
+									</div>
+								</div>
 							</div>
 						</div>
 					</>
