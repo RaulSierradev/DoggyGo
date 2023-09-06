@@ -1,4 +1,4 @@
-const { getUsersByNameController, getUsersController, getUserByIdController, createUserController, updateUserController, loginController, updateUserPassword,  userEmail } = require('../controllers/userControllers')
+const { getUsersByNameController, getUsersController, getUserByIdController, createUserController, updateUserController, loginController, updateUserPassword,  userEmail, userDelete } = require('../controllers/userControllers')
 
 //traer todos los users o traerlos por sus nombres
 const getUsersHandler = async (req, res) => {
@@ -59,10 +59,10 @@ const createUserHandler = async (req, res) => {
         res.status(201).json(createUser.newUser);
     } catch (error) {
         console.log(error.message);
-        if (error.message === 'All fields are required' || error.message === 'This email is already registered!' || error.message === 'This phone number is already registered!' || error.message === 'Details are not correct') {
+        if (error.message === 'Todos los campos son requeridos' || error.message === '¡Este correo electrónico ya está registrado!' || error.message === 'This phone number is already registered!' || error.message === 'Details are not correct') {
             res.status(409).json({ error: error.message });
         } else {
-            res.status(500).json({ error: 'An unexpected error occurred' });
+            res.status(500).json({ error: 'Ocurrió un error inesperado' });
         }
     }
 }
@@ -132,6 +132,18 @@ const handleUserByEmail = async(req, res) => {
     }
 }
 
+const deleteUserHandler = async(req, res) => {
+    const { id } = req.params
+    console.log('Id desde handler',id)
+    try {
+        
+        const result = await userDelete(id)
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 
 
 module.exports = {
@@ -142,5 +154,6 @@ module.exports = {
     updateUserHandler,
     loginHandler,
     passwordUserHandler, 
-    handleUserByEmail
+    handleUserByEmail,
+    deleteUserHandler,
 }

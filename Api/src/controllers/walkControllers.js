@@ -11,7 +11,8 @@ const createWalk = async ({
   image,
   comment,
   emergency,
-  WalkerId
+  WalkerId,
+  ClientId
 }) => {
   const newWalk = await Walk.create({
     startDate,
@@ -24,7 +25,8 @@ const createWalk = async ({
     image,
     comment,
     emergency,
-    WalkerId
+    WalkerId,
+    ClientId
   });
   return newWalk;
 };
@@ -53,7 +55,7 @@ const editWalk = async ({
   emergency,
 }) => {
   const walkFound = await Walk.findByPk(id);
-  if (!walkFound) throw new Error("Walk not created");
+  if (!walkFound) throw new Error("Paseo no creado");
 
   const updatedWalk = await Walk.update(
     {

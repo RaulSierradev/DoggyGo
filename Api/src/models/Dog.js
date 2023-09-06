@@ -39,6 +39,10 @@ module.exports = (sequelize) => {
         castrated: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
+        },
+        ownerID: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     }, {
         timestamps: false

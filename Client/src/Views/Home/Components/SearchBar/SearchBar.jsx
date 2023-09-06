@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterWalkers, getWalkerByName, restoreWalkers } from "../../../../Redux/actions";
+import { getWalkerByName } from "../../../../Redux/actions";
 
-const SearchBar = () => {
+const SearchBar = ({reset}) => {
   const [name, setName] = useState("");
 
   const dispatch = useDispatch();
@@ -15,20 +15,13 @@ const SearchBar = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
+    reset()
     dispatch(getWalkerByName(name));
     setName("");
   };
 
-  const handleReset = () => {
-    dispatch(restoreWalkers());
-    dispatch(filterWalkers(true))
-  };
-
   return (
     <div className='flex items-center'>
-      <button onClick={handleReset} className='mr-2 px-1 py-2 text-gray-500 border border-gray-200 rounded-md bg-white'>
-        Restablecer
-      </button>
       <form>
         <div className='relative'>
           <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>

@@ -12,7 +12,7 @@ const getWalksHandler = async (req, res) => {
     if (walks.length) {
       res.status(200).json(walks);
     } else {
-      throw Error("There are no walks");
+      throw Error("No hay paseos");
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -42,6 +42,7 @@ const createWalkHandler = async (req, res) => {
     comment,
     emergency,
     WalkerId,
+    ClientId,
   } = req.body;
   try {
     // if (startDate || state || duration || cost || image || comment) {
@@ -59,9 +60,11 @@ const createWalkHandler = async (req, res) => {
       comment,
       emergency,
       WalkerId,
+      ClientId
     });
     res.status(200).json(newWalk);
   } catch (error) {
+    console.log(error.message)
     res.status(400).json({ error: error.message });
   }
 };

@@ -28,7 +28,7 @@ const CardsWalkers = (props) => {
                 <td className="px-5 py-3">{e.name}</td>
                 <td className="px-5">{e.email}</td>
                 <td className="px-5">{e.phone}</td>
-                <td className="px-5">{e.status ? "true" : "false"}</td>
+                <td className="px-5">{e.country}</td>
                 <td className="px-10">
                   <Link
                     className="bg-green-600 p-2 text-sm text-white font-semibold rounded-lg hover:bg-green-500"
@@ -37,12 +37,7 @@ const CardsWalkers = (props) => {
                     Ver perfil
                   </Link>
                 </td>
-
-                <td className="px-10">
-                  <button className="bg-rose-600 p-2 text-sm text-white font-semibold rounded-lg hover:bg-rose-500">
-                    Eliminar
-                  </button>
-                </td>
+                
               </tr>
             );
           })

@@ -9,14 +9,14 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import StarIcon from '@mui/icons-material/Star';
 //import { yellow } from '@mui/material/colors';
 import Payment from '../Booking Confirmation/Payment';
-import { setCurrentUser } from '../../Redux/actions/';
+import { setCurrentUser } from '../../Redux/actions';
 import Modal from '../../Views/Modal/Modal';
 import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
 import Schedule from '../Booking Schedule/Schedule';
 import Swal from 'sweetalert2';
 import idFromToken from '../utils/getToken';
-import ReviewForm from '../Reviews/reviewForm';
+import ReviewForm from '../Reviews/ReviewForm';
 
 function WalkerDetail() {
 	const dispatch = useDispatch();
