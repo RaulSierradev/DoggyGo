@@ -11,7 +11,8 @@ const createWalk = async ({
   image,
   comment,
   emergency,
-  WalkerId
+  WalkerId,
+  ClientId
 }) => {
   const newWalk = await Walk.create({
     startDate,
@@ -24,7 +25,8 @@ const createWalk = async ({
     image,
     comment,
     emergency,
-    WalkerId
+    WalkerId,
+    ClientId
   });
   return newWalk;
 };

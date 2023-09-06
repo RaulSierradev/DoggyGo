@@ -1,7 +1,7 @@
 function MoneyCard({
 	totalMoney = '0',
-	type = 'Total Amount',
-	message = 'Money Available',
+	type = 'Total',
+	message = 'Dinero Disponible',
 }) {
 	return (
 		<>

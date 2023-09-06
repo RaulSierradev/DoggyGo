@@ -57,8 +57,8 @@ function HomeDashboard() {
 								<MoneyCard totalMoney={`$ ${total}`} />
 								<MoneyCard
 									totalMoney={walks.length}
-									type="Walks Completed"
-									message={`You walk ${walks.length} dogs!`}
+									type="Paseos Agendados"
+									message={`Tienes ${walks.length} perros por pasear!`}
 								/>
 							</div>
 							<div className="flex mt-8 flex-1 gap-4 items-center justify-center">

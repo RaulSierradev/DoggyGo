@@ -70,27 +70,33 @@ const Users = () => {
 	useEffect(() => {
 		dispatch(getAllUsers()).then(() => setLoading(false));
 	}, []);
-	// const [user, setUser] = useState({});
+
+	// get all the users
 	const allUsers = useSelector((state) => state.users);
-	console.log(allUsers);
+	// console.log(allUsers);
 
+	// get the current user based on token id
 	const userProfile = allUsers.filter((user) => user.id === id)[0];
-	console.log(userProfile);
+	// console.log(userProfile);
 
+	// change all walks to walks made by the user
 	const allWalks = useSelector((state) => state.walks);
+
+	// this are the walks for the walker
 	const walks = allWalks.filter((walk) => walk.WalkerId === id);
 
-	// console.log(userProfile);
+	// this are the walks for the client
+	const clientWalks = allWalks.filter((walk) => walk.ClientId === id);
 
 	return (
 		<div className="users">
 			<div className="flex items-center gap-5 mb-5">
-				<h1 className="font-bold text-4xl">History</h1>
+				<h1 className="font-bold text-4xl">Paseos</h1>
 			</div>
 			{userProfile?.rol === 'Walker' ? (
 				<DataTable slug="users" columns={columns} rows={walks} />
 			) : (
-				<DataTable slug="users" columns={columns} rows={allWalks} />
+				<DataTable slug="users" columns={columns} rows={clientWalks} />
 			)}
 		</div>
 	);

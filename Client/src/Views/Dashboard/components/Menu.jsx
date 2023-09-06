@@ -19,7 +19,7 @@ export const menu = [
 			},
 			{
 				id: 3,
-				title: 'History',
+				title: 'Paseos',
 				url: '/dash/history',
 				icon: '/log.svg',
 			},
