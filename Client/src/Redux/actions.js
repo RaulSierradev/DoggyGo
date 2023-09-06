@@ -23,6 +23,7 @@ import {
 
 
 } from "./action-types";
+import Swal from "sweetalert2";
 
 const URL = "http://localhost:3001/";
 
@@ -123,8 +124,16 @@ export const getAllUsers = () => {
       return dispatch({ type: GET_ALL_USERS, payload: data });
     } catch (error) {
       error.response && error.response.data
-        ? alert(error.response.data.error)
-        : alert(error.message);
+        ? Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.error
+        })
+        : Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message
+        }) 
     }
   };
 };
@@ -155,8 +164,16 @@ export const getWalkerByName = (name) => {
       return dispatch({ type: GET_WALKER_BY_NAME, payload: data });
     } catch (error) {
       error.response && error.response.data
-        ? alert(error.response.data.error)
-        : alert(error.message);
+        ? Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.error
+        })
+        : Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message
+        }) 
     }
   };
 };

@@ -24,11 +24,11 @@ const Ordenamientos = () => {
 
   return (
     <div>
-      <Stack spacing={1} direction={"row"}>
+      <Stack direction={"row"} sx={{display: "flex", alignItems: "center"}}>
         <InputLabel sx={{ fontWeight: "bold" }} id='order-select-label'>
           ORDENAR POR:
         </InputLabel>
-        <FormControl variant='standard' sx={{ width: 120, bottom: 5 }}>
+        <FormControl variant='standard' sx={{ width: 120, display: "flex", alignItems: "center" }}>
           <Select
             sx={{ backgroundColor: "white" }}
             labelId='order-select-label'

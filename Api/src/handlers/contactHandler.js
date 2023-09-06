@@ -9,7 +9,7 @@ const createContactHandler = async (req, res) => {
   const { name, email, category, title, message } = req.body;
   try {
      if (!name || !email || !category || !title || !message) {
-      throw new Error("All fields are required");
+      throw new Error("Todos los campos son requeridos");
     }
     const newContact = await createContact({ name, email, category, title, message });
     res.status(200).json(newContact);
@@ -24,7 +24,7 @@ const getAllContactsHandler = async (req, res) => {
     if (contacts.length) {
       res.status(200).json(contacts);
     } else {
-      throw Error("There are no contacts");
+      throw Error("No hay contactos");
     }
   } catch (error) {
     res.status(400).json({ error: error.message });

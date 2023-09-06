@@ -4,7 +4,6 @@ import Paginado from './Components/Paginado/Paginado';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { filterWalkers, getAllUsers, orderWalkers } from '../../Redux/actions';
-import SearchBar from './Components/SearchBar/SearchBar';
 import Cookies from 'js-cookie';
 import Ordenamientos from './Components/Ordenamientos/Ordenamientos';
 //import FormDogs from './Components/FormDogs/FormDogs';
@@ -51,9 +50,8 @@ const Home = () => {
       </div>
 
       <div className='mt-2 flex flex-row flex-wrap justify-around items-center'>
-        <Filtros />
         <Ordenamientos />
-        <SearchBar />
+        <Filtros />
       </div>
       {orderDefaultComplete && <Paginado />}
       {/* <button
