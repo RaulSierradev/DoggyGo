@@ -19,10 +19,10 @@ import {
   GET_STATES,
   GET_CITIES,
   CREATE_WALK,
+  CREATE_WALK,
+  DELETE_USER,
   GET_ALL_MAIL,
   GET_ALL_DOGS
-
-
 } from "./action-types";
 import Swal from "sweetalert2";
 
@@ -297,12 +297,12 @@ export const getCities = (sta, co) => {
       return { error: error.message };
     }
   };
-
 };
-export const getEmail = (email) => {
-  const endpoint = ` http://localhost:3001/user/email/${email}`
-  return async (dispatch) => {
-    try {
+
+export const getEmail = (email) =>{ 
+  const endpoint = `http://localhost:3001/user/email/${email}` 
+  return async (dispatch) => { 
+    try { 
       const { data } = await axios(endpoint)
       return dispatch({
         type: GET_ALL_MAIL,
@@ -316,4 +316,19 @@ export const getEmail = (email) => {
   }
 
 }
+
+export const deleteUser = (id) => {
+  const endpoint = `http://localhost:3001/user/id/${id}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      return dispatch({
+        type: DELETE_USER,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: `No hay un usuario con el siguiente ID: "${id}"` };
+    }
+  };
+};
 

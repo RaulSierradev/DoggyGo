@@ -319,6 +319,14 @@ const userEmail = async (email) => {
    
 }
 
+const userDelete = async(id)=>{
+    console.log('id desde el controller',id)
+    const userDelete = await User.findByPk(id)
+    await userDelete.update({enabled: false})
+    
+    return userDelete
+}
+
 module.exports = {
     getUsersByNameController,
     getUsersController,
@@ -327,5 +335,6 @@ module.exports = {
     updateUserController,
     loginController, 
     updateUserPassword, 
-    userEmail
+    userEmail,
+    userDelete
 }

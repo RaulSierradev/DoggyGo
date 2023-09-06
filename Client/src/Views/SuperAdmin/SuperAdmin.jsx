@@ -1,22 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import jwt_decode from 'jwt-decode';
-import Cookies from 'js-cookie';
-
 import * as actions from "../../Redux/actions.js";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import SuperHeader from "./SuperHeader.jsx";
+import SuperSidebar from "./SuperSidebar.jsx";
 
 // Icons
 import { RiLineChartLine } from "react-icons/ri";
 
-const Admin = () => {
-  const token = Cookies.get('auth'); // {"email":"test","password":"test"}
-	const decoded = jwt_decode(token);
-	const id = decoded.id;
-  const users = useSelector((state) => state.users);
-  const userProfile = users.filter((user) => user.id === id)[0];
+const SuperAdmin = () => {
   const clients = useSelector((state) => state.clients);
   const walkers = useSelector((state) => state.walkers);
   const walks = useSelector((state) => state.walks);
@@ -30,15 +22,17 @@ const Admin = () => {
       console.log(error.message);
     }
   }, [dispatch]);
+
+  console.log("Estos son los clientes", clients);
   return (
     <div className="grid lg:grid-cols-4 xl:grid-cols-6 min-h-screen">
-      <Sidebar userProfile={userProfile} />
-      <main className="lg:col-span-3 xl:col-span-5 bg-gray-100 p-8 h-[100vh] overflow-y-scroll">
-        <Header userProfile={userProfile}/>
+      <SuperSidebar />
+      <main className="lg:col-span-3 xl:col-span-5 bg-white p-8 h-[100vh] overflow-y-scroll">
+        <SuperHeader />
         {/* Section 1 */}
         <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 mt-10 gap-8">
           {/* Card 1 */}
-          <div className="bg-indigo-600 p-8 rounded-xl text-gray-300 flex flex-col gap-3">
+          <div className="bg-amber-600 p-8 rounded-xl text-white flex flex-col gap-3">
             <RiLineChartLine className="text-5xl" />
             <h4 className="text-2xl">Ingresos</h4>
             <span className="text-5xl text-white">
@@ -47,17 +41,17 @@ const Admin = () => {
           </div>
           {/* Card 2 */}
           <div className="p-4 bg-white rounded-xl flex flex-col justify-between gap-4 drop-shadow-2xl">
-            <div className="flex items-center gap-4 bg-indigo-600/10 rounded-xl p-4">
-              <span className="bg-indigo-600 text-gray-300 text-2xl font-bold p-4 rounded-xl">
+            <div className="flex items-center gap-4 bg-amber-600/10 rounded-xl p-4">
+              <span className="bg-amber-600 text-white text-2xl font-bold p-4 rounded-xl">
                 {walks.length}
               </span>
               <div>
                 <h3 className="font-bold">Paseos realizados</h3>
               </div>
             </div>
-            <div className="bg-indigo-600/10 rounded-xl p-4">
+            <div className="bg-amber-600/10 rounded-xl p-4">
               <div className="flex items-center gap-4 mb-4">
-                <span className="bg-indigo-600 text-gray-300 text-2xl font-bold p-4 rounded-xl">
+                <span className="bg-amber-600 text-white text-2xl font-bold p-4 rounded-xl">
                   {clients.length}
                 </span>
                 <div>
@@ -93,8 +87,8 @@ const Admin = () => {
               })}
               <div className="flex justify-end">
                 <Link
-                  to="/admin/clientes"
-                  className="hover:text-indigo-600 transition-colors hover:underline"
+                  to="/sadmin/clientes"
+                  className="hover:text-amber-600 transition-colors hover:underline"
                 >
                   <p>Todos los clientes</p>
                 </Link>
@@ -123,7 +117,7 @@ const Admin = () => {
                       />
                       <div>
                         <h3 className="font-bold">Jhon Philips</h3>
-                        <p className="text-gray-500">{e.duration}</p>
+                        <p className="text-white">{e.duration}</p>
                       </div>
                     </div>
                     <div>
@@ -147,7 +141,7 @@ const Admin = () => {
               <div className="flex justify-end">
                 <a
                   href="#"
-                  className="hover:text-indigo-600 transition-colors hover:underline"
+                  className="hover:text-amber-600 transition-colors hover:underline"
                 >
                   Todos los paseos
                 </a>
@@ -180,8 +174,8 @@ const Admin = () => {
 
               <div className="flex justify-end">
                 <Link
-                  to="/admin/paseadores"
-                  className="hover:text-indigo-600 transition-colors hover:underline"
+                  to="/sadmin/paseadores"
+                  className="hover:text-amber-600 transition-colors hover:underline"
                 >
                   <p>Todos los paseadores</p>
                 </Link>
@@ -194,4 +188,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default SuperAdmin;

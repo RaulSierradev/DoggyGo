@@ -1,4 +1,4 @@
-const { getUsersByNameController, getUsersController, getUserByIdController, createUserController, updateUserController, loginController, updateUserPassword,  userEmail } = require('../controllers/userControllers')
+const { getUsersByNameController, getUsersController, getUserByIdController, createUserController, updateUserController, loginController, updateUserPassword,  userEmail, userDelete } = require('../controllers/userControllers')
 
 //traer todos los users o traerlos por sus nombres
 const getUsersHandler = async (req, res) => {
@@ -131,6 +131,18 @@ const handleUserByEmail = async(req, res) => {
     }
 }
 
+const deleteUserHandler = async(req, res) => {
+    const { id } = req.params
+    console.log('Id desde handler',id)
+    try {
+        
+        const result = await userDelete(id)
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 
 
 module.exports = {
@@ -141,5 +153,6 @@ module.exports = {
     updateUserHandler,
     loginHandler,
     passwordUserHandler, 
-    handleUserByEmail
+    handleUserByEmail,
+    deleteUserHandler,
 }
