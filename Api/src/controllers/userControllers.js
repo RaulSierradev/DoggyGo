@@ -23,13 +23,13 @@ const getUsersController = async () => {
 //Trae usuarios por nombre
 const getUsersByNameController = async (name) => {
     if (!name) {
-        throw new Error('Ingrese un nombre');
+        throw new Error('Tiene que ingresar un nombre');
     }
 
     const users = await User.findAll({
         where: {
             name: {
-                [Op.iLike]: `%${name}%`
+                [Op.iLike]: `%${name}`
             }
         }
     });

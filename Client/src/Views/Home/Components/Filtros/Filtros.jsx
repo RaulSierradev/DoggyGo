@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterWalkers, getCountries, restoreWalkers } from "../../../../Redux/actions";
+import {
+  filterWalkers,
+  getCountries,
+  restoreWalkers,
+} from "../../../../Redux/actions";
 import {
   Autocomplete,
   Checkbox,
   FormControl,
   FormControlLabel,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
   Stack,
   TextField,
 } from "@mui/material";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Filtros = () => {
   const dispatch = useDispatch();
@@ -58,13 +61,16 @@ const Filtros = () => {
   const handleCountryFilter = (event, value) => {
     event.preventDefault();
     setCountryValue(value);
-    
+
     //Cuando elimino la opcion seleccionada en el Autocomplete, este handle se activa y se manda con valor nulo
-    if (!value) return dispatch(filterWalkers({
-      ...selectsFilter,
-      cpr: cprFilter,
-      status: true
-    }))
+    if (!value)
+      return dispatch(
+        filterWalkers({
+          ...selectsFilter,
+          cpr: cprFilter,
+          status: true,
+        })
+      );
 
     dispatch(
       filterWalkers({
@@ -114,7 +120,8 @@ const Filtros = () => {
 
   return (
     <div>
-      <Stack
+      <Stack spacing={10} direction={"row"} sx={{display: "flex", alignItems: "center"}}>
+        <Stack
         spacing={1}
         direction={"row"}
         sx={{ display: "flex", alignItems: "center" }}
@@ -124,7 +131,7 @@ const Filtros = () => {
         </InputLabel>
         <Autocomplete
           autoComplete
-          noOptionsText="No hay resultados"
+          noOptionsText='No hay resultados'
           value={countryValue}
           onChange={handleCountryFilter}
           inputValue={inputValue}
@@ -201,10 +208,14 @@ const Filtros = () => {
             labelPlacement='end'
           />
         </Stack>
-
-        <IconButton disableRipple size='large' onClick={handleResetFilter}>
-          <HighlightOffIcon />
-        </IconButton>
+      </Stack>
+      <SearchBar reset={handleResetFilter}/>
+      <button
+        onClick={handleResetFilter}
+        className='mr-2 px-1 py-2 text-gray-500 border border-gray-200 rounded-md bg-white h-10 flex items-center'
+      >
+        Restablecer
+      </button>
       </Stack>
     </div>
   );
