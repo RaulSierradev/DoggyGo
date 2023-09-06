@@ -22,7 +22,7 @@ import Walks from './Views/Admin/Walks/Walks';
 import ResetPassword from './Views/Login/ResetPassword'; 
 import Success from './Views/Mercado Pago/Success';
 import AlertDialog from './Views/Home/Components/Card/AlertDialog';
-import Recuperar from './Views/recuprarContraseña/recuperar';
+import Recuperar from './Views/recuprarContrasena/Recuperar';
 
 function App() {
 	return (
@@ -36,7 +36,7 @@ function App() {
 				<Route path="/home" element={<Home />} />
 				<Route path="/alert" element={<AlertDialog />} /> 
 				<Route path="/reset-password" element={<ResetPassword/>} /> 
-				<Route path="/recuperarcontraseña" element={<Recuperar/>}/>
+				<Route path="/recuperarcontraseña/:id" element={<Recuperar/>}/>
 
 				{/* Walker routes */}
 				<Route

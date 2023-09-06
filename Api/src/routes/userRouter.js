@@ -11,8 +11,8 @@ userRouter.get('/', getUsersHandler);
 userRouter.post('/login', loginHandler);
 userRouter.post('/', createUserHandler);
 userRouter.put('/', updateUserHandler) 
-userRouter.post('/auth/update', passwordUserHandler) 
-userRouter.get('/email', handleUserByEmail)
+userRouter.put('/auth/update', passwordUserHandler) 
+userRouter.get('/email/:email', handleUserByEmail)
 
 
 

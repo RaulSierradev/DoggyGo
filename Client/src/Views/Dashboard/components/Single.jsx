@@ -10,7 +10,7 @@ const Single = (props) => {
 	function handleEdit() {
 		setEdit(!edit);
 	}
-
+    console.log(props.name)
 	return (
 		<div className="h-full bg-slate-50  text-black rounded-3xl flex ">
 			{/* <div>

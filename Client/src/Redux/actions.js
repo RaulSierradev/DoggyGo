@@ -19,7 +19,8 @@ import {
   GET_STATES,
   GET_CITIES,
   CREATE_WALK, 
-  GET_ALL_MAIL, 
+  GET_ALL_MAIL,  
+  EDIT_PASSWORD,
 
 
 } from "./action-types";
@@ -281,5 +282,6 @@ export const getEmail = (email) =>{
 
   }
 
-} 
+}  
+
 

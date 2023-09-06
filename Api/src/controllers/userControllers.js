@@ -313,7 +313,7 @@ const updateUserPassword = async (email,newPassword) => {
 // consultar por email 
 const userEmail = async (email) => {
     const user = await User.findOne({where: {email}})  
-    emailContraseña(user.email)  
+    emailContraseña(user.email, user.id)  
     console.log("final:", user.email);
     return user
    
