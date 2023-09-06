@@ -520,13 +520,12 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         cities: payload,
       };
-      case DELETE_USER:
+    case DELETE_USER:
         return {
           ...state,
           user: payload,
-        };
-      }; 
-      case GET_ALL_MAIL: 
+        }; 
+    case GET_ALL_MAIL: 
       return{
         ...state, 
         email: payload
