@@ -26,7 +26,8 @@ import {
 } from "./action-types";
 import Swal from "sweetalert2";
 
-const URL = import.meta.env.VITE_REACT_APP_API_URL || "https://doggygo-production.up.railway.app/";
+// const URL = 'http://localhost:3001/';
+const URL = "https://doggygo-production.up.railway.app/";
 
 /*
 /////////////////////ejemplo funcion asincrona para las store/////////////////////// 
