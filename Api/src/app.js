@@ -10,7 +10,7 @@ require('./handlers/authenticate.js');
 const session = require('cookie-session')
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = process.env;
-const path = require('path');
+
 
 
 
@@ -39,13 +39,6 @@ server.use(express.json())
 server.use(express.urlencoded({ extended: false }))
 server.use(passport.initialize())
 server.use(passport.session())
-
-
-server.use(express.static(path.join(__dirname, 'build')));
-
-server.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 
 // For Google Signup
