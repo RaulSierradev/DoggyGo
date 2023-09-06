@@ -1,42 +1,43 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterWalkers, restoreWalkers } from "../../../../Redux/actions";
+import {
+  filterWalkers,
+  getCountries,
+  restoreWalkers,
+} from "../../../../Redux/actions";
 import {
   Autocomplete,
   Checkbox,
   FormControl,
   FormControlLabel,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
   Stack,
   TextField,
 } from "@mui/material";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Filtros = () => {
   const dispatch = useDispatch();
-  const countries = useSelector(state => state.countries)
+
+  const countries = useSelector((state) => state.countries);
+  const countriesNames = countries.map((country) => country.name);
 
   useEffect(() => {
     dispatch(restoreWalkers());
+    if (!countries.length) dispatch(getCountries());
   }, [dispatch]);
 
   const [selectsFilter, setSelectsFilter] = useState({
     time: "",
   });
-  
+
   const [inputValue, setInputValue] = useState("");
-  const [countryValue, setCountryValue] = useState("")
+  const [countryValue, setCountryValue] = useState(null);
 
   //const [sizeFilter, setSizeFilter] = useState("");
   const [cprFilter, setCprFilter] = useState(false);
-
-  console.log(selectsFilter);
-  console.log(countryValue);
-  //console.log(sizeFilter);
-  console.log(cprFilter);
 
   const handleSelectsFilter = (event) => {
     event.preventDefault();
@@ -57,17 +58,28 @@ const Filtros = () => {
     });
   };
 
-  const handleCountryFilter = (event)=>{
-    event.preventDefault()
-    const value = event.target.value
+  const handleCountryFilter = (event, value) => {
+    event.preventDefault();
+    setCountryValue(value);
 
-    dispatch(filterWalkers({
-      ...selectsFilter,
-      cpr: cprFilter,
-      country: value
-    }))
-    setCountryValue(value)
-  }
+    //Cuando elimino la opcion seleccionada en el Autocomplete, este handle se activa y se manda con valor nulo
+    if (!value)
+      return dispatch(
+        filterWalkers({
+          ...selectsFilter,
+          cpr: cprFilter,
+          status: true,
+        })
+      );
+
+    dispatch(
+      filterWalkers({
+        ...selectsFilter,
+        cpr: cprFilter,
+        country: value,
+      })
+    );
+  };
 
   const handleCprFilter = (event) => {
     const checked = event.target.checked;
@@ -102,28 +114,37 @@ const Filtros = () => {
     dispatch(filterWalkers({ status: true }));
     setSelectsFilter({ time: "" });
     //setSizeFilter("");
-    setCountryValue("")
+    setCountryValue(null);
     setCprFilter(false);
   };
 
   return (
     <div>
-      <Stack spacing={2} direction={"row"}>
-      <InputLabel sx={{ fontWeight: "bold", top: 20 }} id='filter-label'>
+      <Stack spacing={10} direction={"row"} sx={{display: "flex", alignItems: "center"}}>
+        <Stack
+        spacing={1}
+        direction={"row"}
+        sx={{ display: "flex", alignItems: "center" }}
+      >
+        <InputLabel sx={{ fontWeight: "bold" }} id='filter-label'>
           FILTRAR POR:
         </InputLabel>
         <Autocomplete
-        value={countryValue}
-        onChange={handleCountryFilter}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
-        id="country-input-select"
-        options={countries}
-        sx={{ width: 180, top: 12, backgroundColor: "white" }}
-        renderInput={(params) => <TextField {...params} label="Selecciona el pais" />}
-      />
+          autoComplete
+          noOptionsText='No hay resultados'
+          value={countryValue}
+          onChange={handleCountryFilter}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          id='country-input-select'
+          options={countriesNames}
+          sx={{ width: 200, backgroundColor: "white" }}
+          renderInput={(params) => (
+            <TextField {...params} label='Selecciona el pais' />
+          )}
+        />
         {/*<FormControl variant='outlined' sx={{ width: 180, top: 12 }}>
           <InputLabel id='country-select-label'>Selecciona el pais</InputLabel>
           <Select
@@ -140,7 +161,7 @@ const Filtros = () => {
             ))}
           </Select>
             </FormControl>*/}
-        <FormControl variant='outlined' sx={{ width: 200, top: 12 }}>
+        <FormControl variant='outlined' sx={{ width: 200 }}>
           <InputLabel id='time-select-label'>Selecciona el horario</InputLabel>
           <Select
             sx={{ backgroundColor: "white" }}
@@ -187,10 +208,14 @@ const Filtros = () => {
             labelPlacement='end'
           />
         </Stack>
-
-        <IconButton disableRipple size='large' onClick={handleResetFilter}>
-          <HighlightOffIcon />
-        </IconButton>
+      </Stack>
+      <SearchBar reset={handleResetFilter}/>
+      <button
+        onClick={handleResetFilter}
+        className='mr-2 px-1 py-2 text-gray-500 border border-gray-200 rounded-md bg-white h-10 flex items-center'
+      >
+        Restablecer
+      </button>
       </Stack>
     </div>
   );

@@ -12,7 +12,7 @@ const getWalksHandler = async (req, res) => {
     if (walks.length) {
       res.status(200).json(walks);
     } else {
-      throw Error("There are no walks");
+      throw Error("No hay paseos");
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
