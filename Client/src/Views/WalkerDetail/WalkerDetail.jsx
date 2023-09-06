@@ -9,23 +9,24 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import StarIcon from '@mui/icons-material/Star';
 //import { yellow } from '@mui/material/colors';
 import Payment from '../Booking Confirmation/Payment';
-import { setCurrentUser } from '../../Redux/actions/';
+import { setCurrentUser } from '../../Redux/actions';
 import Modal from '../../Views/Modal/Modal';
 import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
 import Schedule from '../Booking Schedule/Schedule';
 import Swal from 'sweetalert2';
-import ReviewForm from '../Reviews/reviewForm';
 import idFromToken from '../utils/getToken';
 import CardsReview from '../Reviews/CardsReview';
 
 
+import ReviewForm from '../Reviews/ReviewForm';
 
 function WalkerDetail() {
 	const dispatch = useDispatch();
 
 	const clientId = idFromToken();
-console.log(clientId);
+	console.log(clientId);
+
 	const [details, setDetails] = useState([]);
 	const [reviews, setReviews] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -61,18 +62,18 @@ console.log(clientId);
 		try {
 			// setLoading(true);
 
-			const res = await axios.get(`http://localhost:3001/review/`);
+			const res = await axios.get(`http://localhost:3001/review//walkerId/${id}`);
 			console.log(res.data);
 			setReviews(res.data);
 
 			// setLoading(false);
 		} catch (error) {
 			console.error(error.message);
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Something went wrong!',
-			});
+			// Swal.fire({
+			// 	icon: 'error',
+			// 	title: 'Oops...',
+			// 	text: 'Something went wrong!',
+			// });
 			// alert(error.message);
 		}
 	}
@@ -199,7 +200,7 @@ console.log(clientId);
 									<ReviewForm walkerId={id} clientId={clientId}/>
 								</div>
 							</div>
-							<div className="gap-10 flex w-full h-[61%] rounded-md bg-[#e9ecef]">
+							<div className="gap-10 flex w-full min-h-[0] h-[fit-content] rounded-md bg-[#e9ecef]">
 								{/* <ReviewForm walkerId={id} clientId={clientId}/> */}
 								<div className="flex flex-col w-full h-auto p-3 rounded-md bg-white shadow">
 									<h3 className="font-bold text-lg mb-2">

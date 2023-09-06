@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getWalkerByName, restoreWalkers } from "../../../../Redux/actions";
+import { getWalkerByName } from "../../../../Redux/actions";
 
-const SearchBar = () => {
+const SearchBar = ({reset}) => {
   const [name, setName] = useState("");
 
   const dispatch = useDispatch();
@@ -15,19 +15,13 @@ const SearchBar = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
+    reset()
     dispatch(getWalkerByName(name));
     setName("");
   };
 
-  const handleReset = () => {
-    dispatch(restoreWalkers());
-  };
-
   return (
     <div className='flex items-center'>
-      <button onClick={handleReset} className='mr-2 px-1 py-2 text-gray-500 border border-gray-200 rounded-md bg-white'>
-        Restablecer
-      </button>
       <form>
         <div className='relative'>
           <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
@@ -51,7 +45,7 @@ const SearchBar = () => {
             onChange={handleChange}
             value={name}
             type='search'
-            className='block w-full p-4 pl-14 mr-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500  dark:placeholder-gray-400 dark:text-white'
+            className='block w-full p-4 pl-14 mr-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500'
             placeholder='Buscar paseador...'
           />
           <button

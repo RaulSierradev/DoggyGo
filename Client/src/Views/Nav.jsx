@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import Person2Icon from '@mui/icons-material/Person2';
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -43,13 +44,16 @@ function Nav() {
 					</div>
 					<p>Home</p>
 				</Link>
-				<Link to="/dash" className="text-white flex gap-1">
+				<Link to={'/dash'} className="text-white flex gap-1">
 					<div className="flex items-center">
 						<Person2Icon />
 					</div>
-					<p>Profile</p>
+					<p>Perfil</p>
 				</Link>
-				<p>Help</p>
+				<div className="flex items-center gap-1">
+					<HelpCenterIcon />
+					<p>Ayuda</p>
+				</div>
 			</div>
 			<div className="text-white font-bold flex gap-4 items-center">
 				<div className="ml-2 rounded-full">

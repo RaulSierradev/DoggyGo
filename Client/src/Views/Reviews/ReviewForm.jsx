@@ -4,45 +4,49 @@ import { useDispatch } from 'react-redux';
 import StarRating from './StartRating';
 import axios from 'axios';
 
-export default function ReviewForm({walkerId, clientId}) {
+export default function ReviewForm({ walkerId, clientId }) {
+	const [rating, setRating] = useState(0);
+	const [comment, setComment] = useState('');
 
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState('');
+	const handleRatingChange = (newRating) => {
+		setRating(newRating);
+	};
 
-    const handleRatingChange = (newRating) => {
-        setRating(newRating);
-    };
+	const handleCommentChange = (event) => {
+		setComment(event.target.value);
+	};
 
-    const handleCommentChange = (event) => {
-        setComment(event.target.value);
-    };
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		console.log('clientId: ', clientId);
+		console.log('walkerId: ', walkerId);
+		try {
+			const response = await axios.post(
+				`http://localhost:3001/review/${walkerId}`,
+				{
+					rating: rating,
+					comment: comment,
+					clientId: clientId,
+				}
+			);
+			console.log(response);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log("clientId: ", clientId);
-        console.log("walkerId: ", walkerId);
-        try {
-            const response = await axios.post(`http://localhost:3001/review/${walkerId}`, {
-                rating: rating,
-                comment: comment,
-                clientId: clientId
-            });
-            console.log(response);
-      
-            console.log('Reseña guardada:', response.data);
-            
-            //reset a los estados
-            setRating(0);
-            setComment('');
+			console.log('Reseña guardada:', response.data);
 
-            // console.log('Calificación:', rating);
-            // console.log('Comentario:', comment);
-          } catch (error) {
-            console.error('Error al guardar la reseña:', error.response.data.error);
-            alert(error.response.data.error);
-           
-          }
-    };
+			//reset a los estados
+			setRating(0);
+			setComment('');
+
+			// console.log('Calificación:', rating);
+			// console.log('Comentario:', comment);
+		} catch (error) {
+			console.error(
+				'Error al guardar la reseña:',
+				error.response.data.error
+			);
+			alert(error.response.data.error);
+		}
+	};
 
     
 
@@ -56,7 +60,7 @@ export default function ReviewForm({walkerId, clientId}) {
             <div className="flex h-5/6">
                 <div className="">
                     <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">calificacion:</label>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">calificacion:</label>
                         <StarRating onRatingChange={handleRatingChange} size={35}/>
                     </div>
                     <div>
@@ -66,8 +70,8 @@ export default function ReviewForm({walkerId, clientId}) {
                     </div>
                 </div>
                 <div className='ml-5 h-full w-full'>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comentario:</label>
-                    <textarea value={comment} onChange={handleCommentChange} class=" block p-2.5 h-[75%] w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your review here..."></textarea>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comentario:</label>
+                    <textarea value={comment} onChange={handleCommentChange} className=" block p-2.5 h-[75%] w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your review here..."></textarea>
                 </div>
             </div>
         </form>

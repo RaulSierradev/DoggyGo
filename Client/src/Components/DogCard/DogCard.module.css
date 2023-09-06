@@ -1,0 +1,37 @@
+.DogCard{
+    width: 30%;
+    aspect-ratio: 1.5;
+    border-radius: 20px;
+    margin-top: 5.5VH;
+    position: relative;
+    background-image: var(--imagebg);
+    background-size: cover;
+    background-position: center center;
+    text-transform: capitalize;
+	  animation: slom 500Ms ease-in-out both;
+}
+@keyframes slom {
+    0% {
+      transform: translateY(15%);
+      opacity: 0;
+    }
+    10%{
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+.nameDog{
+    background-color: rgb(92, 203, 220);
+    width: fit-content;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: rgb(39, 37, 37);
+    text-align: center;
+    font-size: 3cqb;
+    position: absolute;
+    right: 1rem;
+    bottom: 101%;
+}

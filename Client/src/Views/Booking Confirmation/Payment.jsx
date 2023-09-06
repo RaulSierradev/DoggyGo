@@ -4,10 +4,12 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios';
 import { useState } from 'react';
 import { createWalk, setWalk } from '../../Redux/actions';
+import idFromToken from '../utils/getToken';
 
 const PUBLIC_KEY = import.meta.env.VITE_REACT_APP_PUBLIC_KEY;
 
 function Payment() {
+	const idClient = idFromToken();
 	const dispatch = useDispatch();
 
 	const [loading, setLoading] = useState(false);
@@ -23,7 +25,10 @@ function Payment() {
 	console.log(walk);
 
 	// get the current user (Client user)
-	// !todo
+	const clientUser = useSelector((state) =>
+		state.users.filter((user) => user.id === idClient)
+	);
+	console.log('client id ' + clientUser[0].id);
 
 	const [id, setId] = useState(null);
 
@@ -44,6 +49,7 @@ function Payment() {
 		}
 	};
 
+	console.log('walker id ' + currentUser.id);
 	const handlePayment = async () => {
 		setLoading(true);
 		await dispatch(
@@ -52,13 +58,14 @@ function Payment() {
 				total: Number(walk.cost) + bookingFee,
 				state: true, // this needs back fix
 				// walker: currentUser.name,
-				// UserId: currentUser.id, // ! fix this
+				WalkerId: currentUser.id, // ! fix this
+				ClientId: clientUser[0].id,
 			})
 		);
 		// get the new walk state
 		console.log(walk);
 
-		await dispatch(createWalk());
+		// await dispatch(createWalk());
 
 		const id = await createPreference();
 		setId(id);

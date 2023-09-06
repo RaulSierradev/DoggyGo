@@ -1,7 +1,7 @@
 const { Dog } = require("../db")
 const axios = require('axios')
 
-const createDog = async (name, size, image, age, recomendations, breed, sex, castrated) => {
+const createDog = async (name, size, image, age, recomendations, breed, sex, castrated, ownerID) => {
     const dog = await Dog.create({
         name,
         size,
@@ -10,7 +10,8 @@ const createDog = async (name, size, image, age, recomendations, breed, sex, cas
         recomendations,
         breed,
         sex,
-        castrated
+        castrated,
+        ownerID
     })
     return dog
 }
@@ -42,4 +43,4 @@ const getBreeds = async () => {
 module.exports = {
     createDog,
     getBreeds
-}
+}                                                                                                                               

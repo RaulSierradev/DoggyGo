@@ -5,7 +5,7 @@ import {
   GET_ALL_USERS,
   GET_CLIENT_BY_NAME,
   GET_WALKER_BY_NAME,
-  ORDER_DEFAULT,
+  ORDER_WALKERS,
   PRUEBA,
   RESTORE_CLIENTS,
   RESTORE_WALKERS,
@@ -18,6 +18,10 @@ import {
   GET_STATES,
   GET_CITIES,
   CREATE_WALK,
+  GET_ALL_MAIL,
+  EDIT_PASSWORD,
+  DELETE_USER,
+  GET_ALL_DOGS
 } from "./action-types";
 
 let initialstate = {
@@ -30,6 +34,8 @@ let initialstate = {
       email: "ejemplo1@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "6am-11am",
+      cpr: true,
       birthdate: "1901-05-25",
       image: "url",
       country: "Argentina",
@@ -39,13 +45,17 @@ let initialstate = {
       phone: "1",
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled: true,
+      ratingAvg: 1.21,
     },
     {
       name: "Messi",
       email: "ejemplo2@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "6am-11am",
+      cpr: true,
       birthdate: "1901-05-25",
       image: "url",
       country: "Colombia",
@@ -55,13 +65,17 @@ let initialstate = {
       phone: "2",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.45,
     },
     {
       name: "Maradona",
       email: "ejemplo3@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "11am-3pm",
+      cpr: true,
       birthdate: "1901-05-25",
       image: "url",
       country: "Mexico",
@@ -71,13 +85,17 @@ let initialstate = {
       phone: "3",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.42,
     },
     {
       name: "Ronaldo",
       email: "ejemplo4@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "3pm-10pm",
+      cpr: true,
       birthdate: "1901-05-25",
       image: "url",
       country: "Argentina",
@@ -87,13 +105,17 @@ let initialstate = {
       phone: "4",
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.76,
     },
     {
       name: "Di Stéfano",
       email: "ejemplo5@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "11am-3pm",
+      cpr: false,
       birthdate: "1901-05-25",
       image: "url",
       country: "Argentina",
@@ -103,13 +125,17 @@ let initialstate = {
       phone: "5",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.99,
     },
     {
       name: "Cruyff",
       email: "ejemplo6@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "3pm-10pm",
+      cpr: false,
       birthdate: "1901-05-25",
       image: "url",
       country: "Argentina",
@@ -119,7 +145,9 @@ let initialstate = {
       phone: "6",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.34,
     },
   ],
   walkersBackUp: [
@@ -128,6 +156,8 @@ let initialstate = {
       email: "ejemplo1@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "6am-11am",
+      cpr: true,
       birthdate: "1901-05-25",
       image: "url",
       country: "Argentina",
@@ -137,13 +167,17 @@ let initialstate = {
       phone: "1",
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.21,
     },
     {
       name: "Messi",
       email: "ejemplo2@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "6am-11am",
+      cpr: true,
       birthdate: "1901-05-25",
       image: "url",
       country: "Colombia",
@@ -153,13 +187,17 @@ let initialstate = {
       phone: "2",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.45,
     },
     {
       name: "Maradona",
       email: "ejemplo3@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "11am-3pm",
+      cpr: true,
       birthdate: "1901-05-25",
       image: "url",
       country: "Mexico",
@@ -169,13 +207,17 @@ let initialstate = {
       phone: "3",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.42,
     },
     {
       name: "Ronaldo",
       email: "ejemplo4@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "3pm-10pm",
+      cpr: true,
       birthdate: "1901-05-25",
       image: "url",
       country: "Argentina",
@@ -185,13 +227,17 @@ let initialstate = {
       phone: "4",
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.76,
     },
     {
       name: "Di Stéfano",
       email: "ejemplo5@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "11am-3pm",
+      cpr: false,
       birthdate: "1901-05-25",
       image: "url",
       country: "Argentina",
@@ -201,13 +247,17 @@ let initialstate = {
       phone: "5",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.99,
     },
     {
       name: "Cruyff",
       email: "ejemplo6@gmail.com",
       password: ".",
       description: "Esta es la descripcion",
+      schedule: "3pm-10pm",
+      cpr: false,
       birthdate: "1901-05-25",
       image: "url",
       country: "Argentina",
@@ -217,7 +267,9 @@ let initialstate = {
       phone: "6",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.34,
     },
   ],
   users: [],
@@ -228,7 +280,33 @@ let initialstate = {
   walks: [],
   countries: [],
   states: [],
-  cities: [],
+  cities: [], 
+  email:[],
+  emails: [],
+  admin: [],
+  adminBackup: [],
+};
+
+const compareStringsSecondary = (a, b, i = 0) => {
+  //* Para ORDER_CARDS
+  if (a === b) {
+    return 0;
+  }
+
+  if (i >= a.length) {
+    return -1; // a es más corto que b
+  }
+
+  if (i >= b.length) {
+    return 1; // b es más corto que a
+  }
+
+  const comparison = a[i].localeCompare(b[i]);
+  if (comparison !== 0) {
+    return comparison;
+  }
+
+  return compareStringsSecondary(a, b, i + 1);
 };
 
 let reducer = (state = initialstate, { type, payload }) => {
@@ -243,12 +321,14 @@ let reducer = (state = initialstate, { type, payload }) => {
       return {
         ...state,
         allUsers: payload,
-        clients: payload && payload.filter((user) => user.rol === "Client"),
+        clients: payload && payload.filter((user) => user.rol === "Client" && user.enabled === true),
         clientsBackUp:
-          payload && payload.filter((user) => user.rol === "Client"),
-        walkers: payload && payload.filter((user) => user.rol === "Walker"),
+          payload && payload.filter((user) => user.rol === "Client" && user.enabled === true),
+        walkers: payload && payload.filter((user) => user.rol === "Walker" && user.enabled === true),
         walkersBackUp:
-          payload && payload.filter((user) => user.rol === "Walker"),
+          payload && payload.filter((user) => user.rol === "Walker" && user.enabled === true),
+        admin: payload && payload.filter((user) => user.rol === "Admin" && user.enabled === true),
+        adminBackup: payload && payload.filter((user) => user.rol === "Admin" && user.enabled === true),
         users: payload,
       };
     case GET_CLIENT_BY_NAME:
@@ -273,29 +353,69 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         walkers: state.walkersBackUp,
       };
-    case ORDER_DEFAULT:
-      //*Establecer el orden por default de los paseadores (Disponibilidad)
-      //*Que mas?
-      return {
-        ...state,
-        walkersBackUp: state.walkersBackUp.sort((a, b) => (b.status ? 1 : -1)),
-        walkers: state.walkers.sort((a, b) => (b.status ? 1 : -1)),
-      };
-    case FILTER_WALKERS:
-      //*Filtros combinados
-      /*if (payload.country && payload.time && payload.cpr) {
+    case ORDER_WALKERS:
+      //*Ordenamiento alfabetico (por defecto)
+      if (payload === "Alphabetic") {
         return {
           ...state,
-          walkers: state.walkersBackUp.filter(walker => walker.country === payload.country && walker.schedule === payload.time && walker.cpr === payload.cpr)
+          walkersBackUp: state.walkersBackUp.sort((a, b) =>
+            compareStringsSecondary(a.name, b.name)
+          ),
+          walkers: [...state.walkers].sort((a, b) =>
+            compareStringsSecondary(a.name, b.name)
+          ),
         }
-      }*/
+      }
+      //*Ordenamiento por calificación
+      return {
+        ...state,
+        walkersBackUp: state.walkersBackUp.sort((a, b) => b.ratingAvg - a.ratingAvg),
+        walkers: [...state.walkers].sort((a, b) => b.ratingAvg - a.ratingAvg)
+      }
+    case FILTER_WALKERS:
+      //*Filtros combinados
+      if (payload.country && payload.time && payload.cpr) {
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(
+            (walker) =>
+              walker.country === payload.country &&
+              walker.schedule === payload.time &&
+              walker.cpr === payload.cpr &&
+              walker.status === true
+          ),
+        };
+      }
       if (payload.country && payload.time) {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
             (walker) =>
               walker.country === payload.country &&
-              walker.schedule === payload.time
+              walker.schedule === payload.time &&
+              walker.status === true
+          ),
+        };
+      }
+      if (payload.country && payload.cpr) {
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(
+            (walker) =>
+              walker.country === payload.country &&
+              walker.cpr === payload.cpr &&
+              walker.status === true
+          ),
+        };
+      }
+      if (payload.time && payload.cpr){
+        return {
+          ...state,
+          walkers: state.walkersBackUp.filter(
+            (walker) =>
+              walker.schedule === payload.time &&
+              walker.cpr === payload.cpr &&
+              walker.status === true
           ),
         };
       }
@@ -304,7 +424,8 @@ let reducer = (state = initialstate, { type, payload }) => {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
-            (walker) => walker.country === payload.country
+            (walker) =>
+              walker.country === payload.country && walker.status === true
           ),
         };
       }
@@ -313,7 +434,8 @@ let reducer = (state = initialstate, { type, payload }) => {
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
-            (walker) => walker.schedule === payload.time
+            (walker) =>
+              walker.schedule === payload.time && walker.status === true
           ),
         };
       }
@@ -321,15 +443,17 @@ let reducer = (state = initialstate, { type, payload }) => {
       if (payload.cpr) {
         return {
           ...state,
-
           walkers: state.walkersBackUp.filter(
-            (walker) => walker.cpr === payload.cpr
+            (walker) => walker.cpr === payload.cpr && walker.status === true
           ),
         };
       }
+      //*Filtro por disponibilidad
       return {
         ...state,
-        walkers: state.walkersBackUp,
+        walkers: state.walkersBackUp.filter(
+          (walker) => walker.status === payload.status
+        ),
       };
     case CREATE_USER:
       return {
@@ -396,6 +520,33 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         cities: payload,
       };
+    case DELETE_USER:
+        return {
+          ...state,
+          user: payload,
+        }; 
+    case GET_ALL_MAIL: 
+      return{
+        ...state, 
+        email: payload
+      }
+      case EDIT_PASSWORD:
+      return {
+        ...state,
+        emails: state.emails.map((user) => {
+          if (user.email === payload.email) {
+            return payload;
+          } else {
+            return user;
+          }
+        }),
+      };
+
+    case GET_ALL_DOGS:
+      return {
+        ...state,
+        dogs: payload
+      }
 
     default:
       return { ...state };

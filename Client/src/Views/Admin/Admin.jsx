@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import jwt_decode from 'jwt-decode';
+import Cookies from 'js-cookie';
+
 import * as actions from "../../Redux/actions.js";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
@@ -9,6 +12,11 @@ import Sidebar from "./Sidebar";
 import { RiLineChartLine } from "react-icons/ri";
 
 const Admin = () => {
+  const token = Cookies.get('auth'); // {"email":"test","password":"test"}
+	const decoded = jwt_decode(token);
+	const id = decoded.id;
+  const users = useSelector((state) => state.users);
+  const userProfile = users.filter((user) => user.id === id)[0];
   const clients = useSelector((state) => state.clients);
   const walkers = useSelector((state) => state.walkers);
   const walks = useSelector((state) => state.walks);
@@ -22,13 +30,11 @@ const Admin = () => {
       console.log(error.message);
     }
   }, [dispatch]);
-
-  console.log("Estos son los clientes", clients);
   return (
     <div className="grid lg:grid-cols-4 xl:grid-cols-6 min-h-screen">
-      <Sidebar />
+      <Sidebar userProfile={userProfile} />
       <main className="lg:col-span-3 xl:col-span-5 bg-gray-100 p-8 h-[100vh] overflow-y-scroll">
-        <Header />
+        <Header userProfile={userProfile}/>
         {/* Section 1 */}
         <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 mt-10 gap-8">
           {/* Card 1 */}

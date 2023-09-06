@@ -1,6 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userRows } from '../data';
 import DataTable from './DataTable';
+import idFromToken from '../../utils/getToken';
+import { useEffect, useState } from 'react';
+import { getAll, getAllUsers, getById } from '../../../Redux/actions';
 
 const columns = [
 	{ field: 'id', headerName: 'ID', width: 90 },
@@ -58,14 +61,43 @@ const columns = [
 ];
 
 const Users = () => {
-	const walks = useSelector((state) => state.walks);
+	const id = idFromToken();
+	console.log(id);
+	const dispatch = useDispatch();
+
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		dispatch(getAllUsers()).then(() => setLoading(false));
+	}, []);
+
+	// get all the users
+	const allUsers = useSelector((state) => state.users);
+	// console.log(allUsers);
+
+	// get the current user based on token id
+	const userProfile = allUsers.filter((user) => user.id === id)[0];
+	// console.log(userProfile);
+
+	// change all walks to walks made by the user
+	const allWalks = useSelector((state) => state.walks);
+
+	// this are the walks for the walker
+	const walks = allWalks.filter((walk) => walk.WalkerId === id);
+
+	// this are the walks for the client
+	const clientWalks = allWalks.filter((walk) => walk.ClientId === id);
 
 	return (
 		<div className="users">
 			<div className="flex items-center gap-5 mb-5">
-				<h1 className="font-bold text-4xl">History</h1>
+				<h1 className="font-bold text-4xl">Paseos</h1>
 			</div>
-			<DataTable slug="users" columns={columns} rows={walks} />
+			{userProfile?.rol === 'Walker' ? (
+				<DataTable slug="users" columns={columns} rows={walks} />
+			) : (
+				<DataTable slug="users" columns={columns} rows={clientWalks} />
+			)}
 		</div>
 	);
 };
