@@ -29,11 +29,11 @@ const getReviewsByWalkerIdController = async (walkerId) => {
     const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
    
     if (!walkerId) {
-        throw new Error('Enter an ID');
+        throw new Error('Ingrese un ID');
     }
 
     if (!regexExp.test(walkerId)) {
-        throw Error('Enter a valid ID');
+        throw Error('Ingrese un ID valido');
     }
 
     const walker = await User.findOne({ where: { id: walkerId } });
@@ -42,11 +42,11 @@ const getReviewsByWalkerIdController = async (walkerId) => {
     });
 
     if (!walker) {
-        throw Error('Walker does not exist');
+        throw Error('El paseador no existe');
     }
 
     if (walkerReviews.length === 0) {
-        throw Error('This walker has no reviews');
+        throw Error('El paseador no tiene reviews');
     }
 
     return walkerReviews;
@@ -58,11 +58,11 @@ const getReviewsByClientIdController = async (clientId) => {
     const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
    
     if (!clientId) {
-        throw new Error('Enter an ID');
+        throw new Error('Ingrese un ID');
     }
 
     if (!regexExp.test(clientId)) {
-        throw Error('Enter a valid ID');
+        throw Error('Ingrese un ID valido');
     }
 
     const client = await User.findOne({ where: { id: clientId } });
@@ -71,11 +71,11 @@ const getReviewsByClientIdController = async (clientId) => {
     });
 
     if (!client) {
-        throw Error('Client does not exist');
+        throw Error('El cliente no existe');
     }
 
     if (clientReviews.length === 0) {
-        throw Error('this client has not reviewed');
+        throw Error('Este cliente no tiene reviews');
     }
 
     return clientReviews;
@@ -89,14 +89,14 @@ const createReviewController = async ( walkerId, clientId, rating, comment ) => 
     const client = await User.findOne({ where: { id: clientId } });
     
     if (!rating) {
-        throw Error('Star rating is required!')
+        throw Error('¡Se requiere calificación de estrellas!')
     }
 
     const searchReview = await Review.findAll({
         where: { clientId: clientId, walkerId: walkerId }
     });
 
-    if (searchReview.length !== 0) throw Error('You have already reviewed this user!');
+    if (searchReview.length !== 0) throw Error('¡Ya has reseñado a este usuario!');
 
     let newReview = await Review.create({
         clientName: client.name,

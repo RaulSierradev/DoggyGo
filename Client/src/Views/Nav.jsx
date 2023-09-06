@@ -43,7 +43,7 @@ function Nav() {
 					</div>
 					<p>Home</p>
 				</Link>
-				<Link to="/dash" className="text-white flex gap-1">
+				<Link to={'/dash'} className="text-white flex gap-1">
 					<div className="flex items-center">
 						<Person2Icon />
 					</div>

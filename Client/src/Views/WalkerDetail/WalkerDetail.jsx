@@ -15,15 +15,15 @@ import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
 import Schedule from '../Booking Schedule/Schedule';
 import Swal from 'sweetalert2';
-import ReviewForm from '../Reviews/reviewForm';
 import idFromToken from '../utils/getToken';
-
+import ReviewForm from '../Reviews/reviewForm';
 
 function WalkerDetail() {
 	const dispatch = useDispatch();
 
 	const clientId = idFromToken();
-console.log(clientId);
+	console.log(clientId);
+
 	const [details, setDetails] = useState([]);
 	const [loading, setLoading] = useState(false);
 
@@ -156,8 +156,6 @@ console.log(clientId);
 								{renderStepContent(currentStep)}
 							</Modal>
 						</div>
-
-
 						<div className="gap-10 flex flex-col h-5/6 w-2/3">
 							<div className="gap-8 flex-col ml-5 h-4/6  p-3 rounded-md bg-white shadow">
 								<div className="h-2/5">
@@ -171,8 +169,6 @@ console.log(clientId);
 									</div>
 								</div>
 
-
-
 								<div className="">
 									<h3 className="font-bold text-lg">
 										Recent Reviews
@@ -185,8 +181,8 @@ console.log(clientId);
 											<p>
 												Lorem ipsum dolor sit amet,
 												consectetur adipisicing elit.
-												Exercitationem, autem veniam amet
-												cupiditate aliquid maiores
+												Exercitationem, autem veniam
+												amet cupiditate aliquid maiores
 											</p>
 										</div>{' '}
 										<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md">
@@ -197,7 +193,7 @@ console.log(clientId);
 							</div>
 
 							<div className="gap-8 flex flex-col ml-5 w-1/3 h-4/6  p-3 rounded-md bg-white shadow">
-								<ReviewForm walkerId={id} clientId={clientId}/>
+								<ReviewForm walkerId={id} clientId={clientId} />
 							</div>
 						</div>
 					</>

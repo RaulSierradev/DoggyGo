@@ -19,9 +19,10 @@ import Walkers from './Views/Admin/Walkers/Walkers';
 import PerfilDeUsuario from './Views/PerfilDeUsuario/PerfilDeUsuario';
 import UserProfile from './Views/Admin/UserProfile/UserProfile';
 import Walks from './Views/Admin/Walks/Walks';
-
+import ResetPassword from './Views/Login/ResetPassword'; 
 import Success from './Views/Mercado Pago/Success';
 import AlertDialog from './Views/Home/Components/Card/AlertDialog';
+import Recuperar from './Views/recuprarContraseña/recuperar';
 import Contact from './Views/Contact/Contact';
 
 function App() {
@@ -34,12 +35,14 @@ function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/home/success" element={<Success />} />
 				<Route path="/home" element={<Home />} />
-				<Route path="/alert" element={<AlertDialog />} />
+				<Route path="/alert" element={<AlertDialog />} /> 
+				<Route path="/reset-password" element={<ResetPassword/>} /> 
+				<Route path="/recuperarcontraseña" element={<Recuperar/>}/>
 
 				{/* Walker routes */}
 				<Route
 					path="/dash"
-					element={<PrivateRoutes rol={['Walker']} />}
+					element={<PrivateRoutes rol={['Walker', 'Client']} />}
 				>
 					<Route path="/dash" element={<Layout />}>
 						<Route path="" element={<HomeDashboard />} exact />
@@ -56,9 +59,14 @@ function App() {
 					<Route index element={<WalkerDetail />} />
 					<Route path="payment" element={<Payment />} />
 				</Route>
-				
+
+				<Route
+					path="/perfil"
+					element={<PrivateRoutes rol={['Client']} />}
+				>
+					<Route index element={<PerfilDeUsuario />} />
+				</Route>
 				<Route path="/Help" element={<Contact />} />
-				<Route path="/Profile" element={<PerfilDeUsuario />} />
 				<Route path="/T" element={<T />} />
 				<Route path="*" element={<Error404 />} />
 
@@ -70,15 +78,15 @@ function App() {
 					<Route index element={<Admin />} />
 					<Route path="clientes" element={<Clientes />} />
 					<Route path="paseadores" element={<Walkers />} />
-					<Route path="/admin/detail/:id" element={<UserProfile />} />
-					<Route path="/admin/paseos" element={<Walks />} />
+					<Route path="detail/:id" element={<UserProfile />} />
+					<Route path="paseos" element={<Walks />} />
 				</Route>
 
-				{/* <Route path="/admin" element={<Admin />} />
+				<Route path="/admin" element={<Admin />} />
 				<Route path="/admin/clientes" element={<Clientes />} />
 				<Route path="/admin/paseadores" element={<Walkers />} />
 				<Route path="/admin/detail/:id" element={<UserProfile />} />
-				<Route path="/admin/paseos" element={<Walks />} /> */}
+				<Route path="/admin/paseos" element={<Walks />} />
 			</Routes>
 		</div>
 	);

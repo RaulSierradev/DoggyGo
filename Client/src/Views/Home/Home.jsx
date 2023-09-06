@@ -3,8 +3,7 @@ import Filtros from './Components/Filtros/Filtros';
 import Paginado from './Components/Paginado/Paginado';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { filterWalkers, getAllUsers, orderDefault } from '../../Redux/actions';
-import SearchBar from './Components/SearchBar/SearchBar';
+import { filterWalkers, getAllUsers, orderWalkers } from '../../Redux/actions';
 import Cookies from 'js-cookie';
 import Ordenamientos from './Components/Ordenamientos/Ordenamientos';
 //import FormDogs from './Components/FormDogs/FormDogs';
@@ -21,7 +20,7 @@ const Home = () => {
     const getAllUsersFirst = async () => {
       await dispatch(getAllUsers()); //!Esto va aca por ahora
       await dispatch(filterWalkers({status: true}));
-      await dispatch(orderDefault());
+      await dispatch(orderWalkers("Alphabetic"));
       setOrderDefaultComplete(true);
     };
     getAllUsersFirst();
@@ -51,9 +50,8 @@ const Home = () => {
       </div>
 
       <div className='mt-2 flex flex-row flex-wrap justify-around items-center'>
+        <Ordenamientos />
         <Filtros />
-		<Ordenamientos />
-        <SearchBar />
       </div>
       {orderDefaultComplete && <Paginado />}
       {/* <button

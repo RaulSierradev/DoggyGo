@@ -145,7 +145,9 @@ const Login = () => {
 								type="submit"
 							>
 								Iniciar Sesión
-							</button>
+							</button> 
+							<Link to="/reset-password">Olvidé mi contraseña</Link>
+
 						</form>
 					</div>
 				</div>
