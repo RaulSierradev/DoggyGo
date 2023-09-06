@@ -13,13 +13,13 @@ export const menu = [
 			},
 			{
 				id: 2,
-				title: 'Profile',
+				title: 'Perfil',
 				url: '/dash/profile',
 				icon: '/profile.svg',
 			},
 			{
 				id: 3,
-				title: 'History',
+				title: 'Paseos',
 				url: '/dash/history',
 				icon: '/log.svg',
 			},
