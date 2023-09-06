@@ -16,7 +16,7 @@ import WalkCosts from '../Booking Costs/WalkCosts';
 import Schedule from '../Booking Schedule/Schedule';
 import Swal from 'sweetalert2';
 import idFromToken from '../utils/getToken';
-import ReviewForm from '../Reviews/reviewForm';
+import ReviewForm from '../Reviews/ReviewForm';
 
 function WalkerDetail() {
 	const dispatch = useDispatch();

@@ -45,6 +45,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword/>} /> 
 				<Route path="/recuperarcontraseña" element={<Recuperar/>}/>
 
+
         {/* Walker routes */}
         <Route path="/dash" element={<PrivateRoutes rol={["Walker"]} />}>
           <Route path="/dash" element={<Layout />}>

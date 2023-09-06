@@ -21,5 +21,5 @@ export const CREATE_WALK = 'CREATE_WALK'
 export const EDIT_PASSWORD = 'EDIT_PASSWORD' 
 export const DELETE_USER = 'DELETE_USER'
 export const GET_ALL_MAIL = 'GET_ALL_MAIL'
-
+export const GET_ALL_DOGS = 'GET_ALL_DOGS'
 

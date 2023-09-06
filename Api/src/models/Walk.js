@@ -57,7 +57,11 @@ module.exports = (sequelize) => {
       WalkerId: {
         type: DataTypes.STRING,
         allowNull: true,
-      }
+      },
+      ClientId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       timestamps: false,

@@ -1,3 +1,5 @@
+
+require("dotenv").config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -5,7 +7,7 @@ const morgan = require('morgan');
 const router = require('./routes/index.js');
 const passport = require('passport')
 require('./handlers/authenticate.js');
-const session = require('express-session')
+const session = require('cookie-session')
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = process.env;
 
@@ -18,8 +20,8 @@ const server = express();
 server.use(session({
   secret: 'mysecret',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
+  saveUninitialized: false,
+  // cookie: { secure: false }
 }))
 
 
