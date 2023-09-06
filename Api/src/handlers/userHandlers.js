@@ -109,9 +109,10 @@ const loginHandler = async (req, res) => {
 
 // actualizar contraseña 
 const passwordUserHandler = async (req, res) => { 
-    const { email, newPassword} = req.body
+    const { email, password} = req.body
+    console.log('Es esto correcto handler', email, password )
     try {
-       const updatePassword = await updateUserPassword(email, newPassword) 
+       const updatePassword = await updateUserPassword(email, password) 
        res.status(200).json(updatePassword)
     } catch (error) { 
         res.status(400).json({ error: error.message });
@@ -119,8 +120,8 @@ const passwordUserHandler = async (req, res) => {
     }
 } 
 // consultar contraseña 
-const handleUserByEmail = async(req, res) => {
-    try { 
+const handleUserByEmail = async(req, res) => {  
+    try {  
         const { email} = req.params 
         const Email = await  userEmail(email) 
         res.status(200).json(Email)

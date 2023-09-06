@@ -27,24 +27,23 @@ import SuperWalks from "./Views/SuperAdmin/SuperWalks/SuperWalks";
 import ResetPassword from './Views/Login/ResetPassword'; 
 import Success from './Views/Mercado Pago/Success';
 import AlertDialog from './Views/Home/Components/Card/AlertDialog';
-import Recuperar from './Views/recuprarContraseña/recuperar';
+import Recuperar from './Views/recuprarContrasena/Recuperar';
 import Editar from "./Views/Admin/Editar";
 import SAdmins from "./Views/SuperAdmin/SAdmins/SAdmins";
 
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Navigate to="/inicio" />} />
-        <Route path="/inicio" element={<Landing />} />
-        <Route path="/registro" element={<Registro />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home/success" element={<Success />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/alert" element={<AlertDialog />} />
-        <Route path="/reset-password" element={<ResetPassword/>} /> 
-				<Route path="/recuperarcontraseña" element={<Recuperar/>}/>
-
+	return (
+		<div className="App">
+			<Routes>
+				<Route path="/" element={<Navigate to="/inicio" />} />
+				<Route path="/inicio" element={<Landing />} />
+				<Route path="/registro" element={<Registro />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/home/success" element={<Success />} />
+				<Route path="/home" element={<Home />} />
+				<Route path="/alert" element={<AlertDialog />} /> 
+				<Route path="/reset-password" element={<ResetPassword/>} /> 
+				<Route path="/recuperarcontraseña/:id" element={<Recuperar/>}/>
 
         {/* Walker routes */}
         <Route path="/dash" element={<PrivateRoutes rol={["Walker"]} />}>

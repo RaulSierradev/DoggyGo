@@ -19,9 +19,9 @@ import {
   GET_STATES,
   GET_CITIES,
   CREATE_WALK,
-  CREATE_WALK,
   DELETE_USER,
-  GET_ALL_MAIL,
+  GET_ALL_MAIL,  
+  EDIT_PASSWORD,
   GET_ALL_DOGS
 } from "./action-types";
 import Swal from "sweetalert2";
@@ -314,6 +314,21 @@ export const getEmail = (email) =>{
     }
 
   }
+}  
+
+export const editPassword = (email, password)=>{
+  const endpoint = 'http://localhost:3001/user/auth/update'
+  return async (dispatch)=>{
+    try {
+      const { data } = await axios.put(endpoint, email, password)
+      return dispatch({
+        type: EDIT_PASSWORD,
+        payload: data
+      })
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
 
 }
 
@@ -331,4 +346,6 @@ export const deleteUser = (id) => {
     }
   };
 };
+
+
 

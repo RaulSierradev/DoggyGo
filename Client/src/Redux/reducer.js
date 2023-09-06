@@ -19,9 +19,9 @@ import {
   GET_CITIES,
   CREATE_WALK,
   GET_ALL_MAIL,
+  EDIT_PASSWORD,
   DELETE_USER,
   GET_ALL_DOGS
-
 } from "./action-types";
 
 let initialstate = {
@@ -280,10 +280,11 @@ let initialstate = {
   walks: [],
   countries: [],
   states: [],
-  cities: [],
+  cities: [], 
+  email:[],
+  emails: [],
   admin: [],
   adminBackup: [],
-    email:[],
 };
 
 const compareStringsSecondary = (a, b, i = 0) => {
@@ -530,6 +531,17 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state, 
         email: payload
       }
+      case EDIT_PASSWORD:
+      return {
+        ...state,
+        emails: state.emails.map((user) => {
+          if (user.email === payload.email) {
+            return payload;
+          } else {
+            return user;
+          }
+        }),
+      };
 
     case GET_ALL_DOGS:
       return {
