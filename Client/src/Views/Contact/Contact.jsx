@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import style from './Contact.module.css'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Contact = (props) => {
 
@@ -13,16 +14,11 @@ const Contact = (props) => {
   const [message, SetMessage] = useState('')
 
   const SendContact = (event) => {
+      
+    if (!user.name || !user.email || !categoria || !title || !message) Swal.fire('Por favor rellene todos los campos');
+
     event.preventDefault();
     setBtnActive(true)
-    console.log({
-      name:user.name,
-      email:user.email,
-      category: categoria,
-      title,
-      message,
-      email:user.email,
-    })
     axios.post('http:/contact', {
         name:user.name,
         email:user.email,
@@ -32,10 +28,14 @@ const Contact = (props) => {
         email:user.email,
 			})
     .then(()=>{
+      Swal.fire('Mensaje enviado, nos pondreos en contacto cuando sea posible');
+      setCategoria('')
+      setTitle('')
+      SetMessage('')
       setBtnActive(false)
     })
     .catch((error)=>{
-      window.alert(error.message)
+      Swal.fire(error.message);
       setBtnActive(false)
     })
   }
