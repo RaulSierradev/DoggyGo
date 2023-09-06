@@ -5,7 +5,7 @@ export const GET_CLIENT_BY_NAME = "GET_CLIENT_BY_NAME"
 export const GET_WALKER_BY_NAME = "GET_WALKER_BY_NAME"
 export const RESTORE_CLIENTS = "RESTORE_CLIENTS"
 export const RESTORE_WALKERS = "RESTORE_WALKERS"
-export const ORDER_DEFAULT = "ORDER_DEFAULT"
+export const ORDER_WALKERS = "ORDER_WALKERS"
 export const FILTER_WALKERS = "FILTER_WALKERS"
 export const CREATE_USER = 'CREATE_USER'
 export const EDIT_USER = 'EDIT_USER'
@@ -18,5 +18,8 @@ export const GET_COUNTRIES = 'GET_COUNTRIES'
 export const GET_STATES = 'GET_STATES'
 export const GET_CITIES = 'GET_CITIES'
 export const CREATE_WALK = 'CREATE_WALK'
+export const EDIT_PASSWORD = 'EDIT_PASSWORD' 
 export const DELETE_USER = 'DELETE_USER'
+export const GET_ALL_MAIL = 'GET_ALL_MAIL'
+
 

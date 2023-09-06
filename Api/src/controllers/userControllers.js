@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = process.env;
-const sendEmail = require('../utils/mailer')
+const {email1 , emailContraseña } = require('../utils/mailer')  
 require("dotenv").config();
 
 
@@ -13,7 +13,7 @@ const getUsersController = async () => {
     const users = await User.findAll();
 
     if (users.length === 0) {
-        throw Error('No registered walkers');
+        throw Error('No se encontraron paseadores');
     }
 
     return users;
@@ -23,19 +23,19 @@ const getUsersController = async () => {
 //Trae usuarios por nombre
 const getUsersByNameController = async (name) => {
     if (!name) {
-        throw new Error('Enter a name');
+        throw new Error('Tiene que ingresar un nombre');
     }
 
     const users = await User.findAll({
         where: {
             name: {
-                [Op.iLike]: `%${name}%`
+                [Op.iLike]: `%${name}`
             }
         }
     });
 
     if (users.length === 0) {
-        throw Error('Walkers not found');
+        throw Error('No se encontraron paseadores');
     }
 
     const arrayUsers = users.map(user => {
@@ -69,11 +69,11 @@ const getUserByIdController = async (id) => {
     const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
 
     if (!id) {
-        throw new Error('Enter an ID');
+        throw new Error('Ingrese un ID');
     }
 
     if (!regexExp.test(id)) {
-        throw Error('Enter a valid ID');
+        throw Error('Ingrese un ID valido');
     }
 
     const user = await User.findOne({
@@ -82,7 +82,7 @@ const getUserByIdController = async (id) => {
     });
 
     if (!user) {
-        throw Error('User does not exist');
+        throw Error('El usuario no existe');
     }
 
     return user;
@@ -168,7 +168,7 @@ const createUserController = async (userData) => {
 
 
         if (!name || !email || !password || !birthdate || !address || !phone || !country || !state || !city || !rol) {
-            throw Error('All fields are required')
+            throw Error('Todos los campos son requeridos')
         }
 
         const emailCheck = await User.findOne({
@@ -176,14 +176,14 @@ const createUserController = async (userData) => {
                 email: email
             }
         });
-        if (emailCheck) throw new Error('This email is already registered!');
+        if (emailCheck) throw new Error('¡Este correo electrónico ya está registrado!');
 
         const phoneCheck = await User.findOne({
             where: {
                 phone: phone
             }
         });
-        if (phoneCheck) throw new Error('This phone number is already registered!');
+        if (phoneCheck) throw new Error('¡Este numero de telefono ya está registrado!');
 
         if (password !== 'null') {
             const hashedPassword = await bcrypt.hash(password, 10);  // 10 number of salt rounds
@@ -199,7 +199,7 @@ const createUserController = async (userData) => {
     }
     if (newUser) {
 
-        sendEmail(newUser.email);
+        email1(newUser.email);
         console.log("final:", newUser);
 
         if (newUser) {
@@ -211,7 +211,7 @@ const createUserController = async (userData) => {
             //send users details
             return { newUser, token };
         } else {
-            throw new Error('Details are not correct');
+            throw new Error('Los detalles no son correctos');
         }
     }
 
@@ -251,7 +251,7 @@ const updateUserController = async (updates) => {
 
 
     if (!user) {
-        throw new Error('User not found');
+        throw new Error('Usuario no encontrado');
     }
 
     let updatedUser = await user.update(updates);
@@ -285,10 +285,10 @@ const loginController = async (email, password) => {
             //send user and token data
             return { user, token };
         } else {
-            throw new Error('Authentication failed');
+            throw new Error('Error de autenticación');
         }
     } else {
-        throw new Error('Authentication failed');
+        throw new Error('Error de autenticación');
     }
 }; 
 
@@ -313,7 +313,7 @@ const updateUserPassword = async (email,newPassword) => {
 // consultar por email 
 const userEmail = async (email) => {
     const user = await User.findOne({where: {email}})  
-    sendEmail(user.email)  
+    emailContraseña(user.email)  
     console.log("final:", user.email);
     return user
    

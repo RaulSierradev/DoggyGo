@@ -40,7 +40,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { User, Walk, Dog, Review } = sequelize.models;
+const { User, Walk, Dog, Review, Contact } = sequelize.models;
 
 // Aca vendrian las relaciones
 
@@ -78,6 +78,14 @@ Review.belongsTo(User, {
   foreignKey: 'walkerId',
   as: 'walker',
 });
+
+
+
+Contact.hasMany(User);
+User.belongsTo(Contact);
+
+User.hasMany(Contact);
+Contact.belongsTo(User);
 
 
 

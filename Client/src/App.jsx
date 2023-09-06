@@ -16,6 +16,7 @@ import Payment from "./Views/Booking Confirmation/Payment";
 import Admin from "./Views/Admin/Admin";
 import Clientes from "./Views/Admin/Clients/Clientes";
 import Walkers from "./Views/Admin/Walkers/Walkers";
+import PerfilDeUsuario from './Views/PerfilDeUsuario/PerfilDeUsuario';
 import UserProfile from "./Views/Admin/UserProfile/UserProfile";
 import Walks from "./Views/Admin/Walks/Walks";
 import SuperAdmin from "./Views/SuperAdmin/SuperAdmin";
@@ -23,9 +24,10 @@ import SuperClientes from "./Views/SuperAdmin/SuperClients/SuperClientes";
 import SuperWalkers from "./Views/SuperAdmin/SuperWalkers/SuperWalkers";
 import SuperUserProfile from "./Views/SuperAdmin/SuperUserProfile/SuperUserProfile";
 import SuperWalks from "./Views/SuperAdmin/SuperWalks/SuperWalks";
-
-import Success from "./Views/Mercado Pago/Success";
-import AlertDialog from "./Views/Home/Components/Card/AlertDialog";
+import ResetPassword from './Views/Login/ResetPassword'; 
+import Success from './Views/Mercado Pago/Success';
+import AlertDialog from './Views/Home/Components/Card/AlertDialog';
+import Recuperar from './Views/recuprarContraseña/recuperar';
 import Editar from "./Views/Admin/Editar";
 import SAdmins from "./Views/SuperAdmin/SAdmins/SAdmins";
 
@@ -40,6 +42,8 @@ function App() {
         <Route path="/home/success" element={<Success />} />
         <Route path="/home" element={<Home />} />
         <Route path="/alert" element={<AlertDialog />} />
+        <Route path="/reset-password" element={<ResetPassword/>} /> 
+				<Route path="/recuperarcontraseña" element={<Recuperar/>}/>
 
         {/* Walker routes */}
         <Route path="/dash" element={<PrivateRoutes rol={["Walker"]} />}>
@@ -50,6 +54,7 @@ function App() {
           </Route>
         </Route>
 
+
         {/* Client routes */}
         <Route
           path="/home/detail/:id"
@@ -59,6 +64,14 @@ function App() {
           <Route path="payment" element={<Payment />} />
         </Route>
 
+
+				<Route
+					path="/perfil"
+					element={<PrivateRoutes rol={['Client']} />}
+				>
+					<Route index element={<PerfilDeUsuario />} />
+				</Route>
+        
         <Route path="/T" element={<T />} />
         <Route path="*" element={<Error404 />} />
 
@@ -81,6 +94,7 @@ function App() {
       </Routes>
     </div>
   );
+
 }
 
 export default App;

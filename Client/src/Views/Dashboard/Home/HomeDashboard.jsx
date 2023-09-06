@@ -1,13 +1,17 @@
 import { useSelector } from 'react-redux';
 import MoneyCard from './MoneyCard';
 import Orders from './Orders';
+import idFromToken from '../../utils/getToken';
 
 // import Nav from '../../Nav';
 
 function HomeDashboard() {
-	const walks = useSelector((state) => state.walks);
+	const id = idFromToken();
+	const allWalks = useSelector((state) => state.walks);
+	console.log(allWalks);
 
-	console.log(walks);
+	// grab only walks that are for the current user
+	const walks = allWalks.filter((walk) => walk.WalkerId === id);
 
 	// ! missing the conecction with the back end to get the data
 	const total = walks
@@ -39,7 +43,7 @@ function HomeDashboard() {
 							</h2>
 							{walks.map((walk) => (
 								<Orders
-									key={walk._id}
+									key={walk.id}
 									name={walk.startDate}
 									time={walk.time}
 									amount={walk.cost}

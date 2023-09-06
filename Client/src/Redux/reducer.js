@@ -5,7 +5,7 @@ import {
   GET_ALL_USERS,
   GET_CLIENT_BY_NAME,
   GET_WALKER_BY_NAME,
-  ORDER_DEFAULT,
+  ORDER_WALKERS,
   PRUEBA,
   RESTORE_CLIENTS,
   RESTORE_WALKERS,
@@ -18,6 +18,7 @@ import {
   GET_STATES,
   GET_CITIES,
   CREATE_WALK,
+  GET_ALL_MAIL,
   DELETE_USER,
 } from "./action-types";
 
@@ -42,7 +43,9 @@ let initialstate = {
       phone: "1",
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled: true,
+      ratingAvg: 1.21,
     },
     {
       name: "Messi",
@@ -60,7 +63,9 @@ let initialstate = {
       phone: "2",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.45,
     },
     {
       name: "Maradona",
@@ -78,7 +83,9 @@ let initialstate = {
       phone: "3",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.42,
     },
     {
       name: "Ronaldo",
@@ -96,7 +103,9 @@ let initialstate = {
       phone: "4",
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.76,
     },
     {
       name: "Di Stéfano",
@@ -114,7 +123,9 @@ let initialstate = {
       phone: "5",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.99,
     },
     {
       name: "Cruyff",
@@ -132,7 +143,9 @@ let initialstate = {
       phone: "6",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.34,
     },
   ],
   walkersBackUp: [
@@ -152,7 +165,9 @@ let initialstate = {
       phone: "1",
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.21,
     },
     {
       name: "Messi",
@@ -170,7 +185,9 @@ let initialstate = {
       phone: "2",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.45,
     },
     {
       name: "Maradona",
@@ -188,7 +205,9 @@ let initialstate = {
       phone: "3",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.42,
     },
     {
       name: "Ronaldo",
@@ -206,7 +225,9 @@ let initialstate = {
       phone: "4",
       status: false,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.76,
     },
     {
       name: "Di Stéfano",
@@ -224,7 +245,9 @@ let initialstate = {
       phone: "5",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.99,
     },
     {
       name: "Cruyff",
@@ -242,7 +265,9 @@ let initialstate = {
       phone: "6",
       status: true,
       suscription: true,
-      rol: "Walker",
+      rol: 'Walker',
+      enabled:true,
+      ratingAvg: 1.34,
     },
   ],
   users: [],
@@ -256,6 +281,7 @@ let initialstate = {
   cities: [],
   admin: [],
   adminBackup: [],
+    email:[],
 };
 
 const compareStringsSecondary = (a, b, i = 0) => {
@@ -324,21 +350,28 @@ let reducer = (state = initialstate, { type, payload }) => {
         ...state,
         walkers: state.walkersBackUp,
       };
-    case ORDER_DEFAULT:
-      //*Establecer el orden por defecto de los paseadores (Alfabetico)
-      return {
+    case ORDER_WALKERS:
+      //*Ordenamiento alfabetico (por defecto)
+      if (payload === "Alphabetic"){
+        return {
         ...state,
         walkersBackUp: state.walkersBackUp.sort((a, b) =>
           compareStringsSecondary(a.name, b.name)
         ),
-        walkers: state.walkers.sort((a, b) =>
+        walkers: [...state.walkers].sort((a, b) =>
           compareStringsSecondary(a.name, b.name)
         ),
-      };
+        }
+      }
+      //*Ordenamiento por calificación
+      return {
+        ...state,
+        walkersBackUp: state.walkersBackUp.sort((a , b) => b.ratingAvg - a.ratingAvg),
+        walkers: [...state.walkers].sort((a , b) => b.ratingAvg - a.ratingAvg)
+      }
     case FILTER_WALKERS:
       //*Filtros combinados
       if (payload.country && payload.time && payload.cpr) {
-        console.log("Se aplico filtro pais, horario y RCP");
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
@@ -351,7 +384,6 @@ let reducer = (state = initialstate, { type, payload }) => {
         };
       }
       if (payload.country && payload.time) {
-        console.log("Se aplico filtro pais y horario");
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
@@ -362,8 +394,7 @@ let reducer = (state = initialstate, { type, payload }) => {
           ),
         };
       }
-      if (payload.country && payload.cpr) {
-        console.log("Se aplico filtro pais y RCP");
+      if (payload.country && payload.cpr){
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
@@ -374,8 +405,8 @@ let reducer = (state = initialstate, { type, payload }) => {
           ),
         };
       }
-      if (payload.time && payload.cpr) {
-        console.log("Se aplico filtro horario y RCP");
+
+      if (payload.time && payload.cpr){
         return {
           ...state,
           walkers: state.walkersBackUp.filter(
@@ -492,6 +523,12 @@ let reducer = (state = initialstate, { type, payload }) => {
           ...state,
           user: payload,
         };
+      }; 
+      case GET_ALL_MAIL: 
+      return{
+        ...state, 
+        email: payload
+      }
 
     default:
       return { ...state };

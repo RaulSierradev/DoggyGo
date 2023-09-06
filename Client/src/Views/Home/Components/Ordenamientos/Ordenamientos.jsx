@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { orderWalkers } from "../../../../Redux/actions";
 
 const Ordenamientos = () => {
   const dispatch = useDispatch();
@@ -23,11 +24,11 @@ const Ordenamientos = () => {
 
   return (
     <div>
-      <Stack spacing={1} direction={"row"}>
+      <Stack direction={"row"} sx={{display: "flex", alignItems: "center"}}>
         <InputLabel sx={{ fontWeight: "bold" }} id='order-select-label'>
           ORDENAR POR:
         </InputLabel>
-        <FormControl variant='standard' sx={{ width: 120, bottom: 5 }}>
+        <FormControl variant='standard' sx={{ width: 120, display: "flex", alignItems: "center" }}>
           <Select
             sx={{ backgroundColor: "white" }}
             labelId='order-select-label'
@@ -36,7 +37,7 @@ const Ordenamientos = () => {
             onChange={handleOrder}
           >
             <MenuItem value='Alphabetic'>Alfabético</MenuItem>
-            <MenuItem value='Calification'>Calificación</MenuItem>
+            <MenuItem value='rating'>Calificación</MenuItem>
           </Select>
         </FormControl>
       </Stack>
