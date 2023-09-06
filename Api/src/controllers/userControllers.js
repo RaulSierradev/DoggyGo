@@ -293,12 +293,13 @@ const loginController = async (email, password) => {
 }; 
 
 // Actualizar contraseña 
-const updateUserPassword = async (email,newPassword) => { 
+const updateUserPassword = async (email, password) => { 
     try { 
 
     const user = await User.findOne({ where: { email: email } });
+    console.log('Es esto correcto controller', email, password )
       
-    const hashednewPassword = await bcrypt.hash(newPassword, 10) 
+    const hashednewPassword = await bcrypt.hash(password, 10) 
 
     await user.update({password: hashednewPassword}) 
     return 'Contraseña actualizada exitosamente';

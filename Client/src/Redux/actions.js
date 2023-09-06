@@ -284,4 +284,20 @@ export const getEmail = (email) =>{
 
 }  
 
+export const editPassword = (email, password)=>{
+  const endpoint = 'http://localhost:3001/user/auth/update'
+  return async (dispatch)=>{
+    try {
+      const { data } = await axios.put(endpoint, email, password)
+      return dispatch({
+        type: EDIT_PASSWORD,
+        payload: data
+      })
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
+
+}
+
 

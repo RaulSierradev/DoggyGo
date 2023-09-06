@@ -26,7 +26,7 @@ const emailContraseña = async (email,id) => {
         from: 'doggygo.noreply@gmail.com', 
         to: email, 
         subject: '¡Recuperar Contraseña.',  
-        html:  href=`http://127.0.0.1:5173/recuperarcontrase%C3%B1a/${id}`, 
+        html:  href=`http://localhost:5173/recuperarcontrase%C3%B1a/${id}`, 
         text: '¡Ingrese al siguiente enlace para recuperar su contraseña.', 
        
 
