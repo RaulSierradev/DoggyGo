@@ -123,6 +123,8 @@ const Filtros = () => {
           FILTRAR POR:
         </InputLabel>
         <Autocomplete
+          autoComplete
+          noOptionsText="No hay resultados"
           value={countryValue}
           onChange={handleCountryFilter}
           inputValue={inputValue}

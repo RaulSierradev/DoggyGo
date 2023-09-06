@@ -59,10 +59,10 @@ const createUserHandler = async (req, res) => {
         res.status(201).json(createUser.newUser);
     } catch (error) {
         console.log(error.message);
-        if (error.message === 'All fields are required' || error.message === 'This email is already registered!' || error.message === 'This phone number is already registered!' || error.message === 'Details are not correct') {
+        if (error.message === 'Todos los campos son requeridos' || error.message === '¡Este correo electrónico ya está registrado!' || error.message === 'This phone number is already registered!' || error.message === 'Details are not correct') {
             res.status(409).json({ error: error.message });
         } else {
-            res.status(500).json({ error: 'An unexpected error occurred' });
+            res.status(500).json({ error: 'Ocurrió un error inesperado' });
         }
     }
 }

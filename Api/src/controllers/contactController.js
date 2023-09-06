@@ -23,7 +23,7 @@ const getContactById = async (id) => {
 
 const editContact = async ({ id, name, email, category, title, message }) => {
   const contactFound = await Contact.findByPk(id);
-  if (!contactFound) throw new Error("Contact not created");
+  if (!contactFound) throw new Error("Contacto no creado");
   const updatedContact = await Contact.update(
     {
       name,
