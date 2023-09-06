@@ -27,7 +27,7 @@ server.use(session({
   // cookie: { secure: false }
 }))
 
-server.use(express.static(path.join(__dirname, '../../Client')));
+server.use(express.static(path.join(__dirname, '../../Client/dist')));
 
 
 
@@ -86,7 +86,7 @@ server.use((req, res, next) => {
 server.use('/', router);
 
 server.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../Client', 'index.html'));
+  res.sendFile(path.join(__dirname, '../../Client/dist', 'index.html'));
 });
 
 
