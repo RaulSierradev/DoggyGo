@@ -28,6 +28,7 @@ import ResetPassword from './Views/Login/ResetPassword';
 import Success from './Views/Mercado Pago/Success';
 import AlertDialog from './Views/Home/Components/Card/AlertDialog';
 import Recuperar from './Views/recuprarContrasena/Recuperar';
+import Contact from './Views/Contact/Contact';
 import Editar from "./Views/Admin/Editar";
 import SAdmins from "./Views/SuperAdmin/SAdmins/SAdmins";
 
@@ -71,7 +72,7 @@ function App() {
 				>
 					<Route index element={<PerfilDeUsuario />} />
 				</Route>
-        
+				<Route path="/Help" element={<Contact />} />        
         <Route path="/T" element={<T />} />
         <Route path="*" element={<Error404 />} />
 

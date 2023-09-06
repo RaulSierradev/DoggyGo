@@ -58,7 +58,6 @@ const Landing = () => {
 					numquam magni veritatis aliquam, sed ut accusantium illo
 					unde cupiditate itaque harum adipisci quidem?
 				</p>
-				<button>Mas sobre nosostros</button>
 			</section>
 			<section className={style.sec2}>
 				<p className={style.sec2txP}>¿como funciona?</p>
