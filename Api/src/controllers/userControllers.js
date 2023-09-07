@@ -13,7 +13,7 @@ const getUsersController = async () => {
     const users = await User.findAll();
 
     if (users.length === 0) {
-        throw Error('No se encontraron paseadores');
+        throw Error('Por el momento no tenemos paseadores. ¡Vuelva mas tarde!');
     }
 
     return users;

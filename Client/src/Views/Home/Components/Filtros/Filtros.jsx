@@ -197,7 +197,7 @@ const Filtros = () => {
           </ToggleButtonGroup>
         </Stack>*/}
         <Stack spacing={1} direction={"column"}>
-          <InputLabel sx={{ fontWeight: "bold" }} id='cpr-checkbox-label'>
+          <InputLabel sx={{ fontWeight: "bold", paddingLeft: 1 }} id='cpr-checkbox-label'>
             Servicios adicionales
           </InputLabel>
           <FormControlLabel
