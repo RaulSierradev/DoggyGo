@@ -78,11 +78,11 @@ function App() {
 					element={<PrivateRoutes rol={['Admin']} />}
 				>
 					<Route index element={<Admin />} />
-					<Route path="admin/clientes" element={<Clientes />} />
-					<Route path="admin/editar" element={<Editar />} />
-					<Route path="admin/paseadores" element={<Walkers />} />
-					<Route path="admin/detail/:id" element={<UserProfile />} />
-					<Route path="admin/paseos" element={<Walks />} />
+					<Route path="/admin/clientes" element={<Clientes />} />
+					<Route path="/admin/editar" element={<Editar />} />
+					<Route path="/admin/paseadores" element={<Walkers />} />
+					<Route path="/admin/detail/:id" element={<UserProfile />} />
+					<Route path="/admin/paseos" element={<Walks />} />
 				</Route>
 
 				<Route path="/sadmin" element={<SuperAdmin />} />
