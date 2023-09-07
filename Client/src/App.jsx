@@ -54,7 +54,7 @@ function App() {
 				{/* Walker routes */}
 				<Route
 					path="/dash"
-					element={<PrivateRoutes rol={['Walker, Client']} />}
+					element={<PrivateRoutes rol={['Walker', 'Client']} />}
 				>
 					<Route path="/dash" element={<Layout />}>
 						<Route path="" element={<HomeDashboard />} exact />

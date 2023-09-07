@@ -75,7 +75,7 @@ function Nav() {
 						onClick={handleLogout}
 						className="border border-neutral-50 px-6 py-3 rounded text-neutral-50"
 					>
-						LOGOUT
+						Cierra Sesión
 					</button>
 				) : (
 					<>
