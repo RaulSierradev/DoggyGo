@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import Filtros from './Components/Filtros/Filtros';
 import Paginado from './Components/Paginado/Paginado';
+import Nav from "../Nav"
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { filterWalkers, getAllUsers, orderWalkers } from '../../Redux/actions';
@@ -9,7 +9,6 @@ import Ordenamientos from './Components/Ordenamientos/Ordenamientos';
 //import FormDogs from './Components/FormDogs/FormDogs';
 
 const Home = () => {
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -39,16 +38,8 @@ const Home = () => {
 
   return (
     <div className='flex flex-col bg-sky-100 h-screen'>
+      <Nav />
       {/* <FormDogs estadoModal={estadoModal} setEstadoModal={setEstadoModal} /> */}
-      <div className='w-full bg-white h-13 border-b-4'>
-        <button
-          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-5 inline-block w-fit'
-          onClick={() => navigate('/inicio')}
-        >
-          Volver
-        </button>
-      </div>
-
       <div className='mt-2 flex flex-row flex-wrap justify-around items-center'>
         <Ordenamientos />
         <Filtros />

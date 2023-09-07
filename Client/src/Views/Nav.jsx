@@ -28,15 +28,18 @@ function Nav() {
 
 	return (
 		<nav className="flex justify-between items-center bg-[#16425b] h-20 p-4">
-			<div className="flex items-center gap-2">
-				<img
-					className="w-10 h-10 rounded-full"
-					src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80"
-				/>
-				<div className="text-white text-xl font-bold leading-tight tracking-widest">
-					DoggyGo
+			<Link to="/inicio">
+				<div className="flex items-center gap-2">
+					<img
+						className="w-10 h-10 rounded-full"
+						src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80"
+					/>
+					<div className="text-white text-xl font-bold leading-tight tracking-widest">
+						DoggyGo
+					</div>
 				</div>
-			</div>
+			</Link>
+			
 			<div className="flex gap-10 text-zinc-200">
 				<Link to="/home" className="text-white flex gap-1">
 					<div className="flex items-center">

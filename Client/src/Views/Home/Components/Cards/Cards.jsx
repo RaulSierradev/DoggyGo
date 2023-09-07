@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import Card from "../Card/Card";
+import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 
 const Cards = ({ walkers }) => {
   return (
@@ -8,7 +9,7 @@ const Cards = ({ walkers }) => {
         <table className="border-separate border-spacing-3 w-full">
           <thead>
             <tr>
-              <th>Paseadores</th>
+              <th className="border-4">NUESTROS PASEADORES<DirectionsWalkIcon /></th>
             </tr>
           </thead>
           <tbody>
