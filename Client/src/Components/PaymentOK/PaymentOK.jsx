@@ -53,6 +53,7 @@ const PaymentOK = () => {
 					<p>Hora: {items.time}</p>
 				</div>
 			</div>
+			<div className="mt-5 mb-5"></div>
 			<hr />
 			<div className={style.POK_sec2}>
 				{/* <div className={style.POK_sec2_TXcontainer}>
@@ -68,7 +69,7 @@ const PaymentOK = () => {
 				</div>
 				<div className={style.POK_sec2_TXcontainer}>
 					{' '}
-					<p>Metdo de Pago</p>{' '}
+					<p>Metodo de Pago</p>{' '}
 					<p className={style.sc2tx_txsec}>Tarjeta de Credito</p>{' '}
 				</div>
 				<div className={style.POK_sec2_TXcontainer}>
@@ -83,7 +84,7 @@ const PaymentOK = () => {
 					<p className={style.sc2tx_total}>${items.total}</p>{' '}
 				</div>
 				<button
-					className="w-44 h-12 px-5 py-3 bg-indigo-500 rounded justify-start items-center gap-2 inline-flex"
+					className="w-2/6 h-12 px-5 py-3 bg-indigo-500 rounded justify-start items-center gap-2  text-white font-bold block mx-auto "
 					onClick={handleConfirm}
 				>
 					Confirma

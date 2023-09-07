@@ -180,7 +180,12 @@ const FormDogs = () => {
 				<div className="mt-5">
 					<ImageUpload setImageUrl={setImageUrl} />
 				</div>
-				<button type="submit">Submit</button>
+				<button
+					className="mt-3 bg-slate-800 text-white p-2 rounded-md w-2/6  items-center justify-center block mx-auto hover:bg-slate-900"
+					type="submit"
+				>
+					Crea mi Perro
+				</button>
 			</form>
 		</div>
 	);

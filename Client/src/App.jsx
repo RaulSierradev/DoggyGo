@@ -81,8 +81,8 @@ function App() {
 					<Route path="clientes" element={<Clientes />} />
 					<Route path="editar" element={<Editar />} />
 					<Route path="paseadores" element={<Walkers />} />
-					<Route path="/admin/detail/:id" element={<UserProfile />} />
-					<Route path="/admin/paseos" element={<Walks />} />
+					<Route path="detail/:id" element={<UserProfile />} />
+					<Route path="paseos" element={<Walks />} />
 				</Route>
 
 				<Route path="/sadmin" element={<SuperAdmin />} />

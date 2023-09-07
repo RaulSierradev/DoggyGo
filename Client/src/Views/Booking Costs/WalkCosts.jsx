@@ -133,7 +133,7 @@ function WalkCosts() {
 					</div>
 
 					<div className="flex flex-col gap-1">
-						<p>Paseo Basicok</p>
+						<p>Paseo Basico</p>
 						<p className="text-sm font-thin text-slate-800">
 							30 minutos
 						</p>

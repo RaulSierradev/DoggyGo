@@ -38,38 +38,6 @@ server.use(express.urlencoded({ extended: false }))
 server.use(passport.initialize())
 server.use(passport.session())
 
-// // For Google Signup
-// server.get('/auth/google/signup', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-// // For Google Login
-// server.get('/auth/google/login', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-// // For Google Callback
-// server.get('/auth/google/create', passport.authenticate('google', { failureRedirect: '/login' }), async (req, res) => {
-//   // user isComplete only when user is created manually or when user is created by google and then completed the form
-//   if (req.user.isComplete) {
-//     console.log('req user complete', req.user)
-//     let token = jwt.sign({ id: req.user.dataValues.id, rol: req.user.dataValues.rol }, JWT_SECRET_KEY, {
-//       expiresIn: 1 * 24 * 60 * 60 * 1000,
-//     });
-//     console.log('token', token)
-//     if (req.user.dataValues.rol === 'Client') {
-//       console.log('req user complete')
-//       res.redirect(`http://127.0.0.1:5173/home?token=${token}`);
-//     } else if (req.user.dataValues.rol === 'Admin') {
-//       res.redirect(`http://127.0.0.1:5173/admin?token=${token}`);
-//     } else if (req.user.dataValues.rol === 'Walker') {
-//       console.log('req user complete')
-//       res.redirect(`http://127.0.0.1:5173/dash?token=${token}`);
-//     }
-
-//   } else {
-
-//     res.redirect(`http://127.0.0.1:5173/registro?googleId=${req.user.id}&email=${req.user.emails[0].value}&name=${req.user.displayName}`);
-//   }
-
-// });
-
 
 // For Google Signup
 server.get('/auth/google/signup', passport.authenticate('google', { scope: ['profile', 'email'] }));

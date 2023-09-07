@@ -3,16 +3,16 @@ import AccItem from './AccItem';
 
 const faqs = [
 	{
-		title: 'Como Funciona DoggyGo?',
-		text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium, quaerat temporibus quas dolore provident nisi ut aliquid ratione beatae sequi aspernatur veniam repellendus.',
+		title: '¿Cómo Funciona DoggyGo?',
+		text: 'DoggyGo esta diseñado para conectar a dueños de perros con paseadores de perros confiables y verificados en tu área. Brindandote un proceso simple, desde la selección del paseador hasta el pago.',
 	},
 	{
-		title: 'Como agendo un paseo?',
-		text: 'Pariatur recusandae dignissimos fuga voluptas unde optio nesciunt commodi beatae, explicabo natus.',
+		title: '¿Cómo agendo un paseo?',
+		text: 'Elige a tu paseador y selecciona la duración que prefieras (20, 30 minutos o 1 hora). Una vez que hayas elegido un paseador, se te dirigirá a la página de pago donde podrás completar la transacción a través de Mercado Pago. ¡Eso es todo!',
 	},
 	{
-		title: 'Como me registro como paseador?',
-		text: 'Excepturi velit laborum, perspiciatis nemo perferendis reiciendis aliquam possimus dolor sed! Dolore laborum ducimus veritatis facere molestias!',
+		title: '¿Cómo me registro como paseador?',
+		text: 'Registrarte como paseador en DoggyGo es muy fácil. Una vez que tu perfil haya sido aprobado, podrás empezar a recibir solicitudes de paseo. ¡Es así de sencillo!',
 	},
 ];
 
