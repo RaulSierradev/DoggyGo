@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './Contact.module.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -8,12 +8,26 @@ import idFromToken from '../utils/getToken';
 
 const Contact = (props) => {
 	const id = idFromToken();
-	console.log(id);
+	const [user, setUser] = useState({});
 	const allUsers = useSelector((state) => state.users);
-	let user = allUsers.find((user) => user.id === id);
-	console.log(user);
 
-	if (!user) user = { name: '', email: '' };
+	useEffect(() => {
+		if (!id) {
+			setUser({ name: '', email: '' });
+		} else {
+			// Fetch or update user details based on id if necessary
+			const currentUser = allUsers.find((user) => user.id === id);
+			if (currentUser) {
+				setUser({ name: currentUser.name, email: currentUser.email });
+			}
+		}
+	}, [id]);
+
+	// if (!id) setUser({ name: '', email: '' });
+
+	// console.log(id);
+	// const currentUser = allUsers.find((user) => user.id === id);
+	// console.log(user);
 
 	const [btnActive, setBtnActive] = useState(!true);
 	const [title, setTitle] = useState('');
