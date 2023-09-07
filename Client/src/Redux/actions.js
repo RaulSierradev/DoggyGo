@@ -19,10 +19,10 @@ import {
   GET_STATES,
   GET_CITIES,
   CREATE_WALK,
+  DELETE_USER,
   GET_ALL_MAIL,
+  EDIT_PASSWORD,
   GET_ALL_DOGS
-
-
 } from "./action-types";
 import Swal from "sweetalert2";
 
@@ -298,7 +298,6 @@ export const getCities = (sta, co) => {
       return { error: error.message };
     }
   };
-
 };
 export const getEmail = (email) => {
   const endpoint = ` ${URL}user/email/${email}`
@@ -315,6 +314,38 @@ export const getEmail = (email) => {
     }
 
   }
+}
+
+export const editPassword = (email, password) => {
+  const endpoint = `${URL}user/auth/update`
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, email, password)
+      return dispatch({
+        type: EDIT_PASSWORD,
+        payload: data
+      })
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
 
 }
+
+export const deleteUser = (id) => {
+  const endpoint = `${URL}user/id/${id}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      return dispatch({
+        type: DELETE_USER,
+        payload: data,
+      });
+    } catch (error) {
+      return { error: `No hay un usuario con el siguiente ID: "${id}"` };
+    }
+  };
+};
+
+
 

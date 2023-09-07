@@ -9,7 +9,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import StarIcon from '@mui/icons-material/Star';
 //import { yellow } from '@mui/material/colors';
 import Payment from '../Booking Confirmation/Payment';
-import { setCurrentUser } from '../../Redux/actions/';
+import { setCurrentUser } from '../../Redux/actions';
 import Modal from '../../Views/Modal/Modal';
 import FormDogs from '../Home/Components/FormDogs/FormDogs';
 import WalkCosts from '../Booking Costs/WalkCosts';
@@ -88,7 +88,7 @@ function WalkerDetail() {
 			<Nav />
 			<div className="flex items-center gap-10 justify-center bg-[#e9ecef] p-6 w-full h-screen">
 				{loading ? (
-					<h1>Loading...</h1>
+					<h1>Cargando...</h1>
 				) : (
 					<>
 						<div className="border-md h-5/6 w-1/3 flex items-center flex-col justify-center gap-4 bg-white p-3 rounded-md shadow">
@@ -160,7 +160,7 @@ function WalkerDetail() {
 							<div className="gap-8 flex-col ml-5 h-4/6  p-3 rounded-md bg-white shadow">
 								<div className="h-2/5">
 									<h3 className="font-bold text-lg mb-2">
-										About Me
+										Mi información
 									</h3>
 									<div className="flex p-2 m-1 justify-center items-center">
 										<p className="items-center font-semibold justify-center flex w-5/6">
@@ -171,7 +171,7 @@ function WalkerDetail() {
 
 								<div className="">
 									<h3 className="font-bold text-lg">
-										Recent Reviews
+										Reseñas Recientes
 									</h3>
 									<div className="gap-5 flex mt-2">
 										<div className="rounded-md bg-[#faf9f9] w-full px-6 py-3 shadow-md italic">

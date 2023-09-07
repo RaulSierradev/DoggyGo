@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 import { Link } from "react-router-dom";
-import PaginadoAdmin from "../PaginadoAdmin";
+import SuperPaginadoAdmin from "../SuperPaginadoAdmin";
 
-const CardsWalkers = (props) => {
+const SuperCardsWalkers = (props) => {
   const { walkers } = props;
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
@@ -16,34 +16,33 @@ const CardsWalkers = (props) => {
     <div className="mt-16">
       <table className="m-10 text-center">
         <tr className="p-10">
-          <td className="font-bold text-xl text-indigo-800">Nombre</td>
-          <td className="font-bold text-xl text-indigo-800">Correo</td>
-          <td className="font-bold text-xl text-indigo-800">Telefono</td>
-          <td className="font-bold text-xl text-indigo-800">Disponible</td>
+          <td className="font-bold text-xl text-amber-800">Nombre</td>
+          <td className="font-bold text-xl text-amber-800">Correo</td>
+          <td className="font-bold text-xl text-amber-800">Telefono</td>
+          <td className="font-bold text-xl text-amber-800">País</td>
         </tr>
         {walkers
           ?.map((e, index) => {
             return (
               <tr key={index}>
-                <td className="px-5 py-3">{e.name}</td>
-                <td className="px-5">{e.email}</td>
-                <td className="px-5">{e.phone}</td>
-                <td className="px-5">{e.country}</td>
+                <td className="px-8 py-3">{e.name}</td>
+                <td className="px-8">{e.email}</td>
+                <td className="px-8">{e.phone}</td>
+                <td className="px-8">{e.country}</td>
                 <td className="px-10">
                   <Link
                     className="bg-green-600 p-2 text-sm text-white font-semibold rounded-lg hover:bg-green-500"
-                    to={`http://localhost:5173/admin/detail/${e.id}`}
+                    to={`http://localhost:5173/sadmin/detail/${e.id}`}
                   >
                     Ver perfil
                   </Link>
                 </td>
-                
               </tr>
             );
           })
           .slice(firstIndex, lastIndex)}
       </table>
-      <PaginadoAdmin
+      <SuperPaginadoAdmin
         cardsPerPage={cardsPerPage}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
@@ -53,4 +52,4 @@ const CardsWalkers = (props) => {
   );
 };
 
-export default CardsWalkers;
+export default SuperCardsWalkers;

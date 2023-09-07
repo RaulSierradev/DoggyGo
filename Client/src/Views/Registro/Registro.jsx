@@ -23,42 +23,43 @@ import registroPaseador from '../../img/registroPaseador.png';
 import google from '../../assets/google1.svg';
 
 const Registro = () => {
-	const initialState = {
-		rol: '',
-		name: '',
-		password: '',
-		description: '',
-		birthdate: '',
-		email: '',
-		image: '',
-		country: '',
-		city: '',
-		address: '',
-		state: '',
-		phone: '',
-		status: true,
-		suscription: false,
-		isComplete: true,
-	};
-	const urlParams = new URLSearchParams(window.location.search)
-		? new URLSearchParams(window.location.search)
-		: null;
-	const googleEmail = urlParams ? urlParams.get('email') : null;
-	const googleName = urlParams ? urlParams.get('name') : null;
-	const countries = useSelector((state) => state.countries);
-	const states = useSelector((state) => state.states);
-	const cities = useSelector((state) => state.cities);
-	const navigate = useNavigate();
-	const dispatch = useDispatch();
-	const [errors, setErrors] = useState({});
-	const [input, setInput] = useState('');
-	const [openC, setOpenC] = useState(false);
-	const [openS, setOpenS] = useState(false);
-	const [openY, setOpenY] = useState(false);
-	const [co, setCo] = useState('');
-	const [st, setSt] = useState('');
-	const [value, setValue] = useState(dayjs('2022-04-07'));
-	const [imageUrl, setImageUrl] = useState('');
+  const initialState = {
+    rol: "",
+    name: "",
+    password: "",
+    description: "",
+    birthdate: "",
+    email: "",
+    image: "",
+    country: "",
+    city: "",
+    address: "",
+    state: "",
+    phone: "",
+    enabled: true,
+    status: false,
+    suscription: false,
+    isComplete: true,
+  };
+  const urlParams = new URLSearchParams(window.location.search)
+    ? new URLSearchParams(window.location.search)
+    : null;
+  const googleEmail = urlParams ? urlParams.get("email") : null;
+  const googleName = urlParams ? urlParams.get("name") : null;
+  const countries = useSelector((state) => state.countries);
+  const states = useSelector((state) => state.states);
+  const cities = useSelector((state) => state.cities);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [errors, setErrors] = useState({});
+  const [input, setInput] = useState("");
+  const [openC, setOpenC] = useState(false);
+  const [openS, setOpenS] = useState(false);
+  const [openY, setOpenY] = useState(false);
+  const [co, setCo] = useState("");
+  const [st, setSt] = useState("");
+  const [value, setValue] = useState(dayjs("2022-04-07"));
+  const [imageUrl, setImageUrl] = useState("");
 
 	useEffect(() => {
 		try {

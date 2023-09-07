@@ -21,14 +21,11 @@ export default function ReviewForm({ walkerId, clientId }) {
 		console.log('clientId: ', clientId);
 		console.log('walkerId: ', walkerId);
 		try {
-			const response = await axios.post(
-				`http://localhost:3001/review/${walkerId}`,
-				{
-					rating: rating,
-					comment: comment,
-					clientId: clientId,
-				}
-			);
+			const response = await axios.post(`/review/${walkerId}`, {
+				rating: rating,
+				comment: comment,
+				clientId: clientId,
+			});
 			console.log(response);
 
 			console.log('Reseña guardada:', response.data);

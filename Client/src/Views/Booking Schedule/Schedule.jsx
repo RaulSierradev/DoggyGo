@@ -141,7 +141,7 @@ const Schedule = () => {
 				{/* <Button variant="outlined">Atras</Button> */}
 				<div className="mt-5">
 					<Button onClick={handleChanges} variant="contained">
-						Confirm
+						Confirma
 					</Button>
 				</div>
 			</Stack>

@@ -40,7 +40,7 @@ const Modal = ({
 												className="rounded-md mt-2 text-white bg-green-500 p-2"
 												onClick={() => prevStep()}
 											>
-												Back
+												Atras
 											</button>
 										)}
 									</div>
@@ -52,7 +52,7 @@ const Modal = ({
 												className="rounded-md mt-2 text-white bg-green-500 p-2"
 												onClick={() => nextStep()}
 											>
-												Continue
+												Continuar
 											</button>
 										</div>
 									)}

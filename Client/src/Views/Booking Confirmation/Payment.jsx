@@ -110,7 +110,7 @@ function Payment() {
 				</div>
 				<div className="w-96 h-6 justify-start items-start inline-flex">
 					<div className="grow shrink basis-0 text-slate-500 text-lg font-normal">
-						Booking Fee
+						Costo Agendado
 					</div>
 					<div className="text-right text-slate-500 text-lg font-normal">
 						${bookingFee}
@@ -142,7 +142,7 @@ function Payment() {
 				<div className="flex gap-2 mb-5">
 					<div className="w-48 h-12 px-5 py-3 rounded border border-indigo-500 justify-start items-center gap-2 inline-flex">
 						<button className="text-indigo-500 text-lg font-normal">
-							Back
+							Atras
 						</button>
 					</div>
 					<div className="w-44 h-12 px-5 py-3 bg-indigo-500 rounded justify-start items-center gap-2 inline-flex">
@@ -150,14 +150,14 @@ function Payment() {
 							onClick={handlePayment}
 							className="text-neutral-50 text-lg font-normal"
 						>
-							Confirm and pay
+							Confirma y Paga
 						</button>
 					</div>
 				</div>
 				<div className="flex">
 					{loading ? (
 						<div className="font-bold text-blue-600">
-							Loading...
+							Cargando...
 						</div>
 					) : (
 						id && <Wallet initialization={{ preferenceId: id }} />

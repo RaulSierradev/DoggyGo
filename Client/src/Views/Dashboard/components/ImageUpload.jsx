@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 function ImageUpload({ imageUrl, setImageUrl }) {
 	const [image, setImage] = useState('');
@@ -8,7 +9,7 @@ function ImageUpload({ imageUrl, setImageUrl }) {
 	// const [imageUrl, setImageUrl] = useState(''); // save the image url
 
 	async function uploadImage() {
-		if (!image) return alert('Please choose a valid image');
+		if (!image) return Swal.fire('Ingresa una imagen valida');
 		const formData = new FormData();
 		formData.append('file', image);
 		formData.append('upload_preset', 'zihghzim');

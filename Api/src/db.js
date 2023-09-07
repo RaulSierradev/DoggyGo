@@ -10,6 +10,7 @@ const sequelize = new Sequelize(DB_URL,
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
     ssl: true,
   }
+  // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/doggygo`
 );
 
 const basename = path.basename(__filename);

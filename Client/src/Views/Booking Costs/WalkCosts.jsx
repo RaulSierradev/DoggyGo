@@ -40,21 +40,21 @@ function WalkCosts() {
 		if (service === 'basic') {
 			setDetails({
 				...details,
-				title: 'Fast Walk',
+				title: 'Paseo Rapido',
 				duration: '20 min',
 				cost: '8',
 			});
 		} else if (service === 'mid') {
 			setDetails({
 				...details,
-				title: 'Basic Walk',
+				title: 'Paseo Basico',
 				duration: '30 min',
 				cost: '12',
 			});
 		} else if (service === 'long') {
 			setDetails({
 				...details,
-				title: 'Long Walk',
+				title: 'Paseo Largo',
 				duration: '60 min',
 				cost: '20',
 			});
@@ -98,9 +98,9 @@ function WalkCosts() {
 					</div>
 
 					<div className="flex flex-col gap-1">
-						<p>Fast Walk</p>
+						<p>Paseo Rapido</p>
 						<p className="text-sm font-thin text-slate-800">
-							20 minutes
+							20 minutos
 						</p>
 					</div>
 
@@ -133,9 +133,9 @@ function WalkCosts() {
 					</div>
 
 					<div className="flex flex-col gap-1">
-						<p>Basic Walk</p>
+						<p>Paseo Basicok</p>
 						<p className="text-sm font-thin text-slate-800">
-							30 minutes
+							30 minutos
 						</p>
 					</div>
 
@@ -168,9 +168,9 @@ function WalkCosts() {
 					</div>
 
 					<div className="flex flex-col gap-1">
-						<p>Long Walk</p>
+						<p>Paseo Largo</p>
 						<p className="text-sm font-thin text-slate-800">
-							1 hour
+							1 hora
 						</p>
 					</div>
 
@@ -181,7 +181,7 @@ function WalkCosts() {
 				className="bg-slate-800 text-white p-2 rounded-md"
 				onClick={setWalkDetail}
 			>
-				confirm
+				Confirma
 			</button>
 		</div>
 	);

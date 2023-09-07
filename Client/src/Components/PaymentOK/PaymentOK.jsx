@@ -61,14 +61,14 @@ const PaymentOK = () => {
 				</div> */}
 				<div className={style.POK_sec2_TXcontainer}>
 					{' '}
-					<p>Payment Time</p>{' '}
+					<p>Hora de Pago</p>{' '}
 					<p className={style.sc2tx_txsec}>
 						{`${new Date()}`.slice(4, 21)}
 					</p>{' '}
 				</div>
 				<div className={style.POK_sec2_TXcontainer}>
 					{' '}
-					<p>Payment Method</p>{' '}
+					<p>Metdo de Pago</p>{' '}
 					<p className={style.sc2tx_txsec}>Tarjeta de Credito</p>{' '}
 				</div>
 				<div className={style.POK_sec2_TXcontainer}>
@@ -82,7 +82,12 @@ const PaymentOK = () => {
 					<p className={style.sc2tx_total}>Total</p>{' '}
 					<p className={style.sc2tx_total}>${items.total}</p>{' '}
 				</div>
-				<button onClick={handleConfirm}>Confirma</button>
+				<button
+					className="w-44 h-12 px-5 py-3 bg-indigo-500 rounded justify-start items-center gap-2 inline-flex"
+					onClick={handleConfirm}
+				>
+					Confirma
+				</button>
 			</div>
 		</div>
 	);
