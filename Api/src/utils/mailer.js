@@ -15,7 +15,7 @@ const email1 = async (email) => {
         from: 'doggygo.noreply@gmail.com',
         to: email,
         subject: '¡Bienvenido a GOGGYGO! Confirmación de registro exitoso.',
-        text: '¡Gracias por unirte a GOGGYGO! Estamos encantados de que te hayas registrado y te damos la más cordial bienvenida a nuestra comunidad dedicada a encontrar tu pasiador favorito.',
+        text: '¡Gracias por unirte a GOGGYGO! Estamos encantados de que te hayas registrado y te damos la más cordial bienvenida a nuestra comunidad dedicada a encontrar tu paseador favorito.',
 
     })
     console.log('Correo enviado:', info.messageId);

@@ -47,7 +47,7 @@ function App() {
 					path="/recuperarcontraseña/:id"
 					element={<Recuperar />}
 				/>
-				<Route path="/Help" element={<Contact />} />
+				<Route path="/help" element={<Contact />} />
 				<Route path="/T" element={<T />} />
 				<Route path="*" element={<Error404 />} />
 

@@ -50,10 +50,10 @@ function Nav() {
 					</div>
 					<p>Perfil</p>
 				</Link>
-				<div className="flex items-center gap-1">
+				<Link to={'/help'} className="flex items-center gap-1">
 					<HelpCenterIcon />
 					<p>Ayuda</p>
-				</div>
+				</Link>
 			</div>
 			<div className="text-white font-bold flex gap-4 items-center">
 				<div className="ml-2 rounded-full">

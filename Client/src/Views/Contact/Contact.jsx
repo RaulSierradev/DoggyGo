@@ -3,6 +3,7 @@ import style from './Contact.module.css';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { NavLink } from 'react-router-dom';
 
 const Contact = (props) => {
 	const user = useSelector((state) => state.currentUser);
@@ -46,7 +47,9 @@ const Contact = (props) => {
 			<div className={style.vwContainer}>
 				<div className={style.contact}>
 					<header className={style.contacthdr}>
-						<p className={style.contact_p}>DoggyGo</p>
+						<NavLink to={'/'} className={style.contact_p}>
+							DoggyGo
+						</NavLink>
 						<hr />
 					</header>
 					<h1 className={style.frmttl}>

@@ -302,7 +302,7 @@ export const getCities = (sta, co) => {
   };
 };
 export const getEmail = (email) => {
-  const endpoint = ` ${URL}user/email/${email}`
+  const endpoint = `${URL}user/email/${email}`
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint)
