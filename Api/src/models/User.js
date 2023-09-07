@@ -88,6 +88,7 @@ module.exports = (sequelize) => {
     },
     ratingAvg: {
       type: DataTypes.FLOAT,
+      defaultValue: 0,
     }
   },
     {
