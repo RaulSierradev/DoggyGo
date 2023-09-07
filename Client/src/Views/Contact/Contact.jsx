@@ -4,9 +4,14 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
+import idFromToken from '../utils/getToken';
 
 const Contact = (props) => {
-	const user = useSelector((state) => state.currentUser);
+	const id = idFromToken();
+	console.log(id);
+	const allUsers = useSelector((state) => state.users);
+	const user = allUsers.find((user) => user.id === id);
+	console.log(user);
 
 	const [btnActive, setBtnActive] = useState(!true);
 	const [title, setTitle] = useState('');
