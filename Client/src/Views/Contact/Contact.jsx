@@ -10,8 +10,10 @@ const Contact = (props) => {
 	const id = idFromToken();
 	console.log(id);
 	const allUsers = useSelector((state) => state.users);
-	const user = allUsers.find((user) => user.id === id);
+	let user = allUsers.find((user) => user.id === id);
 	console.log(user);
+
+	if (!user) user = { name: '', email: '' };
 
 	const [btnActive, setBtnActive] = useState(!true);
 	const [title, setTitle] = useState('');
