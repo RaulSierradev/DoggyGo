@@ -6,22 +6,22 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_URL } = process.env;
 
 
 // Production db connection
-// const sequelize = new Sequelize(DB_URL,
-//   {
-//     // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/doggygo`
-//     logging: false, // set to console.log to see the raw SQL queries
-//     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-//     ssl: true,
-//   }
-// );
-
-// Development db connection
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/doggygo`,
+const sequelize = new Sequelize(DB_URL,
   {
+    // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/doggygo`
     logging: false, // set to console.log to see the raw SQL queries
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+    ssl: true,
   }
 );
+
+// // Development db connection
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/doggygo`,
+//   {
+//     logging: false, // set to console.log to see the raw SQL queries
+//     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+//   }
+// );
 
 const basename = path.basename(__filename);
 

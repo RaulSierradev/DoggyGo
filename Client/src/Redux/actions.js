@@ -26,10 +26,10 @@ import {
 } from "./action-types";
 import Swal from "sweetalert2";
 
-const URL = 'http://localhost:3001/';
+// const URL = 'http://localhost:3001/';
 
 // production url
-// const URL = "https://doggygo-production.up.railway.app/";
+const URL = "https://doggygo-production.up.railway.app/";
 
 /*
 /////////////////////ejemplo funcion asincrona para las store/////////////////////// 
